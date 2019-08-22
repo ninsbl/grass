@@ -10,7 +10,10 @@ labels.
 In order to avoid unexpected results, the type of vector features 
 should always be specified. The default is to convert all vector 
 features, but if only e.g. areas should be converted use 
-<em>type=area</em> rather than <em>type=point,line,area</em>.
+<em>type=area</em> rather than <em>type=point,line,area</em>. 
+If multiple feature types are selected, areas are rasterized first, 
+then points, lines, boundaries, and centroids are rasterized in the 
+order in which they are read from the vector map.
 
 <p>
 <em>v.to.rast</em> will only affect data in areas lying
