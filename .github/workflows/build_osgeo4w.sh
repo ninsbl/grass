@@ -26,8 +26,8 @@ export UNITTEST=1
 
 export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
 export PATH="${VCPATH}/VC/bin:$PATH"
-export CC=cl.exe
-export CXX=cl.exe
+#export CC=cl.exe
+#export CXX=cl.exe
 
 # Build according to OSGeo4W recipe
 ${SRC}/mswindows/osgeo4w/build_osgeo4W.sh
