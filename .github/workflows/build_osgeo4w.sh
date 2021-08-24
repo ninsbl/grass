@@ -24,7 +24,7 @@ export UNITTEST=1
 
 #fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat
 
-export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise"
+export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
 export PATH="${VCPATH}/VC/bin:$PATH"
 export CC=cl.exe
 export CXX=cl.exe
