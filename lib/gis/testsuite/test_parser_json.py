@@ -9,6 +9,7 @@ for details.
 """
 
 import subprocess
+import sys
 from grass.gunittest.case import TestCase
 from grass.script import decode
 import json
@@ -48,7 +49,9 @@ class TestParserJson(TestCase):
             },
         ]
 
-        stdout, stderr = subprocess.Popen(args, stdout=subprocess.PIPE).communicate()
+        stdout, stderr = subprocess.Popen(
+            args, stdout=subprocess.PIPE, shell=sys.platform == "win32"
+        ).communicate()
         print(stdout)
         json_code = json.loads(decode(stdout))
         self.assertEqual(json_code["module"], "r.slope.aspect")
