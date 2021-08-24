@@ -20,7 +20,7 @@
 #
 
 # stop on errors
-set -e
+# set -e
 
 
 # compile
