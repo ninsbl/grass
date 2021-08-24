@@ -18,16 +18,16 @@ export OSGEO4W_ROOT_MSYS=/c/OSGeo4W
 export SRC=$(pwd)
 export UNITTEST=1
 
-wget https://raw.githubusercontent.com/jef-n/OSGeo4W/master/scripts/build-helpers
+#wget https://raw.githubusercontent.com/jef-n/OSGeo4W/master/scripts/build-helpers
 
-source build-helpers
+#source build-helpers
 
-fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat
+#fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat
 
-export VCPATH=$(
-		vs2019env
-		echo ${PATH//\/cygdrive/}
-	)
+export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise"
+export PATH="${VCPATH}/VC/bin:$PATH"
+export CC=cl.exe
+export CXX=cl.exe
 
 # Build according to OSGeo4W recipe
 ${SRC}/mswindows/osgeo4w/build_osgeo4W.sh
