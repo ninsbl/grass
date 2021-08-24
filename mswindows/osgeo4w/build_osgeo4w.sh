@@ -58,6 +58,7 @@ export ARCH=x86_64-w64-mingw32
     --with-postgres-libs=${OSGEO4W_ROOT_MSYS}/lib \
     --with-gdal=${SRC}/mswindows/osgeo4w/gdal-config \
     --with-geos=${SRC}/mswindows/osgeo4w/geos-config \
+    --with-pdal=${OSGEO4W_ROOT_MSYS}/bin/pdal-config \
     --with-sqlite \
     --with-sqlite-includes=${OSGEO4W_ROOT_MSYS}/include \
     --with-sqlite-libs=${OSGEO4W_ROOT_MSYS}/lib \
@@ -71,9 +72,12 @@ export ARCH=x86_64-w64-mingw32
     --with-opengl=windows \
     --with-bzlib \
     --with-liblas=${SRC}/mswindows/osgeo4w/liblas-config \
-    --with-netcdf=${OSGEO4W_ROOT_MSYS}/bin/nc-config
+    --with-netcdf=${OSGEO4W_ROOT_MSYS}/bin/nc-config &> configure.log
 
-# --with-pdal=${OSGEO4W_ROOT_MSYS}/bin/pdal-config \
+printf "\nconfigure.log\n"
+cat configure.log
+printf "\nconfig.log\n"
+cat config.log
 
 make
 
