@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Guess values for system-dependent variables and create Makefiles.
-# Generated automatically using autoconf version 2.13 
+# Generated automatically using autoconf version 2.13
 # Copyright (C) 1992, 93, 94, 95, 96 Free Software Foundation, Inc.
 #
 # This configure script is free software; the Free Software Foundation
@@ -1083,7 +1083,7 @@ echo $ac_n "checking for full floating-point support""... $ac_c" 1>&6
 echo "configure:1084: checking for full floating-point support" >&5
 if test "$cross_compiling" = yes; then
      echo "$ac_t""unknown (cross-compiling)" 1>&6
-     
+
 echo $ac_n "checking whether "cc -mieee" works""... $ac_c" 1>&6
 echo "configure:1089: checking whether "cc -mieee" works" >&5
 ac_save_cflags=${CFLAGS}
@@ -1108,7 +1108,7 @@ else
 fi
 rm -f conftest*
 CFLAGS=${ac_save_cflags}
- 
+
 
 else
   cat > conftest.$ac_ext <<EOF
@@ -1129,7 +1129,7 @@ EOF
 if { (eval echo configure:1130: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
      echo "$ac_t""yes" 1>&6
-    
+
 else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
@@ -1137,7 +1137,7 @@ else
      echo "$ac_t""no" 1>&6
      ac_save_cflags=${CFLAGS}
   CFLAGS=-mieee
-  
+
 echo $ac_n "checking for full floating-point support with -mieee""... $ac_c" 1>&6
 echo "configure:1143: checking for full floating-point support with -mieee" >&5
 if test "$cross_compiling" = yes; then
@@ -1203,13 +1203,13 @@ case "$pwd" in
   /*)
   ac_cv_path_pwd="$pwd" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_pwd="$pwd" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_pwd="$ac_dir/$ac_word"
@@ -1324,13 +1324,13 @@ case "$GIT" in
   /*)
   ac_cv_path_GIT="$GIT" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_GIT="$GIT" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_GIT="$ac_dir/$ac_word"
@@ -1435,7 +1435,7 @@ MACOSX_SDK=
 if test -z "$with_macosx_sdk" ; then
   echo "$ac_t""no" 1>&6
 else
-  
+
 ac_safe=`echo "$with_macosx_sdk/SDKSettings.plist" | sed 'y%./+-%__p_%'`
 echo $ac_n "checking for $with_macosx_sdk/SDKSettings.plist""... $ac_c" 1>&6
 echo "configure:1442: checking for $with_macosx_sdk/SDKSettings.plist" >&5
@@ -1451,7 +1451,7 @@ else
 fi
 if eval "test \"`echo '$ac_cv_file_'$ac_safe`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
     MACOSX_SDK="-isysroot $with_macosx_sdk"
 else
   echo "$ac_t""no" 1>&6
@@ -1512,7 +1512,7 @@ EOF
 
 	GRASS_LIBRARY_TYPE='stlib'
     fi
-    
+
 
 
 ac_save_ldflags="$LDFLAGS"
@@ -1585,8 +1585,8 @@ EOF
 	    ;;
 	*-solaris2*)
 	    # Note: Solaris is as of 2010 Oracle Solaris, not Sun Solaris
-	    #       Oracle Solaris derives from Solaris 2 
-	    #       derives from SunOS 5 
+	    #       Oracle Solaris derives from Solaris 2
+	    #       derives from SunOS 5
 	    #       derives from UNIX System V Release 4
 	    # Note: If _REENTRANT isn't defined, then Solaris
 	    # won't define thread-safe library routines.
@@ -1623,7 +1623,7 @@ EOF
 	    LDFLAGS="-export-dynamic"
 	    #LD_SEARCH_FLAGS='-rpath ${LIB_RUNTIME_DIR}'
 	    LD_SEARCH_FLAGS='-Wl,-rpath-link,${LIB_RUNTIME_DIR}'
-	    # TODO: add optional pthread support with any combination of: 
+	    # TODO: add optional pthread support with any combination of:
 	    # CFLAGS="$CFLAGS -pthread"
 	    # LDFLAGS="$LDFLAGS -lpthread"
 	    # AC_DEFINE(_REENTRANT)
@@ -1644,7 +1644,7 @@ EOF
 	    # NetBSD 6 does handle version numbers with dots.
 	    STLIB_SUFFIX=".a"
 	    SHLIB_SUFFIX=".so"
-	    # TODO: add optional pthread support with any combination of: 
+	    # TODO: add optional pthread support with any combination of:
 	    # CFLAGS="$CFLAGS -pthread"
 	    # LDFLAGS="$LDFLAGS -lpthread"
 	    # AC_DEFINE(_REENTRANT)
@@ -1675,17 +1675,17 @@ EOF
             ;;
     esac
 
-    
-    
-    
 
-    
-    
-    
-    
 
-    
-    
+
+
+
+
+
+
+
+
+
 
 LDFLAGS="${ac_save_ldflags} $LDFLAGS"
 
@@ -2606,13 +2606,13 @@ case "$LEXPATH" in
   /*)
   ac_cv_path_LEXPATH="$LEXPATH" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_LEXPATH="$LEXPATH" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_LEXPATH="$ac_dir/$ac_word"
@@ -2677,13 +2677,13 @@ case "$YACCPATH" in
   /*)
   ac_cv_path_YACCPATH="$YACCPATH" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_YACCPATH="$YACCPATH" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_YACCPATH="$ac_dir/$ac_word"
@@ -2804,13 +2804,13 @@ case "$PERL" in
   /*)
   ac_cv_path_PERL="$PERL" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_PERL="$PERL" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_PERL="$ac_dir/$ac_word"
@@ -2827,7 +2827,7 @@ if test -n "$PERL"; then
 else
   echo "$ac_t""no" 1>&6
 fi
-  
+
 echo $ac_n "checking how to run the C preprocessor""... $ac_c" 1>&6
 echo "configure:2833: checking how to run the C preprocessor" >&5
 # On Suns, sometimes $CPP names a directory.
@@ -3038,7 +3038,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3075,7 +3075,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3112,7 +3112,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3149,7 +3149,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3186,7 +3186,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3399,7 +3399,7 @@ if eval "test \"`echo '$ac_cv_func_'$ac_func`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_func 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3451,7 +3451,7 @@ if eval "test \"`echo '$ac_cv_func_'$ac_func`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_func 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3503,7 +3503,7 @@ if eval "test \"`echo '$ac_cv_func_'$ac_func`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_func 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3555,7 +3555,7 @@ if eval "test \"`echo '$ac_cv_func_'$ac_func`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_func 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3607,7 +3607,7 @@ if eval "test \"`echo '$ac_cv_func_'$ac_func`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_func 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -3680,7 +3680,7 @@ long long int x;
 EOF
 if { (eval echo configure:3682: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
-  
+
 echo "$ac_t""yes" 1>&6
 cat >> confdefs.h <<\EOF
 #define HAVE_LONG_LONG_INT 1
@@ -3691,7 +3691,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
 echo "$ac_t""no" 1>&6
 
 fi
@@ -3709,7 +3709,7 @@ int64_t x;
 EOF
 if { (eval echo configure:3711: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then
   rm -rf conftest*
-  
+
 echo "$ac_t""yes" 1>&6
 cat >> confdefs.h <<\EOF
 #define HAVE_INT64_T 1
@@ -3720,7 +3720,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
 echo "$ac_t""no" 1>&6
 
 fi
@@ -3741,8 +3741,8 @@ XTLIB=
 if test "$enable_w11" = "yes" ; then
     X_CFLAGS=-I${SRCDIR}/display/drivers/windows/libW11
     X_LIBS='-L$(LIBDIR)'
-    
-    
+
+
 
     USE_W11="1"
     USE_X11="1"
@@ -4618,9 +4618,9 @@ LIBS="$ac_func_search_save_LIBS"
 echo "$ac_t""$ac_cv_search_cuserid" 1>&6
 if test "$ac_cv_search_cuserid" != "no"; then
   test "$ac_cv_search_cuserid" = "none required" || LIBS="$ac_cv_search_cuserid $LIBS"
-  
+
 else :
-  
+
 fi
 DBMIEXTRALIB="$LIBS"
 LIBS="$ac_save_libs"
@@ -4672,7 +4672,7 @@ if eval "test \"`echo '$ac_cv_func_'$ac_func`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_func 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -5270,7 +5270,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate zlib includes." 1>&2; exit 1; }
@@ -5442,7 +5442,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate bzlib includes." 1>&2; exit 1; }
@@ -5615,7 +5615,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate zstd includes." 1>&2; exit 1; }
@@ -5778,7 +5778,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 PROJ4API=1
@@ -5789,14 +5789,14 @@ CPPFLAGS=$ac_save_cppflags
 
 
 if test $PROJ4API = 0 ; then
-    
+
 echo $ac_n "checking External PROJ major version""... $ac_c" 1>&6
 echo "configure:5795: checking External PROJ major version" >&5
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$PROJINC $CPPFLAGS"
 if test "$cross_compiling" = yes; then
      proj_ver_major=0
-        echo "$ac_t""unknown (cross-compiling)" 1>&6 
+        echo "$ac_t""unknown (cross-compiling)" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
 #line 5803 "configure"
@@ -5809,7 +5809,7 @@ int main(void) {
  fprintf(fp, "%d", PROJ_VERSION_MAJOR);
  return 0;
 }
-    
+
 EOF
 if { (eval echo configure:5815: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
@@ -5819,21 +5819,21 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -fr conftest*
-     { echo "configure: error: *** Could not determine External PROJ major version." 1>&2; exit 1; } 
+     { echo "configure: error: *** Could not determine External PROJ major version." 1>&2; exit 1; }
 fi
 rm -fr conftest*
 fi
 
 CPPFLAGS=$ac_save_cppflags
 
-    
+
 echo $ac_n "checking External PROJ minor version""... $ac_c" 1>&6
 echo "configure:5832: checking External PROJ minor version" >&5
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$PROJINC $CPPFLAGS"
 if test "$cross_compiling" = yes; then
      proj_ver_minor=0
-        echo "$ac_t""unknown (cross-compiling)" 1>&6 
+        echo "$ac_t""unknown (cross-compiling)" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
 #line 5840 "configure"
@@ -5846,7 +5846,7 @@ int main(void) {
  fprintf(fp, "%d", PROJ_VERSION_MINOR);
  return 0;
 }
-    
+
 EOF
 if { (eval echo configure:5852: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
@@ -5856,21 +5856,21 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -fr conftest*
-     { echo "configure: error: *** Could not determine External PROJ minor version." 1>&2; exit 1; } 
+     { echo "configure: error: *** Could not determine External PROJ minor version." 1>&2; exit 1; }
 fi
 rm -fr conftest*
 fi
 
 CPPFLAGS=$ac_save_cppflags
 
-    
+
 echo $ac_n "checking External PROJ patch version""... $ac_c" 1>&6
 echo "configure:5869: checking External PROJ patch version" >&5
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$PROJINC $CPPFLAGS"
 if test "$cross_compiling" = yes; then
      proj_ver_patch=0
-        echo "$ac_t""unknown (cross-compiling)" 1>&6 
+        echo "$ac_t""unknown (cross-compiling)" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
 #line 5877 "configure"
@@ -5883,7 +5883,7 @@ int main(void) {
  fprintf(fp, "%d", PROJ_VERSION_PATCH);
  return 0;
 }
-    
+
 EOF
 if { (eval echo configure:5889: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
@@ -5893,7 +5893,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -fr conftest*
-     { echo "configure: error: *** Could not determine External PROJ patch version." 1>&2; exit 1; } 
+     { echo "configure: error: *** Could not determine External PROJ patch version." 1>&2; exit 1; }
 fi
 rm -fr conftest*
 fi
@@ -5908,14 +5908,14 @@ CPPFLAGS=$ac_save_cppflags
 	PROJ4API=1
     fi
 else
-    
+
 echo $ac_n "checking External PROJ.4 version""... $ac_c" 1>&6
 echo "configure:5914: checking External PROJ.4 version" >&5
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$PROJINC $CPPFLAGS"
 if test "$cross_compiling" = yes; then
      proj_ver=0
-        echo "$ac_t""unknown (cross-compiling)" 1>&6 
+        echo "$ac_t""unknown (cross-compiling)" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
 #line 5922 "configure"
@@ -5928,7 +5928,7 @@ int main(void) {
  fprintf(fp, "%d", PJ_VERSION);
  return 0;
 }
-    
+
 EOF
 if { (eval echo configure:5934: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
@@ -5938,7 +5938,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -fr conftest*
-     { echo "configure: error: *** Could not determine External PROJ.4 version." 1>&2; exit 1; } 
+     { echo "configure: error: *** Could not determine External PROJ.4 version." 1>&2; exit 1; }
 fi
 rm -fr conftest*
 fi
@@ -5960,7 +5960,7 @@ if test $PROJ4API = 0 ; then
 
     # With PROJ library directory
 
-    
+
 echo $ac_n "checking for location of External PROJ library""... $ac_c" 1>&6
 echo "configure:5966: checking for location of External PROJ library" >&5
 case "$with_proj_libs" in
@@ -5980,7 +5980,7 @@ if test -n "$with_proj_libs"; then
     done
 fi
 
-    
+
 ac_save_ldflags="$LDFLAGS"
 LDFLAGS="$PROJLIB $LDFLAGS"
 
@@ -6039,7 +6039,7 @@ else
 EOF
 
 
-    
+
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$PROJINC $CPPFLAGS"
 for ac_hdr in proj_api.h
@@ -6073,7 +6073,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate External PROJ includes." 1>&2; exit 1; }
@@ -6088,14 +6088,14 @@ CPPFLAGS=$ac_save_cppflags
     if test "$cross_compiling" = yes; then
 	echo "configure: warning: *** Cannot check PROJ.4 version (cross-compiling)." 1>&2
     else
-	
+
 echo $ac_n "checking External PROJ.4 version""... $ac_c" 1>&6
 echo "configure:6094: checking External PROJ.4 version" >&5
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$PROJINC $CPPFLAGS"
 if test "$cross_compiling" = yes; then
      proj_ver=0
-        echo "$ac_t""unknown (cross-compiling)" 1>&6 
+        echo "$ac_t""unknown (cross-compiling)" 1>&6
 else
   cat > conftest.$ac_ext <<EOF
 #line 6102 "configure"
@@ -6108,7 +6108,7 @@ int main(void) {
  fprintf(fp, "%d", PJ_VERSION);
  return 0;
 }
-    
+
 EOF
 if { (eval echo configure:6114: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext} && (./conftest; exit) 2>/dev/null
 then
@@ -6118,7 +6118,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -fr conftest*
-     { echo "configure: error: *** Could not determine External PROJ.4 version." 1>&2; exit 1; } 
+     { echo "configure: error: *** Could not determine External PROJ.4 version." 1>&2; exit 1; }
 fi
 rm -fr conftest*
 fi
@@ -6133,7 +6133,7 @@ CPPFLAGS=$ac_save_cppflags
 
     # With PROJ library directory
 
-    
+
 echo $ac_n "checking for location of External PROJ.4 library""... $ac_c" 1>&6
 echo "configure:6139: checking for location of External PROJ.4 library" >&5
 case "$with_proj_libs" in
@@ -6153,7 +6153,7 @@ if test -n "$with_proj_libs"; then
     done
 fi
 
-    
+
 ac_save_ldflags="$LDFLAGS"
 LDFLAGS="$PROJLIB $LDFLAGS"
 
@@ -6240,7 +6240,7 @@ if test `expr ${PROJMAJOR} \< 6` = 1 ; then
 echo "configure:6241: checking for epsg" >&5
 	echo "$ac_t""unknown (cross-compiling)" 1>&6
     else
-	
+
 
 ac_safe=`echo "$PROJSHARE/epsg" | sed 'y%./+-%__p_%'`
 echo $ac_n "checking for $PROJSHARE/epsg""... $ac_c" 1>&6
@@ -6261,7 +6261,7 @@ if eval "test \"`echo '$ac_cv_file_'$ac_safe`\" = yes"; then
 else
   echo "$ac_t""no" 1>&6
 echo "configure: warning: *** Unable to locate PROJ data files." 1>&2
-	
+
 fi
 
 
@@ -6351,7 +6351,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate regex includes." 1>&2; exit 1; }
@@ -6430,7 +6430,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'regcomp`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 
     REGEXLIB="$REGEXLIB "
 
@@ -6585,7 +6585,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate Readline includes." 1>&2; exit 1; }
@@ -6629,7 +6629,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate Readline includes." 1>&2; exit 1; }
@@ -6804,13 +6804,13 @@ case "$GDAL_CONFIG" in
   /*)
   ac_cv_path_GDAL_CONFIG="$GDAL_CONFIG" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_GDAL_CONFIG="$GDAL_CONFIG" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_GDAL_CONFIG="$ac_dir/$ac_word"
@@ -6866,7 +6866,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   LIBS="$LIBS $GDAL_DEP_LIBS"
   cat > conftest.$ac_ext <<EOF
 #line 6873 "configure"
@@ -6883,12 +6883,12 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   { echo "configure: error: *** Unable to locate GDAL library." 1>&2; exit 1; }
-  
+
 fi
 rm -f conftest*
-  
+
 fi
 rm -f conftest*
   LIBS=${ac_save_libs}
@@ -6931,13 +6931,13 @@ case "$LIBLAS_CONFIG" in
   /*)
   ac_cv_path_LIBLAS_CONFIG="$LIBLAS_CONFIG" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_LIBLAS_CONFIG="$LIBLAS_CONFIG" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_LIBLAS_CONFIG="$ac_dir/$ac_word"
@@ -7005,7 +7005,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -7025,7 +7025,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   cat > conftest.$ac_ext <<EOF
 #line 7031 "configure"
 #include "confdefs.h"
@@ -7041,12 +7041,12 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   { echo "configure: error: *** Unable to locate libLAS library." 1>&2; exit 1; }
-  
+
 fi
 rm -f conftest*
-  
+
 fi
 rm -f conftest*
   LIBS=${ac_save_libs}
@@ -7101,13 +7101,13 @@ case "$PDAL_CONFIG" in
   /*)
   ac_cv_path_PDAL_CONFIG="$PDAL_CONFIG" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_PDAL_CONFIG="$PDAL_CONFIG" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_PDAL_CONFIG="$ac_dir/$ac_word"
@@ -7132,7 +7132,11 @@ fi
 
   if test "$PDAL_CONFIG" != "" ; then
     PDAL_LIBS=`"$PDAL_CONFIG" --libs`
-    PDAL_CPPFLAGS=`"$PDAL_CONFIG" --cxxflags`
+    if test "$MINGW32" = yes ; then
+        PDAL_CPPFLAGS="-DWIN32 -D_WINDOWS -W3 -GR -EHsc -std=c++11"
+    else
+        PDAL_CPPFLAGS=`"$PDAL_CONFIG" --cxxflags`
+    fi
     PDAL_INC=`"$PDAL_CONFIG" --includes`
     USE_PDAL=1
   fi
@@ -7160,7 +7164,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   cat > conftest.$ac_ext <<EOF
 #line 7166 "configure"
 #include "confdefs.h"
@@ -7178,12 +7182,12 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   { echo "configure: error: *** Unable to locate suitable (>=1.7.1) PDAL library." 1>&2; exit 1; }
-  
+
 fi
 rm -f conftest*
-  
+
 fi
 rm -f conftest*
   LIBS=${ac_save_libs}
@@ -7244,13 +7248,13 @@ case "$NETCDF_CONFIG" in
   /*)
   ac_cv_path_NETCDF_CONFIG="$NETCDF_CONFIG" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_NETCDF_CONFIG="$NETCDF_CONFIG" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_NETCDF_CONFIG="$ac_dir/$ac_word"
@@ -7298,7 +7302,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   cat > conftest.$ac_ext <<EOF
 #line 7304 "configure"
 #include "confdefs.h"
@@ -7314,12 +7318,12 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
   { echo "configure: error: *** Unable to locate NetCDF library." 1>&2; exit 1; }
-  
+
 fi
 rm -f conftest*
-  
+
 fi
 rm -f conftest*
   LIBS=${ac_save_libs}
@@ -7362,13 +7366,13 @@ case "$GEOS_CONFIG" in
   /*)
   ac_cv_path_GEOS_CONFIG="$GEOS_CONFIG" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_GEOS_CONFIG="$GEOS_CONFIG" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_GEOS_CONFIG="$ac_dir/$ac_word"
@@ -7390,14 +7394,14 @@ fi
   if test "$GEOS_CONFIG" = "no" ; then
     { echo "configure: error: *** couldn't find geos-config" 1>&2; exit 1; }
   fi
-  
+
   if test "$GEOS_CONFIG" != "" ; then
     GEOS_LIBS=`"$GEOS_CONFIG" --clibs`
     GEOS_CFLAGS=`"$GEOS_CONFIG" --cflags`
     USE_GEOS=1
   fi
-  
-  
+
+
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$GEOS_CFLAGS $CPPFLAGS"
 for ac_hdr in geos_c.h
@@ -7431,7 +7435,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate GEOS includes." 1>&2; exit 1; }
@@ -7445,7 +7449,7 @@ CPPFLAGS=$ac_save_cppflags
 #  if test "$MINGW32" = yes ; then
 #    LOC_CHECK_LIBS(geos_c_i,initGEOS,GEOS,$GEOS_LIBS,GEOS_LIBS)
 #  else
-  
+
 ac_save_ldflags="$LDFLAGS"
 LDFLAGS="$GEOS_LIBS $LDFLAGS"
 
@@ -7585,7 +7589,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate TIFF includes." 1>&2; exit 1; }
@@ -8070,7 +8074,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate PNG includes." 1>&2; exit 1; }
@@ -8249,7 +8253,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate PostgreSQL includes." 1>&2; exit 1; }
@@ -8651,7 +8655,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate MySQL includes." 1>&2; exit 1; }
@@ -8667,7 +8671,7 @@ fi # $USE_MYSQL
 if test -n "$USE_MYSQL"; then
   # With MySQL library directory
 
-  
+
 echo $ac_n "checking for location of MySQL library""... $ac_c" 1>&6
 echo "configure:8673: checking for location of MySQL library" >&5
 case "$with_mysql_libs" in
@@ -8688,7 +8692,7 @@ if test -n "$with_mysql_libs"; then
 fi
 
 
-  
+
 ac_save_ldflags="$LDFLAGS"
 LDFLAGS="$MYSQLLIBPATH $LDFLAGS"
 
@@ -9065,13 +9069,13 @@ case "$MYSQLD_CONFIG" in
   /*)
   ac_cv_path_MYSQLD_CONFIG="$MYSQLD_CONFIG" # Let the user override the test with a path.
   ;;
-  ?:/*)			 
+  ?:/*)
   ac_cv_path_MYSQLD_CONFIG="$MYSQLD_CONFIG" # Let the user override the test with a dos path.
   ;;
   *)
   IFS="${IFS= 	}"; ac_save_ifs="$IFS"; IFS=":"
   ac_dummy="$PATH"
-  for ac_dir in $ac_dummy; do 
+  for ac_dir in $ac_dummy; do
     test -z "$ac_dir" && ac_dir=.
     if test -f $ac_dir/$ac_word; then
       ac_cv_path_MYSQLD_CONFIG="$ac_dir/$ac_word"
@@ -9095,7 +9099,7 @@ fi
   fi
 
   if test "$MYSQLD_CONFIG" != "" ; then
-    
+
     ac_ext=C
 # CXXFLAGS is not in ac_cpp because -g, -O, etc. are not valid cpp options.
 ac_cpp='$CXXCPP $CPPFLAGS'
@@ -9154,7 +9158,7 @@ if eval "test \"`echo '$ac_cv_func_'mysql_server_init`\" = yes"; then
 else
   echo "$ac_t""no" 1>&6
 MYSQLDLIB="";
-                  echo "configure: warning: libmysqld not found" 1>&2 
+                  echo "configure: warning: libmysqld not found" 1>&2
 fi
 
     LIBS=$ac_save_libs
@@ -9262,7 +9266,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate SQLite includes." 1>&2; exit 1; }
@@ -9602,7 +9606,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate OpenGL includes." 1>&2; exit 1; }
@@ -9972,7 +9976,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'glXCreatePbuffer`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 cat >> confdefs.h <<\EOF
 #define HAVE_PBUFFERS 1
 EOF
@@ -10035,7 +10039,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'glXCreateGLXPixmap`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 cat >> confdefs.h <<\EOF
 #define HAVE_PIXMAPS 1
 EOF
@@ -10116,7 +10120,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate OpenGL includes." 1>&2; exit 1; }
@@ -10172,7 +10176,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'glBegin`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 
     OPENGLLIB="$OPENGLLIB -framework OpenGL -framework AGL -framework ApplicationServices"
 
@@ -10235,7 +10239,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'gluBeginCurve`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 
     OPENGLLIB="$OPENGLLIB "
 
@@ -10323,7 +10327,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate OpenGL includes." 1>&2; exit 1; }
@@ -10376,7 +10380,7 @@ glEnd();
 EOF
 if { (eval echo configure:10378: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
-  
+
 echo "$ac_t""found" 1>&6
 OPENGLLIB="$OPENGLLIB -lopengl32 "
 
@@ -10384,7 +10388,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
 
     { echo "configure: error: *** Unable to locate OpenGL library." 1>&2; exit 1; }
 
@@ -10411,7 +10415,7 @@ gluNewQuadric();
 EOF
 if { (eval echo configure:10413: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
-  
+
 echo "$ac_t""found" 1>&6
 OPENGLULIB="$OPENGLULIB -lglu32 "
 
@@ -10419,7 +10423,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
 
     { echo "configure: error: *** Unable to locate GLU library." 1>&2; exit 1; }
 
@@ -10530,7 +10534,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate ODBC includes." 1>&2; exit 1; }
@@ -10668,7 +10672,7 @@ SQLAllocEnv((SQLHENV *)0);
 EOF
 if { (eval echo configure:10670: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
   rm -rf conftest*
-  
+
 echo "$ac_t""found" 1>&6
 ODBCLIB="$ODBCLIB -lodbc32 "
 
@@ -10676,7 +10680,7 @@ else
   echo "configure: failed program was:" >&5
   cat conftest.$ac_ext >&5
   rm -rf conftest*
-  
+
 
     { echo "configure: error: *** Unable to locate ODBC library." 1>&2; exit 1; }
 
@@ -10787,7 +10791,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 ac_save_cppflags="$CPPFLAGS"
@@ -10823,7 +10827,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 ac_save_cppflags="$CPPFLAGS"
@@ -10859,7 +10863,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate FFTW includes." 1>&2; exit 1; }
@@ -11163,7 +11167,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -11534,7 +11538,7 @@ else
   echo "$ac_t""no" 1>&6
 fi
 
-	
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -11613,7 +11617,7 @@ else
   echo "$ac_t""no" 1>&6
 fi
 
-		
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -11778,7 +11782,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 fi
@@ -11885,7 +11889,7 @@ fi
 fi
 
 if test $lapack_ok = no; then
-	
+
 ac_save_ldflags="$LDFLAGS"
 LDFLAGS="$LAPACKLIB $LDFLAGS"
 
@@ -12087,7 +12091,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate Cairo includes." 1>&2; exit 1; }
@@ -12179,7 +12183,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'cairo_create`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 :
 
 else
@@ -12239,7 +12243,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'cairo_xlib_surface_create_with_xrender_format`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 CAIRO_HAS_XRENDER=1
 
 else
@@ -12298,7 +12302,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'cairo_xlib_surface_get_xrender_format`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 CAIRO_HAS_XRENDER_SURFACE=1
 
 else
@@ -12399,7 +12403,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate FreeType includes." 1>&2; exit 1; }
@@ -12610,7 +12614,7 @@ fi
 
 
 # Enable C++ option
- 
+
 
 echo $ac_n "checking whether to use C++""... $ac_c" 1>&6
 echo "configure:12617: checking whether to use C++" >&5
@@ -12761,8 +12765,8 @@ fi
 else
 	CXX=
 	CXXFLAGS=
-	
-	
+
+
 fi
 
 # Done checking C++
@@ -12844,7 +12848,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate openDWG includes." 1>&2; exit 1; }
@@ -12973,7 +12977,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate POSIX threads includes." 1>&2; exit 1; }
@@ -13052,7 +13056,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'pthread_create`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 
     PTHREADLIB="$PTHREADLIB "
 
@@ -13207,7 +13211,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate OpenMP includes." 1>&2; exit 1; }
@@ -13290,7 +13294,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'GOMP_parallel_start`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 
     OMPLIB="$OMPLIB "
 
@@ -13377,7 +13381,7 @@ fi
 
 # try to build a test program with "$CC $OMPCLFAGS" to confirm it works
 #...how?
-#echo "int main() {return 0;}" > test.c 
+#echo "int main() {return 0;}" > test.c
 #$CC $OMPCLFAGS test.c -o test
 
 fi # $USE_OPENMP
@@ -13434,7 +13438,7 @@ fi
 
 
 if test -n "$MACOSX_APP" ; then
-    
+
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$OCLINCPATH $CPPFLAGS"
 for ac_hdr in OpenCL/opencl.h
@@ -13468,7 +13472,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate OpenCL includes." 1>&2; exit 1; }
@@ -13483,7 +13487,7 @@ CPPFLAGS=$ac_save_cppflags
     ### FIXME: ###
     #LOC_CHECK_FRAMEWORK_PATH(opencl,OpenCL,OPENCLPATH)
     # last term in following would become ',$OPENCLPATH)' if above is uncommented
-    
+
 ac_save_libs="$LIBS"
 ac_save_ldflags="$LDFLAGS"
 LIBS="-framework OpenCL  $LIBS"
@@ -13528,7 +13532,7 @@ rm -f conftest*
 
 if eval "test \"`echo '$ac_cv_func_'clGetPlatformInfo`\" = yes"; then
   echo "$ac_t""yes" 1>&6
-  
+
 
     OCLLIB="$OCLLIB -framework OpenCL"
 
@@ -13547,7 +13551,7 @@ LIBS=${ac_save_libs}
 LDFLAGS=${ac_save_ldflags}
 
 else
-    
+
 ac_save_cppflags="$CPPFLAGS"
 CPPFLAGS="$OCLINCPATH $CPPFLAGS"
 for ac_hdr in CL/cl.h
@@ -13581,7 +13585,7 @@ if eval "test \"`echo '$ac_cv_header_'$ac_safe`\" = yes"; then
   cat >> confdefs.h <<EOF
 #define $ac_tr_hdr 1
 EOF
- 
+
 else
   echo "$ac_t""no" 1>&6
 { echo "configure: error: *** Unable to locate OpenCL includes." 1>&2; exit 1; }
@@ -13593,7 +13597,7 @@ CPPFLAGS=$ac_save_cppflags
 
 
     # With OpenCL library directory
-    
+
 echo $ac_n "checking for location of OpenCL library""... $ac_c" 1>&6
 echo "configure:13599: checking for location of OpenCL library" >&5
 case "$with_opencl_libs" in
@@ -13613,7 +13617,7 @@ if test -n "$with_opencl_libs"; then
     done
 fi
 
-    
+
 ac_save_ldflags="$LDFLAGS"
 LDFLAGS="$OCLLIBPATH $LDFLAGS"
 
@@ -13715,7 +13719,7 @@ ac_cv_sys_largefile_CC=no
     int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 			&& LARGE_OFF_T % 2147483647 == 1)
 		       ? 1 : -1];
-  
+
 int main() {
 
 ; return 0; }
@@ -13740,7 +13744,7 @@ else
     int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 			&& LARGE_OFF_T % 2147483647 == 1)
 		       ? 1 : -1];
-  
+
 int main() {
 
 ; return 0; }
@@ -13787,7 +13791,7 @@ ac_cv_sys_file_offset_bits=no
     int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 			&& LARGE_OFF_T % 2147483647 == 1)
 		       ? 1 : -1];
-  
+
 int main() {
 
 ; return 0; }
@@ -13811,8 +13815,8 @@ else
     int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 			&& LARGE_OFF_T % 2147483647 == 1)
 		       ? 1 : -1];
-  
-	   
+
+
 int main() {
 
 ; return 0; }
@@ -13858,7 +13862,7 @@ ac_cv_sys_large_files=no
     int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 			&& LARGE_OFF_T % 2147483647 == 1)
 		       ? 1 : -1];
-  
+
 int main() {
 
 ; return 0; }
@@ -13882,8 +13886,8 @@ else
     int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 			&& LARGE_OFF_T % 2147483647 == 1)
 		       ? 1 : -1];
-  
-	   
+
+
 int main() {
 
 ; return 0; }
@@ -13936,7 +13940,7 @@ else
 #include "confdefs.h"
 #define _LARGEFILE_SOURCE 1
 #include <stdio.h>
-	   
+
 int main() {
 return !fseeko;
 ; return 0; }
@@ -13969,7 +13973,7 @@ EOF
 
      CFLAGS=$ac_save_cflags
    fi
-  
+
 ac_save_cflags=${CFLAGS}
 CFLAGS="$LFS_CFLAGS ${ac_save_cflags}"
 echo $ac_n "checking for _LARGEFILE_SOURCE value needed for large files""... $ac_c" 1>&6
@@ -13995,7 +13999,7 @@ else
 #include "confdefs.h"
 #define _LARGEFILE_SOURCE 1
 #include <stdio.h>
-	   
+
 int main() {
 return !fseeko;
 ; return 0; }
@@ -14115,9 +14119,9 @@ EOF
 	  USE_LARGEFILES=
 	  LFS_CFLAGS=
 	fi
-	
-	
-	
+
+
+
 CFLAGS=${ac_save_cflags}
 # Done large file support
 
@@ -14743,4 +14747,3 @@ echo "$ac_t""  using old PROJ 4 API" 1>&6
 fi
 
 echo ""
-
