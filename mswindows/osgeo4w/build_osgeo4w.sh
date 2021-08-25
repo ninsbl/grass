@@ -29,6 +29,8 @@ export ARCH=x86_64-w64-mingw32
 export C_INCLUDE_PATH=".:${OSGEO4W_ROOT_MSYS}/include:${SRC}/dist.${ARCH}/include:/c/msys64/mingw64/${ARCH}/include:/c/msys64/mingw64/include"
 export CPLUS_INCLUDE_PATH=".:${OSGEO4W_ROOT_MSYS}/include:${SRC}/dist.${ARCH}/include:/c/msys64/mingw64/${ARCH}/include:/c/msys64/mingw64/include"
 export PYTHONHOME=${OSGEO4W_ROOT_MSYS}/apps/Python39
+export CPPFLAGS="-I/c/msys64/mingw64/${ARCH}/include -I/c/msys64/mingw64/include -I${OSGEO4W_ROOT_MSYS}/include -I${SRC}/dist.${ARCH}/include -I/usr/include"
+
 
 ./configure \
     --host=${ARCH} \
