@@ -7133,7 +7133,7 @@ fi
   if test "$PDAL_CONFIG" != "" ; then
     PDAL_LIBS=`"$PDAL_CONFIG" --libs`
     if test "$MINGW32" = yes ; then
-        PDAL_CPPFLAGS="-DWIN32 -D_WINDOWS -W3 -GR -EHsc -std=c++11"
+        PDAL_CPPFLAGS="-DWIN32 -D_WINDOWS -std=c++11"
     else
         PDAL_CPPFLAGS=`"$PDAL_CONFIG" --cxxflags`
     fi
