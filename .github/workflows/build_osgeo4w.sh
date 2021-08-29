@@ -20,9 +20,10 @@ export UNITTEST=1
 
 wget https://raw.githubusercontent.com/jef-n/OSGeo4W/master/scripts/build-helpers
 chmod +x build-helpers
+echo source
 source build-helpers &> /dev/null
-
-fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat &> /dev/null
+echo fetchenv
+#fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat &> /dev/null
 
 export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
 export PATH="${VCPATH}/VC/bin:$PATH"
