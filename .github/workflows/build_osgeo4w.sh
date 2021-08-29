@@ -25,7 +25,7 @@ source build-helpers &> /dev/null
 echo fetchenv
 #fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat &> /dev/null
 
-export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
+#export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
 export PATH="${VCPATH}/VC/bin:$PATH"
 
 vs2019env
