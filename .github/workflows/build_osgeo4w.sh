@@ -23,15 +23,15 @@ chmod +x build-helpers
 echo source
 source build-helpers &> /dev/null
 echo fetchenv
-#fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat &> /dev/null
+fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat &> /dev/null
 
-#export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
+export VCPATH=$(cygpath "$PROGRAMFILES (x86)/Microsoft Visual Studio/2019/Enterprise")
 export PATH="${VCPATH}/VC/bin:$PATH"
-
+echo vsenv
 vs2019env
 
 #export CC=cl.exe
 #export CXX=cl.exe
-
+echo build
 # Build according to OSGeo4W recipe
 ${SRC}/mswindows/osgeo4w/build_osgeo4W.sh
