@@ -25,7 +25,7 @@ export UNITTEST=1
 #echo fetchenv
 #fetchenv ${OSGEO4W_ROOT_MSYS}/bin/o4w_env.bat &> /dev/null
 echo vcpath
-export VCPATH="$(cygpath "$PROGRAMFILES\ (x86)/Microsoft\ Visual\ Studio/2019/Enterprise")"
+export VCPATH="$(cygpath "$PROGRAMFILES~1/Microsoft~/2019/Enterprise")"
 export PATH="${VCPATH}/VC/bin:$PATH"
 #echo vsenv
 #vs2019env
