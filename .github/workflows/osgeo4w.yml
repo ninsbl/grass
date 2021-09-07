@@ -21,9 +21,9 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
       - uses: actions/checkout@v2
-      - name: Create Symlink
+      - name: Copy
         run: |
-          New-Item -ItemType SymbolicLink -Path "c:/msvc" -Target "c:/Program\ Files\ (x86)/Microsoft\ Visual\ Studio"
+          Copy-Item -Path "c:/Program Files (x86)/Microsoft Visual Studio" -Destination "c:/msvc" -Recurse
       - name: Install OSGeo4W
         run: |
           $exe = 'osgeo4w-setup.exe'
