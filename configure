@@ -7133,8 +7133,8 @@ fi
   if test "$PDAL_CONFIG" != "" ; then
     PDAL_LIBS=`"$PDAL_CONFIG" --libs`
     if test "$MINGW32" = yes ; then
-        PDAL_CPPFLAGS="-v -DWIN32 -D_WINDOWS -DENABLE_PRECOMPILED_HEADERS=OFF -std=c++11 -fPIC"
-	PDAL_CFLAGS="-fPIC -DENABLE_PRECOMPILED_HEADERS=OFF"
+        PDAL_CPPFLAGS="-v -DWIN32 -D_WINDOWS -DENABLE_PRECOMPILED_HEADERS=OFF -std=c++11 -fPIC -I/c/msvc/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include"
+	PDAL_CFLAGS="-fPIC -DENABLE_PRECOMPILED_HEADERS=OFF -I/c/msvc/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include"
     else
         PDAL_CPPFLAGS=`"$PDAL_CONFIG" --cxxflags`
     fi
