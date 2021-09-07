@@ -27,10 +27,10 @@
 export PATH="${OSGEO4W_ROOT_MSYS}/bin:/usr/bin:/mingw64/bin"
 export ARCH=x86_64-w64-mingw32
 export C_INCLUDE_PATH=".:${OSGEO4W_ROOT_MSYS}/include:${SRC}/dist.${ARCH}/include:/c/msys64/mingw64/${ARCH}/include:/c/msys64/mingw64/include"
-export CPLUS_INCLUDE_PATH=".:${OSGEO4W_ROOT_MSYS}/include:${SRC}/dist.${ARCH}/include:/c/msvc/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include"
+#export CPLUS_INCLUDE_PATH=".:${OSGEO4W_ROOT_MSYS}/include:${SRC}/dist.${ARCH}/include:/c/msvc/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include"
 # :/c/msys64/mingw64/${ARCH}/include:/c/msys64/mingw64/include:/c/msys64/mingw64/include/c++/10.3.0:/c/msys64/mingw64/include/c++"
 export PYTHONHOME="${OSGEO4W_ROOT_MSYS}/apps/Python39"
-export CPPFLAGS="-I/c/msvc/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include -I/c/msys64/mingw64/include/c++ -I/c/msys64/mingw64/${ARCH}/include -I/c/msys64/mingw64/include -I${OSGEO4W_ROOT_MSYS}/include -I${SRC}/dist.${ARCH}/include -I/usr/include"
+#export CPPFLAGS="-I/c/msvc/2019/Enterprise/VC/Tools/MSVC/14.29.30133/include -I/c/msys64/mingw64/include/c++ -I/c/msys64/mingw64/${ARCH}/include -I/c/msys64/mingw64/include -I${OSGEO4W_ROOT_MSYS}/include -I${SRC}/dist.${ARCH}/include -I/usr/include"
 
 
 
