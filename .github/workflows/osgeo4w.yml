@@ -24,6 +24,7 @@ jobs:
       - name: Copy
         run: |
           Copy-Item -Path "c:/Program Files (x86)/Microsoft Visual Studio" -Destination "c:/msvc" -Recurse
+          Copy-Item -Path "C:/Program Files (x86)/Windows Kits" -Destination "c:/mskits" -Recurse
       - name: Install OSGeo4W
         run: |
           $exe = 'osgeo4w-setup.exe'
