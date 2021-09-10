@@ -22,6 +22,7 @@
 # stop on errors
 # set -e
 
+"C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x86_amd64
 
 # compile
 export PATH="${OSGEO4W_ROOT_MSYS}/bin:/usr/bin:/mingw64/bin"
