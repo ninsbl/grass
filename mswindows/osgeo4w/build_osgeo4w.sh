@@ -64,7 +64,6 @@ export ARCH=x86_64-w64-mingw32
     --with-regex \
     --with-nls \
     --with-zstd \
-    --with-odbc \
     --with-cairo \
     --with-cairo-includes=${SRC}/include \
     --with-cairo-ldflags="-L${SRC}/mswindows/osgeo4w/lib -lcairo -lfontconfig" \
