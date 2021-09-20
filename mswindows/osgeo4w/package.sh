@@ -174,16 +174,19 @@ if ! [ -f mswindows/osgeo4w/configure-stamp ]; then
 		--with-sqlite \
 		--with-sqlite-includes=$OSGEO4W_ROOT_MSYS/include \
 		--with-sqlite-libs=$PWD/mswindows/osgeo4w/lib \
-		--with-regex \
 		--with-nls \
 		--with-zstd \
 		--with-odbc \
+		--with-netcdf=${OSGEO4W_ROOT_MSYS}/bin/nc-config \
+		--with-pdal=${OSGEO4W_ROOT_MSYS}/bin/pdal-config \
+		--with-blas \
+		--with-openmp \
+		--with-wxwidgets \
 	    --with-cairo \
 		--with-cairo-includes=$OSGEO4W_ROOT_MSYS/include \
 		--with-cairo-ldflags="-L$PWD/mswindows/osgeo4w/lib -lcairo -lfontconfig" \
 	    --with-opengl=windows \
-		--with-bzlib \
-		--with-liblas=$PWD/mswindows/osgeo4w/liblas-config
+		--with-bzlib
 
 	touch mswindows/osgeo4w/configure-stamp
 fi
