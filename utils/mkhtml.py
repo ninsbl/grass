@@ -24,6 +24,7 @@ from datetime import datetime
 import locale
 import json
 import pathlib
+import subprocess
 
 try:
     # Python 2 import
@@ -66,6 +67,52 @@ def decode(bytes_):
         enc = _get_encoding()
         return bytes_.decode(enc)
     return unicode(bytes_)
+
+
+def get_last_commit_git(src_dir):
+    gitlog_dict = {}
+    cwd = os.getcwd()
+    os.chdir(src_dir)
+    gitlog = decode(
+        subprocess.run(
+            ["git", "log", "-1"], stderr=subprocess.DEVNULL, stdout=subprocess.PIPE
+        ).stdout
+    ).split("\n")
+    if gitlog[0]:
+        gitlog_dict = {
+            "commit": gitlog[0].split(" ")[1][0:7],
+            "date": gitlog[2].lstrip("Date:").strip(),
+        }
+        os.chdir(cwd)
+        return gitlog_dict
+    # Lazy import urllib
+    import urllib.request
+
+    # If git is not available (or for addons) we might try the github API
+    # but remember requests limit there
+    api_base_url = "https://api.github.com/repos/osgeo/grass-addons"
+    addons_api_url = f"{api_base_url}/commits?path={addon_path}&page=1&per_page=1"
+    try:
+        commits = urllib.request.urlopen(addons_api_url)
+        commit_log = json.loads(commits.read().decode())
+        if commit_log:
+            gitlog_dict = {
+                "commit": commit_log[0]["sha"][0:7],
+                "date": commit_log[0]["commit"]["author"]["date"],
+            }
+            return gitlog_dict
+    except Exception:
+        pass
+    # Lazy import time
+    import time
+
+    gitlog_dict = {
+        "commit": "unknown",
+        "date": time.ctime(
+            max(os.path.getmtime(root) for root, _, _ in os.walk(src_dir))
+        ),
+    }
+    return gitlog_dict
 
 
 html_page_footer_pages_path = (
@@ -120,6 +167,9 @@ sourcecode = string.Template(
   Available at:
   <a href="${URL_SOURCE}">${PGM} source code</a>
   (<a href="${URL_LOG}">history</a>)
+</p>
+<p>
+  ${DATE_TAG}
 </p>
 """
 )
@@ -477,11 +527,20 @@ if index_name:
     else:
         url_log = url_source.replace(tree, commits)
 
+    git_commit_log = get_last_commit_git(curdir)
+    if git_commit_log["commit"] == "unknown":
+        date_tag = "Accessed: {date}".format(date=git_commit_log["date"])
+    else:
+        date_tag = "Latest change: {date} in commit: {commit}".format(
+            date=git_commit_log["date"], commit=git_commit_log["commit"]
+        )
+
     sys.stdout.write(
         sourcecode.substitute(
             URL_SOURCE=url_source,
             PGM=pgm,
             URL_LOG=url_log,
+            DATE_TAG=date_tag,
         )
     )
     sys.stdout.write(
