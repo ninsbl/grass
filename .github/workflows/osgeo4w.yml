@@ -41,7 +41,9 @@ jobs:
 
       - name: Check env
         run: echo $PKG_CONFIG_PATH
-             pkgconfig --version
+
+      - name: Check version
+        run: pkgconfig --version
 
       - name: Compile GRASS GIS
         run: C:\msys64\usr\bin\bash.exe -l (''+(Get-Location)+'\.github\workflows\build_osgeo4w.sh') (Get-Location)
