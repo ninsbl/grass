@@ -28,7 +28,7 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
       - uses: actions/checkout@v2
-      - uses: msys/setup-msys@v2
+      - uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
           update: true
