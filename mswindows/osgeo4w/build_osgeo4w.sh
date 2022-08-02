@@ -53,6 +53,8 @@ export ARCH=x86_64-w64-mingw32
     --with-proj-share=${OSGEO4W_ROOT_MSYS}/share/proj \
     --with-proj-includes=${OSGEO4W_ROOT_MSYS}/include \
     --with-proj-libs=${OSGEO4W_ROOT_MSYS}/lib \
+    --with-png-includes=${OSGEO4W_ROOT_MSYS}/include \
+    --with-png-libs=${OSGEO4W_ROOT_MSYS}/lib \
     --with-postgres \
     --with-postgres-includes=${OSGEO4W_ROOT_MSYS}/include \
     --with-postgres-libs=${OSGEO4W_ROOT_MSYS}/lib \
