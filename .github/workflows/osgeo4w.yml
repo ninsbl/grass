@@ -52,5 +52,5 @@ jobs:
         run: D:\msys64\usr\bin\bash.exe .github/workflows/test_simple.sh
 
       - name: Run tests
-      - shell: powershell
+        shell: powershell
         run: .github/workflows/test_thorough.bat 'C:\OSGeo4W\opt\grass\grass83.bat' 'C:\OSGeo4W\bin\python3'
