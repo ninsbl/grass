@@ -40,5 +40,6 @@ jobs:
 
       - name: Package WinGRASS
         shell: msys2 {0}
-        run: ./mswindows\osgeo4w\package.sh
+        run: |
+          ./mswindows\osgeo4w\package.sh
 
