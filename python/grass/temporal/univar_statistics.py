@@ -19,6 +19,8 @@ for details.
 :authors: Soeren Gebbert
 """
 from __future__ import print_function
+from multiprocessing import Pool
+from copy import deepcopy
 
 from .core import SQLDatabaseInterfaceConnection, get_current_mapset
 from .factory import dataset_factory
@@ -26,6 +28,74 @@ from .open_stds import open_old_stds
 import grass.script as gscript
 
 ###############################################################################
+
+
+def compute_univar_stats(row, stats_module, fs, rast_region=False):
+    """Compute univariate statistics for a map of a space time raster or raster3d dataset
+
+    :param row: Must be "strds" or "str3ds"
+    :param stats_module: Pre-configured PyGRASS to compute univariate statistics with
+    :param fs: Field separator
+    :param rast_region: If set True ignore the current region settings
+           and use the raster map regions for univar statistical calculation.
+           Only available for strds.
+    """
+	string = ""
+	id = row["id"]
+	start = row["start_time"]
+	end = row["end_time"]
+	semantic_label = (
+		""
+		if type != "strds" or not row["semantic_label"]
+		else row["semantic_label"]
+	)
+
+    stats_module.inputs.map = id
+    if rast_region:
+        stats_module.env = gscript.region_env(raster=id)
+    stats_module.run()
+
+	univar_stats = stats_module.outputs.stdout
+	#gscript.read_command(
+	#	stats_module, map=id, flags=flag, zones=zones
+	#).rstrip()
+
+	if not univar_stats:
+        gscript.warning(
+			_("Unable to get statistics for {voxel}raster map " "<{rmap}>".format(rmap=id, voxel="" if stats_module.name == "r.univar" else "3d "))
+		)
+		return None
+	eol = ""
+
+	for idx, stats_kv in enumerate(univar_stats.split(";")):
+		stats = gscript.utils.parse_key_val(stats_kv)
+		string += (
+			f"{id}{fs}{semantic_label}{fs}{start}{fs}{end}"
+			if stats_module.name == "r.univar"
+			else f"{id}{fs}{start}{fs}{end}"
+		)
+		if stats_module.inputs.zones:
+			if idx == 0:
+				zone = str(stats["zone"])
+				string = ""
+				continue
+			string += f"{fs}{zone}"
+			if "zone" in stats:
+				zone = str(stats["zone"])
+				eol = "\n"
+			else:
+				eol = ""
+		string += f'{fs}{stats["mean"]}{fs}{stats["min"]}'
+		string += f'{fs}{stats["max"]}{fs}{stats["mean_of_abs"]}'
+		string += f'{fs}{stats["stddev"]}{fs}{stats["variance"]}'
+		string += f'{fs}{stats["coeff_var"]}{fs}{stats["sum"]}'
+		string += f'{fs}{stats["null_cells"]}{fs}{stats["n"]}'
+		string += f'{fs}{stats["n"]}'
+		if "median" in stats:
+			string += f'{fs}{stats["first_quartile"]}{fs}{stats["median"]}'
+			string += f'{fs}{stats["third_quartile"]}{fs}{stats["percentile_90"]}'
+		string += eol
+	return string
 
 
 def print_gridded_dataset_univar_statistics(
@@ -53,12 +123,6 @@ def print_gridded_dataset_univar_statistics(
            Only available for strds.
     :param zones: raster map with zones to calculate statistics for
     """
-
-    stats_module = {
-        "strds": "r.univar",
-        "str3ds": "r3.univar",
-    }[type]
-
     # We need a database interface
     dbif = SQLDatabaseInterfaceConnection()
     dbif.connect()
@@ -123,66 +187,26 @@ def print_gridded_dataset_univar_statistics(
     if type == "strds" and rast_region is True:
         flag += "r"
 
-    for row in rows:
-        string = ""
-        id = row["id"]
-        start = row["start_time"]
-        end = row["end_time"]
-        semantic_label = (
-            ""
-            if type != "strds" or not row["semantic_label"]
-            else row["semantic_label"]
-        )
+    univar_module = Module("r.univar" if type == "strds" else "r3.univar"
+        input=False,
+        flags=flag,
+        zones=zones,
+        run_=False,
+    )
+    
 
-        univar_stats = gscript.read_command(
-            stats_module, map=id, flags=flag, zones=zones
-        ).rstrip()
-
-        if not univar_stats:
-            if type == "strds":
-                gscript.warning(
-                    _("Unable to get statistics for raster map " "<%s>") % id
-                )
-            elif type == "str3ds":
-                gscript.warning(
-                    _("Unable to get statistics for 3d raster map" " <%s>") % id
-                )
-            continue
-        eol = ""
-
-        for idx, stats_kv in enumerate(univar_stats.split(";")):
-            stats = gscript.utils.parse_key_val(stats_kv)
-            string += (
-                f"{id}{fs}{semantic_label}{fs}{start}{fs}{end}"
-                if type == "strds"
-                else f"{id}{fs}{start}{fs}{end}"
-            )
-            if zones:
-                if idx == 0:
-                    zone = str(stats["zone"])
-                    string = ""
-                    continue
-                string += f"{fs}{zone}"
-                if "zone" in stats:
-                    zone = str(stats["zone"])
-                    eol = "\n"
-                else:
-                    eol = ""
-            string += f'{fs}{stats["mean"]}{fs}{stats["min"]}'
-            string += f'{fs}{stats["max"]}{fs}{stats["mean_of_abs"]}'
-            string += f'{fs}{stats["stddev"]}{fs}{stats["variance"]}'
-            string += f'{fs}{stats["coeff_var"]}{fs}{stats["sum"]}'
-            string += f'{fs}{stats["null_cells"]}{fs}{stats["n"]}'
-            string += f'{fs}{stats["n"]}'
-            if extended is True:
-                string += f'{fs}{stats["first_quartile"]}{fs}{stats["median"]}'
-                string += f'{fs}{stats["third_quartile"]}{fs}{stats["percentile_90"]}'
-            string += eol
-
-        if output is None:
-            print(string)
-        else:
-            out_file.write(string + "\n")
+    if nprocs == 1:
+        strings = [compute_univar_stats(row, univar_module, fs, ) for row in rows]
+    else:
+        with Pool(nprocs) as pool:
+            strings = pool.starmap(compute_univar_stats, [(row, univar_module, fs) for row in rows])
+            pool.close()
+            pool.join()
+        
+    if output is None:
+        print("\n".join(filter(None, strings)))
+    else:
+        out_file.write("\n".join(filter(None, strings)))
 
     dbif.close()
 
