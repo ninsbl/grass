@@ -25,7 +25,7 @@ ms_windows = sys.platform == "win32"
 
 print("sys.platform = ", sys.platform)
 import os
-print("os.name = ", sys.name)
+print("os.name = ", os.name)
 print("os.environ = ", os.environ.get('OS',''))
 
 
