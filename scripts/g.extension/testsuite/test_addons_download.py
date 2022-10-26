@@ -21,7 +21,7 @@ from grass.gunittest.case import TestCase
 from grass.gunittest.main import test
 from grass.gunittest.utils import silent_rmtree
 
-ms_windows = sys.platform == "win32"
+ms_windows = sys.platform == "win32" or sys.platform == "cygwin"
 
 print("sys.platform = ", sys.platform)
 import os
