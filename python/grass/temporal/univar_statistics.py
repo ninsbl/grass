@@ -48,7 +48,7 @@ def compute_univar_stats(row, stats_module, fs, rast_region=False):
     end = row["end_time"]
     semantic_label = (
         ""
-        if type != "strds" or not row["semantic_label"]
+        if stats_module.name == "r3.univar" or not row["semantic_label"]
         else row["semantic_label"]
     )
 
@@ -58,13 +58,15 @@ def compute_univar_stats(row, stats_module, fs, rast_region=False):
     stats_module.run()
 
     univar_stats = stats_module.outputs.stdout
-    #gs.read_command(
-    #    stats_module, map=id, flags=flag, zones=zones
-    #).rstrip()
 
     if not univar_stats:
         gs.warning(
-            _("Unable to get statistics for {voxel}raster map " "<{rmap}>".format(rmap=id, voxel="" if stats_module.name == "r.univar" else "3d "))
+            _(
+                "Unable to get statistics for {voxel}raster map "
+                "<{rmap}>".format(
+                    rmap=id, voxel="" if stats_module.name == "r.univar" else "3d "
+                )
+            )
         )
         return None
     eol = ""
@@ -110,7 +112,7 @@ def print_gridded_dataset_univar_statistics(
     fs="|",
     rast_region=False,
     zones=None,
-    nprocs=1
+    nprocs=1,
 ):
     """Print univariate statistics for a space time raster or raster3d dataset
 
@@ -184,30 +186,39 @@ def print_gridded_dataset_univar_statistics(
         else:
             out_file.write(string + "\n")
 
+    # Define flags
     flag = "g"
-
     if extended is True:
         flag += "e"
     if type == "strds" and rast_region is True:
         flag += "r"
 
-    univar_module = Module("r.univar" if type == "strds" else "r3.univar",
-        #input=False,
+    # Setup pygrass module to use for computation
+    univar_module = Module(
+        "r.univar" if type == "strds" else "r3.univar",
         flags=flag,
         zones=zones,
         stdout_=PIPE,
         run_=False,
     )
-    
 
     if nprocs == 1:
-        strings = [compute_univar_stats(row, univar_module, fs, ) for row in rows]
+        strings = [
+            compute_univar_stats(
+                row,
+                univar_module,
+                fs,
+            )
+            for row in rows
+        ]
     else:
-        with Pool(nprocs) as pool:
-            strings = pool.starmap(compute_univar_stats, [(row, univar_module, fs) for row in rows])
+        with Pool(min(nprocs, len(rows))) as pool:
+            strings = pool.starmap(
+                compute_univar_stats, [(dict(row), univar_module, fs) for row in rows]
+            )
             pool.close()
             pool.join()
-        
+
     if output is None:
         print("\n".join(filter(None, strings)))
     else:
