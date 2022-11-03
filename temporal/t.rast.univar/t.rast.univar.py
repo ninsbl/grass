@@ -87,7 +87,7 @@ def main():
     input = options["input"]
     zones = options["zones"]
     output = options["output"]
-    nprocs = options["nprocs"]
+    nprocs = int(options["nprocs"])
     where = options["where"]
     extended = flags["e"]
     no_header = flags["u"]
