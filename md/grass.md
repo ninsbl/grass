@@ -7,44 +7,62 @@
 ### Flags:
 
  
+
 **-h** \| **-help** \| **--help**
 :   Prints a brief usage message and exits
+
 **-v** \| **--version**
 :   Prints the version of GRASS and exits
+
 **-c XY**
 :   Creates new GRASS project (location) without coordinate reference system in specified GISDBASE
+
 **-c geofile**
 :   Creates new GRASS project in specified GISDBASE with coordinate reference system based on georeferenced file
+
 **-c EPSG:code**
 :   Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code
+
 **-c EPSG:code:datum\_trans**
 :   Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code and datum transform parameters
+
 **-e**
 :   Exit after creation of project or mapset. Only with **-c** flag
+
 **-f**
 :   Forces removal of .gislock if exists (use with care!). Only with --text flag
+
 **--text**
 :   Indicates that Text-based User Interface should be used (skip welcome screen)
+
 **--gtext**
 :   Indicates that Text-based User Interface should be used (show welcome screen)
+
 **--gui**
 :   Indicates that Graphical User Interface (*[wxGUI](wxGUI.html)*) should be used
+
 **--config**
 :   Prints GRASS configuration parameters (options: arch, build, compiler, date, path, python\_path, revision, svn\_revision, version)
+
 **--exec EXECUTABLE**
 :   Execute GRASS module or script. The provided executable will be executed in a GRASS GIS non-interactive session.
+
 **--tmp-project**
 :   Run using a temporary project which is created based on the given coordinate reference system and deleted at the end of the execution (use with the --exec flag). The active mapset will be the PERMANENT mapset.
+
 **--tmp-mapset**
 :   Run using a temporary mapset which is created in the specified project and deleted at the end of the execution (use with the --exec flag).
 
 ### Parameters:
 
  
+
 **GISDBASE**
 :   Initial database directory which should be a fully qualified path (e.g., `/usr/local/share/grassdata`)
+
 **PROJECT**
 :   Initial project directory which is a subdirectory of GISDBASE (project was previously called location)
+
 **MAPSET**
 :   Initial mapset directory which is a subdirectory of PROJECT
  *Note*: These parameters must be specified in one of the following ways: 
@@ -182,27 +200,38 @@ The GRASS\_HTML\_BROWSER environment variable allows the user to set the HTML we
 The following are some examples of how you could start GRASS
 
  
+
 **grass**
 :   Start GRASS using the default user interface. The user will be prompted to choose the appropriate project and mapset.
+
 **grass --gui**
 :   Start GRASS using the graphical user interface. The user will be prompted to choose the appropriate project and mapset.
+
 **grass --text**
 :   Start GRASS using the text-based user interface. Appropriate project and mapset must be set by environmental variables (see examples below) otherwise taken from the last GRASS session.
  
+
 **grass --gtext**
 :   Start GRASS using the text-based user interface. The user will be prompted to choose the appropriate project and mapset.
+
 **grass $HOME/grassdata/spearfish70/user1**
 :   Start GRASS using the default user interface and automatically launch into the given mapset, bypassing the mapset selection menu.
+
 **grass --gui \-**
 :   Start GRASS using the graphical user interface and try to obtain the project and mapset from environment variables.
+
 **grass -c EPSG:4326 $HOME/grassdata/myproject**
 :   Creates a new GRASS project with EPSG code 4326 (latitude-longitude, WGS84) in the specified GISDBASE
+
 **grass -c EPSG:5514:3 $HOME/grassdata/myproject**
 :   Creates a new GRASS project with EPSG code 5514 (S-JTSK / Krovak East North \- SJTSK) with datum transformation parameters used in Czech Republic in the specified GISDBASE
+
 **grass -c XY $HOME/grassdata/gnomonic --exec g.proj -c proj4\='\+proj\=gnom \+lat\_0\=90 \+lon\_0\=-50'**
 :   Creates a new GRASS project from PROJ definition string (here: [gnomonic](https://proj4.org/operations/projections/gnom.html)) in the specified GISDBASE
+
 **grass -c myvector.shp $HOME/grassdata/myproject**
 :   Creates a new GRASS project based on georeferenced Shapefile
+
 **grass -c myraster.tif $HOME/grassdata/myproject**
 :   Creates a new GRASS project based on georeferenced GeoTIFF file
 
