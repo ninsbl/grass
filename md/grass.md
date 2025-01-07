@@ -1,69 +1,69 @@
 
+
 ## SYNOPSIS
 
-**grass** [**-h** | **-help** | **--help**] [**-v** | **--version**] |
-[**-c** | **-c geofile** | **-c EPSG:code[:datum\_trans]**] | **-e** | **-f** |
-[**--text** | **--gtext** | **--gui**] | **--config** |
-[**--tmp-project** | **--tmp-mapset**]
-[[[**<GISDBASE>/**]**<PROJECT>/**]
-**<MAPSET>**]
-[**--exec EXECUTABLE**]
+**grass** \[**-h** \| **-help** \| **--help**] \[**-v** \| **--version**] \|
+\[**-c** \| **-c geofile** \| **-c EPSG:code\[:datum\_trans]**] \| **-e** \| **-f** \|
+\[**--text** \| **--gtext** \| **--gui**] \| **--config** \|
+\[**--tmp-project** \| **--tmp-mapset**]
+\[\[\[**\<GISDBASE\>/**]**\<PROJECT\>/**]
+**\<MAPSET\>**]
+\[**--exec EXECUTABLE**]
 
-### Flags
+### Flags:
 
-**-h** | **-help** | **--help**
- Prints a brief usage message and exits
-**-v** | **--version**
- Prints the version of GRASS and exits
+**-h** \| **-help** \| **--help**
+:   Prints a brief usage message and exits
+**-v** \| **--version**
+:   Prints the version of GRASS and exits
 **-c XY**
- Creates new GRASS project (location) without coordinate reference system in specified GISDBASE
+:   Creates new GRASS project (location) without coordinate reference system in specified GISDBASE
 **-c geofile**
- Creates new GRASS project in specified GISDBASE with coordinate reference system based on georeferenced file
+:   Creates new GRASS project in specified GISDBASE with coordinate reference system based on georeferenced file
 **-c EPSG:code**
- Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code
+:   Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code
 **-c EPSG:code:datum\_trans**
- Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code and datum transform parameters
+:   Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code and datum transform parameters
 **-e**
- Exit after creation of project or mapset. Only with **-c** flag
+:   Exit after creation of project or mapset. Only with **-c** flag
 **-f**
- Forces removal of .gislock if exists (use with care!). Only with --text flag
+:   Forces removal of .gislock if exists (use with care!). Only with --text flag
 **--text**
- Indicates that Text-based User Interface should be used (skip welcome screen)
+:   Indicates that Text-based User Interface should be used (skip welcome screen)
 **--gtext**
- Indicates that Text-based User Interface should be used (show welcome screen)
+:   Indicates that Text-based User Interface should be used (show welcome screen)
 **--gui**
- Indicates that Graphical User Interface
-(*[wxGUI](wxGUI.html)*) should be used
+:   Indicates that Graphical User Interface
+    (*[wxGUI](wxGUI.html)*) should be used
 **--config**
- Prints GRASS configuration parameters (options: arch, build, compiler, date, path, python\_path, revision, svn\_revision, version)
+:   Prints GRASS configuration parameters (options: arch, build, compiler, date, path, python\_path, revision, svn\_revision, version)
 **--exec EXECUTABLE**
- Execute GRASS module or script. The provided executable will be executed in a GRASS GIS non-interactive session.
+:   Execute GRASS module or script. The provided executable will be executed in a GRASS GIS non-interactive session.
 **--tmp-project**
- Run using a temporary project which is created based on the given
-coordinate reference system and deleted at the end of the execution
-(use with the --exec flag).
-The active mapset will be the PERMANENT mapset.
+:   Run using a temporary project which is created based on the given
+    coordinate reference system and deleted at the end of the execution
+    (use with the --exec flag).
+    The active mapset will be the PERMANENT mapset.
 **--tmp-mapset**
- Run using a temporary mapset which is created in the specified
-project and deleted at the end of the execution
-(use with the --exec flag).
+:   Run using a temporary mapset which is created in the specified
+    project and deleted at the end of the execution
+    (use with the --exec flag).
 
-### Parameters
+### Parameters:
 
 **GISDBASE**
- Initial database directory which should be a fully qualified path
-(e.g., `/usr/local/share/grassdata`)
+:   Initial database directory which should be a fully qualified path
+    (e.g., `/usr/local/share/grassdata`)
 **PROJECT**
- Initial project directory which is a subdirectory of GISDBASE
-(project was previously called location)
+:   Initial project directory which is a subdirectory of GISDBASE
+    (project was previously called location)
 **MAPSET**
- Initial mapset directory which is a subdirectory of PROJECT
+:   Initial mapset directory which is a subdirectory of PROJECT
 
 *Note*: These parameters must be specified in one of the
 following ways:
 
 ```
-
     MAPSET
     PROJECT/MAPSET
     GISDBASE/PROJECT/MAPSET
@@ -162,7 +162,7 @@ from highest precedence to lowest.
 1. Command line argument
 2. Environment variable GRASS\_GUI
 3. Value set in `$HOME/.grass8/rc` (GUI)
-4. Default value - `gui`
+4. Default value \- `gui`
 
 ### Python Environment Variables
 
@@ -176,7 +176,6 @@ under `$HOME/bin`. You can use the above variables to have
 GRASS use the Python 3.8 binaries instead.
 
 ```
-
    GRASS_PYTHON=python3.8
 
 ```
@@ -188,7 +187,6 @@ search paths to include locally developed/installed GRASS modules or
 user scripts.
 
 ```
-
    GRASS_ADDON_PATH=/usr/mytools
    GRASS_ADDON_PATH=/usr/mytools:/usr/local/othertools
 
@@ -206,7 +204,6 @@ search paths to include locally installed
 modules which are not distributed with the standard GRASS release.
 
 ```
-
    GRASS_ADDON_BASE=/usr/grass-addons
 
 ```
@@ -226,48 +223,50 @@ HTML web browser to use for displaying help pages.
 ## EXAMPLES
 
 The following are some examples of how you could start GRASS
+
 **grass**
- Start GRASS using the default user interface. The user will be
-prompted to choose the appropriate project and mapset.
+:   Start GRASS using the default user interface. The user will be
+    prompted to choose the appropriate project and mapset.
 **grass --gui**
- Start GRASS using the graphical user interface. The user will be
-prompted to choose the appropriate project and mapset.
+:   Start GRASS using the graphical user interface. The user will be
+    prompted to choose the appropriate project and mapset.
 **grass --text**
- Start GRASS using the text-based user interface. Appropriate
-project and mapset must be set by environmental variables (see
-examples below) otherwise taken from the last GRASS session.
+:   Start GRASS using the text-based user interface. Appropriate
+    project and mapset must be set by environmental variables (see
+    examples below) otherwise taken from the last GRASS session.
+
 **grass --gtext**
- Start GRASS using the text-based user interface. The user will be
-prompted to choose the appropriate project and mapset.
+:   Start GRASS using the text-based user interface. The user will be
+    prompted to choose the appropriate project and mapset.
 **grass $HOME/grassdata/spearfish70/user1**
- Start GRASS using the default user interface and automatically
-launch into the given mapset, bypassing the mapset selection menu.
-**grass --gui -**
- Start GRASS using the graphical user interface and try to
-obtain the project and mapset from environment variables.
+:   Start GRASS using the default user interface and automatically
+    launch into the given mapset, bypassing the mapset selection menu.
+**grass --gui \-**
+:   Start GRASS using the graphical user interface and try to
+    obtain the project and mapset from environment variables.
 **grass -c EPSG:4326 $HOME/grassdata/myproject**
- Creates a new GRASS project with EPSG code 4326 (latitude-longitude, WGS84)
-in the specified GISDBASE
+:   Creates a new GRASS project with EPSG code 4326 (latitude-longitude, WGS84)
+    in the specified GISDBASE
 **grass -c EPSG:5514:3 $HOME/grassdata/myproject**
- Creates a new GRASS project with EPSG code 5514 (S-JTSK / Krovak
-East North - SJTSK) with datum transformation parameters used in
-Czech Republic in the specified GISDBASE
-**grass -c XY $HOME/grassdata/gnomonic --exec g.proj -c proj4='+proj=gnom +lat\_0=90 +lon\_0=-50'**
- Creates a new GRASS project from PROJ definition string
-(here: [gnomonic](https://proj4.org/operations/projections/gnom.html))
-in the specified GISDBASE
+:   Creates a new GRASS project with EPSG code 5514 (S-JTSK / Krovak
+    East North \- SJTSK) with datum transformation parameters used in
+    Czech Republic in the specified GISDBASE
+**grass -c XY $HOME/grassdata/gnomonic --exec g.proj -c proj4\='\+proj\=gnom \+lat\_0\=90 \+lon\_0\=-50'**
+:   Creates a new GRASS project from PROJ definition string
+    (here: [gnomonic](https://proj4.org/operations/projections/gnom.html))
+    in the specified GISDBASE
 **grass -c myvector.shp $HOME/grassdata/myproject**
- Creates a new GRASS project based on georeferenced Shapefile
+:   Creates a new GRASS project based on georeferenced Shapefile
 **grass -c myraster.tif $HOME/grassdata/myproject**
- Creates a new GRASS project based on georeferenced GeoTIFF file
+:   Creates a new GRASS project based on georeferenced GeoTIFF file
 
 ### Batch jobs with the exec interface
+
 
 Creating a new project based on a geodata file's projection (**-c**)
 and exit (**-e**) immediately:
 
 ```
-
 grass -c elevation.tiff -e /path/to/grassdata/test1/
 
 ```
@@ -275,7 +274,6 @@ grass -c elevation.tiff -e /path/to/grassdata/test1/
 Linking external raster data to PERMANENT Mapset:
 
 ```
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=basins.tiff output=basins
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=elevation.tiff output=elevation
 
@@ -284,7 +282,6 @@ grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=elevation.tiff
 Get statistics for one raster map:
 
 ```
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.univar map=elevation
 
 ```
@@ -292,7 +289,6 @@ grass /path/to/grassdata/test1/PERMANENT/ --exec r.univar map=elevation
 Compare the rasters visually:
 
 ```
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec g.gui.mapswipe first=elevation second=basins
 
 ```
@@ -305,7 +301,6 @@ exec interface.
 **Shell script example:** the command to execute a shell script might be:
 
 ```
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec sh test.sh
 
 ```
@@ -313,7 +308,6 @@ grass /path/to/grassdata/test1/PERMANENT/ --exec sh test.sh
 A very simple bash script ("test.sh") may look like this:
 
 ```
-
 #!/bin/bash
 
 g.region -p
@@ -325,7 +319,6 @@ r.info elevation
 **Python script example:** the command to execute a Python script might be:
 
 ```
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec python test.py
 
 ```
@@ -333,7 +326,6 @@ grass /path/to/grassdata/test1/PERMANENT/ --exec python test.py
 A very simple Python script ("test.py") may look like this:
 
 ```
-
 #!/usr/bin/env python3
 
 # import GRASS Python bindings (see also pygrass)
@@ -359,7 +351,6 @@ coordinate reference system (CRS) and simultaneously starting
 computation in a shell script:
 
 ```
-
 grass --tmp-project elevation.tiff --exec test.sh
 
 ```
@@ -367,7 +358,6 @@ grass --tmp-project elevation.tiff --exec test.sh
 The same, but using an EPSG code and a Python script:
 
 ```
-
 grass --tmp-project EPSG:3358 --exec test.py
 
 ```
@@ -375,7 +365,6 @@ grass --tmp-project EPSG:3358 --exec test.py
 Finally, for special cases, we can create an XY project without any CRS:
 
 ```
-
 grass --tmp-project XY --exec test.py
 
 ```
@@ -388,7 +377,6 @@ A single command can be also executed, e.g. to examine properties of the
 temporary project:
 
 ```
-
 grass --tmp-project EPSG:3358 --exec g.proj -p
 
 ```
@@ -397,7 +385,6 @@ A temporary XY project with single command is useful, e.g. to show
 help text of a module:
 
 ```
-
 grass --tmp-project XY --exec r.neighbors --help
 
 ```
@@ -408,7 +395,6 @@ A single command can be executed, e.g., to examine properties of a
 project (here using the NC SPM sample dataset):
 
 ```
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec g.proj -p
 
 ```
@@ -416,17 +402,15 @@ grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec g.proj -p
 Computation in a Python script can be executed in the same way:
 
 ```
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py
 
 ```
 
 Additional parameters are just passed to the script, so we can run the
-script with different sets of parameters (here 5, 8 and 3, 9) in
+script with different sets of parameters (here 5, 8 and 3, 9\) in
 different temporary mapsets which is good for parallel processing.
 
 ```
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py 5 8
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py 3 9
 
@@ -436,7 +420,6 @@ The same applies to Bash scripts (and other scripts supported on you
 platform):
 
 ```
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.sh 5 8
 
 ```
