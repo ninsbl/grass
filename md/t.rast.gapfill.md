@@ -28,7 +28,6 @@ two maps (values 3.666 and 4.333) for the second gap after interpolation.
 
 ```
 
-
 r.mapcalc expression="map1 = 1"
 r.mapcalc expression="map2 = 3"
 r.mapcalc expression="map3 = 5"
@@ -43,7 +42,6 @@ t.create type=strds temporaltype=absolute \
          description="Test dataset with daily precipitation"
 
 t.register type=raster input=precipitation_daily maps=map1,map2,map3
-
 
 # the output shows three missing maps
 t.rast.list input=precipitation_daily columns=name,start_time,min,max
@@ -73,7 +71,6 @@ map2|2012-08-22 00:00:00|3.0|3.0
 gap_7_1|2012-08-23 00:00:00|3.666667|3.666667
 gap_7_2|2012-08-24 00:00:00|4.333333|4.333333
 map3|2012-08-25 00:00:00|5.0|5.0
-
 
 ```
 

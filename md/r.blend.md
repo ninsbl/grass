@@ -11,11 +11,9 @@ Blending the aspect map with the elevation map for a shaded map
 
 ```
 
-
 g.region raster=elevation
 r.relief input=elevation output=relief zscale=10
 r.blend -c first=elevation second=relief output=blend percent=75
-
 
 ```
 

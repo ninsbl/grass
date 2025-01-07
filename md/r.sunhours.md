@@ -35,19 +35,15 @@ Calculate the sun elevation angle map for 2010-10-11 at 14:00h solar time:
 
 ```
 
-
-
 # set computational region to North Carolina state extent
 g.region n=318500 s=-16000 w=124000 e=963000 res=500 -p
 r.sunhours elevation=sun_elev year=2010 month=10 day=11 hour=14 minute=00
-
 
 # visualize
 d.mon wx0
 d.rast sun_elev
 d.vect nc_state type=boundary
 d.legend sun_elev -s
-
 
 ```
 
@@ -63,10 +59,8 @@ terrain:
 
 ```
 
-
 g.region -p
 r.sunhours sunhour=photoperiod_doy_001 year=2012 day=1
-
 
 ```
 

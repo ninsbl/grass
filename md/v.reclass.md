@@ -10,9 +10,7 @@ Rules file may contain on each row either pair:
 
 ```
 
-
 keyword value
-
 
 ```
 
@@ -41,9 +39,7 @@ Either the **rules** or **column** option must be specified.
 
 ```
 
-
 v.reclass input=land output=land_u type=boundary rules=land.rcl
-
 
 ```
 
@@ -51,14 +47,11 @@ The rules file contains:
 
 ```
 
-
-
 # land reclass file
 cat 1
 where use = 'E13' and owner = 'Jara Cimrman'
 cat 2
 where use = 'E14'
-
 
 ```
 
@@ -79,14 +72,12 @@ values selected from database by SQL select statement:
 
 ```
 
-
 v.reclass in=streams out=streams_by_type column=I_vs_P
 
 v.db.select streams_by_type
 cat|I_vs_P
 1|intermittent
 2|perennial
-
 
 ```
 

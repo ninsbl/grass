@@ -41,9 +41,7 @@ Here the entire stack of input maps is considered:
 
 ```
 
-
 t.rast.series input=tempmean_monthly output=tempmean_average method=average
-
 
 ```
 
@@ -53,10 +51,8 @@ Here the stack of input maps is limited to a certain period of time:
 
 ```
 
-
 t.rast.series input=tempmean_daily output=tempmean_season method=average \
   where="start_time >= '2012-06' and start_time <= '2012-08'"
-
 
 ```
 
@@ -68,17 +64,14 @@ Estimate average temperature for all January maps in the time series:
 
 ```
 
-
 t.rast.series input=tempmean_monthly \
     method=average output=tempmean_january \
     where="strftime('%m', start_time)='01'"
-
 
 # equivalently, we can use
 t.rast.series input=tempmean_monthly \
     output=tempmean_january method=average \
     where="start_time = datetime(start_time, 'start of year', '0 month')"
-
 
 # if we want also February and March averages
 
@@ -90,7 +83,6 @@ t.rast.series input=tempmean_monthly \
     output=tempmean_march method=average \
     where="start_time = datetime(start_time, 'start of year', '2 month')"
 
-
 ```
 
 Generalizing a bit, we can estimate monthly climatologies for all months
@@ -98,14 +90,12 @@ by means of different methods
 
 ```
 
-
 for i in `seq -w 1 12` ; do
   for m in average stddev minimum maximum ; do
     t.rast.series input=tempmean_monthly method=${m} output=tempmean_${m}_${i} \
     where="strftime('%m', start_time)='${i}'"
   done
 done
-
 
 ```
 

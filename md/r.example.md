@@ -17,11 +17,9 @@ Create a copy of the raster map "elevation"
 
 ```
 
-
 g.region raster=elevation -p
 r.example input=elevation output=elevation2
 r.info elevation2
-
 
 ```
 
@@ -34,4 +32,5 @@ r.info elevation2
 ## AUTHOR
 
 GRASS Development Team
-ent Team
+
+nt Team

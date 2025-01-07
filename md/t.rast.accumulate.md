@@ -55,99 +55,67 @@ grass hopper reproduction cycles that are critical to agriculture.
 
 ```
 
-
-
 # Get the temperature data
 wget http://www-pool.math.tu-berlin.de/~soeren/grass/temperature_mean_1990_2000_daily_celsius.tar.gz
-
 
 # Create a temporary project directory
 mkdir -p /tmp/grassdata/LL
 
-
 # Start GRASS and create a new project with PERMANENT mapset
 grass -c EPSG:4326 /tmp/grassdata/LL/PERMANENT
-
 
 # Import the temperature data
 t.rast.import input=temperature_mean_1990_2000_daily_celsius.tar.gz \
     output=temperature_mean_1990_2000_daily_celsius directory=/tmp
 
-
 # We need to set the region correctly
 g.region -p raster=`t.rast.list input=temperature_mean_1990_2000_daily_celsius column=name | tail -1`
-
 # We can zoom to the raster map
 g.region -p zoom=`t.rast.list input=temperature_mean_1990_2000_daily_celsius column=name | tail -1`
 
-
 #############################################################################
-
 #### ACCUMULATION USING GDD METHOD ##########################################
-
 #############################################################################
-
 # The computation of grashopper pest control cycles is based on:
-
 #
-
 #   Using Growing Degree Days For Insect Management
-
 #   Nancy E. Adams
-
 #   Extension Educator, Agricultural Resources
-
 #
-
 # available here: http://extension.unh.edu/agric/gddays/docs/growch.pdf
 
-
 # Now we compute the Biologically Effective Degree Days
-
 # from 1990 - 2000 for each year (12 month cycle) with
-
 # a granularity of one day. Base temperature is 10°C, upper limit is 30°C.
-
 # Hence the accumulation starts at 10°C and does not accumulate values above 30°C.
 t.rast.accumulate input="temperature_mean_1990_2000_daily_celsius" \
     output="temperature_mean_1990_2000_daily_celsius_accumulated_10_30" \
     limits="10,30" start="1990-01-01" stop="2000-01-01" cycle="12 months" \
     basename="temp_acc_daily_10_30" method="bedd"
 
-
 #############################################################################
-
 #### ACCUMULATION PATTERN DETECTION #########################################
-
 #############################################################################
-
 # Now we detect the three grasshopper pest control cycles
-
 
 # First cycle at 325°C - 427°C GDD
 t.rast.accdetect input=temperature_mean_1990_2000_daily_celsius_accumulated_10_30@PERMANENT \
     occ=leafhopper_occurrence_c1_1990_2000 start="1990-01-01" stop="2000-01-01" \
     cycle="12 months" range=325,427 basename=lh_c1 indicator=leafhopper_indicator_c1_1990_2000
 
-
 # Second cycle at 685°C - 813°C GDD
 t.rast.accdetect input=temperature_mean_1990_2000_daily_celsius_accumulated_10_30@PERMANENT \
     occ=leafhopper_occurrence_c2_1990_2000 start="1990-01-01" stop="2000-01-01" \
     cycle="12 months" range=685,813 basename=lh_c2 indicator=leafhopper_indicator_c2_1990_2000
-
 
 # Third cycle at 1047°C - 1179°C GDD
 t.rast.accdetect input=temperature_mean_1990_2000_daily_celsius_accumulated_10_30@PERMANENT \
     occ=leafhopper_occurrence_c3_1990_2000 start="1990-01-01" stop="2000-01-01" \
     cycle="12 months" range=1047,1179 basename=lh_c3 indicator=leafhopper_indicator_c3_1990_2000
 
-
 #############################################################################
-
 #### YEARLY SPATIAL OCCURRENCE COMPUTATION OF ALL CYCLES ####################
-
 #############################################################################
-
 
 # Extract the areas that have full cycles
 t.rast.aggregate input=leafhopper_indicator_c1_1990_2000 gran="1 year" \
@@ -190,13 +158,9 @@ t.rast.colors input=leafhopper_cycle_2_1990_2000_yearly_clean rules=color.table
 t.rast.colors input=leafhopper_cycle_3_1990_2000_yearly_clean rules=color.table
 t.rast.colors input=leafhopper_all_cycles_1990_2000_yearly_clean rules=color.table
 
-
 #############################################################################
-
 ################ DURATION COMPUTATION #######################################
-
 #############################################################################
-
 
 # Extract the duration in days of the first cycle
 t.rast.aggregate input=leafhopper_occurrence_c1_1990_2000 gran="1 year" \
@@ -208,7 +172,6 @@ t.rast.mapcalc input=leafhopper_min_day_c1_1990_2000,leafhopper_max_day_c1_1990_
     output=leafhopper_duration_c1_1990_2000 \
     expression="leafhopper_max_day_c1_1990_2000 - leafhopper_min_day_c1_1990_2000"
 
-
 # Extract the duration in days of the second cycle
 t.rast.aggregate input=leafhopper_occurrence_c2_1990_2000 gran="1 year" \
     output=leafhopper_min_day_c2_1990_2000 method=minimum basename=occ_min_day_c2
@@ -218,7 +181,6 @@ t.rast.mapcalc input=leafhopper_min_day_c2_1990_2000,leafhopper_max_day_c2_1990_
     basename=occ_duration_c2 \
     output=leafhopper_duration_c2_1990_2000 \
     expression="leafhopper_max_day_c2_1990_2000 - leafhopper_min_day_c2_1990_2000"
-
 
 # Extract the duration in days of the third cycle
 t.rast.aggregate input=leafhopper_occurrence_c3_1990_2000 gran="1 year" \
@@ -234,16 +196,11 @@ t.rast.colors input=leafhopper_duration_c1_1990_2000 color=rainbow
 t.rast.colors input=leafhopper_duration_c2_1990_2000 color=rainbow
 t.rast.colors input=leafhopper_duration_c3_1990_2000 color=rainbow
 
-
 #############################################################################
-
 ################ MONTHLY CYCLES OCCURRENCE ##################################
-
 #############################################################################
-
 
 # Extract the monthly indicator that shows the start and end of a cycle
-
 
 # First cycle
 t.rast.aggregate input=leafhopper_indicator_c1_1990_2000 gran="1 month" \
@@ -255,7 +212,6 @@ t.rast.mapcalc input=leafhopper_indi_min_month_c1_1990_2000,leafhopper_indi_max_
     output=leafhopper_monthly_indicator_c1_1990_2000 \
     expression="if(leafhopper_indi_min_month_c1_1990_2000 == 1, 1, if(leafhopper_indi_max_month_c1_1990_2000 == 3, 3, 2))"
 
-
 # Second cycle
 t.rast.aggregate input=leafhopper_indicator_c2_1990_2000 gran="1 month" \
     output=leafhopper_indi_min_month_c2_1990_2000 method=minimum basename=occ_indi_min_month_c2
@@ -265,7 +221,6 @@ t.rast.mapcalc input=leafhopper_indi_min_month_c2_1990_2000,leafhopper_indi_max_
     basename=indicator_monthly_c2 \
     output=leafhopper_monthly_indicator_c2_1990_2000 \
     expression="if(leafhopper_indi_min_month_c2_1990_2000 == 1, 1, if(leafhopper_indi_max_month_c2_1990_2000 == 3, 3, 2))"
-
 
 # Third cycle
 t.rast.aggregate input=leafhopper_indicator_c3_1990_2000 gran="1 month" \
@@ -287,39 +242,27 @@ t.rast.colors input=leafhopper_monthly_indicator_c1_1990_2000 rules=color.table
 t.rast.colors input=leafhopper_monthly_indicator_c2_1990_2000 rules=color.table
 t.rast.colors input=leafhopper_monthly_indicator_c3_1990_2000 rules=color.table
 
-
 #############################################################################
-
 ################ VISUALIZATION ##############################################
-
 #############################################################################
-
 # Now we use g.gui.animation to visualize the yearly occurrence, the duration and the monthly occurrence
-
 
 # Yearly occurrence of all reproduction cycles
 g.gui.animation strds=leafhopper_all_cycles_1990_2000_yearly_clean
 
-
 # Yearly duration of reproduction cycle 1
 g.gui.animation strds=leafhopper_duration_c1_1990_2000
-
 # Yearly duration of reproduction cycle 2
 g.gui.animation strds=leafhopper_duration_c2_1990_2000
-
 # Yearly duration of reproduction cycle 3
 g.gui.animation strds=leafhopper_duration_c3_1990_2000
 
-
 # Monthly occurrence of reproduction cycle 1
 g.gui.animation strds=leafhopper_monthly_indicator_c1_1990_2000
-
 # Monthly occurrence of reproduction cycle 2
 g.gui.animation strds=leafhopper_monthly_indicator_c2_1990_2000
-
 # Monthly occurrence of reproduction cycle 3
 g.gui.animation strds=leafhopper_monthly_indicator_c3_1990_2000
-
 
 ```
 

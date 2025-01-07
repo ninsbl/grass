@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.svm.train* finds parameters for a Support Vector Machine
@@ -10,7 +9,6 @@ Internally the module performs input value rescaling of each of imagery
 group rasters by mean normalisation based on minimum and maximum value present
 in the raster metadata. Rescaling parameters are
 written into the signature file for use during prediction.
-
 
 ## NOTES
 
@@ -23,7 +21,6 @@ Chih-Wei Hsu, Chih-Chung Chang, and Chih-Jen Lin.
 It is strongly suggested to have semantic labels set for each raster
 map in the training data (feature value) imagery group.
 Use [r.support](r.support.html) to set semantic labels.
-
 
 ## PERFORMANCE
 
@@ -46,7 +43,6 @@ note that the actual module's memory consumption may vary from this
 setting, as it solely impacts LIBSVM's internal caching. The cache is
 utilized on an as-needed basis, so it's unlikely to reach the specified value.
 
-
 ## EXAMPLE
 
 This is the first part of classification process. See
@@ -56,42 +52,29 @@ Train a SVM to identify land use classes according to the 1996 land
 use map *landuse96\_28m* and then classify a LANDSAT scene from
 October of 2002. Example requires the nc\_spm\_08 dataset.
 
-
 ```
-
-
 
 # Align computation region to the scene
 g.region raster=lsat7_2002_10 -p
-
 
 # store VIZ, NIR, MIR into group/subgroup
 i.group group=lsat7_2002 subgroup=res_30m \
     input=lsat7_2002_10,lsat7_2002_20,lsat7_2002_30,lsat7_2002_40,lsat7_2002_50,lsat7_2002_70
 
-
 # Now digitize training areas "training" with the digitizer
-
 # and convert to raster model with v.to.rast
 v.to.rast input=training output=training use=cat label_column=label
-
 # If you are just playing around and do not care about the accuracy of outcome,
-
 # just use one of existing maps instead e.g.
-
 # r.random input=landuse96_28m npoints=10000 raster=training -s
-
 
 # Train the SVM
 i.svm.train group=lsat7_2002 subgroup=res_30m \
     trainingmap=training signaturefile=landuse96_rnd_points
 
-
 # Go to i.svm.predict for the next step.
 
-
 ```
-
 
 ## SEE ALSO
 
@@ -118,7 +101,6 @@ Please cite both - LIBSVM and i.svm.
 
   Chang, C.-C., & Lin, C.-J. (2011). LIBSVM : a library for support vector machines.
   ACM Transactions on Intelligent Systems and Technology, 2:27:1--27:27.
-
 
 ## AUTHOR
 

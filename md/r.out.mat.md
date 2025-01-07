@@ -34,9 +34,7 @@ value is used to represent it within these maps. You'll have to do something
 like this to clean them once the map is loaded into Matlab:
 
 ```
-
     map_data(find(map_data < -1e9)) = NaN;
-
 ```
 
 Null values in maps containing either floating point or double-precision
@@ -52,13 +50,11 @@ be used to determine the map's resolution information:
 
 ```
 
-
     [rows cols] = size(map_data)
     x_range = map_eastern_edge - map_western_edge
     y_range = map_northern_edge - map_southern_edge
     ns_res = y_range/rows
     ew_res = x_range/cols
-
 
 ```
 
@@ -68,9 +64,7 @@ In Matlab, plot with either:
 
 ```
 
-
 imagesc(map_data), axis equal, axis tight, colorbar
-
 
 ```
 
@@ -78,9 +72,7 @@ or
 
 ```
 
-
 contourf(map_data, 24), axis ij, axis equal, axis tight, colorbar
-
 
 ```
 

@@ -21,9 +21,7 @@ An example for project **imagery60**:
 
 ```
 
-
 g.gui.photo2image group=aerial@PERMANENT raster=gs13.1@PERMANENT camera=gscamera order=2 extension=try --o
-
 
 ```
 

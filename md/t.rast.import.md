@@ -22,10 +22,8 @@ by running:
 
 ```
 
-
 t.rast.import input=lst_daily.tar.bzip2 output=lst_daily \
               basename=lst directory=/tmp
-
 
 ```
 

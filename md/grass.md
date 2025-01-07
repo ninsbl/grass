@@ -1,5 +1,4 @@
 
-
 ## SYNOPSIS
 
 **grass** [**-h** | **-help** | **--help**] [**-v** | **--version**] |
@@ -65,14 +64,11 @@ following ways:
 
 ```
 
-
     MAPSET
     PROJECT/MAPSET
     GISDBASE/PROJECT/MAPSET
 
-
 ```
-
 
 ## DESCRIPTION
 
@@ -119,7 +115,6 @@ version parameters, with the options:
 * **revision**: (e.g., `745ee7ec9`)
 * **svn\_revision**: (e.g., `062bffc8`)
 * **version**: (e.g., `8.4.0`)
-
 
 ## SAMPLE DATA
 
@@ -169,7 +164,6 @@ from highest precedence to lowest.
 3. Value set in `$HOME/.grass8/rc` (GUI)
 4. Default value - `gui`
 
-
 ### Python Environment Variables
 
 If you choose to use *[wxGUI](wxGUI.html)*
@@ -183,12 +177,9 @@ GRASS use the Python 3.8 binaries instead.
 
 ```
 
-
    GRASS_PYTHON=python3.8
 
-
 ```
-
 
 ### Addon Path to Extra User Scripts
 
@@ -198,13 +189,10 @@ user scripts.
 
 ```
 
-
    GRASS_ADDON_PATH=/usr/mytools
    GRASS_ADDON_PATH=/usr/mytools:/usr/local/othertools
 
-
 ```
-
 
 In this example above path(s) would be added to the standard GRASS path
 environment.
@@ -219,12 +207,9 @@ modules which are not distributed with the standard GRASS release.
 
 ```
 
-
    GRASS_ADDON_BASE=/usr/grass-addons
 
-
 ```
-
 
 In this example above path would be added to the standard GRASS
 path environment.
@@ -283,46 +268,34 @@ and exit (**-e**) immediately:
 
 ```
 
-
 grass -c elevation.tiff -e /path/to/grassdata/test1/
 
-
 ```
-
 
 Linking external raster data to PERMANENT Mapset:
 
 ```
 
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=basins.tiff output=basins
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=elevation.tiff output=elevation
 
-
 ```
-
 
 Get statistics for one raster map:
 
 ```
 
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.univar map=elevation
 
-
 ```
-
 
 Compare the rasters visually:
 
 ```
 
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec g.gui.mapswipe first=elevation second=basins
 
-
 ```
-
 
 #### Execution of shell and Python scripts instead of single commands
 
@@ -333,18 +306,13 @@ exec interface.
 
 ```
 
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec sh test.sh
 
-
 ```
-
 
 A very simple bash script ("test.sh") may look like this:
 
 ```
-
-
 
 #!/bin/bash
 
@@ -352,29 +320,21 @@ g.region -p
 g.list type=raster
 r.info elevation
 
-
 ```
-
 
 **Python script example:** the command to execute a Python script might be:
 
 ```
 
-
 grass /path/to/grassdata/test1/PERMANENT/ --exec python test.py
 
-
 ```
-
 
 A very simple Python script ("test.py") may look like this:
 
 ```
 
-
-
 #!/usr/bin/env python3
-
 
 # import GRASS Python bindings (see also pygrass)
 import grass.script as gs
@@ -390,9 +350,7 @@ gs.message('Available vector maps:')
 for vector in gs.list_strings(type='vector'):
     print(vector)
 
-
 ```
-
 
 #### Using temporary project
 
@@ -402,34 +360,25 @@ computation in a shell script:
 
 ```
 
-
 grass --tmp-project elevation.tiff --exec test.sh
 
-
 ```
-
 
 The same, but using an EPSG code and a Python script:
 
 ```
 
-
 grass --tmp-project EPSG:3358 --exec test.py
 
-
 ```
-
 
 Finally, for special cases, we can create an XY project without any CRS:
 
 ```
 
-
 grass --tmp-project XY --exec test.py
 
-
 ```
-
 
 Temporary project is automatically deleted after computation,
 so the script is expected to export, link or otherwise preserve the
@@ -440,24 +389,18 @@ temporary project:
 
 ```
 
-
 grass --tmp-project EPSG:3358 --exec g.proj -p
 
-
 ```
-
 
 A temporary XY project with single command is useful, e.g. to show
 help text of a module:
 
 ```
 
-
 grass --tmp-project XY --exec r.neighbors --help
 
-
 ```
-
 
 #### Using temporary mapset
 
@@ -466,23 +409,17 @@ project (here using the NC SPM sample dataset):
 
 ```
 
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec g.proj -p
 
-
 ```
-
 
 Computation in a Python script can be executed in the same way:
 
 ```
 
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py
 
-
 ```
-
 
 Additional parameters are just passed to the script, so we can run the
 script with different sets of parameters (here 5, 8 and 3, 9) in
@@ -490,25 +427,19 @@ different temporary mapsets which is good for parallel processing.
 
 ```
 
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py 5 8
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py 3 9
 
-
 ```
-
 
 The same applies to Bash scripts (and other scripts supported on you
 platform):
 
 ```
 
-
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.sh 5 8
 
-
 ```
-
 
 The temporary mapset is automatically deleted after computation,
 so the script is expected to export, link or otherwise preserve the

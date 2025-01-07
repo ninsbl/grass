@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.compress* can be used to compress or decompress raster maps.
@@ -56,7 +55,6 @@ compression is indicated with "YES" or "NO".
   15-17 digits precision)
 * NULL: represents "no data" in raster maps; to be distinguished from
   0 (zero) data value
-
 
 ### OVERVIEW OF AVAILABLE COMPRESSION ALGORITHMS
 
@@ -131,7 +129,6 @@ default compression method if available.
 
 ## NOTES
 
-
 ### Compression method number scheme
 
 The used compression method is encoded with numbers. In the internal
@@ -169,29 +166,22 @@ integer, ZLIB's compression level 1 will be used.
 
 ## EXAMPLES
 
-
 ### Printing of current compression state
 
 Example for an uncompressed raster map:
 
 ```
 
-
 r.compress compressed_no -p
   <compressed_no> (method 0: NONE). Data type: <CELL>
 
-
 ```
-
-
 
 ### Applying ZLIB compression
 
 Applying ZLIB compression to a copy of the uncompressed map from above:
 
 ```
-
-
 
 # compression of map using ZLIB compression
 g.copy raster=compressed_no,compressed_ZLIB
@@ -202,17 +192,13 @@ r.compress compressed_ZLIB -p
   <compressed_ZLIB> is compressed (method 2: ZLIB). Data type: <CELL>
 unset GRASS_COMPRESSOR # switch back to default
 
-
 ```
-
 
 ### Applying BZIP2 compression
 
 Applying BZIP2 compression to a copy of the ZLIB-compressed map from above:
 
 ```
-
-
 
 # compression of map using BZIP2 compression
 g.copy raster=compressed_ZLIB,compressed_BZIP2
@@ -223,17 +209,13 @@ r.compress compressed_BZIP2 -p
   <compressed_BZIP2> is compressed (method 4: BZIP2). Data type: <CELL>
 unset GRASS_COMPRESSOR # switch back to default
 
-
 ```
-
 
 ### Applying ZSTD compression
 
 Applying ZSTD compression to a copy of the BZIP2-compressed map from above:
 
 ```
-
-
 
 # compression of map using ZSTD compression
 g.copy raster=compressed_BZIP2,compressed_ZSTD
@@ -244,9 +226,7 @@ r.compress compressed_ZSTD -p
   <compressed_ZSTD> is compressed (method 5: ZSTD). Data type: <CELL>
 unset GRASS_COMPRESSOR
 
-
 ```
-
 
 ## SEE ALSO
 

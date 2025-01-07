@@ -9,13 +9,11 @@ Show all installed GRASS database drivers:
 
 ```
 
-
 db.drivers -p
 pg
 ogr
 sqlite
 dbf
-
 
 ```
 

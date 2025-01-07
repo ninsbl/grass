@@ -26,9 +26,7 @@ small value. Example:
 
 ```
 
-
 v.buffer input=map output=bufferedmap buffer=1 type=point,line,area,boundary
-
 
 ```
 
@@ -43,9 +41,7 @@ between them afterwards you can use the **coordinates** parameter, e.g.:
 
 ```
 
-
 coordinates=25556200,6686400,25556400,6686600
-
 
 ```
 
@@ -61,10 +57,8 @@ points given with coordinate (edges will be computed as well).
 
 ```
 
-
 v.net.visibility input=map visibility=vis_map output=new_vis_map \
       coordinates=25556200,6686400,25556400,6686600
-
 
 ```
 
@@ -76,7 +70,6 @@ A simple example (North Carolina sample data) showing how to use the module:
 
 ```
 
-
 v.extract input=zipcodes_wake output=areas_7_11_25 cats=7,11,25
 g.region vector=zipcodes_wake
 d.mon wx0
@@ -84,7 +77,6 @@ d.vect areas_7_11_25
 v.net.visibility input=areas_7_11_25 output=graph
 d.vect graph
 d.vect areas_7_11_25 color=red type=boundary
-
 
 ```
 
@@ -95,12 +87,10 @@ along with the module:
 
 ```
 
-
 v.buffer input=lines output=buffered_lines buffer=1
 v.net.visibility input=buffered_lines output=graph
 d.vect graph
 d.vect lines col=red
-
 
 ```
 
@@ -111,11 +101,9 @@ visibility graph of the vector map lines with the point 2555678,6686343:
 
 ```
 
-
 v.net.visibility input=lines output=graph coordinates=2555678,6686343
 d.vect graph
 d.vect lines col=red
-
 
 ```
 
@@ -127,7 +115,6 @@ Here the vector map graph is computed then a new visibility graph is computed
 from it with the point 669547.97,208348.20 extra:
 
 ```
-
 
 v.extract input=zipcodes_wake output=areas_7_11_25 cats=7,11,25
 g.region vector=zipcodes_wake
@@ -142,7 +129,6 @@ echo "symbol basic/star 20 669547.97 208348.20 black red" | d.graph -m
 d.vect new_graph
 d.vect areas_7_11_25 color=red type=boundary
 
-
 ```
 
 ### Example 5
@@ -151,13 +137,11 @@ An example for connections of points (Spearfish):
 
 ```
 
-
 v.net.visibility input=archsites output=graph
 g.region vector=archsites
 d.mon wx0
 d.vect graph
 d.vect archsites col=red
-
 
 ```
 
@@ -170,7 +154,6 @@ Here is an example with artificial data.
 Load data using here document syntax (Bash and unix-like commands lines only):
 
 ```
-
 
 v.in.ascii input=- output=simple format=standard <<EOF
 VERTI:
@@ -222,16 +205,13 @@ B  9
  78.73119266  71.35366972
 EOF
 
-
 ```
 
 Compute the graph:
 
 ```
 
-
 v.net.visibility input=simple output=graph
-
 
 ```
 

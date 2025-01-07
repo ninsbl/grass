@@ -48,13 +48,11 @@ and then reload the maps to update the animation.
 
 ```
 
-
 g.gui.animation raster=rmap1,rmap2,rmap3
 
 g.gui.animation vector=vmap1,vmap2,vmap3
 
 g.gui.animation strds=precipitation_2000_2010
-
 
 ```
 
@@ -63,9 +61,7 @@ with *[g.list](g.list.html)* (back ticks syntax works for Linux and Mac only):
 
 ```
 
-
 g.gui.animation raster=`g.list type=raster mapset=. separator=comma pattern="precip*"`
-
 
 ```
 
@@ -74,9 +70,7 @@ e.g., numeric range (here: precipitation for the years 1997-2012):
 
 ```
 
-
 g.gui.animation raster=`g.list -e type=raster mapset=. separator=comma pattern="precip_total.(199[7-9]|200[0-9]|201[0-2]).sum"`
-
 
 ```
 

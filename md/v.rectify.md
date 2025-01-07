@@ -29,9 +29,7 @@ ground control points with an additional third coordinate:
 
 ```
 
-
  x y z east north height status
-
 
 ```
 

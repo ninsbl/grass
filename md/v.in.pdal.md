@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 Imports a point cloud (e.g. from a LAS file) as vector points with the PDAL library.
@@ -10,7 +9,6 @@ Imports a point cloud (e.g. from a LAS file) as vector points with the PDAL libr
 * return filter
 * class filter
 
-
 ## EXAMPLES
 
 Import only XYZ coordinates of points, limit the import to the current
@@ -19,12 +17,9 @@ system during the import:
 
 ```
 
-
 v.in.pdal input=points.las output=points -c -r -w
 
-
 ```
-
 
 ## REFERENCES
 
@@ -33,7 +28,6 @@ v.in.pdal input=points.las output=points -c -r -w
   XXIII ISPRS Congress 2016
   [[ISPRS Archives](https://doi.org/10.5194/isprs-archives-XLI-B7-945-2016),
   [ResearchGate](https://www.researchgate.net/publication/304340172_Processing_UAV_and_lidar_point_clouds_in_GRASS_GIS)]
-
 
 ## SEE ALSO
 

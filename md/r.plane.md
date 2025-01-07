@@ -26,25 +26,18 @@ A tilted plane in the North Carolina sample dataset region:
 
 ```
 
-
-
 # set computational region
 g.region raster=elev_lid792_1m -p
 
-
 # get center coordinates as an example
 g.region -c
-
 # get terrain height at point
 r.what map=elev_lid792_1m coordinates=638650.0,220375.0
-
 # shows elevation: 116.7734
-
 
 # generate tilted plane
 r.plane myplane30 dip=30 az=75 east=638650.0 north=220375.0 \
         elev=116.7734 type=FCELL
-
 
 ```
 

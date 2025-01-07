@@ -62,9 +62,7 @@ Export the soils with cats in layer 1:
 
 ```
 
-
 v.out.vtk input=soils type=area layer=1 output=/tmp/soils.vtk
-
 
 ```
 
@@ -72,9 +70,7 @@ Export the streams with cats in layer 1:
 
 ```
 
-
 v.out.vtk input=streams type=line layer=1 output=/tmp/streams.vtk
-
 
 ```
 
@@ -82,9 +78,7 @@ Write the archsite vtk output to stdout with cats in layer 1:
 
 ```
 
-
 v.out.vtk input=archsites type=point layer=1
-
 
 ```
 

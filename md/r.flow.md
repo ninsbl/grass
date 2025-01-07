@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.flow* generates flowlines using a combined raster-vector
@@ -111,27 +110,20 @@ transported to a single cell downslope.
 
 ### Diagnostics
 
-
 ```
-
 
 Elevation raster map resolution differs from current region resolution
 
-
 ```
-
 
 The resolutions of all input raster maps and the current region must
 match (see *[g.region](g.region.html)*).
 
 ```
 
-
 Resolution too unbalanced
 
-
 ```
-
 
 The difference in length between the two axes of a grid cell is so
 great that quantization error is larger than one of the
@@ -145,14 +137,11 @@ a flow accumulation raster map are computed from an elevation raster map
 
 ```
 
-
 g.region raster=elevation -p
 r.flow elevation=elevation skip=3 flowline=flowline flowlength=flowlength \
        flowaccumulation=flowaccumulation
 
-
 ```
-
 
 ![flow line](r_flow_line.png)
 ![flow path length](r_flow_length.png)
@@ -161,7 +150,6 @@ r.flow elevation=elevation skip=3 flowline=flowline flowlength=flowlength \
 Figure: Flow lines with underlying elevation map;
 flow lines with underlying flow path lengths (in map units: meters);
 flow accumulation map (zoomed view)
-
 
 ## REFERENCES
 
@@ -183,7 +171,6 @@ flow accumulation map (zoomed view)
   Science, Vol. 11, No. 6)
 * Mitasova, H.(1993): Surfaces and modeling. Grassclippings (winter and
   spring) p.18-19.
-
 
 ## SEE ALSO
 

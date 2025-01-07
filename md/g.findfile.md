@@ -21,12 +21,10 @@ need to be deleted/renamed/copied for a given entity type.
 
 ```
 
-
 name='file_name'
 mapset='mapset_name'
 file='unix_filename'
 fullname='grass_fullname'
-
 
 ```
 
@@ -39,9 +37,7 @@ as follows:
 
 ```
 
-
 eval `g.findfile element=name mapset=name file=name`
-
 
 ```
 
@@ -53,9 +49,7 @@ eval `g.findfile element=name mapset=name file=name`
 
 ```
 
-
 eval `g.findfile element=cell file=elevation`
-
 
 ```
 
@@ -64,12 +58,10 @@ will be set as follows:
 
 ```
 
-
 name=
 mapset=
 fullname=
 file=
-
 
 ```
 
@@ -77,12 +69,10 @@ The following is a way to test for this case:
 
 ```
 
-
 if [ ! "$file" ]
 then
-    exit 1
+	exit 1
 fi
-
 
 ```
 
@@ -90,13 +80,11 @@ fi
 
 ```
 
-
 eval `g.findfile element=vector file="$G_OPT_V_INPUT"`
 if [ ! "$file" ] ; then
    g.message -e "Vector map <$G_OPT_V_INPUT> not found"
    exit 1
 fi
-
 
 ```
 
@@ -110,11 +98,9 @@ following code:
 
 ```
 
-
 import grass.script as gcore
 
 gcore.find_file('elevation', element = 'cell')
-
 
 ```
 

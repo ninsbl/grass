@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.external.out* instructs GRASS to write vector maps in
@@ -77,7 +76,6 @@ Note that topological output requires **PostGIS version 2 or later**.
 
 ## EXAMPLES
 
-
 ### ESRI Shapefile
 
 *v.external.out* can be used along with
@@ -87,36 +85,27 @@ Shapefile format:
 
 ```
 
-
-
 # register Shapefile in GRASS mapset:
 v.external input=/path/to/shapefiles layer=cities
-
 
 # define output directory for GRASS calculation results:
 v.external.out output=$HOME/gisoutput
 
-
 # do something (here: spatial query), write output directly as Shapefile
 v.select ainput=cities atype=point binput=forests btype=area operator=within output=fcities
 
-
 ```
-
 
 Current settings can be printed using **-p** or **-g** flag.
 
 ```
-
 
 v.external.out -p
 
 output: /path/to/home/gisoutput
 format: ESRI Shapefile
 
-
 ```
-
 
 ### PostGIS (simple features)
 
@@ -125,21 +114,15 @@ provider* (GRASS must be compiled with PostgreSQL support).
 
 ```
 
-
-
 # register PostGIS table in GRASS mapset:
 v.external output=PG:dbname=gisdb layer=cities
-
 
 # define output PostGIS database for GRASS calculation results stored as simple features:
 v.external.out output=PG:dbname=gisdb format=PostgreSQL
 
-
 # do some processing...
 
-
 ```
-
 
 *Note:* If the environment variable `GRASS_VECTOR_OGR`
 is defined, or GRASS is compiled without PostgreSQL support then GRASS
@@ -148,20 +131,14 @@ PostGIS data.
 
 ### PostGIS Topology
 
-
 ```
-
-
 
 # define output PostGIS database for GRASS calculation results stored as topological elements:
 v.external.out output=PG:dbname=gisdb format=PostgreSQL options=topology=YES
 
-
 # do some processing...
 
-
 ```
-
 
 *Note:* PostGIS topological access is supported only in
 built-in *GRASS-PostGIS data provider*.
@@ -172,12 +149,9 @@ To restore original settings, ie. use the GRASS native format, type:
 
 ```
 
-
 v.external.out -r
 
-
 ```
-
 
 ### Restore settings
 
@@ -185,49 +159,35 @@ Current settings can be stored to file by specifying **output** option.
 
 ```
 
-
-
 # define output PostGIS database for GRASS calculation with
-
 # results stored as topological elements:
 v.external.out output=PG:dbname=gisdb format=PostgreSQL \
   options=topology=YES savesettings=gisdb_topo.txt
 
-
 # ... and do some processing in PostGIS Topology
 
-
 ```
-
 
 Back to native format:
 
 ```
 
-
 v.external.out -r
-
 
 # do some processing in native format
 
-
 ```
-
 
 Restore previous settings from "gisdb\_topo.txt" file by
 specifying **loadsettings** option.
 
 ```
 
-
 v.external.out loadsettings=gisdb_topo.txt
-
 
 # ... and do some processing in PostGIS Topology
 
-
 ```
-
 
 ## REFERENCES
 
@@ -235,7 +195,6 @@ v.external.out loadsettings=gisdb_topo.txt
 * [OGR vector library C API](https://gdal.org/en/stable/api/) documentation
 * [GRASS-PostGIS data provider](https://trac.osgeo.org/grass/wiki/Grass7/VectorLib/PostGISInterface)
 * [libpq - C Library](https://www.postgresql.org/docs/9.1/static/libpq.html)
-
 
 ## SEE ALSO
 

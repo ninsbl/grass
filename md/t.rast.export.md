@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *t.rast.export* exports a space time raster dataset (strds) as a tar
@@ -33,13 +32,11 @@ following suffix can be used:
 * **.tar.bzip2** in the case of **compress=bzip2**
 * **.tar.gzip** in the case of **compress=gzip**
 
-
 ## EXAMPLE
 
 In this example, all the raster maps of 2012 of "tempmean\_monthly" will be exported:
 
 ```
-
 
 t.rast.export input=tempmean_monthly output=tempmean_monthly.tar.bzip2 \
               where="start_time >= '2012-01-01' and start_time < '2013-01-01'"
@@ -128,9 +125,7 @@ Files:
  metadata.txt -- The output of t.info
    readme.txt -- This file
 
-
 ```
-
 
 ## SEE ALSO
 

@@ -32,9 +32,7 @@ with a radius of 100,000 map units, use the following command:
 
 ```
 
-
 v.perturb input=comm_colleges output=uniform_perturb parameters=100000
-
 
 ```
 
@@ -51,9 +49,7 @@ For a normal distribution with a mean of 5000 and standard deviation of
 
 ```
 
-
 v.perturb input=comm_colleges output=normal_perturb distribution=normal parameters=5000,2000
-
 
 ```
 
@@ -69,9 +65,7 @@ In order to include a minimum value of 500, use the following command:
 
 ```
 
-
 v.perturb input=comm_colleges output=min_perturb distribution=normal parameters=100000,1000 minimum=500
-
 
 ```
 

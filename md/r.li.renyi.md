@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.li.renyi* calculates the "Renyi's diversity index" as:
@@ -14,7 +13,6 @@ with:
 * **S**: number of different patch types
 * **pi**: proportional abundance of
   patch type *i*
-
 
 ## NOTES
 
@@ -36,36 +34,28 @@ To calculate Renyi's diversity index on map *my\_map*, using
 
 ```
 
-
 r.li.renyi input=my_map conf=my_conf output=my_out alpha=0.6
 
-
 ```
-
 
 Forest map (Spearfish sample dataset) example:
 
 ```
-
 
 g.region raster=landcover.30m -p
 r.mapcalc "forests = if(landcover.30m >= 41 && landcover.30m <= 43,1,null())"
 r.li.renyi input=forests conf=movwindow7 out=forests_renyi_mov7_a06 alpha=0.6
 r.univar forests_renyi_mov7_a06
 
-
 ```
-
 
 Forest map (North Carolina sample dataset) example:
 
 ```
 
-
 g.region raster=landclass96 -p
 r.mapcalc "forests = if(landclass96 == 5, 1, null() )"
 r.li.renyi input=forests conf=movwindow7 out=forests_renyi_mov7
-
 
 # verify
 r.univar forests_renyi_mov7
@@ -74,9 +64,7 @@ d.mon wx0
 d.rast forests_renyi_mov7
 d.vect forests type=boundary
 
-
 ```
-
 
 ## SEE ALSO
 

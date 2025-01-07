@@ -14,9 +14,7 @@ Pack up vector map *random\_point* into *random\_point.pack* file.
 
 ```
 
-
 v.pack input=random_point
-
 
 ```
 
@@ -24,9 +22,7 @@ the vector map can be afterwards unpacked by
 
 ```
 
-
 v.unpack input=random_point.pack
-
 
 ```
 

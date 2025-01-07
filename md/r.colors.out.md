@@ -9,11 +9,9 @@ to *[r.colors](r.colors.html)*.
 
 ```
 
-
 r.colors.out map=el_D782_6m rules=rules.txt
 r.colors map=el_D783_6m rules=rules.txt
 r.colors.out map=el_D782_6m rules=rules.json format=json
-
 
 ```
 

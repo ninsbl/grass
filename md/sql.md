@@ -32,37 +32,29 @@ distributions of GRASS GIS:
 | [odbc](grass-odbc.html) | Data storage via UnixODBC (PostgreSQL, Oracle, etc.) | <https://www.unixodbc.org/> |
 | [ogr](grass-ogr.html) | Data storage in OGR files | [https://gdal.org/](https://gdal.org) |
 
-
 ## NOTES
-
 
 ### Database table name restrictions
 
 * No dots are allowed as SQL does not support '.' (dots) in table names.
 * Supported table name characters are only:
 
-
-```
-
+  ```
 
   [A-Za-z][A-Za-z0-9_]*
 
-
-```
+  ```
 
 * A table name must start with a character, not a number.
 * Text-string matching requires the text part to be 'single quoted'.
   When run from the command line multiple queries should be contained
   in "double quotes". e.g.
 
-
-```
-
+  ```
 
   d.vect map where="individual='juvenile' and area='beach'"
 
-
-```
+  ```
 
 * Attempts to use a reserved SQL word (depends on database backend) as
   column or table name will cause a "SQL syntax error".
@@ -72,14 +64,12 @@ distributions of GRASS GIS:
   extended).
 * DBF column names are limited to 10 characters (DBF API definition).
 
-
 ### Database table column types
 
 The supported types of columns depend on the database backend. However, all backends
 should support VARCHAR, INT, DOUBLE PRECISION and DATE.
 
 ## EXAMPLES
-
 
 ### Display of vector feature selected by attribute query
 
@@ -89,98 +79,71 @@ example):
 
 ```
 
-
 g.region vector=schools_wake -p
 d.mon wx0
 d.vect roadsmajor
 
-
 # all schools
 d.vect schools_wake fcol=black icon=basic/diamond col=white size=13
-
 
 # numerical selection: show schools with capacity of above 1000 kids:
 d.vect schools_wake fcol=blue icon=basic/diamond col=white size=13 \
     where="CAPACITYTO > 1000"
 
-
 # string selection: all schools outside of Raleigh
-
 #   along with higher level schools in Raleigh
 d.vect schools_wake fcol=red icon=basic/diamond col=white size=13 \
     where="ADDRCITY <> 'Raleigh' OR (ADDRCITY = 'Raleigh' AND GLEVEL = 'H')"
 
-
 ```
-
 
 Select all attributes from table where *CORECAPACI* column values are
 smaller than 200 (children):
 
 ```
 
-
-
 # must be run from the mapset which contains the table
 echo "SELECT * FROM schools_wake WHERE CORECAPACI < 200" | db.select input=-
 
-
 ```
-
 
 Example of subquery expressions from a list (not supported for DBF driver):
 
 ```
 
-
 v.db.select schools_wake where="ADDRCITY IN ('Apex', 'Wendell')"
 
-
 ```
-
 
 ### Example of pattern matching
 
-
 ```
 
-
-
 # field contains string:
-
 #  for DBF driver:
 v.extract schools_wake out=elementary_schools where="NAMELONG LIKE 'ELEM'"
-
 #  for SQLite driver:
 v.extract schools_wake out=rivers_noce where="DES LIKE '%NOCE%'"
 v.extract schools_wake out=elementary_schools where="NAMELONG LIKE '%ELEM%'"
 
-
 # match exactly number of characters (here: 2), does not work for DBF driver:
 v.db.select mysites where="id LIKE 'P__'"
-
 
 #define wildcard:
 v.db.select mysites where="id LIKE 'P%'"
 
-
 ```
-
 
 ### Example of null handling
 
-
 ```
-
 
 v.db.addcolumn map=roads col="nulltest int"
 v.db.update map=roads col=nulltest value=1 where="cat > 2"
 d.vect roads where="nulltest is null"
 v.db.update map=roads col=nulltest value=2 where="cat <= 2"
 
-
 ```
-
 
 ### Update of attributes
 
@@ -189,24 +152,19 @@ modules):
 
 ```
 
-
 v.db.addcolumn map=roads column="exprtest double precision"
 v.db.update map=roads column=exprtest value="cat/nulltest"
 v.db.update map=roads column=exprtest value="cat/nulltest+cat" where="cat=1"
 
-
 # using data from another column
 v.db.update map=roads column=exprtest qcolumn="(cat*100.)/SHAPE_LEN."
 
-
 ```
-
 
 Examples of more complex expressions in updates (using `db.*`
 modules):
 
 ```
-
 
 echo "UPDATE roads SET exprtest=null"
 echo "UPDATE roads SET exprtest=cat/2" | db.execute
@@ -214,22 +172,17 @@ echo "UPDATE roads SET exprtest=cat/2+cat/3" | db.execute
 echo "UPDATE roads SET exprtest=NULL WHERE cat>2" | db.execute
 echo "UPDATE roads SET exprtest=cat/3*(cat+1) WHERE exprtest IS NULL" | db.execute"
 
-
 ```
-
 
 Instead of creating and updating new columns with an expression, you
 can use the expression directly in a command:
 
 ```
 
-
 d.vect roads where="(cat/3*(cat+1))>8"
 d.vect roads where="cat>exprtest"
 
-
 ```
-
 
 ### Example of changing a SQL type (type casting)
 
@@ -237,24 +190,18 @@ d.vect roads where="cat>exprtest"
 
 North Carolina data set: convert string column to double precision:
 
-
 ```
-
-
 
 # first copy map into current mapset
 g.copy vect=geodetic_pts,mygeodetic_pts
 v.db.addcolumn mygeodetic_pts col="zval double precision"
-
 
 # the 'z_value' col contains 'N/A' strings, not to be converted
 v.db.update mygeodetic_pts col=zval \
             qcol="CAST(z_value AS double precision)" \
             where="z_value <> 'N/A'"
 
-
 ```
-
 
 ### Example of concatenation of fields
 
@@ -262,12 +209,9 @@ v.db.update mygeodetic_pts col=zval \
 
 ```
 
-
 v.db.update vectormap column=column3 qcolumn="column1 || column2"
 
-
 ```
-
 
 ### Example of conditions
 
@@ -275,16 +219,12 @@ Conditions (like if statements) are usually written as CASE statement in SQL:
 
 ```
 
-
 v.db.update vectormap column=species qcolumn="CASE WHEN col1 >= 12 THEN cat else NULL end"
-
 
 # a more complex example with nested conditions
 v.db.update vectormap column=species qcolumn="CASE WHEN col1 >= 1 THEN cat WHEN row = 13 then 0 ELSE NULL end"
 
-
 ```
-
 
 ## SEE ALSO
 

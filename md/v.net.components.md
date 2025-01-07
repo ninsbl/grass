@@ -36,9 +36,7 @@ Otherwise, it is impossible to travel between some places.
 
 ```
 
-
 v.net.components input=roads output=roads_components method=strong
-
 
 ```
 

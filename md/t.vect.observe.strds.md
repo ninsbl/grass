@@ -34,7 +34,6 @@ layer starting from a point vector and a space time raster dataset:
 
 ```
 
-
 t.vect.observe.strds input=precip_30ynormals_3d strds=tempmean_monthly \
                      output=precip_stations vect=precip_stations_monthly \
                      columns=month
@@ -127,7 +126,6 @@ v.info precip_stations_monthly
  |   Comment:                                                                 |
  |                                                                            |
  +----------------------------------------------------------------------------+
-
 
 ```
 

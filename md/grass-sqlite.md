@@ -16,12 +16,9 @@ is created:
 
 ```
 
-
-
 # example for storing DB in mapset directory (keep single quotes):
 db.connect driver=sqlite database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
 db.connect -p
-
 
 ```
 
@@ -44,14 +41,10 @@ the following way is suggested (corresponds to above database connection):
 
 ```
 
-
-
 # fetch GRASS variables as shell environment variables:
 eval `g.gisenv`
-
 # use double quotes:
 sqlitebrowser "$GISDBASE/$LOCATION_NAME/$MAPSET"/sqlite/sqlite.db
-
 
 ```
 

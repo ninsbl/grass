@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.topo.corr* is used to topographically correct reflectance
@@ -32,11 +31,9 @@ the original reflectance (ref\_o) using one of the four offered methods
 
 (one lambertian and two non-lambertian).
 
-
 ### Method: cosine
 
 * ref\_c = ref\_o \* cos\_z / cos\_i
-
 
 ### Method: minnaert
 
@@ -64,7 +61,6 @@ be calculated as
 
 * ref\_c = ref\_o \* 2 / (cos\_i + 1)
 
-
 ## NOTES
 
 1. The illumination model (cos\_i) with flag -i uses the actual region
@@ -73,7 +69,6 @@ be calculated as
    null) and its resolution.
 3. The elevation map to calculate the illumination model should be metric.
 
-
 ## EXAMPLES
 
 First, make a illumination model from the elevation map (here, SRTM). Then
@@ -81,22 +76,16 @@ make perform the topographic correction of e.g. the bands toar.5, toar.4 and toa
 with output as tcor.toar.5, tcor.toar.4, and tcor.toar.3 using c-factor (= c-correction)
 method:
 
-
 ```
-
-
 
 # first pass: create illumination model
 i.topo.corr -i base=SRTM zenith=33.3631 azimuth=59.8897 output=SRTM.illumination
-
 
 # second pass: apply illumination model
 i.topo.corr base=SRTM.illumination input=toar.5,toar.4,toar.3 output=tcor \
   zenith=33.3631 method=c-factor
 
-
 ```
-
 
 ## REFERENCES
 
@@ -114,7 +103,6 @@ i.topo.corr base=SRTM.illumination input=toar.5,toar.4,toar.3 output=tcor \
 * Twele A. and Erasmi S, 2005. Evaluating topographic correction algorithms
   for improved land cover discrimination in mountainous areas of
   Central Sulawesi. Göttinger Geographische Abhandlungen, vol. 113.
-
 
 ## SEE ALSO
 

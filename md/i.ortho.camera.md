@@ -20,7 +20,6 @@ Please provide the following information
 
 ```
 
-
     CAMERA NAME:               camera name______
     CAMERA IDENTIFICATION:     identification___
     CALIBRATED FOCAL LENGTH mm.:_________________
@@ -30,7 +29,6 @@ Please provide the following information
 
    AFTER COMPLETING ALL ANSWERS, HIT <ESC> TO CONTINUE
                (OR <Ctrl-C> TO CANCEL)
-
 
 ```
 
@@ -71,7 +69,6 @@ Please provide the following information
 
 ```
 
-
     Fid#    FID ID          X          Y
 
     1__    _____        0.0___    0.0___
@@ -89,7 +86,6 @@ Please provide the following information
 
      AFTER COMPLETING ALL ANSWERS, HIT <ESC> TO CONTINUE
                     (OR <Ctrl-C> TO CANCEL)
-
 
 ```
 

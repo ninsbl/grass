@@ -51,10 +51,8 @@ dataset is used to hillshade the elevation map:
 
 ```
 
-
 g.region raster=elevation -p
 r.relief input=elevation output=elevation_shade
-
 
 ```
 
@@ -70,9 +68,7 @@ or *[d.shade](d.shade.html)*:
 
 ```
 
-
 r.shade shade=elevation_shade color=elevation output=elevation_shaded
-
 
 ```
 
@@ -84,12 +80,9 @@ In Latitude-Longitude coordinate reference systems
 
 ```
 
-
-
 # Latitude-Longitude example
 g.region raster=srtm -p
 r.relief input=srtm output=srtm_shaded scale=111120
-
 
 ```
 
@@ -107,31 +100,23 @@ equivalents:
 
 ```
 
-
-
 # using the map created above
-
 
 # create new map from map category values
 r.mapcalc expression="elevation_shade_byte = #elevation_shade"
 
-
 # verify data range
 r.info elevation_shade_byte
 
-
 # assign grey color table
 r.colors elevation_shade_byte color=grey
-
 
 # export (optionally: createopt="COMPRESS=DEFLATE,BIGTIFF=YES")
 r.out.gdal input=elevation_shade_byte createopt="COMPRESS=DEFLATE" \
            output=elevation_shade.tif
 
-
 # add overview images in GeoTIFF file for faster zooming
 gdaladdo --config GDAL_CACHEMAX 2000 elevation_shade.tif 2 4 8 16
-
 
 ```
 

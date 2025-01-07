@@ -22,31 +22,23 @@ from [External data for NC sample dataset](https://grassbook.org/wp-content/uplo
 
 ```
 
-
-
 # check original map attributes
 v.db.select geology column=GEO_NAME,SHAPE_area
-
 
 # import of CSV table
 db.in.ogr input=nc_geology.csv output=nc_geology
 
-
 # work on copy of geology map in current mapset
 g.copy vector=geology,mygeology
-
 
 # check column names of vector map attributes
 v.info -c mygeology
 
-
 # check column names of legend table
 db.describe -c nc_geology
 
-
 # join table using key columns (map: "GEO_NAME"; table: "geol_id")
 v.db.join map=mygeology column=GEO_NAME other_table=nc_geology other_column=geol_id
-
 
 # verify result (here abbreviated)
 v.db.select mygeology | head -3
@@ -54,7 +46,6 @@ cat|onemap_pro|PERIMETER|GEOL250_|GEOL250_ID|GEO_NAME|SHAPE_area|SHAPE_len|geol_
 1|963738.75|4083.97998|2|1|Zml|963738.608571|4083.979839|Zml|Metagraywacke|Interlayered with metaconglomerate, ...
 2|22189124|26628.261719|3|2|Zmf|22189123.2296|26628.261112|Zmf|Metafelsite|Light-colored porphyritic extrusive rock
 ...
-
 
 ```
 
@@ -65,18 +56,14 @@ into the Spearfish soils map ([download legend](https://grassbook.org/code-examp
 
 ```
 
-
 g.copy vect=soils,mysoils
-
 
 # import legend table
 db.in.ogr soils_legend.csv out=soils_legend
 
-
 # get join column names
 v.info -c mysoils
 db.describe -c soils_legend
-
 
 # look at original table
 v.db.select mysoils
@@ -87,7 +74,6 @@ cat|label
 4|BcB
 5|BcC
 ...
-
 
 # look at legend
 db.select table=soils_legend
@@ -101,10 +87,8 @@ id|shortname|longname
 0|BcC|Boneek silt loam, 6 to 9
 ...
 
-
 # join soils_legend into mysoils attribute table
 v.db.join mysoils col=label other_table=soils_legend ocol=shortname
-
 
 # verification of join
 v.db.select mysoils
@@ -115,7 +99,6 @@ cat|label|id|shortname|longname
 4|BcB|4|BcB|Boneek silt loam, 2 to 6
 5|BcC|5|BcC|Boneek silt loam, 6 to 9
 ...
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.li.mpa* (mean pixel attribute) calculates the average value of the
@@ -13,7 +12,6 @@ with:
 * **m**: number of non-null attributes in the sampling area
 * **wi**: number of cells of attribute i
 * **size**: size of sampling area (in cells)
-
 
 ## NOTES
 
@@ -34,12 +32,9 @@ If you want to change these -1 values to NULL, run subsequently on the resulting
 
 ```
 
-
 r.null setnull=-1 input=my_map
 
-
 ```
-
 
 after index calculation.
 
@@ -51,36 +46,28 @@ To calculate the mean pixel attribute index on map *my\_map*, using
 
 ```
 
-
 r.li.mpa input=my_map conf=my_conf output=my_out
 
-
 ```
-
 
 Forest map (Spearfish sample dataset) example:
 
 ```
-
 
 g.region raster=landcover.30m -p
 r.mapcalc "forests = if(landcover.30m >= 41 && landcover.30m <= 43,1,null())"
 r.li.mpa input=forests conf=movwindow7 out=forests_mpa_mov7
 r.univar forests_mpa_mov7
 
-
 ```
-
 
 Forest map (North Carolina sample dataset) example:
 
 ```
 
-
 g.region raster=landclass96 -p
 r.mapcalc "forests = if(landclass96 == 5, 1, null() )"
 r.li.mpa input=forests conf=movwindow7 out=forests_mpa_mov7
-
 
 # verify
 r.univar forests_mpa_mov7
@@ -89,9 +76,7 @@ d.mon wx0
 d.rast forests_mpa_mov7
 d.vect forests type=boundary
 
-
 ```
-
 
 ## SEE ALSO
 

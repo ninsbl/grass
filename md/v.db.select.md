@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.db.select* prints attributes of a vector map from one or several
@@ -25,16 +24,13 @@ Example with a pipe as a separator (the default):
 
 ```
 
-
 cat|road_name|multilane|year|length
 1|NC-50|no|2001|4825.369405
 2|NC-50|no|2002|14392.589058
 3|NC-98|no|2003|3212.981242
 4|NC-50|no|2004|13391.907552
 
-
 ```
-
 
 When escaping is enabled, the following characters in the fields are escaped:
 backslash (`\\`), carriage return (`\r`), line feed (`\n`),
@@ -65,16 +61,13 @@ Example with default settings:
 
 ```
 
-
 cat,road_name,multilane,year,length
 1,"NC-50","no",2001,4825.369405
 2,"NC-50","no",2002,14392.589058
 3,"NC-98","no",2003,3212.981242
 4,"NC-50","no",2004,13391.907552
 
-
 ```
-
 
 If desired, the separator can be customized and escaping can be enabled
 with the same characters being escaped as for the plain text.
@@ -117,9 +110,7 @@ from the JSON representation or the SQL types. The definition of
 
 Example with added indentation:
 
-
 ```
-
 
 {
   "info": {
@@ -155,9 +146,7 @@ Example with added indentation:
   ]
 }
 
-
 ```
-
 
 JSON is the recommended format for reading the data in Python
 and for any uses and environments where convenient access to individual values
@@ -174,7 +163,6 @@ Example with (horizontal) separator `=` and vertical separator `newline`:
 
 ```
 
-
 cat=1
 road_name=NC-50
 multilane=no
@@ -187,9 +175,7 @@ multilane=no
 year=2002
 length=14392.589058
 
-
 ```
-
 
 Newline is automatically added after a vertical separator unless it is a newline
 which allows for separating the records, e.g., by multiple dashes.
@@ -209,16 +195,13 @@ need implement the parsing yourself.
 * Escaping of plain and vertical formats was extended from just backslash
   and newlines to all escapes from JSON except for double quote character.
 
-
 ## EXAMPLES
 
 All examples are based on the North Carolina sample dataset.
 
 ### Select and show entire table
 
-
 ```
-
 
 v.db.select map=roadsmajor
 cat|MAJORRDS_|ROAD_NAME|MULTILANE|PROPYEAR|OBJECTID|SHAPE_LEN
@@ -228,16 +211,13 @@ cat|MAJORRDS_|ROAD_NAME|MULTILANE|PROPYEAR|OBJECTID|SHAPE_LEN
 4|4|NC-50|no|0|4|13391.907552
 ...
 
-
 ```
-
 
 ### Select and show single column from table
 
 Note: multiple columns can be specified as comma separated list.
 
 ```
-
 
 v.db.select map=roadsmajor column=ROAD_NAME
 NC-50
@@ -247,15 +227,11 @@ NC-50
 NC-98
 ...
 
-
 ```
-
 
 ### Print region extent of selected vector features
 
-
 ```
-
 
 v.db.select -r map=roadsmajor where="ROAD_NAME = 'NC-98'"
 n=248425.389891
@@ -263,15 +239,11 @@ s=245640.640081
 w=635906.517653
 e=661979.801880
 
-
 ```
-
 
 ### Select empty vector features (no data entries)
 
-
 ```
-
 
 v.db.select geonames_wake where="ALTERNATEN IS NULL"
 cat|GEONAMEID|NAME|ASCIINAME|ALTERNATEN|FEATURECLA|FEATURECOD|...
@@ -280,15 +252,11 @@ cat|GEONAMEID|NAME|ASCIINAME|ALTERNATEN|FEATURECLA|FEATURECOD|...
 31|4452808|Apex|Apex||P|PPL|US||NC|30873|167|134|America/Iqaluit|...
 ...
 
-
 ```
-
 
 ### Select not empty vector features (no data entries)
 
-
 ```
-
 
 v.db.select geonames_wake where="ALTERNATEN IS NOT NULL"
 cat|GEONAMEID|NAME|ASCIINAME|ALTERNATEN|FEATURECLA|FEATURECOD|...
@@ -296,15 +264,11 @@ cat|GEONAMEID|NAME|ASCIINAME|ALTERNATEN|FEATURECLA|FEATURECOD|...
 31299|4487056|Raleigh-Durham Airport|Raleigh-Durham Airport|...
 ...
 
-
 ```
-
 
 ### Select features with distinct road names
 
-
 ```
-
 
 v.db.select map=roadsmajor columns=ROAD_NAME group=ROAD_NAME
 ROAD_NAME
@@ -317,14 +281,11 @@ NC-39
 NC-42
 ...
 
-
 ```
-
 
 It is also possible to combine with *where* option
 
 ```
-
 
 v.db.select map=roadsmajor columns=ROAD_NAME,MULTILANE group=ROAD_NAME where='ROAD_NAME is not null'
 ROAD_NAME|MULTILANE
@@ -345,14 +306,11 @@ US-401|no
 US-64|yes
 US-70|yes
 
-
 ```
-
 
 It can also use more columns in *group* option
 
 ```
-
 
 v.db.select map=roadsmajor columns=ROAD_NAME,MULTILANE group=ROAD_NAME,MULTILANE where='ROAD_NAME is not null'
 ROAD_NAME|MULTILANE
@@ -375,9 +333,7 @@ US-401|yes
 US-64|yes
 US-70|yes
 
-
 ```
-
 
 ### Read results in Python
 
@@ -387,7 +343,6 @@ through the *read\_command* function:
 
 ```
 
-
 import json
 import grass.script as gs
 
@@ -396,9 +351,7 @@ data = json.loads(text)
 for row in data["records"]:
     print(row["ROAD_NAME"])
 
-
 ```
-
 
 ## SEE ALSO
 

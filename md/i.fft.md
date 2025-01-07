@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.fft* is an image processing program based on the FFT algorithm
@@ -27,10 +26,8 @@ North Carolina example:
 
 ```
 
-
 g.region raster=lsat7_2002_70
 i.fft input=lsat7_2002_70 real=lsat7_2002_70.real imaginary=lsat7_2002_70.imag
-
 
 # set region to resulting FFT output map (due to new FFT coordinate space):
 g.region raster=lsat7_2002_70.real -p
@@ -38,9 +35,7 @@ d.mon x0
 d.rast lsat7_2002_70.real
 d.rast lsat7_2002_70.imag
 
-
 ```
-
 
 ## REFERENCES
 
@@ -51,7 +46,6 @@ d.rast lsat7_2002_70.imag
 * John A. Richards, 1986. Remote Sensing Digital Image Analysis, Springer-Verlag.
 * Personal communication, between program author and Ali R. Vali,
   Space Research Center, [University of Texas](https://www.utexas.edu), Austin, 1990.
-
 
 ## SEE ALSO
 

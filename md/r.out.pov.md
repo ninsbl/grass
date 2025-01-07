@@ -20,14 +20,9 @@ An example Povray script file may look like this:
 
 ```
 
-
-
 #include "shapes.inc"
-
 #include "colors.inc"
-
 #include "textures.inc"
-
 
 #declare Scale = 7;
 
@@ -63,7 +58,6 @@ height_field  {
    scale < 14500, Scale*6553.6, 13000 >
    translate <18300, 0, 1100>
 }
-
 
 ```
 

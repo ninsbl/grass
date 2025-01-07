@@ -1,4 +1,5 @@
 
+
 When [launching](grass.html) GRASS GIS for the first time, you will open a
 **default project** "world\_latlog\_wgs84" where you can find a map layer
 called "country\_boundaries" showing a world map in the WGS84 coordinate system.

@@ -12,9 +12,7 @@ each map, in the file
 
 ```
 
-
 <database>/<project>/<mapset>/vector/<map>/dbln
-
 
 ```
 
@@ -42,9 +40,7 @@ Print all database connection parameters for vector map.
 
 ```
 
-
 v.db.connect -p map=roads
-
 
 ```
 
@@ -52,9 +48,7 @@ Print column types and names of table linked to vector map.
 
 ```
 
-
 v.db.connect -c map=roads
-
 
 ```
 
@@ -66,9 +60,7 @@ Using default DB connection:
 
 ```
 
-
 v.db.connect map=vectormap table=table
-
 
 ```
 
@@ -76,10 +68,8 @@ Using hardcoded path to DBF directory (not recommended):
 
 ```
 
-
 v.db.connect map=vectormap table=table \
              database=/home/user/grassdata/spearfish60/PERMANENT/dbf
-
 
 ```
 
@@ -87,10 +77,8 @@ Using variable as DBF directory definition, single quotes must be used:
 
 ```
 
-
 v.db.connect map=vectormap table=table \
              database='$GISDBASE/$LOCATION_NAME/$MAPSET/dbf/'
-
 
 ```
 
@@ -100,9 +88,7 @@ parameter):
 
 ```
 
-
 v.db.connect map=vectormap table=table layer=2 key=ID
-
 
 ```
 
@@ -112,13 +98,11 @@ Very similar to DBF driver example above.
 
 ```
 
-
 db.connect driver=sqlite database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
 db.tables -p
 v.db.connect map=vectormap table=table driver=sqlite \
              database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
 v.db.connect -p map=vectormap
-
 
 ```
 
@@ -126,21 +110,16 @@ v.db.connect -p map=vectormap
 
 ```
 
-
-
 # note: connection which requires password
 db.connect driver=mysql database="host=dbserver.foo.org,dbname=my_database"
 db.login user=joshua [password=xxx]
-
 # ... or enter password interactively.
 
 db.tables -p
 
-
 # connect external table to layer 2:
 v.db.connect map=my_map table=my_mysql_table key=baz layer=2
 v.db.connect -p my_map
-
 
 ```
 
@@ -148,13 +127,10 @@ v.db.connect -p my_map
 
 ```
 
-
-
 # note: connection without password being asked
 v.db.connect map=vectormap table=table layer=1 key=oid driver=pg \
              database="host=myserver.itc.it,dbname=mydb,user=name" \
              table=mytable key=id
-
 
 ```
 
@@ -165,43 +141,32 @@ update attributes in an external PostgreSQL database:
 
 ```
 
-
-
 # Check current settings for attribute storage:
 db.connect -p
 
-
 # Import table from PostgreSQL to new map
-
 # (NOTE: output map name needs to be different from table name in
-
 #        case that GRASS is connected to PostgreSQL):
 v.in.db driver=pg database="host=localhost,dbname=meteo" \
         table=mytable x=lon y=lat key=cat out=mytable
 
 v.db.connect map=mytable -p
 
-
 # Cancel table connection between map and attribute table:
 v.db.connect map=mytable -d
 v.db.connect map=mytable -p
-
 
 # Drop table which was replicated due to import:
 db.tables -p
 echo "DROP TABLE mytable" | db.execute
 db.tables -p
 
-
 # reconnect map to table in PostgreSQL:
 v.db.connect map=mytable driver=pg database="host=localhost,dbname=meteo" \
         table=mytable key=cat
 
-
 # Now the geometry is stored in GRASS while the attributes are stored
-
 # in PostgreSQL.
-
 
 ```
 
@@ -217,43 +182,32 @@ top update attributes in external PostGIS database:
 
 ```
 
-
-
 # Check current settings for attribute storage:
 db.connect -p
 
-
 # Import table from PostGIS to new map
-
 # (NOTE: output map name needs to be different from table name in
-
 #        case that GRASS is connected to PostGIS):
 v.in.db driver=pg database="host=localhost,dbname=meteo" \
         table=mytable x="x(geom)" y="y(geom)" key=cat out=mytable
 
 v.db.connect map=mytable -p
 
-
 # Cancel table connection between map and attribute table:
 v.db.connect map=mytable -d
 v.db.connect map=mytable -p
-
 
 # Drop table which was replicated due to import:
 db.tables -p
 echo "DROP TABLE mytable" | db.execute
 db.tables -p
 
-
 # reconnect map to table in PostGIS:
 v.db.connect map=mytable driver=pg database="host=localhost,dbname=meteo" \
         table=mytable key=cat
 
-
 # Now the geometry is stored in GRASS while the attributes are stored
-
 # in PostGIS.
-
 
 ```
 

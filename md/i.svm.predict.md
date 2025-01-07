@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.svm.predict* predicts values with a Support Vector Machine (SVM)
@@ -8,7 +7,6 @@ generated with [i.svm.train](i.svm.train.html).
 
 Internally the module performs input value rescaling of each of imagery
 group rasters by minimum and maximum range determined during training.
-
 
 ## NOTES
 
@@ -22,7 +20,6 @@ It is strongly suggested to have semantic labels set for each raster
 map in the training data (feature value) and in value prediction imagery groups.
 Use [r.support](r.support.html) to set semantic labels.
 
-
 ## PERFORMANCE
 
 Value prediction is done cell by cell and thus memory consumption
@@ -34,7 +31,6 @@ note that the actual module's memory consumption may vary from this
 setting, as it solely impacts LIBSVM's internal caching. The cache is
 utilized on an as-needed basis, so it's unlikely to reach the specified value.
 
-
 ## EXAMPLE
 
 This is the second part of classification process. See
@@ -44,16 +40,12 @@ Predict land use classes form a LANDSAT scene from
 October of 2002 with a SVM trained on a 1996 land
 use map *landuse96\_28m*.
 
-
 ```
-
 
 i.svm.predict group=lsat7_2002 subgroup=res_30m \
     signaturefile=landuse96_rnd_points output=pred_landuse_2002
 
-
 ```
-
 
 ## SEE ALSO
 
@@ -80,7 +72,6 @@ Please cite both - LIBSVM and i.svm.
 
   Chang, C.-C., & Lin, C.-J. (2011). LIBSVM : a library for support vector machines.
   ACM Transactions on Intelligent Systems and Technology, 2:27:1--27:27.
-
 
 ## AUTHOR
 

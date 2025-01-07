@@ -42,14 +42,11 @@ category. No-data are not reported (see **-n** flag).
 
 ```
 
-
 r.report -n map=geology_30m units=mi,a sort=desc
 
-
 ```
 
 ```
-
 
 +-----------------------------------------------------------------------------+
 |                         RASTER MAP CATEGORY REPORT                          |
@@ -82,21 +79,17 @@ r.report -n map=geology_30m units=mi,a sort=desc
 |TOTAL                                                  | 77.606534|49,668.182|
 +-----------------------------------------------------------------------------+
 
-
 ```
 
 Report areas for each category of land use for each zipcode (included only part of the table):
 
 ```
 
-
 r.report map=zipcodes@PERMANENT,landclass96@PERMANENT units=h,p
 
-
 ```
 
 ```
-
 
 +-----------------------------------------------------------------------------+
 |                         RASTER MAP CATEGORY REPORT                          |
@@ -135,21 +128,17 @@ r.report map=zipcodes@PERMANENT,landclass96@PERMANENT units=h,p
 |TOTAL                                                      |22,968.900|100.00|
 +-----------------------------------------------------------------------------+
 
-
 ```
 
 The output from *r.report* can be output in JSON by passing the **format=json** option.
 
 ```
 
-
 r.report -n -a map=towns,elevation units=miles,meters,kilometers,acres,hectares,cells,percent nsteps=2 format=json
 
-
 ```
 
 ```
-
 
 {
     "location": "nc_spm_08_grass7",
@@ -880,7 +869,6 @@ r.report -n -a map=towns,elevation units=miles,meters,kilometers,acres,hectares,
         }
     ]
 }
-
 
 ```
 

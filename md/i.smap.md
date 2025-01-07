@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The *i.smap* program is used to segment
@@ -23,7 +22,6 @@ but requires somewhat less computation. This mode is selected with
 the **-m** flag (see below).
 
 ## OPTIONS
-
 
 ### Flags
 
@@ -88,7 +86,6 @@ classification results. This new raster map layer will
 contain categories that can be related to landcover
 categories on the ground.
 
-
 ## NOTES
 
 The SMAP algorithm exploits the fact that nearby pixels in
@@ -115,15 +112,11 @@ The module *i.smap* does not support MASKed or NULL cells. Therefore
 it might be necessary to create a copy of the classification results
 using e.g. *r.mapcalc*:
 
-
 ```
-
 
 r.mapcalc "MASKed_map = classification_results"
 
-
 ```
-
 
 ## EXAMPLE
 
@@ -131,50 +124,36 @@ Supervised classification of LANDSAT scene (complete NC dataset)
 
 ```
 
-
-
 # Align computation region to the scene
 g.region raster=lsat7_2002_10 -p
-
 
 # store VIZ, NIR, MIR into group/subgroup
 i.group group=lsat7_2002 subgroup=res_30m \
   input=lsat7_2002_10,lsat7_2002_20,lsat7_2002_30,lsat7_2002_40,lsat7_2002_50,lsat7_2002_70
 
-
 # Now digitize training areas "training" with the digitizer
-
 # and convert to raster model with v.to.rast
 v.to.rast input=training output=training use=cat label_column=label
-
 # If you are just playing around and do not care about the accuracy of outcome,
-
 # just use one of existing maps instead e.g.
-
 # g.copy rast=landuse96_28m,training
-
 
 # Create a signature file with statistics for each class
 i.gensigset trainingmap=training group=lsat7_2002 subgroup=res_30m \
             signaturefile=lsat7_2002_30m maxsig=5
 
-
 # Predict classes based on whole LANDSAT scene
 i.smap group=lsat7_2002 subgroup=res_30m signaturefile=lsat7_2002_30m \
        output=lsat7_2002_smap_classes
-
 
 # Visually check result
 d.mon wx0
 d.rast.leg lsat7_2002_smap_classes
 
-
 # Statistically check result
 r.kappa -w classification=lsat7_2002_smap_classes reference=training
 
-
 ```
-
 
 The signature file obtained in the example above will allow
 to classify the current imagery group only (lsat7\_2002).
@@ -187,8 +166,6 @@ as shown below:
 
 ```
 
-
-
 # Define semantic labels for all LANDSAT bands
 r.support map=lsat7_2002_10 semantic_label=TM7_1
 r.support map=lsat7_2002_20 semantic_label=TM7_2
@@ -200,9 +177,7 @@ r.support map=lsat7_2002_62 semantic_label=TM7_62
 r.support map=lsat7_2002_70 semantic_label=TM7_7
 r.support map=lsat7_2002_80 semantic_label=TM7_8
 
-
 ```
-
 
 ## REFERENCES
 
@@ -217,7 +192,6 @@ r.support map=lsat7_2002_80 semantic_label=TM7_8
 * McCauley, J.D. and B.A. Engel 1995,
   "Comparison of Scene Segmentations: SMAP, ECHO and Maximum Likelihood",
   *IEEE Trans. on Geoscience and Remote Sensing, 33(6): 1313-1316.*
-
 
 ## SEE ALSO
 

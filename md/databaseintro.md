@@ -1,5 +1,4 @@
 
-
 ### Attribute management in general
 
 GRASS can be linked to one or many database management systems (DBMS).
@@ -38,7 +37,6 @@ Further conversion tools:
 * [MDB Tools](https://github.com/mdbtools/mdbtools): Convert MS-Access data to SQL, DBF, etc.
 * [Using OpenOffice.org with SQL Databases](https://grasswiki.osgeo.org/wiki/Openoffice.org_with_SQL_Databases)
 
-
 ### SQL commands
 
 GRASS supports two main SQL operations, execution of an SQL statement
@@ -62,7 +60,6 @@ pages are only available if driver was compiled in this installation):
 * mySQL: [mySQL](grass-mysql.html) and [meSQL](grass-mesql.html) pages
 * ODBC: [ODBC](grass-odbc.html) page (connect to Oracle, etc.)
 * PostgreSQL: [PostgreSQL](grass-pg.html) and PostGIS page
-
 
 ### Metadata
 

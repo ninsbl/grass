@@ -23,8 +23,6 @@ At the end we snap the created time instances resulting in time intervals.
 
 ```
 
-
-
 # Generate data
 
 t.create type=strds temporaltype=absolute \
@@ -35,7 +33,6 @@ t.create type=strds temporaltype=absolute \
 t.register type=raster input=precipitation_monthly \
            maps=`g.list type=raster pattern="2012*precip" sep=comma` \
            start=2012-01-01 increment="1 months"
-
 
 # please take attention to "Temporal type of maps" value
 t.info type=strds input=precipitation_monthly
@@ -92,7 +89,6 @@ t.info type=strds input=precipitation_monthly
  |
  +----------------------------------------------------------------------------+
 
-
 # you can see that end time is not set
 t.rast.list input=precipitation_monthly
 
@@ -111,7 +107,6 @@ name|mapset|start_time|end_time
 2012_12_precip|climate_2009_2012|2012-12-01 00:00:00|None
 
 t.snap type=strds input=precipitation_monthly
-
 
 # please take attention to "Temporal type of maps" value again
 t.info type=strds input=precipitation_monthly
@@ -170,7 +165,6 @@ t.info type=strds input=precipitation_monthly
  |
  +----------------------------------------------------------------------------+
 
-
 # now instead end time is set
 
 t.rast.list input=precipitation_daily
@@ -187,7 +181,6 @@ t.rast.list input=precipitation_daily
 2012_10_precip|climate_2009_2012|2012-10-01 00:00:00|2012-11-01 00:00:00
 2012_11_precip|climate_2009_2012|2012-11-01 00:00:00|2012-12-01 00:00:00
 2012_12_precip|climate_2009_2012|2012-12-01 00:00:00|2013-01-01 00:00:00
-
 
 ```
 

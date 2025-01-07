@@ -28,12 +28,10 @@ Obtain the list of space time raster dataset(s):
 
 ```
 
-
 t.list strds
 ----------------------------------------------
 Space time raster datasets with absolute time available in mapset <climate_2000_2012>:
 tempmean_monthly@climate_2000_2012
-
 
 ```
 
@@ -42,12 +40,9 @@ that the target mapset must be in the user's search path):
 
 ```
 
-
-
 # strds in PERMANENT
 t.list strds where="mapset = 'PERMANENT'"
 ----------------------------------------------
-
 
 # strds in climate_2000_2012
 t.list strds where="mapset = 'climate_2000_2012'"
@@ -57,7 +52,6 @@ precip_abs@climate_2000_2012
 precipitation@climate_2000_2012
 tempmean@climate_2000_2012
 
-
 ```
 
 The *where* option can also be used to list the stds with a
@@ -66,15 +60,12 @@ certain pattern in their name, i.e. as the pattern option in
 
 ```
 
-
-
 # strds whose name start with "precip"
 t.list type=strds where="name LIKE 'precip%'"
 ----------------------------------------------
 Space time raster datasets with absolute time available in mapset <climate_1970_2012>:
 precip_abs@climate_1970_2012
 precipitation@climate_1970_2012
-
 
 ```
 
@@ -85,7 +76,6 @@ can vary according to the accessible mapsets specified through
 
 ```
 
-
 t.list raster
 Time stamped raster maps with absolute time available in mapset <climate_2000_2012>:
 2009_01_tempmean@climate_2000_2012
@@ -95,7 +85,6 @@ Time stamped raster maps with absolute time available in mapset <climate_2000_20
 2012_10_tempmean@climate_2000_2012
 2012_11_tempmean@climate_2000_2012
 2012_12_tempmean@climate_2000_2012
-
 
 ```
 

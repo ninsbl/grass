@@ -35,7 +35,6 @@ point features. The basic format is:
 
 ```
 
-
 A                      <for polygonal areas>
     easting northing
     .
@@ -51,7 +50,6 @@ L                      <for linear features>
 P                      <for single cell point features>
     easting northing
 =   cat# label
-
 
 ```
 
@@ -76,14 +74,12 @@ An area described by four points:
 
 ```
 
-
 A
   591316.80   4926455.50
   591410.25   4926482.40
   591434.60   4926393.60
   591341.20   4926368.70
 = 42 stadium
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.univar* calculates univariate statistics on (by default) an attribute
@@ -31,16 +30,13 @@ between features are used. Depending on the selected vector
   [v.distance](v.distance.html) for calculating distances
   between areas)
 
-
 ## EXAMPLES
 
 The examples are based on the North Carolina sample dataset.
 
 ### Example dataset preparation
 
-
 ```
-
 
 g.region raster=elevation -p
 v.random output=samples npoints=100
@@ -48,15 +44,11 @@ v.db.addtable map=samples columns="heights double precision"
 v.what.rast map=samples rast=elevation column=heights
 v.db.select map=samples
 
-
 ```
-
 
 ### Calculate height attribute statistics
 
-
 ```
-
 
 v.univar -e samples column=heights type=point
 
@@ -81,15 +73,11 @@ median (even number of cells): 106.518
 3rd quartile: 126.274
 90th percentile: 135.023
 
-
 ```
-
 
 ### Compare to statistics of original raster map
 
-
 ```
-
 
 r.univar -e elevation
 
@@ -113,15 +101,11 @@ median (even number of cells): 108.88
 3rd quartile: 126.792
 90th percentile: 138.66
 
-
 ```
-
 
 ### Calculate statistic of distance between sampling points
 
-
 ```
-
 
 v.univar -d samples type=point
 
@@ -142,26 +126,19 @@ sample variance: 1.20332e+07
 kurtosis: -0.605406
 skewness: 0.238688
 
-
 ```
-
 
 ### Output in JSON format
 
-
 ```
-
 
 v.univar -e samples column=heights type=point format=json
 
-
 ```
-
 
 will output the results in JSON format:
 
 ```
-
 
 {
     "n": 1832,
@@ -191,9 +168,7 @@ will output the results in JSON format:
     ]
 }
 
-
 ```
-
 
 ## SEE ALSO
 

@@ -23,16 +23,13 @@ of meters): 0-100, 101-200, 201-300, 301-400 and 401-500.
 
 ```
 
-
 r.buffer.lowmem input=roads output=roads.buf distances=100,200,300,400,500
-
 
 ```
 
 Result:
 
 ```
-
 
 r.category input=roads.buf
 
@@ -42,7 +39,6 @@ r.category input=roads.buf
       4       200-300 meters
       5       300-400 meters
       6       400-500 meters
-
 
 ```
 

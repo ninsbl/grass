@@ -35,35 +35,25 @@ sample dataset elevation models at random positions:
 
 ```
 
-
-
 # set computational region:
  g.region raster=elev_srtm_30m -p
-
 # generate random points:
  v.random output=random n=100
-
 # add table with one column:
  v.db.addtable random col="elev_srtm30 double precision"
-
 # transfer elevations at random points into table:
  v.what.rast map=random rast=elev_srtm_30m col=elev_srtm30
-
 # verify:
  v.db.select random
-
 
 # perform sampling on other elevation map:
  v.sample in=random col=elev_srtm30 rast=elev_ned_30m out=elev_samples
 
-
 #verify:
  v.db.select elev_samples
 
-
 #univariate statistics of differences between elevation maps:
  v.univar elev_samples column=diff type=point
-
 
 ```
 

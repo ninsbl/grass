@@ -1,5 +1,4 @@
 
-
 ## KEYWORDS
 
 [display](display.html), [GUI](topic_GUI.html), [visualization](keywords.html#visualization), [graphics](keywords.html#graphics), [raster](keywords.html#raster), [vector](keywords.html#vector), [raster3d](keywords.html#raster3d)
@@ -60,7 +59,6 @@ has several tabs:
 * **Appearance** for appearance settings (lighting, fringes, ...).
 * **Analysis** for various data analyses (only cutting planes so far).
 * **Animation** for creating simple animations.
-
 
 ### View
 
@@ -169,7 +167,6 @@ and set some positive value. To reset the surface position press
 
 ![toolbox](wxGUI_nviz_tools_surface.jpg)
 
-
 #### Constant surface
 
 It is possible to add constant surface and set its properties like
@@ -215,7 +212,6 @@ Thematic mapping can be used to determine marker color and size
 
 ![toolbox](wxGUI_nviz_tools_vector.jpg)
 
-
 #### 3D rasters
 
 3D raster maps (volumes, voxel models) can be displayed either as isosurfaces
@@ -260,7 +256,6 @@ attributes.
 3D rasters can be moved the same way like surfaces do.
 
 ![toolbox](wxGUI_nviz_tools_volume.jpg)
-
 
 ### Analysis
 
@@ -329,7 +324,6 @@ parameters, or to set the background color of the Map Display Window
 * Surface - mask by zero/elevation, more interactive positioning
 * Vector points - implement display mode flat/surface for 2D points
 * ...
-
 
 ## NOTE
 

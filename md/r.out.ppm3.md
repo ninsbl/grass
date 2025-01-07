@@ -11,9 +11,7 @@ To get the full area and resolutin of the raster map, run:
 
 ```
 
-
 g.region raster=[mapname]
-
 
 ```
 

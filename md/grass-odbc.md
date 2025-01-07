@@ -37,13 +37,11 @@ ODBC drivers are defined in /etc/odbcinst.ini. Here an example:
 
 ```
 
-
  [PostgreSQL]
  Description     = ODBC for PostgreSQL
  Driver          = /usr/lib/libodbcpsql.so
  Setup           = /usr/lib/libodbcpsqlS.so
  FileUsage       = 1
-
 
 ```
 
@@ -54,7 +52,6 @@ appears twice and also for the PostgreSQL protocol version]. Omit blanks at
 the beginning of lines:
 
 ```
-
 
  [grass6test]
  Description             = PostgreSQL
@@ -75,7 +72,6 @@ the beginning of lines:
  ShowOidColumn           = No
  FakeOidIndex            = No
  ConnSettings            =
-
 ```
 
 Configuration of an DSN without GUI is described on
@@ -88,9 +84,7 @@ To find out about your PostgreSQL protocol, run:
 
 ```
 
-
 psql -V
-
 
 ```
 
@@ -100,9 +94,7 @@ Now create a new database if not yet existing:
 
 ```
 
-
 db.createdb driver=odbc database=grass6test
-
 
 ```
 
@@ -111,11 +103,9 @@ PostgreSQL through ODBC, run:
 
 ```
 
-
 db.connect driver=odbc database=grass6test
 db.copy from_driver=dbf from_database=./ from_table=mytable \
         to_driver=odbc to_database=grass6test to_table=mytable
-
 
 ```
 
@@ -124,11 +114,9 @@ is used, not the dbf file):
 
 ```
 
-
 v.db.connect map=mytable.shp table=mytable key=ID \
              database=grass6test driver=odbc
 v.db.connect -p
-
 
 ```
 
@@ -136,10 +124,8 @@ Finally a test: Here we should see the table columns (if the ODBC connection wor
 
 ```
 
-
 db.tables -p
 db.columns table=mytable
-
 
 ```
 
@@ -155,9 +141,7 @@ table:
 
 ```
 
-
 v.db.connect -p mytable.shp
-
 
 ```
 

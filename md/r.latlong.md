@@ -17,10 +17,8 @@ Datum transform is not implemented, the same datum is taken as output.
 
 ```
 
-
 g.region raster=elevation -p
 r.latlong input=elevation output=latitude
-
 
 ```
 

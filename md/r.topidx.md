@@ -15,9 +15,7 @@ command will create a masked elevation map (belev):
 
 ```
 
-
 r.mapcalc "belev = if(isnull(basin), basin, elev)"
-
 
 ```
 
@@ -35,10 +33,8 @@ figure:
 
 ```
 
-
 g.region raster=elevation -p
 r.topidx input=elevation output=topidx_elevation
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.ifft* is an image processing program based on the algorithm given
@@ -32,7 +31,6 @@ used during the original transformation done with
   Analysis**, Springer-Verlag, 1986.
 * Personal communication, between program author and Ali R. Vali,
   Space Research Center, University of Texas, Austin, 1990.
-
 
 ## SEE ALSO
 

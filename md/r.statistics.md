@@ -51,12 +51,10 @@ Calculation of average elevation of each field in the Spearfish region:
 
 ```
 
-
 r.statistics base=fields cover=elevation.dem out=elevstats method=average
 r.category elevstats
 r.mapcalc "fieldelev = @elevstats"
 r.univar fieldelev
-
 
 ```
 

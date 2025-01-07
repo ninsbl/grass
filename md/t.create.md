@@ -24,12 +24,10 @@ Create a raster space time datasets
 
 ```
 
-
 t.create type=strds temporaltype=absolute \
          output=precipitation_monthly \
          title="Monthly precipitation" \
          description="Dataset with monthly precipitation"
-
 
 ```
 
@@ -39,13 +37,11 @@ Create a vector space time datasets
 
 ```
 
-
 t.create type=stvds temporaltype=relative \
          output=precipitation_monthly_30y \
          title="Monthly precipitation 30 years" \
          description="Test dataset with monthly average \
          precipitation in the last 30 year"
-
 
 ```
 

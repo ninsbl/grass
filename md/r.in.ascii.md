@@ -11,14 +11,12 @@ The header has 6 lines:
 
 ```
 
-
 north:   xxxxxx.xx
 south:   xxxxxx.xx
 east:    xxxxxx.xx
 west:    xxxxxx.xx
 rows:    r
 cols:    c
-
 
 ```
 
@@ -32,11 +30,9 @@ Optionally the following parameters can be defined in the header section:
 
 ```
 
-
 null: nn
 type: float
 multiplier: 2.
-
 
 ```
 
@@ -77,7 +73,6 @@ The following is a sample **input** file to *r.in.ascii*:
 
 ```
 
-
 north:                   4299000.00
 south:                   4247000.00
 east:                     528000.00
@@ -96,7 +91,6 @@ null:                      -9999
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-
 
 ```
 

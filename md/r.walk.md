@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.walk* computes anisotropic cumulative cost of moving between
@@ -29,12 +28,9 @@ specific slope intervals:
 
 ```
 
-
 T = a*delta_S + b*delta_H_uphill + c*delta_H_moderate_downhill + d*delta_H_steep_downhill
 
-
 ```
-
 
 where:
 
@@ -72,12 +68,9 @@ The **lambda** parameter is a dimensionless scaling factor of the friction cost:
 
 ```
 
-
 total cost = movement time cost + lambda * friction costs * delta_S
 
-
 ```
-
 
 For a more accurate result, the "knight's move" option can be used
 (although it is more time consuming). In the diagram below, the center
@@ -88,16 +81,13 @@ option, the neighbours marked with a K are also considered.
 
 ```
 
-
   K   K
 K x x x K
   x O x
 K x x x K
   K   K
 
-
 ```
-
 
 The minimum cumulative costs are computed using Dijkstra's
 algorithm, that find an optimum solution (for more details see
@@ -114,16 +104,13 @@ The directions are recorded as degrees CCW from East:
 
 ```
 
-
        112.5      67.5         i.e. a cell with the value 135
 157.5  135   90   45   22.5    means the next cell is to the north-west
        180   x   360
 202.5  225  270  315  337.5
        247.5     292.5
 
-
 ```
-
 
 Once *r.walk* computes the cumulative cost map as a linear
 combination of friction cost (from friction map) and the altitude and
@@ -150,9 +137,7 @@ while taking into account the topography and landcover.
 
 ```
 
-
 g.region swwake_30m -p
-
 
 # create friction map based on land cover
 r.recode landclass96 out=friction rules=- << EOF
@@ -165,15 +150,11 @@ EOF
 r.walk -k elevation=elev_ned_30m friction=friction output=walkcost \
     start_coordinates=635576,216485 lambda=0.5 max=10000
 
-
 # compute contours on the cost surface to better understand
-
 # how far the person can get in certain time (1000 is in seconds)
 r.contour walkcost output=walkcost step=1000
 
-
 ```
-
 
 [![r.walk example](r_walk.png)](r_walk.png)
 
@@ -188,7 +169,6 @@ r.contour walkcost output=walkcost step=1000
 Svilluppo di metodologie GIS per la determinazione dell'accessibilità
 territoriale come supporto alle decisioni nella gestione ambientale.* Langmuir, E. 1984. Mountaincraft and leadership. The Scottish
   Sports Council/MLTB. Cordee, Leicester.
-
 
 ## SEE ALSO
 

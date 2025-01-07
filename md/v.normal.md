@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.normal* computes tests of normality on vector points.
@@ -27,7 +26,6 @@ giving an index, ranges of indices, or multiple thereof.
 14. Royston's extension of W for large samples
 15. Kotz Separate-Families Test for Lognormality vs. Normality
 
-
 ## EXAMPLE
 
 Compute the sample skewness and kurtosis, Geary's
@@ -37,17 +35,13 @@ extreme normal deviates, and Royston's W for the
 
 ```
 
-
 g.region raster=elevation -p
 v.random random n=200
 v.db.addtable random column="elev double precision"
 v.what.rast random rast=elevation column=elev
 v.normal random tests=1-3,14 column=elev
 
-
 ```
-
-
 
 ## SEE ALSO
 

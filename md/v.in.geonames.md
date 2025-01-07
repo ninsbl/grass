@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.in.geonames* imports Geonames.org country files (Gazetteer
@@ -29,7 +28,6 @@ The main 'geoname' table has the following fields
 
 ```
 
-
 geonameid         : integer id of record in geonames database
 name              : name of geographical point (utf8) varchar(200)
 asciiname         : name of geographical point in plain ascii characters, varchar(200)
@@ -50,9 +48,7 @@ gtopo30           : average elevation of 30'x30' (ca 900mx900m) area in meters, 
 timezone          : the timezone id (see file https://download.geonames.org/export/dump/timeZones.txt)
 modification date : date of last modification in yyyy-MM-dd format
 
-
 ```
-
 
 ## EXAMPLE
 
@@ -60,21 +56,17 @@ Download and import geonames for Czech Republic.
 
 ```
 
-
 wget https://download.geonames.org/export/dump/CZ.zip
 unzip CZ.zip
 
 v.in.geonames input=CZ.txt output=geonames_cz
 
-
 ```
-
 
 ## REFERENCES
 
 * [GeoNames Web site](https://www.geonames.org)
 * [GeoNames Data Dump Server](https://download.geonames.org/export/dump/)
-
 
 ## SEE ALSO
 

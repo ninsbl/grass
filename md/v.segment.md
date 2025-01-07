@@ -9,10 +9,8 @@ The format is:
 
 ```
 
-
 P <point id>   <line cat> <offset> [<side offset>]
 L <segment id> <line cat> <start offset> <end offset> [<side offset>]
-
 
 ```
 
@@ -24,13 +22,11 @@ The user could send to `stdin` something like:
 
 ```
 
-
 P 1 356 24.56
 P 2 495 12.31
 P 3 500 -12.31
 P 4 510 -20%
 ...
-
 
 ```
 
@@ -69,25 +65,19 @@ of line 1:
 
 ```
 
-
-
 # extract lines from railroad map:
 v.extract input=railroads output=myrr cats=1
-
 
 # join segments into polyline and reassign category numbers
 v.build.polylines myrr out=myrr_pol
 v.category input=myrr_pol output=myrailroads option=add
 
-
 # zoom to an area of interest
 g.region vector=myrailroads -p
-
 
 # show line, category, direction (to find the beginning)
 d.mon wx0
 d.vect map=myrailroads display=shape,cat,dir lsize=12
-
 
 # extract line segment from 400m to 5000m from beginning of line 1
 echo "L 1 1 400 5000" | v.segment input=myrailroads output=myrailroads_segl
@@ -95,11 +85,9 @@ d.erase
 d.vect map=myrailroads
 d.vect map=myrailroads_segl col=green width=2
 
-
 # set node at 5000m from beginning of line 1
 echo "P 1 1 5000" | v.segment input=myrailroads output=myrailroads_segp
 d.vect map=myrailroads_segp icon=basic/circle color=red fcolor=red size=5
-
 
 ```
 
@@ -115,7 +103,6 @@ track, offset 500m to the left of the tracks:
 
 ```
 
-
 v.segment input=myrailroads output=myrailroads_segl_side << EOF
 L 1 1 1000 2000 -500
 L 2 1 3000 4000 -500
@@ -126,7 +113,6 @@ d.erase
 d.vect map=myrailroads display=shape,dir
 d.vect -c map=myrailroads_segl_side width=2
 
-
 ```
 
 ### Points equidistant along the tracks
@@ -134,7 +120,6 @@ d.vect -c map=myrailroads_segl_side width=2
 Creation of a series of points, spaced every 2km along the tracks:
 
 ```
-
 
 v.segment input=myrailroads output=myrailroads_pt2km << EOF
 P 1 1 1000
@@ -145,7 +130,6 @@ EOF
 d.erase
 d.vect map=myrailroads display=shape,dir
 d.vect map=myrailroads_pt2km icon=basic/circle color=blue fcolor=blue size=5
-
 
 ```
 
@@ -160,7 +144,6 @@ offset 500m to the right:
 
 ```
 
-
 v.segment input=myrailroads output=myrailroads_pt2kmO500m << EOF
 P 1 1 1000 500
 P 2 1 3000 500
@@ -170,7 +153,6 @@ EOF
 d.erase
 d.vect map=myrailroads display=shape,dir
 d.vect map=myrailroads_pt2kmO500m icon=basic/circle color=aqua fcolor=aqua size=5
-
 
 ```
 
@@ -185,7 +167,6 @@ tracks from the end of the line up to the middle point, offset 500m to the right
 
 ```
 
-
 v.segment input=myrailroads output=myrailroads_pt10pctO500m << EOF
 P 1 1  -0% 500
 P 2 1 -10% 500
@@ -197,7 +178,6 @@ EOF
 d.erase
 d.vect map=myrailroads display=shape,dir
 d.vect map=myrailroads_pt10pctO500m icon=basic/circle color=red fcolor=black size=5
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.eb.hsebal01* will calculate the sensible heat flux map (h0), given
@@ -31,7 +30,6 @@ in this code in [3].
 
   ea=(RH/100)/((eoTmin+eoTmax)/2)
 * t0dem = surface temperature + (altitude \* 0.627 / 100)
-
 
 ## REFERENCES
 

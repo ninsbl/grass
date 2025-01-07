@@ -30,9 +30,7 @@ line:
 
 ```
 
-
 d.linegraph directory=/home/john/data x_file=x.txt y_file=y1.txt,y2.txt
-
 
 ```
 
@@ -113,7 +111,6 @@ them and specify path to them.
 
 ```
 
-
 cat > x.txt <<EOF
 1
 3
@@ -136,7 +133,6 @@ cat > y2.txt <<EOF
 45
 EOF
 
-
 ```
 
 The next command sequence creates a file `plot.png` in the current
@@ -144,11 +140,9 @@ directory which is the drawing made by *d.linegraph*.
 
 ```
 
-
 d.mon start=cairo output=plot.png width=400 height=400
 d.linegraph x_file=x.txt y_file=y1.txt,y2.txt
 d.mon stop=cairo
-
 
 ```
 

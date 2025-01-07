@@ -35,9 +35,7 @@ modules for examples.
 
 ```
 
-
 r.semantic.label map=T33UVR_20180506T100031_B01 semantic_label=S2_1
-
 
 ```
 
@@ -45,9 +43,7 @@ r.semantic.label map=T33UVR_20180506T100031_B01 semantic_label=S2_1
 
 ```
 
-
 r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180521T100029_B01 semantic_label=S2_1,S2_1
-
 
 ```
 
@@ -55,9 +51,7 @@ r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180521T100029_B01 seman
 
 ```
 
-
 r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180506T100031_B02 semantic_label=S2_1,S2_2
-
 
 ```
 
@@ -65,9 +59,7 @@ r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180506T100031_B02 seman
 
 ```
 
-
 r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180506T100031_B02 operation=remove
-
 
 ```
 
@@ -75,9 +67,7 @@ r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180506T100031_B02 opera
 
 ```
 
-
 r.semantic.label map=T33UVR_20180506T100031_B01 operation=print
-
 
 ```
 
@@ -85,9 +75,7 @@ r.semantic.label map=T33UVR_20180506T100031_B01 operation=print
 
 ```
 
-
 r.semantic.label map=T33UVR_20180506T100031_B01,T33UVR_20180506T100031_B02 operation=print
-
 
 ```
 

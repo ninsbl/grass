@@ -40,7 +40,6 @@ the raster map layers):
 
 ```
 
-
 MAPS="map_1 map_2 map_3 map_4 map_5 map_6 map_7"
 
 for map in ${MAPS} ; do
@@ -244,7 +243,6 @@ t.info type=strds input=precipitation_agg
  |
  +----------------------------------------------------------------------------+
 
-
 ```
 
 ### MODIS satellite sensor daily data aggregation to 8 days
@@ -254,10 +252,7 @@ This "eight-day week" is used in some MODIS satellite sensor products.
 
 ```
 
-
-
 # NOTE: the example is written in shell language
-
 
 # create maps every 8 days as seed maps
 for year in `seq 2000 2001` ; do
@@ -266,11 +261,8 @@ for year in `seq 2000 2001` ; do
    done
 done
 
-
 # From de name of each map, we take year and doy, and convert it
-
 # to a YYYY-MM-DD date for start and end, and create a file with
-
 # mapnames, start date and end date
 
 g.list type=raster pattern=8day_20??_* > names_list
@@ -303,7 +295,6 @@ for NAME in `cat names_list` ; do
 
 done
 
-
 # check the list created.
 cat list_map_start_end_time.txt
 8day_2000_001|2000-01-01|2000-01-09
@@ -318,41 +309,32 @@ cat list_map_start_end_time.txt
 8day_2001_353|2001-12-19|2001-12-27
 8day_2001_361|2001-12-27|2002-01-01
 
-
 # all maps except for the last map in each year represent 8-days
-
 # intervals. But the aggregation starts all over again every
-
 # January 1st.
-
 
 # create 8-day MODIS-like strds
 t.create type=strds temporaltype=absolute \
    output=8day_ts title="8 day time series" \
    description="STRDS with MODIS like 8 day aggregation"
 
-
 # register maps
 t.register type=raster input=8day_ts \
    file=list_map_start_end_time.txt
 
-
 # check
 t.info input=8day_ts
 t.rast.list input=8day_ts
-
 
 # finally, copy the aggregation to a daily time series
 t.rast.aggregate.ds input=daily_ts sample=8day_ts \
    output=8day_agg basename=8day_agg method=average \
    sampling=contains suffix=gran
 
-
 # add metadata
 t.support input=8day_agg \
    title="8 day aggregated ts" \
    description="8 day MODIS-like aggregated dataset"
-
 
 # check map list in newly created aggregated strds
 t.rast.list input=8day_agg
@@ -368,7 +350,6 @@ name|mapset|start_time|end_time
 8day_agg_2001_12_11|modis|2001-12-11 00:00:00|2001-12-19 00:00:00
 8day_agg_2001_12_19|modis|2001-12-19 00:00:00|2001-12-27 00:00:00
 8day_agg_2001_12_27|modis|2001-12-27 00:00:00|2002-01-01 00:00:00
-
 
 ```
 

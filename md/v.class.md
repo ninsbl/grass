@@ -60,9 +60,7 @@ Classify column pop of map communes into 5 classes using quantiles:
 
 ```
 
-
 v.class map=communes column=pop algo=qua nbclasses=5
-
 
 ```
 
@@ -71,9 +69,7 @@ and to determine the density classes:
 
 ```
 
-
 v.class map=communes column=pop/area algo=std nbclasses=5
-
 
 ```
 
@@ -82,11 +78,9 @@ into *d.vect.thematic*:
 
 ```
 
-
 d.vect.thematic -l map=communes2 column=pop/area \
     breaks=`v.class -g map=communes2 column=pop/area algo=std nbcla=5` \
     colors=0:0:255,50:100:255,255:100:50,255:0:0,156:0:0
-
 
 ```
 

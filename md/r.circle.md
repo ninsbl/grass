@@ -22,11 +22,9 @@ increasing raster values:
 
 ```
 
-
 EASTCENTER=`g.region -c |  awk ' /center easting:/ { print $3 }'`
 NORTHCENTER=`g.region -c | awk ' /center northing:/ { print $3 }'`
 r.circle output=circle coordinate=${EASTCENTER},${NORTHCENTER} max=300
-
 
 ```
 
@@ -35,11 +33,9 @@ of 500m and an outer radius of 1000m:
 
 ```
 
-
 EASTCENTER=`g.region -c |  awk ' /center easting:/ { print $3 }'`
 NORTHCENTER=`g.region -c | awk ' /center northing:/ { print $3 }'`
 r.circle -b output=circle coordinate=${EASTCENTER},${NORTHCENTER} min=500 max=1000
-
 
 ```
 

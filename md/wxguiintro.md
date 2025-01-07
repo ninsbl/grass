@@ -1,7 +1,5 @@
 
-
 ### Introduction to the GRASS GIS Graphical User Interface
-
 
 #### Overview
 
@@ -26,7 +24,6 @@ the following features:
   dialog windows.
 * Advanced debugging and scripting capabilities for developers and
   power users.
-
 
 #### Getting Started
 

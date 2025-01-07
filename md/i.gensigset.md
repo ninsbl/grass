@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.gensigset*
@@ -34,7 +33,6 @@ An usage example can be found in [i.smap](i.smap.html)
 documentation.
 
 ## OPTIONS
-
 
 ### Parameters
 
@@ -98,7 +96,6 @@ number to a minimal number of subclasses which are
 spectrally distinct. The user has the option to set this
 starting value with this option.
 
-
 ## NOTES
 
 The algorithm in *i.gensigset* determines the
@@ -151,7 +148,6 @@ If warnings like this occur, reducing the remaining classes to 0:
 
 ```
 
-
 ...
 WARNING: Removed a singular subsignature number 1 (4 remain)
 WARNING: Removed a singular subsignature number 1 (3 remain)
@@ -162,16 +158,13 @@ WARNING: Removed a singular subsignature number 1 (-1 remain)
 WARNING: Unreliable clustering. Try a smaller initial number of clusters
 Number of subclasses is 0
 
-
 ```
-
 
 then the user should check for:
 
 * the range of the input data should be between 0 and 100 or 255 but not
   between 0.0 and 1.0 (*r.info* and *r.univar* show the range)
 * the training areas need to contain a sufficient amount of pixels
-
 
 ## REFERENCES
 
@@ -184,7 +177,6 @@ then the user should check for:
 * E. Redner and H. Walker,
   "Mixture Densities, Maximum Likelihood and the EM Algorithm,"
   *SIAM Review,* vol. 26, no. 2, April 1984.
-
 
 ## SEE ALSO
 

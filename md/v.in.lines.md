@@ -17,7 +17,6 @@ This script is a simple wrapper around the *v.in.mapgen* module.
 
 ```
 
-
 v.in.lines in=- out=two_lines separator=, <<EOF
 167.846717,-46.516653
 167.846663,-46.516645
@@ -32,7 +31,6 @@ NaN,NaN
 167.846544,-46.516489
 167.846552,-46.516493
 EOF
-
 
 ```
 

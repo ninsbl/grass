@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.surf.bspline* performs a bilinear/bicubic spline
@@ -91,33 +90,24 @@ created when cross-validation is selected.
 
 ## EXAMPLES
 
-
 ### Basic interpolation
 
-
 ```
-
 
 v.surf.bspline input=point_vector output=interpolate_surface method=bicubic
 
-
 ```
-
 
 A bicubic spline interpolation will be done and a point vector layer
 with estimated (i.e., interpolated) values will be created.
 
 ### Basic interpolation and raster output with a longer spline step
 
-
 ```
-
 
 v.surf.bspline input=point_vector raster=interpolate_surface ew_step=25 ns_step=25
 
-
 ```
-
 
 A bilinear spline interpolation will be done with a spline step length
 of 25 map units. An interpolated raster layer will be created at the
@@ -125,60 +115,44 @@ current region resolution.
 
 ### Estimation of lambda\_i parameter with a cross validation process
 
-
 ```
-
 
 v.surf.bspline -c input=point_vector
 
-
 ```
-
 
 ### Estimation on sparse points
 
-
 ```
-
 
 v.surf.bspline input=point_vector sparse=sparse_points output=interpolate_surface
 
-
 ```
-
 
 An output layer of vector points will be created, corresponding to the
 sparse vector layer, with interpolated values.
 
 ### Using attribute values instead z-coordinates
 
-
 ```
-
 
 v.surf.bspline input=point_vector raster=interpolate_surface layer=1 \
   column=attrib_column
 
-
 ```
-
 
 The interpolation will be done using the values
 in *attrib\_column*, in the table associated with layer 1.
 
 ### North Carolina dataset example using z-coordinates for interpolation
 
-
 ```
-
 
 g.region region=rural_1m res=2 -p
 v.surf.bspline input=elev_lid792_bepts raster=elev_lid792_rast \
   ew_step=5 ns_step=5 method=bicubic lambda_i=0.1
 
-
 ```
-
 
 ## KNOWN ISSUES
 
@@ -204,7 +178,6 @@ no problems with the raster map output from the DBF driver.
 * Antolin R. and Brovelli M.A., 2007, LiDAR data Filtering with GRASS GIS for the
   Determination of Digital Terrain Models. Proceedings of Jornadas de SIG Libre,
   Girona, España. CD ISBN: 978-84-690-3886-9
-
 
 ## SEE ALSO
 

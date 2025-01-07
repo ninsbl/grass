@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 **i.atcorr** performs atmospheric correction on the input raster
@@ -25,7 +24,6 @@ An example of the 6S parameters could be:
 
 ```
 
-
 8                            - geometrical conditions=Landsat ETM+
 2 19 13.00 -47.410 -20.234   - month day hh.ddd longitude latitude ("hh.ddd" is in decimal hours GMT)
 1                            - atmospheric model=tropical
@@ -35,16 +33,13 @@ An example of the 6S parameters could be:
 -1000                        - sensor height (here, sensor on board a satellite)
 64                           - 4th band of ETM+ Landsat 7
 
-
 ```
-
 
 If the position is not available in longitude-latitude (WGS84), the
 *[m.proj](m.proj.html)* conversion module can be
 used to reproject from a different reference system.
 
 ## 6S CODE PARAMETER CHOICES
-
 
 ### A. Geometrical conditions
 
@@ -91,7 +86,6 @@ used to reproject from a different reference system.
 > southern. Longitude must be > 0 for eastern hemisphere and < 0 for
 > western.
 
-
 ### B. Atmospheric model
 
 | **Code** | **Meaning** |
@@ -105,7 +99,6 @@ used to reproject from a different reference system.
 | 6 | us standard 62 |
 | 7 | Define your own atmospheric model as a set of the following 5 parameters per each measurement: altitude [km] pressure [mb] temperature [k] h2o density [g/m3] o3 density [g/m3] For example: there is one radiosonde measurement for each altitude of 0-25km at a step of 1km, one measurement for each altitude of 25-50km at a step of 5km, and two single measurements for altitudes 70km and 100km. This makes 34 measurements. In that case, there are 34\*5 values to input. |
 | 8 | Define your own atmospheric model providing values of the water vapor and ozone content:  uw [g/cm2] uo3 [cm-atm]   The profile is taken from us62. |
-
 
 ### C. Aerosols model
 
@@ -124,7 +117,6 @@ used to reproject from a different reference system.
 | 10 | define your own model | Size distribution function: Junge Power-Law. |
 | 11 | define your own model | Sun-photometer measurements, 50 values max, entered as:  r and d V / d (logr)  where r is the radius [micron], V is the volume, d V / d (logr) [cm3/cm2/micron].  Followed by:  nr and ni for each wavelength  where nr and ni are respectively the real and imaginary part of the refractive index. |
 
-
 ### D. Aerosol concentration model (visibility)
 
 If you have an estimate of the meteorological parameter visibility
@@ -135,16 +127,12 @@ If you have an estimate of aerosol optical depth, enter 0 for the
 visibility and in a following line enter the aerosol optical depth at 550nm
 (iaer means 'i' for input and 'aer' for aerosol), for example:
 
-
 ```
-
 
 0                            - visibility
 0.112                        - aerosol optical depth at 550 nm
 
-
 ```
-
 
 NOTE: if iaer is 0, enter -1 for visibility.
 
@@ -178,7 +166,6 @@ For aircraft simulations only (xpp is neither equal to 0 nor equal to -1000):
 > puw,po3 will then be interpolated from the us62 standard profile according
 > to the values at the ground level; taerp will be computed according to a 2 km
 > exponential profile for aerosol.
-
 
 ### F. Sensor band
 
@@ -429,9 +416,7 @@ Pre-defined satellite bands:
 | 627 | Hyperion SWIR b223 band (2384.9064nm) |
 | 628 | Hyperion SWIR b224 band (2394.9948nm) |
 
-
 ## EXAMPLES
-
 
 ### Atmospheric correction of a Sentinel-2 band
 
@@ -485,32 +470,29 @@ following information:
      (which can be smaller than the scene), and must be in WGS84 decimal
      coordinates. To obtain the coordinates of the centre, we can run:
 
-```
-
+     ```
 
      g.region -bg
 
-
-```
-
+     ```
 
      The longitude and latitude of the centre are stored in *ll\_clon*
      and *ll\_clat*. In our case, `ll_clon=-78.691` and
      `ll_clat=35.749`.
 
-     - *Atmospheric model*
+     * *Atmospheric model*
 
        We can choose between various atmospheric models as defined at the
        beginning of this manual. For North Carolina, we can choose `2 -
        midlatitude summer`.
 
-       - *Aerosol model*
+       * *Aerosol model*
 
          We can also choose between various aerosol models as defined at the
          beginning of this manual. For North Carolina, we can choose `1 -
          continental model`.
 
-         - *Visibility or Aerosol Optical Depth*
+         * *Visibility or Aerosol Optical Depth*
 
            For Sentinel-2 scenes, the visibility is not measured, and therefore
            we have to estimate the aerosol optical depth instead, e.g. from
@@ -520,31 +502,28 @@ following information:
            case, on 28th October 2016, the *EPA-Res\_Triangle\_Pk* station
            measured AOD = 0.07 (approximately).
 
-           - *Mean target elevation above sea level*
+           * *Mean target elevation above sea level*
 
              Mean target elevation above sea level refers to the mean elevation
              of the computational region. You can estimate it from the digital
              elevation model, e.g. by running:
 
-```
-
+             ```
 
              r.univar -g elevation
 
-
-```
-
+             ```
 
              The mean elevation is stored in *mean*. In our case,
              `mean=110`. In the 6S file it will be displayed in [-km],
              i.e., `-0.110`.
 
-             - *Sensor height*
+             * *Sensor height*
 
                Since the sensor is on board a satellite, the sensor height will be
                set to `-1000`.
 
-               - *Sensor band*
+               * *Sensor band*
 
                  The overview of satellite bands can be found in table F (see above).
                  For Sentinel-2A, the band numbers span from 166 to 178, and for
@@ -556,7 +535,6 @@ it in a text file, for example `params_B02.txt`.
 
 ```
 
-
 25
 10 28 15.901 -78.691 35.749
 2
@@ -567,9 +545,7 @@ it in a text file, for example `params_B02.txt`.
 -1000
 167
 
-
 ```
-
 
 **Compute atmospheric correction**
 
@@ -594,12 +570,9 @@ correction to band *B02*:
 
 ```
 
-
 i.atcorr input=B02 parameters=params_B02.txt output=B02.atcorr range=1,10000 rescale=0,255 elevation=elevation
 
-
 ```
-
 
 To apply atmospheric correction to the remaining bands, only the last
 line in the 6S parameters file (i.e., the sensor band) needs to be changed.
@@ -615,12 +588,9 @@ First we set the computational region to the satellite map, e.g. band 4:
 
 ```
 
-
 g.region raster=lsat7_2002_40 -p
 
-
 ```
-
 
 It is important to verify the available metadata for the sun position
 which has to be defined for the atmospheric correction. An option is to
@@ -632,12 +602,9 @@ values have been stored for each channel and can be retrieved with:
 
 ```
 
-
 r.info lsat7_2002_40
 
-
 ```
-
 
 In this case, we have: SUN\_AZIMUTH = 120.8810347, SUN\_ELEVATION = 64.7730999.
 
@@ -648,14 +615,10 @@ uses [SOLPOS](https://www.nrel.gov/grid/solar-resource/solpos.html)):
 
 ```
 
-
 r.sunmask -s elev=elevation out=dummy year=2002 month=5 day=24 hour=10 min=42 sec=7 timezone=-5
-
 # .. reports: sun azimuth: 121.342461, sun angle above horz.(refraction corrected): 65.396652
 
-
 ```
-
 
 If the overpass time is unknown, use the
 [NASA LaRC Satellite Overpass Predictor](https://cloudsgate2.larc.nasa.gov/cgi-bin/predict/predict.cgi).
@@ -672,14 +635,10 @@ manually, using e.g. the formula:
 
 ```
 
-
-
 # formula depends on satellite sensor, see respective metadata
 Lλ = ((LMAXλ - LMINλ)/(QCALMAX-QCALMIN)) * (QCAL-QCALMIN) + LMINλ
 
-
 ```
-
 
 where,
 
@@ -704,7 +663,6 @@ radiance map:
 
 ```
 
-
 CHAN=4
 r.info lsat7_2002_${CHAN}0 -h | tr '\n' ' ' | sed 's+ ++g' | tr ':' '\n' | grep "LMIN_BAND${CHAN}\|LMAX_BAND${CHAN}"
 LMAX_BAND4=241.100,p016r035_7x20020524.met
@@ -712,9 +670,7 @@ LMIN_BAND4=-5.100,p016r035_7x20020524.met
 QCALMAX_BAND4=255.0,p016r035_7x20020524.met
 QCALMIN_BAND4=1.0,p016r035_7x20020524.met
 
-
 ```
-
 
 Conversion to radiance (this calculation is done for band 4, for the
 other bands, the numbers will need to be replaced with their related
@@ -722,12 +678,9 @@ values):
 
 ```
 
-
 r.mapcalc "lsat7_2002_40_rad = ((241.1 - (-5.1)) / (255.0 - 1.0)) * (lsat7_2002_40 - 1.0) + (-5.1)"
 
-
 ```
-
 
 Again, the *r.mapcalc* calculation is only needed when working
 with satellite data other than Landsat or ASTER.
@@ -745,7 +698,6 @@ hours: 10:42:07 NC local time = 10.70 decimal hours (decimal minutes:
 
 ```
 
-
 8                            - geometrical conditions=Landsat ETM+
 5 24 15.70 -78.691 35.749    - month day hh.ddd longitude latitude ("hh.ddd" is in GMT decimal hours)
 2                            - atmospheric model=midlatitude summer
@@ -755,21 +707,16 @@ hours: 10:42:07 NC local time = 10.70 decimal hours (decimal minutes:
 -1000                        - sensor on board a satellite
 64                           - 4th band of ETM+ Landsat 7
 
-
 ```
-
 
 Finally, run the atmospheric correction (-r for reflectance input map;
 -a for date > July 2000):
 
 ```
 
-
 i.atcorr -r -a lsat7_2002_40_rad elevation=elevation parameters=icnd_lsat4.txt output=lsat7_2002_40_atcorr
 
-
 ```
-
 
 Note that the altitude value from 'icnd\_lsat4.txt' file is read at the
 beginning to compute the initial transform. Therefore, it is necessary
@@ -799,7 +746,6 @@ optical depth at 550nm.
 * Barsi, J.A., Markham, B.L. and Pedelty, J.A., 2011, The operational
   land imager: spectral response and spectral uniformity., Proc. SPIE 8153,
   81530G; doi:10.1117/12.895438
-
 
 ## SEE ALSO
 

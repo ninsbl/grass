@@ -26,10 +26,8 @@ by *[db.connect](db.connect.html)*.
 
 ```
 
-
 v.in.db driver=pg database="host=myserver.itc.it,dbname=mydb" \
         table=pat_stazioni x=east y=north z=quota key=id output=pat_stazioni
-
 
 ```
 
@@ -43,10 +41,8 @@ To extract coordinate values from PostGIS, functions have to be used:
 
 ```
 
-
 v.in.db driver=pg database="host=myserver.itc.it,dbname=mydb" \
         table=station x="x(geom)" y="y(geom)" z="z(geom)" key=id out=meteostations
-
 
 ```
 
@@ -66,16 +62,12 @@ column:
 
 ```
 
-
-
 # preview table structure with OGR tool (table name is "Layer name" here):
 ogrinfo -al -so meteodata.ods
-
 
 # import sheet from ODS into map
 v.in.db key=ID table=mysheet x=long y=lat z=height output=meteodata \
          driver=ogr database=meteodata.ods
-
 
 ```
 
@@ -87,10 +79,8 @@ format. Option **table** is name of the selected spreadsheet "List1":
 
 ```
 
-
 v.in.db table=List1 x=long y=lat z=height output=meteodata \
          driver=ogr database=meteodata.xls
-
 
 ```
 
@@ -107,10 +97,8 @@ directory where the DBF file is stored.
 
 ```
 
-
 v.in.db driver=dbf database=/home/user/tables/ table=pointsfile x=x y=y z=z \
         key=idcol out=dtmpoints
-
 
 ```
 
@@ -118,10 +106,8 @@ To check result:
 
 ```
 
-
 v.info dtmpoints
 v.info -c dtmpoints
-
 
 ```
 
@@ -140,10 +126,8 @@ the **where** parameter (see above for general DBF handling):
 
 ```
 
-
 v.in.db driver=dbf  database=/home/user/tables/ table=pointsfile x=x y=y z=z \
         key=idcol out=dtmpoints where="x NOT NULL and z > 100"
-
 
 ```
 
@@ -155,10 +139,8 @@ file. Column 'idcol' contains unique row IDs. The
 
 ```
 
-
 v.in.db driver=sqlite database=/home/user/tables/mysqlite.db table=pointsfile x=x y=y z=z \
         key=idcol out=dtmpoints
-
 
 ```
 

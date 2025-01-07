@@ -25,9 +25,7 @@ The user running the command:
 
 ```
 
-
 d.colortable map=soils color=red lines=1 columns=3
-
 
 ```
 

@@ -16,7 +16,6 @@ Search all modules, where keywords *buffer* OR *clip* can be found:
 
 ```
 
-
 g.search.modules keyword=buffer,clip
 
 r.circle
@@ -35,14 +34,12 @@ r.buffer
     description: Creates a raster map showing buffer zones surrounding cells
                  that contain non-NULL category values.
 
-
 ```
 
 Search all modules, where keywords *overlay* AND *clip* can be
 found with some fancy terminal output (not shown here):
 
 ```
-
 
 g.search.modules keyword=clip,overlay -a -c
 
@@ -57,13 +54,11 @@ v.overlay
     description: Overlays two vector maps offering clip, intersection,
                  difference, symmetrical difference, union operators.
 
-
 ```
 
 Search in manual pages as well:
 
 ```
-
 
 g.search.modules -m keyword=kapri
 
@@ -76,7 +71,6 @@ db.select
     keywords: database,attribute table,SQL
     description: Selects data from attribute table. Performs SQL query
                  statement(s).
-
 
 ```
 

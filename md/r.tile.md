@@ -22,17 +22,12 @@ Retiling example for the North Carolina DEM:
 
 ```
 
-
 g.region raster=elevation -p
-
 # rows:       1350
-
 # cols:       1500
-
 
 # generating 2 x 2 = 4 tiles (width=1500/2, height=rows/2)
 r.tile input=elevation output=elev_tile width=750 height=675
-
 
 ```
 

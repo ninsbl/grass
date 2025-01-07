@@ -56,12 +56,10 @@ counterclockwise from east. e.g.:
 
 ```
 
-
 90  North
 180 West
 270 South
 0,360 East
-
 
 ```
 
@@ -80,11 +78,9 @@ with *d.rast.arrow*:
 
 ```
 
-
 r.mapcalc "magnitude = sqrt(U_map^2 + V_map^2)"
 r.mapcalc "direction = atan(U_map, V_map)"
 d.rast.arrow map=direction type=grass magnitude_map=magnitude skip=3 grid=none
-
 
 ```
 

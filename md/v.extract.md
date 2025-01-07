@@ -29,9 +29,7 @@ The examples are intended for the North Carolina sample dataset:
 
 ```
 
-
 v.extract -d cats=1,2,3,4 input=soils_wake output=soil_groupa type=area new=0
-
 
 ```
 
@@ -43,9 +41,7 @@ dissolved, and all areas in the new map will be assigned category number 0.
 
 ```
 
-
 v.extract -d cats=1-4 input=soils_wake output=soil_groupa type=area new=-1
-
 
 ```
 
@@ -58,9 +54,7 @@ numbers 1 thru 4, since **new** was set to -1.
 
 ```
 
-
 v.extract input=soils_wake output=soil_groupa type=area new=1
-
 
 ```
 
@@ -72,10 +66,8 @@ map will be assigned category number 1.
 
 ```
 
-
 v.extract input=markveggy.shp output=markveggy.1 new=13 \
   where="(VEGTYPE = 'Wi') or (VEGTYPE = 'PS') or (PRIME_TYPE='Wi')"
-
 
 ```
 
@@ -86,9 +78,7 @@ fulfilled.
 
 ```
 
-
 v.extract input=lakes output=lakes_gaps where="FTYPE is NULL"
-
 
 ```
 
@@ -96,9 +86,7 @@ v.extract input=lakes output=lakes_gaps where="FTYPE is NULL"
 
 ```
 
-
 v.extract input=lakes output=lakes_ftype where="FTYPE not NULL"
-
 
 ```
 
@@ -108,20 +96,15 @@ Remove meteorological stations from map which are located above 1000m:
 
 ```
 
-
-
 # check what to delete:
 v.db.select precip_30ynormals where="elev > 1000"
-
 
 # perform reverse selection
 v.extract -r input=precip_30ynormals output=precip_30ynormals_lowland \
   where="elev > 1000"
 
-
 # verify
 v.db.select precip_30ynormals_lowland
-
 
 ```
 
@@ -129,24 +112,18 @@ v.db.select precip_30ynormals_lowland
 
 ```
 
-
-
 # check column names:
 v.info -c zipcodes_wake
 
-
 # reclass based on desired column:
 v.reclass input=zipcodes_wake output=zipcodes_wake_recl_nam column=ZIPNAME
-
 
 # verify:
 v.info -c zipcodes_wake_recl_nam
 v.db.select zipcodes_wake_recl_nam
 
-
 # dissolve:
 v.extract -d input=zipcodes_wake_recl_nam output=zipcodes_wake_regions
-
 
 ```
 
@@ -157,9 +134,7 @@ attributes of adjacent (left/right) areas are identical.
 
 ```
 
-
 v.extract input=geology output=random_geology type=area random=3
-
 
 ```
 

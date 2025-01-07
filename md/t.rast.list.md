@@ -51,7 +51,6 @@ like name, mapset, start\_time, end\_time of each map in the space time dataset
 
 ```
 
-
 t.rast.list tempmean_monthly
 name|mapset|start_time|end_time
 2009_01_tempmean|climate_2000_2012|2009-01-01 00:00:00|2009-02-01 00:00:00
@@ -59,7 +58,6 @@ name|mapset|start_time|end_time
 ....
 2012_11_tempmean|climate_2000_2012|2012-11-01 00:00:00|2012-12-01 00:00:00
 2012_12_tempmean|climate_2000_2012|2012-12-01 00:00:00|2013-01-01 00:00:00
-
 
 ```
 
@@ -69,7 +67,6 @@ The following command let the user to choose the columns to show
 
 ```
 
-
 t.rast.list tempmean_monthly columns=name,start_time,min,max
 name|start_time|min|max
 2009_01_tempmean|2009-01-01 00:00:00|-3.380823|7.426054
@@ -77,7 +74,6 @@ name|start_time|min|max
 ...
 2009_01_tempmean|2009-01-01 00:00:00|-3.380823|7.426054
 2009_02_tempmean|2009-02-01 00:00:00|-1.820261|8.006386
-
 
 ```
 
@@ -87,7 +83,6 @@ In this example the result is filtered showing only the maps with max
 value major than 24
 
 ```
-
 
 t.rast.list tempmean_monthly columns=name,start_time,min,max where="max > 24"
 name|start_time|min|max
@@ -99,7 +94,6 @@ name|start_time|min|max
 2012_07_tempmean|2012-07-01 00:00:00|18.455802|28.794653
 2012_08_tempmean|2012-08-01 00:00:00|15.718526|26.151115
 
-
 ```
 
 ### Filtering the result by time range
@@ -108,7 +102,6 @@ In this example the result is filtered showing only the maps which
 fall into a specified time range (from .. to):
 
 ```
-
 
 t.rast.list tempmean_monthly columns=name,start_time,min,max \
   where="start_time > '2009-06-01 00:00:00' and start_time < '2012-08-01 00:00:00'"
@@ -121,7 +114,6 @@ name|start_time|min|max
 2012_07_tempmean|2012-07-01 00:00:00|18.455802|28.794653
 2012_08_tempmean|2012-08-01 00:00:00|15.718526|26.151115
 
-
 ```
 
 ### Filtering the result by selecting recurring timestamps
@@ -131,9 +123,7 @@ fall into a specified recurring time range (here one month per year):
 
 ```
 
-
 t.rast.list Tseasonal_fieldata_garda where="strftime('%m', start_time)='06'"
-
 
 ```
 
@@ -144,7 +134,6 @@ value is used, the value *comma* will print only the list of maps
 inside the space time dataset:
 
 ```
-
 
 t.rast.list method=comma input=tempmean_monthly
 2009_01_tempmean@climate_2009_2012,2009_02_tempmean@climate_2009_2012,2009_03_tempmean@climate_2009_2012, \
@@ -164,14 +153,12 @@ t.rast.list method=comma input=tempmean_monthly
 2012_07_tempmean@climate_2009_2012,2012_08_tempmean@climate_2009_2012,2012_09_tempmean@climate_2009_2012, \
 2012_10_tempmean@climate_2009_2012,2012_11_tempmean@climate_2009_2012,2012_12_tempmean@climate_2009_2012
 
-
 ```
 
 The *delta* value calculate the interval between maps and the
 distance from the first map:
 
 ```
-
 
 t.rast.list method=delta input=tempmean_monthly
 id|name|mapset|start_time|end_time|interval_length|distance_from_begin
@@ -183,7 +170,6 @@ id|name|mapset|start_time|end_time|interval_length|distance_from_begin
 2012_11_tempmean@climate_2000_2012|2012_11_tempmean|climate_2000_2012|2012-11-01 00:00:00|2012-12-01 00:00:00|30.0|1400.0
 2012_12_tempmean@climate_2000_2012|2012_12_tempmean|climate_2000_2012|2012-12-01 00:00:00|2013-01-01 00:00:00|31.0|1430.0
 
-
 ```
 
 The *gran* value it is used to return data sampled by a user
@@ -191,7 +177,6 @@ defined granule. As default the granularity of the space time raster
 dataset is used for sampling.
 
 ```
-
 
 t.rast.list  method=gran input=tempmean_monthly
 id|name|mapset|start_time|end_time|interval_length|distance_from_begin
@@ -205,11 +190,9 @@ id|name|mapset|start_time|end_time|interval_length|distance_from_begin
 2012_11_tempmean@climate_2009_2012|2012_11_tempmean|climate_2009_2012|2012-11-01 00:00:00|2012-12-01 00:00:00|30.0|1400.0
 2012_12_tempmean@climate_2009_2012|2012_12_tempmean|climate_2009_2012|2012-12-01 00:00:00|2013-01-01 00:00:00|31.0|1430.0
 
-
 ```
 
 ```
-
 
 t.rast.list  method=gran input=tempmean_monthly gran="2 months"
 id|name|mapset|start_time|end_time|interval_length|distance_from_begin
@@ -221,7 +204,6 @@ id|name|mapset|start_time|end_time|interval_length|distance_from_begin
 2012_09_tempmean@climate_2009_2012|2012_09_tempmean|climate_2009_2012|2012-09-01 00:00:00|2012-11-01 00:00:00|61.0|1339.0
 2012_11_tempmean@climate_2009_2012|2012_11_tempmean|climate_2009_2012|2012-11-01 00:00:00|2013-01-01 00:00:00|61.0|1400.0
 
-
 ```
 
 For the *deltagaps* value you can see the example for space time
@@ -231,7 +213,6 @@ vector dataset [t.vect.list](t.vect.list.html#using-method-option)
 
 ```
 
-
 result = json.loads(
     gs.read_command(
         "t.rast.list", input="tempmean_monthly", format="json"
@@ -239,7 +220,6 @@ result = json.loads(
 )
 for item in result["data"]:
     print(item["name"])
-
 
 ```
 
@@ -256,9 +236,7 @@ dot*.
 
 ```
 
-
 t.rast.list input=test.S2_1
-
 
 ```
 

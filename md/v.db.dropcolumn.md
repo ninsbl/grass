@@ -18,12 +18,10 @@ Dropping a column:
 
 ```
 
-
 g.copy vect=roadsmajor,myroads
 v.info -c myroads
 v.db.dropcolumn myroads column=SHAPE_LEN
 v.info -c myroads
-
 
 ```
 

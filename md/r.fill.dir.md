@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.fill.dir* filters and generates a depressionless
@@ -87,7 +86,6 @@ will take into account an active raster mask.
 * The flow direction map can be visualized with
   *[d.rast.arrow](d.rast.arrow.html)*.
 
-
 ## EXAMPLES
 
 Generic example: create a depressionless (sinkless) elevation
@@ -96,12 +94,9 @@ type "grass":
 
 ```
 
-
 r.fill.dir input=ansi.elev output=ansi.fill.elev direction=ansi.asp
 
-
 ```
-
 
 North Carolina sample dataset example: The LiDAR derived 1m elevation map is
 sink-filled. The outcome are a depressionless elevation map, the flow direction
@@ -109,29 +104,22 @@ map and an error map.
 
 ```
 
-
-
 # set computational region to elevation map
 g.region raster=elev_lid792_1m -p
-
 # generate depressionless DEM and related maps
 r.fill.dir input=elev_lid792_1m output=elev_lid792_1m_filled \
            direction=elev_lid792_1m_dir areas=elev_lid792_1m_error
-
 
 # generate elevation map of pixelwise differences to see obtained terrain alterations
 r.mapcalc "elev_lid792_1m_diff = elev_lid792_1m_filled - elev_lid792_1m"
 r.colors elev_lid792_1m_diff color=differences
 
-
 # assess univariate statistics of differences
 r.univar -e elev_lid792_1m_diff
-
 
 # vectorize filled areas (here all fills are of positive value, see r.univar output)
 r.mapcalc "elev_lid792_1m_fill_area = if(elev_lid792_1m_diff > 0.0, 1, null() )"
 r.to.vect input=elev_lid792_1m_fill_area output=elev_lid792_1m_fill_area type=area
-
 
 # generate shaded terrain for better visibility of results
 r.relief input=elev_lid792_1m_filled output=elev_lid792_1m_filled_shade
@@ -140,9 +128,7 @@ d.mon wx0
 d.shade shade=elev_lid792_1m_filled_shade color=elev_lid792_1m_filled
 d.vect elev_lid792_1m_fill_area type=boundary color=red
 
-
 ```
-
 
 ![r.fill.dir example](r_fill_dir.png)
 
@@ -163,7 +149,6 @@ d.vect elev_lid792_1m_fill_area type=boundary color=red
 * Young, R.A., C.A. Onstad, D.D. Bosch and W.P. Anderson. 1985. Agricultural nonpoint
   surface pollution models (AGNPS) I and II model documentation. St. Paul: Minn. Pollution
   control Agency and Washington D.C., USDA-Agricultural Research Service.
-
 
 ## SEE ALSO
 

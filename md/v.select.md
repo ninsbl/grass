@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.select* allows the user to select features from a vector
@@ -22,7 +21,6 @@ Supported operators (internally using
 * **overlaps** - features spatially overlap
 * **relate** - feature A is spatially related to feature B
 
-
 ## NOTES
 
 Only features with category numbers will be considered. If required
@@ -42,23 +40,17 @@ Preparation of example data (North Carolina sample dataset):
 
 ```
 
-
-
 # Create an grid for overlaying to ZIP code vector map
 v.mkgrid map=boxgrid grid=10,10 position=coor \
          coordinates=583600,201500 box=5000,5000
 
-
 # set region to ZIP codes and boxgrid vector maps
 g.region vector=zipcodes_wake,boxgrid -p res=100 -a
-
 # enlarge region a bit for "white border" around map in monitor
 g.region n=n+1000 s=s-1000 w=w-1000 e=e+1000 -p
 d.mon wx0
 
-
 ```
-
 
 ### OVERLAP: features partially or completely overlap (using GRASS)
 
@@ -66,16 +58,13 @@ Select grid boxes (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=boxgrid fill_color=85:130:176
 v.select ainput=boxgrid binput=zipcodes_wake output=v_select_OVERLAP operator=overlap
 d.vect map=v_select_OVERLAP
 d.vect map=zipcodes_wake type=boundary color=255:255:50
 
-
 ```
-
 
 ![v.select with OVERLAP operator](v_select_op_overlap.png)
 
@@ -87,16 +76,13 @@ Select grid boxes (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=boxgrid fill_color=85:130:176
 v.select ainput=boxgrid binput=zipcodes_wake output=v_select_OVERLAPS operator=overlaps
 d.vect map=v_select_OVERLAPS
 d.vect map=zipcodes_wake type=boundary color=255:255:50
 
-
 ```
-
 
 ![v.select with OVERLAPS operator](v_select_op_overlaps.png)
 
@@ -108,16 +94,13 @@ Select grid boxes (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=boxgrid fill_color=85:130:176
 v.select ainput=boxgrid binput=zipcodes_wake output=v_select_DISJOINT operator=disjoint
 d.vect map=v_select_DISJOINT
 d.vect map=zipcodes_wake type=boundary color=255:255:50
 
-
 ```
-
 
 ![v.select with DISJOINT operator](v_select_op_disjoint.png)
 
@@ -129,16 +112,13 @@ Select zipcode polygon (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 v.extract input=zipcodes_wake where=ZIPCODE_ID=35 output=zipcodeID35
 v.select ainput=zipcodes_wake binput=zipcodeID35 output=v_select_EQUALS operator=equals
 d.vect map=v_select_EQUALS
 d.vect map=zipcodes_wake type=boundary color=255:255:50
 
-
 ```
-
 
 ![v.select with EQUALS operator](v_select_op_equals.png)
 
@@ -150,16 +130,13 @@ Select zipcode polygons (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=boxgrid fill_color=85:130:176
 v.select ainput=zipcodes_wake binput=boxgrid output=v_select_INTERSECTS operator=intersects
 d.vect map=v_select_INTERSECTS
 d.vect map=boxgrid type=boundary color=255:255:50
 
-
 ```
-
 
 ![v.select with INTERSECTS operator](v_select_op_intersects.png)
 
@@ -171,16 +148,13 @@ Select polygons (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=zipcodeID35 fill_color=85:130:176
 v.select ainput=zipcodes_wake binput=zipcodeID35 output=v_select_TOUCHES operator=touches
 d.vect map=v_select_TOUCHES
 d.vect map=zipcodes_wake type=boundary color=255:255:50
 
-
 ```
-
 
 ![v.select with TOUCHES operator](v_select_op_touches.png)
 
@@ -192,7 +166,6 @@ Select zipcode polygons by lines (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=busroute1 color=200:27:27 width=3
 v.select ainput=zipcodes_wake binput=busroute1 output=v_select_CROSSES operator=crosses
@@ -200,9 +173,7 @@ d.vect map=v_select_CROSSES
 d.vect map=zipcodes_wake type=boundary color=255:255:50
 d.vect map=busroute1 color=200:27:27 width=3
 
-
 ```
-
 
 ![v.select with CROSSES operator](v_select_op_crosses.png)
 
@@ -214,15 +185,12 @@ Select zipcode polygons (North Carolina sample dataset):
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=boundary_county fill_color=85:130:176
 v.select ainput=zipcodes_wake binput=boundary_county output=v_select_WITHIN operator=within
 d.vect map=v_select_WITHIN
 
-
 ```
-
 
 ![v.select with WITHIN operator](v_select_op_within.png)
 
@@ -234,9 +202,7 @@ Select zipcode polygon (North Carolina sample dataset):
 
 #### CONTAINS with polygons
 
-
 ```
-
 
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=zipcodeID35 fill_color=85:130:176
@@ -244,9 +210,7 @@ v.select ainput=zipcodes_wake binput=zipcodeID35 \
          output=v_select_CONTAINS_pol operator=contains
 d.vect map=v_select_CONTAINS
 
-
 ```
-
 
 ![v.select with CONTAINS operator](v_select_op_contains_pol.png)
 
@@ -254,9 +218,7 @@ v.select with CONTAINS operator: selected polygon shown in yellow (blue: input p
 
 #### CONTAINS with points
 
-
 ```
-
 
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=hospitals fill_color=195:31:31 icon=basic/cross3 size=10
@@ -265,9 +227,7 @@ v.select ainput=zipcodes_wake binput=hospitals \
 d.vect map=v_select_CONTAINS_pnts
 d.vect map=hospitals fill_color=195:31:31 icon=basic/cross3 size=10
 
-
 ```
-
 
 ![v.select with CONTAINS operator](v_select_op_contains_pnts.png)
 
@@ -284,16 +244,13 @@ In the following one example: Select polygon with 'TOUCHES' operator
 
 ```
 
-
 d.vect map=zipcodes_wake fill_color=0:128:0
 d.vect map=zipcodeID35 fill_color=85:130:176
 v.select ainput=zipcodeID35 binput=zipcodes_wake \
          output=v_select_TOUCHES_relate operator=relate relate='T********'
 d.vect map=v_select_TOUCHES
 
-
 ```
-
 
 The result of `relate='T********'` is the same as seen
 above in the example 'TOUCHES'.
@@ -307,13 +264,10 @@ data set (point in polygon test):
 
 ```
 
-
 v.select ainput=firestations binput=urbanarea output=urban_firestations \
          operator=overlap
 
-
 ```
-
 
 ### Extraction of lines overlapping with a polygon
 
@@ -322,13 +276,10 @@ Extract railroad lines from zip code map overlapping with the urban area
 
 ```
 
-
 v.select ainput=railroads binput=urbanarea \
          output=railroads_in_urbanarea operator=overlap
 
-
 ```
-
 
 ### Extraction of areas overlapping with a line
 
@@ -337,8 +288,6 @@ Extract those areas from zip code map which overlap with railroads
 
 ```
 
-
-
 # first add a tiny buffer around railroad lines:
 v.buffer input=railroads output=railroads_buf20m \
   distance=20
@@ -346,10 +295,7 @@ v.buffer input=railroads output=railroads_buf20m \
 v.select ainput=zipcodes_wake binput=railroads_buf20m \
   output=zipcodes_wake_railroads operator=overlap
 
-
 ```
-
-
 
 ## SEE ALSO
 

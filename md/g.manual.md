@@ -17,9 +17,7 @@ Show index page in the browser.
 
 ```
 
-
 g.manual -i
-
 
 ```
 
@@ -28,9 +26,7 @@ in the browser.
 
 ```
 
-
 g.manual d.vect
-
 
 ```
 
@@ -38,9 +34,7 @@ Show module manual page in terminal.
 
 ```
 
-
 g.manual -m d.vect
-
 
 ```
 

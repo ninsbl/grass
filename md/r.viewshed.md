@@ -154,10 +154,8 @@ above ground:
 
 ```
 
-
 g.region raster=elev_lid792_1m -p
 r.viewshed input=elev_lid792_1m output=elev_lid792_1m_viewshed coordinates=638728,220609 observer_elevation=5.0
-
 
 ```
 
@@ -169,10 +167,8 @@ of a mountain:
 
 ```
 
-
 g.region raster=elevation.10m
 r.viewshed input=elevation.10m output=viewshed coordinates=598869,4916642 memory=800
-
 
 ```
 

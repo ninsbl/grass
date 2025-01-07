@@ -42,13 +42,11 @@ dataset is used to hillshade the `elevation` map:
 
 ```
 
-
 g.region raster=aspect -p
 r.shade shade=aspect color=elevation output=elevation_aspect_shaded
 
 d.mon wx0
 d.rast elevation_aspect_shaded
-
 
 ```
 
@@ -58,7 +56,6 @@ raster map for later use:
 
 ```
 
-
 g.region raster=elevation
 r.relief input=elevation output=elevation_shaded_relief
 
@@ -67,7 +64,6 @@ r.shade shade=elevation_shaded_relief color=elevation \
 
 d.mon wx1
 d.rast elevation_relief_shaded
-
 
 ```
 

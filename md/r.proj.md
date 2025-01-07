@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.proj* is used to reproject a raster map from the coordinate
@@ -9,7 +8,6 @@ is taken from the current PROJ\_INFO files, as set and viewed with
 *[g.proj](g.proj.html)*.
 
 ### Introduction
-
 
 #### Map projections
 
@@ -196,7 +194,6 @@ than latitude-longitude so results may be odd with trimming.
 
 ## EXAMPLES
 
-
 ### Inline method
 
 With GRASS running in the destination project use the **-g** flag
@@ -206,8 +203,6 @@ the reprojection:
 
 ```
 
-
-
 # calculate where output map will be
 r.proj input=elevation project=ll_wgs84 mapset=user1 -p
 Source cols: 8162
@@ -216,7 +211,6 @@ Local north: -4265502.30382993
 Local south: -4473453.15255565
 Local west: 14271663.19157564
 Local east: 14409956.2693866
-
 
 # same calculation, but in a form which can be cut and pasted into a g.region call
 r.proj input=elevation project=ll_wgs84 mapset=user1 -g
@@ -238,7 +232,6 @@ rows:       12277
 cols:       8162
 cells:      100204874
 
-
 # round resolution to something cleaner
 g.region res=17 -a -p
 projection: 99 (Mercator)
@@ -255,52 +248,37 @@ rows:       12234
 cols:       8136
 cells:      99535824
 
-
 # finally, perform the reprojection
 r.proj input=elevation project=ll_wgs84 mapset=user1 memory=800
 
-
 ```
-
 
 ### v.in.region method
 
-
 ```
 
-
-
 # In the source project, use v.in.region to generate a bounding box around the
-
 # region of interest:
 
 v.in.region -d output=bounds type=area
 
-
 # Now switch to the target project and import the vector bounding box
-
 # (you can run v.proj -l to get a list of vector maps in the source project):
 
 v.proj input=bounds project=source_project_name output=bounds_reprojected
 
-
 # Set the region in the target project with that of the newly-imported vector
-
 # bounds map, and align the resolution to the desired cell resolution of the
-
 # final, reprojected raster map:
 
 g.region vector=bounds_reprojected res=5 -a
-
 
 # Now reproject the raster into the target project
 
 r.proj input=elevation.dem output=elevation.dem.reproj \
   project=source_project_name mapset=PERMANENT res=5 method=bicubic
 
-
 ```
-
 
 ## REFERENCES
 
@@ -321,7 +299,6 @@ r.proj input=elevation.dem output=elevation.dem.reproj \
 * [MapRef -
   The Collection of Map Projections and Reference Systems for Europe](https://mapref.org)
 * [Information and Service System for European Coordinate Reference Systems - CRS](https://www.crs-geo.eu)
-
 
 ## SEE ALSO
 

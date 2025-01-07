@@ -12,9 +12,7 @@ TBD.
 
 ```
 
-
 v.what.strds input=mypoints strds=mystrds output=newvector
-
 
 ```
 

@@ -16,14 +16,12 @@ Specification of map names:
 
 ```
 
-
 a1
 a2
 a3
 a4
 a5
 a6
-
 
 ```
 
@@ -42,23 +40,17 @@ dataset, so the wrong map will be unregister.
 
 ```
 
-
 t.register -i type=raster input=tempmean_monthly@climate_2009_2012 \
     maps=2012_01_precip \
     start="2013-01-01" increment="1 month"
 
-
 # We unregister raster map 2012_01_precip from a space time dataset,
-
 # the raster maps are still present in the temporal database
 t.unregister type=raster input=tempmean_monthly@climate_2009_2012 maps=2012_01_precip
 
-
 # We unregister raster map 2012_01_precip from the temporal database, hence
-
 # the time stamps are removed
 t.unregister type=raster maps=2012_01_precip
-
 
 ```
 

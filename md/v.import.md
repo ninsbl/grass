@@ -58,11 +58,8 @@ refer to the *v.clean* manual page.
 
 ```
 
-
-
 # import SHAPE file at full extent and reproject to current project CRS
 v.import input=research_area.shp output=research_area extent=input
-
 
 ```
 

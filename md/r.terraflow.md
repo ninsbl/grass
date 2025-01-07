@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.terraflow* takes as input a raster digital elevation
@@ -148,13 +147,10 @@ Example for small area in North Carolina sample dataset to calculate flow accumu
 
 ```
 
-
 g.region raster=elev_lid792_1m
 r.terraflow elevation=elev_lid792_1m accumulation=elev_lid792_1m_accumulation
 
-
 ```
-
 
 ![](rterraflow_accumulation.png)
 
@@ -164,19 +160,14 @@ Spearfish sample data set:
 
 ```
 
-
 g.region raster=elevation.10m -p
 r.terraflow elev=elevation.10m filled=elevation10m.filled \
     dir=elevation10m.mfdir swatershed=elevation10m.watershed \
     accumulation=elevation10m.accu tci=elevation10m.tci
 
-
 ```
 
-
-
 ```
-
 
 g.region raster=elevation.10m -p
 r.terraflow elev=elevation.10m filled=elevation10m.filled \
@@ -184,9 +175,7 @@ r.terraflow elev=elevation.10m filled=elevation10m.filled \
     accumulation=elevation10m.accu tci=elevation10m.tci d8cut=500 memory=800 \
     stats=elevation10mstats.txt
 
-
 ```
-
 
 ## REFERENCES
 
@@ -206,7 +195,6 @@ r.terraflow elev=elevation.10m filled=elevation10m.filled \
    In *GeoInformatica, International Journal on
    Advances of Computer Science for Geographic Information
    Systems*, 7(4):283-313, December 2003.
-
 
 ## SEE ALSO
 

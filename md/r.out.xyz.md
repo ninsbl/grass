@@ -29,10 +29,8 @@ North Carolina sample dataset is exported to CSV format.
 
 ```
 
-
 g.region raster=elev_lid792_1m -p
 r.out.xyz input=elev_lid792_1m output=elev_lid792_1m.csv separator=","
-
 
 ```
 
@@ -43,18 +41,15 @@ combined file (requires the import of the supplementary high-resolution
 
 ```
 
-
 g.region raster=elev_lid792_1m res=1 -a -p
 r.out.xyz input=elev_lid792_1m,ortho2010_t792.red,ortho2010_t792.green,ortho2010_t792.blue \
         separator=space output=pointcloud.asc
-
 
 # validate: X Y Z R G B
 head -n 3 pointcloud.asc
 638300.5 220749.5 126.338218689 78 84 71
 638301.5 220749.5 126.3381958008 93 101 86
 638302.5 220749.5 126.3414840698 68 77 59
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.stream.extract* extracts streams in both raster and vector
@@ -161,44 +160,33 @@ map produced with *[r.watershed](r.watershed.html)*.
 
 ```
 
-
-
 # set region
 g.region -p raster=elev_ned_30m@PERMANENT
-
 
 # calculate flow accumulation
 r.watershed ele=elev_ned_30m@PERMANENT acc=elev_ned_30m.acc
 
-
 # curvature to get narrow valleys
 r.param.scale input=elev_ned_30m@PERMANENT output=tangential_curv_5 size=5 method=crosc
-
 
 # curvature to get a bit broader valleys
 r.param.scale input=elev_ned_30m@PERMANENT output=tangential_curv_7 size=7 method=crosc
 
-
 # curvature to get broad valleys
 r.param.scale input=elev_ned_30m@PERMANENT output=tangential_curv_11 size=11 method=crosc
-
 
 # create weight map
 r.mapcalc "weight = if(tangential_curv_5 < 0, -100 * tangential_curv_5, \
                     if(tangential_curv_7 < 0, -100 * tangential_curv_7, \
                     if(tangential_curv_11 < 0, -100 * tangential_curv_11, 0.000001)))"
 
-
 # weigh accumulation map
 r.mapcalc expr="elev_ned_30m.acc.weighed = elev_ned_30m.acc * weight"
-
 
 # copy color table from original accumulation map
 r.colors map=elev_ned_30m.acc.weighed raster=elev_ned_30m.acc
 
-
 ```
-
 
 [![](r_stream_extract_weights_zoom.png)](r_stream_extract_weights_zoom.png)
 
@@ -217,17 +205,13 @@ Compare them and proceed if the weighed accumulation map makes sense.
 
 ```
 
-
-
 # extract streams using the original accumulation map
 r.stream.extract elevation=elev_ned_30m@PERMANENT \
                  accumulation=elev_ned_30m.acc \
                  threshold=1000 \
                  stream_rast=elev_ned_30m.streams.noweight
 
-
 # extract streams from weighed map
-
 # note that the weighed map is a bit smaller than the original map
 
 r.stream.extract elevation=elev_ned_30m@PERMANENT \
@@ -235,9 +219,7 @@ r.stream.extract elevation=elev_ned_30m@PERMANENT \
                  threshold=1000 \
                  stream_rast=elev_ned_30m.streams
 
-
 ```
-
 
 Now display both stream maps and decide which one is more realistic.
 
@@ -264,7 +246,6 @@ Extracted streams from weighed flow accumulation map
 * Montgomery, D.R., Foufoula-Georgiou, E. (1993). *Channel network source
   representation using digital elevation models.*
   **Water Resources Research** Vol 29(12), pp 3925-3934.
-
 
 ## SEE ALSO
 

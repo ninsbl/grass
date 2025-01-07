@@ -15,10 +15,8 @@ is filtered for large areas (removing smaller areas from the map).
 
 ```
 
-
 g.region raster=zipcodes -p
 r.report zipcodes unit=h
-
 
 ```
 
@@ -26,11 +24,9 @@ Extract only areas greater than 2000 ha, NULL otherwise:
 
 ```
 
-
 r.reclass.area input=zipcodes output=zipcodes_larger2000ha mode=greater value=2000
 
 r.report zipcodes_larger2000ha unit=h
-
 
 ```
 
@@ -45,9 +41,7 @@ boundary. Reclass by substitutional removing of areas minor of 1000 ha:
 
 ```
 
-
 r.reclass.area input=zipcodes output=zipcodes_minor1000ha mode=lesser value=1000 method=rmarea
-
 
 ```
 

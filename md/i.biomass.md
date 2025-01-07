@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.biomass* calculates the biomass growth for a day after [1][2].
@@ -11,7 +10,6 @@ Input:
 * DOY [1-366].
 * Transmissivity of the atmosphere single-way [0.0-1.0], mostly around 0.7+ in clear sky.
 * Water availability [0.0-1.0], possibly using direct output from *i.eb.evapfr*.
-
 
 ## NOTES
 

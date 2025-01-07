@@ -24,10 +24,8 @@ mapset *modis\_lst* included, copy the space-time raster dataset
 
 ```
 
-
 g.mapsets mapset=modis_lst operation=add
 t.copy input=LST_Day_monthly@modis_lst type=strds output=LST_Day_monthly
-
 
 ```
 

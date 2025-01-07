@@ -29,11 +29,9 @@ dataset is used to hillshade the `elevation` map:
 
 ```
 
-
 g.region raster=aspect -p
 d.mon wx0
 d.shade shade=aspect color=elevation
-
 
 ```
 
@@ -47,13 +45,11 @@ and used to create a colorized hillshade:
 
 ```
 
-
 g.region raster=elevation
 r.relief input=elevation output=elevation_shaded_relief
 
 d.mon wx1
 d.shade shade=elevation_shaded_relief color=elevation
-
 
 ```
 

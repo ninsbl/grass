@@ -13,9 +13,7 @@ In case the flag is not set, the average calculation is:
 
 ```
 
-
     average = (min + max) / 2
-
 
 ```
 
@@ -23,9 +21,7 @@ In case the flag was set, the calculation changes to arithmetic mean
 
 ```
 
-
     average = sum(input maps) / (number of input maps)
-
 
 ```
 
@@ -33,9 +29,7 @@ In case the flag was set, the calculation changes to arithmetic mean
 
 ```
 
-
     gdd = average - lower
-
 
 ```
 
@@ -49,9 +43,7 @@ of GDD, usually accumulated for the period April 1st to October
 
 ```
 
-
     bedd = average - lower
-
 
 ```
 
@@ -62,9 +54,7 @@ The **Huglin heliothermal index** is calculated as
 
 ```
 
-
     huglin = (average + max) / 2 - lower
-
 
 ```
 
@@ -76,9 +66,7 @@ usually accumulated for the period April 1st to September
 
 ```
 
-
     mean = average
-
 
 ```
 
@@ -104,9 +92,7 @@ input values with
 
 ```
 
-
     new = old * scale + shift
-
 
 ```
 
@@ -138,12 +124,9 @@ add an entry in:
 
 ```
 
-
 /etc/security/limits.conf
-
 # <domain>      <type>  <item>         <value>
 your_username  hard    nofile          4096
-
 
 ```
 
@@ -152,9 +135,7 @@ overall limit of the operating system
 
 ```
 
-
 cat /proc/sys/fs/file-max
-
 
 ```
 
@@ -179,10 +160,8 @@ Kelvin \* 50 to degrees Celsius:
 
 ```
 
-
 r.series.accumulate in=MOD11A1.Day,MOD11A1.Night,MYD11A1.Day,MYD11A1.Night out=MCD11A1.GDD \
       scale=0.02 shift=-273.15 limits=10,30
-
 
 ```
 

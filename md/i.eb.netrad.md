@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.eb.netrad* calculates the net radiation at the time of satellite
@@ -32,7 +31,6 @@ Add more explanations.
   A Distributed Benchmarking Framework for Actual ET Models,
   in: Irmak, A. (Ed.), Evapotranspiration - Remote Sensing and Modeling. InTech.
   ([PDF](https://www.intechopen.com/chapters/26115))
-
 
 ## SEE ALSO
 

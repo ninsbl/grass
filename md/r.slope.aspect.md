@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.slope.aspect* generates raster maps of slope, aspect, curvatures and
@@ -29,18 +28,13 @@ using [r.mapcalc](r.mapcalc.html):
 
 ```
 
-
-
 # convert angles from CCW from East to CW from North
-
 # modulus (%) can not be used with floating point aspect values
 r.mapcalc "azimuth_aspect = if(ccw_aspect == 0, 0, \
                             if(ccw_aspect < 90, 90 - ccw_aspect, \
                             450 - ccw_aspect)))"
 
-
 ```
-
 
 Alternatively, the **-n** flag can be used to produce aspect as
 degrees CW from North. Aspect for flat areas is then set to -9999
@@ -79,7 +73,6 @@ of slope that groups slope values into ranges of slope. This can be done using
 reclassification is given below:
 
 ```
-
           category      range   category labels
                      (in degrees)    (in percent)
 
@@ -104,9 +97,7 @@ reclassification is given below:
              5       128     51      51
              6       255      0       0
              7         0      0       0
-
 ```
-
 
 ## NOTES
 
@@ -155,7 +146,6 @@ needs to compiled with OpenMP enabled.
 
 ## EXAMPLES
 
-
 ### Calculation of slope, aspect, profile and tangential curvature
 
 In this example a slope, aspect, profile and tangential curvature map
@@ -164,10 +154,8 @@ dataset):
 
 ```
 
-
 g.region raster=elevation
 r.slope.aspect elevation=elevation slope=slope aspect=aspect pcurvature=pcurv tcurvature=tcurv
-
 
 # set nice color tables for output raster maps
 r.colors -n map=slope color=sepia
@@ -175,9 +163,7 @@ r.colors map=aspect color=aspectcolr
 r.colors map=pcurv color=curvature
 r.colors map=tcurv color=curvature
 
-
 ```
-
 
 ![](r_slope_aspect_slope.png)
 ![](r_slope_aspect_aspect.png)
@@ -185,7 +171,6 @@ r.colors map=tcurv color=curvature
 ![](r_slope_aspect_tcurv.png)
 
 Figure: Slope, aspect, profile and tangential curvature raster map (North Carolina dataset)
-
 
 ### Classification of major aspect directions in compass orientation
 
@@ -196,13 +181,10 @@ directions (N, E, S, W):
 
 ```
 
-
 g.region raster=elevation -p
-
 
 # generate integer aspect map with degrees CCW from East
 r.slope.aspect elevation=elevation aspect=myaspect precision=CELL
-
 
 # generate compass orientation and classify four major directions (N, E, S, W)
 r.mapcalc "aspect_4_directions = eval( \\
@@ -214,7 +196,6 @@ r.mapcalc "aspect_4_directions = eval( \\
    + if(compass >=315., 1) \\
 )"
 
-
 # assign text labels
 r.category aspect_4_directions separator=comma rules=- << EOF
 1,north
@@ -222,7 +203,6 @@ r.category aspect_4_directions separator=comma rules=- << EOF
 3,south
 4,west
 EOF
-
 
 # assign color table
 r.colors aspect_4_directions rules=- << EOF
@@ -232,9 +212,7 @@ r.colors aspect_4_directions rules=- << EOF
 4 94,60,153
 EOF
 
-
 ```
-
 
 ![Aspect map classified to four major compass directions](r_slope_aspect_4_directions.png)
 
@@ -251,7 +229,6 @@ Aspect map classified to four major compass directions (zoomed subset shown)
   Developments in Soil Science, vol. 33, Elsevier, 387-410 pp,
   [doi:10.1016/S0166-2481(08)00017-2](https://doi.org/10.1016/S0166-2481%2808%2900017-2),
   <https://www.geomorphometry.org>
-
 
 ## SEE ALSO
 

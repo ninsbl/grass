@@ -19,11 +19,9 @@ Adding a single column:
 
 ```
 
-
 g.copy vect=roadsmajor,myroads
 v.db.addcolumn myroads columns="slope double precision"
 v.info -c myroads
-
 
 ```
 
@@ -31,11 +29,9 @@ Adding two columns:
 
 ```
 
-
 g.copy vect=roadsmajor,myroads
 v.db.addcolumn myroads columns="slope double precision,myname varchar(15)"
 v.info -c myroads
-
 
 ```
 

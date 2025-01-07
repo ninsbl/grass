@@ -47,7 +47,6 @@ Generate 20 random points with binary attributes (only 0 or 1):
 
 ```
 
-
 v.random output=binary_random npoints=20 zmin=0 zmax=1 column='binary'
 v.db.select binary_random
 cat|binary
@@ -66,7 +65,6 @@ minimum: 148.515
 maximum: 16572.8
 [...]
 
-
 ```
 
 ### Generating random points in 2D with binary attributes
@@ -74,7 +72,6 @@ maximum: 16572.8
 Generate 20 random points with binary attributes (only 0 or 1):
 
 ```
-
 
 v.random output=binary_random npoints=20 zmin=0 zmax=1 column='binary' column_type=integer
 v.db.select binary_random
@@ -87,7 +84,6 @@ cat|binary
 6|0
 [...]
 
-
 ```
 
 ### Generating random points in 3D
@@ -95,7 +91,6 @@ cat|binary
 Generate 20 random 3D points using a specific random seed:
 
 ```
-
 
 v.random seed=52 output=height_random npoints=40 zmin=110 zmax=170 -z
 v.univar -d height_random
@@ -111,7 +106,6 @@ population standard deviation: 3563.95
 [...]
 skewness: 0.34703
 
-
 ```
 
 ![](vrandom_z.png)
@@ -125,16 +119,13 @@ code areas):
 
 ```
 
-
 v.random restrict=zipcodes_wake output=zipcodes_local_random_n3 npoints=3 where="ZIPNAME = 'RALEIGH'" -a
-
 
 # visualization
 d.mon wx0
 d.vect zipcodes_wake
 d.vect zipcodes_wake fcolor=yellow where="ZIPNAME = 'RALEIGH'"
 d.vect zipcodes_local_random_n3 color=red icon=basic/circle
-
 
 ```
 
@@ -149,18 +140,15 @@ points, then a triangulation is run (North Carolina sample dataset:
 
 ```
 
-
 g.region vector=nc_state
 v.random output=randpoints6k npoints=6000
 v.voronoi input=randpoints6k output=randareas6k
 v.info -t randareas6k
 v.category randareas6k option=print
 
-
 # plot vector areas
 d.mon wx0
 d.vect randareas6k -c
-
 
 ```
 
@@ -175,16 +163,12 @@ These vector areas can also be rasterized:
 
 ```
 
-
-
 # rasterize areas
-
 # note: rastermaps must result in at least 6k pixel in this example
 g.region vector=nc_state res=500 -p -a
 v.to.rast randareas6k out=randareas6k use=cat
 r.colors randareas6k color=random
 d.rast randareas6k
-
 
 ```
 
@@ -193,7 +177,6 @@ d.rast randareas6k
 Generate 20 random samples from a raster map:
 
 ```
-
 
 g.region -p raster=elevation
 v.random output=random_samples npoints=20
@@ -206,7 +189,6 @@ cat|sample
 3|96.01388
 [...]
 
-
 ```
 
 ### Random sampling from vector map
@@ -214,7 +196,6 @@ cat|sample
 Generate 20 random points and sample attribute data from geology (vector) map:
 
 ```
-
 
 g.region -p vector=geology
 v.random output=random_samples npoints=20
@@ -227,7 +208,6 @@ cat|geology
 3|Zatm
 [...]
 
-
 ```
 
 ### Stratified random sampling: Random sampling from vector map by attribute
@@ -235,7 +215,6 @@ cat|geology
 Generate 20 random points restricted to forested areas:
 
 ```
-
 
 g.region -p raster=landclass96
 r.to.vect -v input=landclass96 output=landclass96 type=area
@@ -246,7 +225,6 @@ cat|landclass96_cat|landclass96_label
 2|5|forest
 3|5|forest
 ...
-
 
 ```
 
@@ -261,11 +239,9 @@ points in each water body:
 
 ```
 
-
 g.region -p raster=landclass96
 r.to.vect -v input=landclass96 output=landclass96 type=area
 v.random restrict=landclass96 output=random_samples npoints=2 where="label = 'water'" layer=1 -a
-
 
 ```
 

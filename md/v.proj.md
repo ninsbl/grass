@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.proj* allows a user to convert a vector map in a specified mapset
@@ -54,12 +53,9 @@ Reprojection of a vector map from another project (and mapset) into the current 
 
 ```
 
-
 v.proj in=mymap project=latlong mapset=user1
 
-
 ```
-
 
 ## REFERENCES
 
@@ -80,7 +76,6 @@ v.proj in=mymap project=latlong mapset=user1
 * [MapRef -
   The Collection of Map Projections and Reference Systems for Europe](https://mapref.org)
 * [Information and Service System for European Coordinate Reference Systems - CRS](https://www.crs-geo.eu)
-
 
 ## SEE ALSO
 

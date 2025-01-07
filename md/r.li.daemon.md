@@ -25,42 +25,35 @@ To write a new index only two steps are needed:
 1. Define a function and insert its declaration on file **index.h** in *r.li.daemon*
    folder, which contains all index declarations. This function must be of this kind:
 
-```
-
+   ```
 
            int index(int fd, char ** par, area_des ad, double * result)
 
-
-```
+   ```
 
    where:
-
-* *fd* is the raster map descriptor
-* *par* is a matrix for special parameter (like argv in main)
-* *ad* is the area descriptor
-* *result* is where to put the index calculation resultThis function has to return 1 on success and 0 otherwise.
+   * *fd* is the raster map descriptor
+   * *par* is a matrix for special parameter (like argv in main)
+   * *ad* is the area descriptor
+   * *result* is where to put the index calculation resultThis function has to return 1 on success and 0 otherwise.
    This function type is defined using typedef named `rli_func`.
+2. Create a main for command line arguments parsing, and call the function
 
-1. Create a main for command line arguments parsing, and call the function
-
-```
-
+   ```
 
            int calculateIndex(char *file, rli_func *f,
                               char **parameters, char *raster, char *output);
 
-
-```
+   ```
 
    from the *r.li* library, for starting raster analysis.
 
    It follows the meaning of parameters:
-
-* *file* name of configuration file created using [g.gui.rlisetup](g.gui.rlisetup.html)
-* *f* pointer to index function defined above
-* *parameters* pointer to index special parameters
-* *raster* name of raster to use
-* *output* output file name
+   * *file* name of configuration file created using [g.gui.rlisetup](g.gui.rlisetup.html)
+   * *f* pointer to index function defined above
+   * *parameters* pointer to index special parameters
+   * *raster* name of raster to use
+   * *output* output file name
 
 Compile it using a changed Makefile based on the file for *r.li.patchdensity*.
 
@@ -74,11 +67,9 @@ execution. It is recommended to use
 
 ```
 
-
 RLI_get_cell_row(int, int, area_des)
 RLI_get_fcell_row(int, int, area_des)
 RLI_get_dcell_row(int, int, area_des)
-
 
 ```
 

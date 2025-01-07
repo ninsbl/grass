@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.mapcalc.simple* provides a wrapper to *r.mapcalc*.
@@ -52,43 +51,29 @@ Differences to *r.mapcalc.simple* module in GRASS GIS 5 and 6:
 * Overwriting of outputs is done in the same way as with other
   modules, so there is no flag to not overwrite outputs.
 
-
 ## EXAMPLES
-
 
 ### Basic examples
 
-
 ```
-
 
 r.mapcalc.simple expression="0" output=zeros
 r.mapcalc.simple expression="1" output=ones
 r.mapcalc.simple expression="2" output=twos
 
-
 ```
 
-
-
 ```
-
 
 r.mapcalc.simple expression="A + B + C" a=zeros b=ones c=twos output=result1
 
-
 ```
 
-
-
 ```
-
 
 r.mapcalc.simple expression="(A * B) / 2 + 3 * C" a=zeros b=ones c=twos output=result2
 
-
 ```
-
 
 ![](r_mapcalc_simple.png)
 
@@ -100,36 +85,26 @@ Addition:
 
 ```
 
-
 A + B
 
-
 ```
-
 
 No spaces around operators are not recommended for readability,
 but allowed in the expression:
 
 ```
 
-
 A+B
 
-
 ```
-
 
 More complex expression with a function:
 
-
 ```
-
 
 exp(A+C)+(B-2)*7
 
-
 ```
-
 
 ## SEE ALSO
 

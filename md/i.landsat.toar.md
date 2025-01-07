@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.landsat.toar* is used to transform the calibrated digital
@@ -165,9 +164,7 @@ correct calibration constants, which were changed in the dates:
 * Landsat-7 ETM+: July 1, 2000
 * Landsat-8 OLI/TIRS: launched in 2013
 
-
 ## EXAMPLES
-
 
 ### Metadata file examples
 
@@ -178,46 +175,35 @@ files 293\_39.61\_toar and 293\_39.62\_toar:
 
 ```
 
-
 i.landsat.toar input=203_30. output=_toar \
   metfile=p203r030_7x20010620.met
 
-
 ```
-
 
 or
 
 ```
-
 
 i.landsat.toar input=L5121060_06020060714. \
   output=L5121060_06020060714_toar \
   metfile=L5121060_06020060714_MTL.txt
 
-
 ```
-
 
 or
 
 ```
 
-
 i.landsat.toar input=LC80160352013134LGN03_B output=toar \
   metfile=LC80160352013134LGN03_MTL.txt sensor=oli8 date=2013-05-14
 
-
 ```
-
 
 ### DOS1 example
 
 DN to reflectance using DOS1:
 
 ```
-
-
 
 # rename channels or make a copy to match i.landsat.toar's input scheme:
 g.copy raster=lsat7_2002_10,lsat7_2002.1
@@ -230,23 +216,18 @@ g.copy raster=lsat7_2002_62,lsat7_2002.62
 g.copy raster=lsat7_2002_70,lsat7_2002.7
 g.copy raster=lsat7_2002_80,lsat7_2002.8
 
-
 ```
-
 
 Calculation of reflectance values from DN using DOS1 (metadata obtained
 from [p016r035\_7x20020524.met.gz](https://grassbook.org/wp-content/uploads/ncexternal/landsat/2002/p016r035_7x20020524.met.gz)):
 
 ```
 
-
 i.landsat.toar input=lsat7_2002. output=lsat7_2002_toar. sensor=tm7 \
   method=dos1 date=2002-05-24 sun_elevation=64.7730999 \
   product_date=2004-02-12 gain=HHHLHLHHL
 
-
 ```
-
 
 The resulting Landsat channels are named `lsat7_2002_toar.1 .. lsat7_2002_toar.8`.
 
@@ -271,7 +252,6 @@ The resulting Landsat channels are named `lsat7_2002_toar.1 .. lsat7_2002_toar.8
 * Song et al, 2001: Classification and Change Detection Using Landsat TM
   Data, When and How to Correct Atmospheric Effects? Remote Sensing
   of Environment, vol. 75.
-
 
 ## SEE ALSO
 

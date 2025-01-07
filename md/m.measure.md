@@ -12,13 +12,11 @@ Distance example in a latitude-longitude coordinate reference system
 
 ```
 
-
 Bonn_DE="7.09549,50.73438"
 Philadelphia_US="-75.16379,39.95233"
 
 m.measure coordinates="$Bonn_DE,$Philadelphia_US" units=kilometers
 Length:  6217.916452 kilometers
-
 
 ```
 
@@ -30,12 +28,10 @@ describing a square of 1000m side length:
 
 ```
 
-
 m.measure units=meters \
   coordinates=922000,2106000,923000,2106000,923000,2107000,922000,2107000
 Length:  3000.000000 meters
 Area:    1000000.000000 square meters
-
 
 # script style output:
 m.measure -g units=hectares \
@@ -43,7 +39,6 @@ m.measure -g units=hectares \
 units=meters,square meters
 length=3000.000000
 area=1000000.000000
-
 
 ```
 

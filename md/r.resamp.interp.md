@@ -54,12 +54,10 @@ North Carolina sample dataset):
 
 ```
 
-
 g.region raster=elev_state_500m -p
 g.region res=250 -ap
 r.resamp.interp input=elev_state_500m output=elev_state_250m \
                 method=bilinear
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.cost* determines the cumulative cost of moving to each
@@ -65,7 +64,6 @@ also considered.
 
 ```
 
-
  . . . . . . . . . . . . . . .
  .   .   . K .   . K .   .   .
  . . . . . . . . . . . . . . .
@@ -78,9 +76,7 @@ also considered.
  .   .   . K .   . K .   .   .
  . . . . . . . . . . . . . . .
 
-
 ```
-
 
 Knight's move example:
 ![](rcost_knightsmove.png)
@@ -121,7 +117,6 @@ following steps:
    **r.cost**
 6. Extract paths again with **r.path** to get a geometrically
    optimized solution
-
 
 ## NULL CELLS
 
@@ -178,7 +173,6 @@ Consider the following example:
 
 ```
 
-
        Input:
          COST SURFACE
        . . . . . . . . . . . . . . .
@@ -211,9 +205,7 @@ Output (using -k):                Output (not using -k):
  . 14.  9.  8.  9.  6.  3.  8.     . 14.  9.  8. 9 .  6.  3.  8.
  . . . . . . . . . . . . . . .     . . . . . . . . . . . . . . .
 
-
 ```
-
 
 The user-provided starting location in the above example is the boxed **3**
 in the above input map. The costs in the output map represent the total
@@ -242,7 +234,6 @@ used. The calculation is done with *r.cost* as follows
 
 ```
 
-
   g.region raster=roads -p
   r.mapcalc "area.one = 1"
   r.cost -k input=area.one output=distance start_raster=roads
@@ -253,10 +244,7 @@ used. The calculation is done with *r.cost* as follows
   r.mapcalc "dist_meters = distance * (ewres()+nsres())/2."
   d.rast dist_meters
 
-
 ```
-
-
 
 ## Movement Direction
 
@@ -269,16 +257,13 @@ The directions are recorded as degrees CCW from East:
 
 ```
 
-
        112.5      67.5         i.e. a cell with the value 135
 157.5  135   90   45   22.5    means the next cell is to the north-west
        180   x   360
 202.5  225  270  315  337.5
        247.5     292.5
 
-
 ```
-
 
 ### Cost allocation
 
@@ -288,12 +273,9 @@ cost raster map "costs":
 
 ```
 
-
 r.cost input=costs start_raster=sources output=costsurf nearest=costalloc
 
-
 ```
-
 
 ### Find the minimum cost path
 

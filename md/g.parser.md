@@ -1,5 +1,4 @@
 
-
 ## KEYWORDS
 
 [general](general.html), [support](topic_support.html), [scripts](keywords.html#scripts)
@@ -55,39 +54,22 @@ Typical header definitions are as follows:
 
 ```
 
-
-
 # %module
-
 # % description: g.parser test script
-
 # %end
-
 # %flag
-
 # % key: f
-
 # % description: A flag
-
 # %end
-
 # %option
-
 # % key: raster
-
 # % type: string
-
 # % gisprompt: old,cell,raster
-
 # % description: Raster input map
-
 # % required: yes
-
 # %end
-
 
 ```
-
 
 With `{NULL}` it is possible to suppress a predefined `description`
 or `label`.
@@ -99,41 +81,25 @@ in the programmer manual. Eg. the option
 
 ```
 
-
-
 # %option
-
 # % key: raster
-
 # % type: string
-
 # % gisprompt: old,cell,raster
-
 # % description: Raster input map
-
 # % required: yes
-
 # %end
 
-
 ```
-
 
 can be easily defined as
 
 ```
 
-
-
 # %option G_OPT_R_MAP
-
 # % key: raster
-
 # %end
 
-
 ```
-
 
 The parser allows defining predefined *rules*
 for used options.
@@ -141,50 +107,32 @@ The syntax of the rules section is following:
 
 ```
 
-
-
 # %rules
-
 # % exclusive: capfile_output, capfile
-
 # %end
 
-
 ```
-
 
 The parser also allows defining "OR" conditions, e.g. requiring raster
 OR vector (for details, see below), e.g.for options:
 
 ```
 
-
-
 # %rules
-
 # % required: raster, vector
-
 # %end
 
-
 ```
-
 
 and e.g., for flags:
 
 ```
 
-
-
 # %rules
-
 # % required: -i,-d,-c
-
 # %end
 
-
 ```
-
 
 ## NOTES
 
@@ -193,13 +141,9 @@ following line:
 
 ```
 
-
-
 # % multiple: yes
 
-
 ```
-
 
 While this will only directly change the *Usage* section of the help
 screen, the option's environmental string may be easily parsed from within
@@ -207,15 +151,12 @@ a script. For example, individual comma separated identities for an option
 named "input" can be parsed with the following Bash shell code:
 
 ```
-
 IFS=,
 for opt in $GIS_OPT_INPUT ; do
     ... "$opt"
 done
 
-
 ```
-
 
 A "`guisection`" field may be added to each option and flag to
 specify that the options should appear in multiple tabs in the
@@ -224,13 +165,9 @@ go into the "Required" or "Options" tab. For example:
 
 ```
 
-
-
 # % guisection: tabname
 
-
 ```
-
 
 would put that option in a tab named *tabname*.
 
@@ -239,13 +176,9 @@ appears in the module's usage help section. For example:
 
 ```
 
-
-
 # % key_desc: filename
 
-
 ```
-
 
 added to an **input** option would create the usage summary
 `[input=filename]`.
@@ -287,17 +220,11 @@ For scripts, relationships are specified using a "rules" section, e.g.
 
 ```
 
-
-
 # %rules
-
 # % required: altitude,elevation
-
 # %end
 
-
 ```
-
 
 specifies that at least one of those options must be given. Both
 options and flags can be specified (a leading "**-**" denotes a flag).
@@ -314,7 +241,6 @@ The available rule types are:
 * `collective`: all or nothing; if any option is given, all
   must be given
 
-
 ## AUTOMATED SCRIPT CREATION
 
 The flag **--script** added to a GRASS command, generates shell
@@ -324,12 +250,9 @@ to any GRASS command. Example:
 
 ```
 
-
 v.in.db --script
 
-
 ```
-
 
 ## Help page template (HTML)
 
@@ -338,12 +261,9 @@ generates a related help page template in HTML. Example:
 
 ```
 
-
 v.in.db --html-description
 
-
 ```
-
 
 ## GUI window parser (XML)
 
@@ -352,12 +272,9 @@ generates a related help page template in XML. Example:
 
 ```
 
-
 v.in.db --interface-description
 
-
 ```
-
 
 ## JSON
 
@@ -365,7 +282,6 @@ The flag **--json** added to a GRASS command with parameters mandatorily
 to be specified generates a module interface description in JSON. Example:
 
 ```
-
 
 v.in.db driver=sqlite database=mysqlite.db table=pointsfile x=x y=y z=z key=idcol out=dtmpoints --json
 {
@@ -385,9 +301,7 @@ v.in.db driver=sqlite database=mysqlite.db table=pointsfile x=x y=y z=z key=idco
    ]
 }
 
-
 ```
-
 
 ## Web Processing Service (WPS)
 
@@ -396,12 +310,9 @@ generates a Web Processing Service process description. Example:
 
 ```
 
-
 v.in.db --wps-process-description
 
-
 ```
-
 
 ## reStructuredText
 
@@ -411,12 +322,9 @@ markup language. Example:
 
 ```
 
-
 v.in.db --rst-description
 
-
 ```
-
 
 reStructuredText is sometimes abbreviated as reST, ReST, or RST.
 The commonly used file extension is `.rst`.
@@ -430,12 +338,9 @@ this
 
 ```
 
-
 g.parser -t somescriptfile
 
-
 ```
-
 
 *g.parser* will print the text of the translatable options to
 standard output, one per line, and exit. This is for internal use within
@@ -457,7 +362,6 @@ text:
 
 ```
 
-
 test.py|sh|pl --help
 
 Description:
@@ -477,65 +381,37 @@ Parameters:
    vector   Vector input map
   option1   An option
 
-
 ```
-
 
 ### Example code for Python
 
-
 ```
-
-
 
 #!/usr/bin/env python3
 
-
 # g.parser demo script for python programming
 
-
 # %module
-
 # % description: g.parser test script (python)
-
 # % keyword: keyword1
-
 # % keyword: keyword2
-
 # %end
-
 # %flag
-
 # % key: f
-
 # % description: A flag
-
 # %end
-
 # %option G_OPT_R_MAP
-
 # % key: raster
-
 # % required: yes
-
 # %end
-
 # %option G_OPT_V_MAP
-
 # % key: vector
-
 # %end
-
 # %option
-
 # % key: option1
-
 # % type: string
-
 # % description: An option
-
 # % required: no
-
 # %end
 
 import os
@@ -571,61 +447,35 @@ if __name__ == "__main__":
     options, flags = gs.parser()
     sys.exit(main())
 
-
 ```
-
 
 ### Example code for SHELL
 
-
 ```
-
-
 
 #!/bin/sh
 
-
 # g.parser demo script for shell programming
 
-
 # %module
-
 # % description: g.parser test script (shell)
-
 # %end
-
 # %flag
-
 # % key: f
-
 # % description: A flag
-
 # %end
-
 # %option G_OPT_R_MAP
-
 # % key: raster
-
 # % required: yes
-
 # %end
-
 # %option G_OPT_V_MAP
-
 # % key: vector
-
 # %end
-
 # %option
-
 # % key: option1
-
 # % type: string
-
 # % description: An option
-
 # % required: no
-
 # %end
 
 if [ -z "$GISBASE" ] ; then
@@ -637,7 +487,6 @@ if [ "$1" != "@ARGS_PARSED@" ] ; then
     exec g.parser "$0" "$@"
 fi
 
-
 #### add your code below ####
 
 echo ""
@@ -648,7 +497,6 @@ else
   g.message message="Flag -f not set"
 fi
 
-
 # test if parameter present:
 if [ -n "$GIS_OPT_OPTION1" ] ; then
     echo "Value of GIS_OPT_OPTION1: '$GIS_OPT_OPTION1'"
@@ -658,69 +506,40 @@ g.message message="Value of GIS_OPT_option1: '$GIS_OPT_option1'"
 g.message message="Value of GIS_OPT_raster: '$GIS_OPT_raster'"
 g.message message="Value of GIS_OPT_vect: '$GIS_OPT_vector'"
 
-
 #### end of your code ####
 
-
 ```
-
 
 ### Example code for Perl
 
-
 ```
-
-
 
 #!/usr/bin/perl -w
 use strict;
 
-
 # g.parser demo script
 
-
 # %module
-
 # %  description: g.parser test script (perl)
-
 # %  keyword: keyword1
-
 # %  keyword: keyword2
-
 # %end
-
 # %flag
-
 # %  key: f
-
 # %  description: A flag
-
 # %end
-
 # %option G_OPT_R_MAP
-
 # % key: raster
-
 # % required: yes
-
 # %end
-
 # %option G_OPT_V_MAP
-
 # % key: vector
-
 # %end
-
 # %option
-
 # % key: option1
-
 # % type: string
-
 # % description: An option
-
 # % required: no
-
 # %end
 
 if ( !$ENV{'GISBASE'} ) {
@@ -737,7 +556,6 @@ if( $ARGV[0] ne '@ARGS_PARSED@' ){
     exit;
 }
 
-
 #### add your code here ####
 print  "\n";
 if ( $ENV{'GIS_FLAG_F'} eq "1" ){
@@ -751,12 +569,9 @@ printf ("Value of GIS_OPT_option1: '%s'\n", $ENV{'GIS_OPT_OPTION1'});
 printf ("Value of GIS_OPT_raster: '%s'\n", $ENV{'GIS_OPT_RASTER'});
 printf ("Value of GIS_OPT_vect: '%s'\n", $ENV{'GIS_OPT_VECTOR'});
 
-
 #### end of your code ####
 
-
 ```
-
 
 ### Easy creation of a script
 
@@ -770,183 +585,95 @@ The output is shown below:
 
 ```
 
-
 v.what.rast --script
 
-
 #!/usr/bin/env python3
-
 ############################################################################
-
 #
-
 # MODULE:       v.what.rast_wrapper
-
 # AUTHOR(S):    username
-
 # PURPOSE:      Wrapper for v.what.rast
-
 # COPYRIGHT:    (C) 2017 by username, and the GRASS Development Team
-
 #
-
 #  This program is free software; you can redistribute it and/or modify
-
 #  it under the terms of the GNU General Public License as published by
-
 #  the Free Software Foundation; either version 2 of the License, or
-
 #  (at your option) any later version.
-
 #
-
 #  This program is distributed in the hope that it will be useful,
-
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
-
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
 #  GNU General Public License for more details.
-
 #
-
 ############################################################################
-
 
 # %module
-
 # % description: Uploads raster values at positions of vector points to the table.
-
 # % keyword: vector, sampling, raster, position, querying, attribute table, surface information
-
 # %end
-
 # %flag
-
 # % key: i
-
 # % description: Interpolate values from the nearest four cells
-
 # %end
-
 # %flag
-
 # % key: p
-
 # % description: Print categories and values instead of updating the database
-
 # %end
-
 # %option
-
 # % key: map
-
 # % type: string
-
 # % required: yes
-
 # % multiple: no
-
 # % key_desc: name
-
 # % label: Name of vector points map for which to edit attributes
-
 # % description: Or data source for direct OGR access
-
 # % gisprompt: old,vector,vector
-
 # %end
-
 # %option
-
 # % key: layer
-
 # % type: string
-
 # % required: no
-
 # % multiple: no
-
 # % label: Layer number or name
-
 # % description: Vector features can have category values in different layers. This number determines which layer to use. When used with direct OGR access this is the layer name.
-
 # % answer: 1
-
 # % gisprompt: old,layer,layer
-
 # %end
-
 # %option
-
 # % key: type
-
 # % type: string
-
 # % required: no
-
 # % multiple: yes
-
 # % options: point,centroid
-
 # % description: Input feature type
-
 # % answer: point
-
 # %end
-
 # %option
-
 # % key: raster
-
 # % type: string
-
 # % required: yes
-
 # % multiple: no
-
 # % key_desc: name
-
 # % description: Name of existing raster map to be queried
-
 # % gisprompt: old,cell,raster
-
 # %end
-
 # %option
-
 # % key: column
-
 # % type: string
-
 # % required: no
-
 # % multiple: no
-
 # % key_desc: name
-
 # % description: Name of attribute column to be updated with the query result
-
 # % gisprompt: old,dbcolumn,dbcolumn
-
 # %end
-
 # %option
-
 # % key: where
-
 # % type: string
-
 # % required: no
-
 # % multiple: no
-
 # % key_desc: sql_query
-
 # % label: WHERE conditions of SQL statement without 'where' keyword
-
 # % description: Example: income < 1000 and population >= 10000
-
 # %end
 
 import sys
@@ -962,9 +689,7 @@ if __name__ == "__main__":
     options, flags = gs.parser()
     sys.exit(main())
 
-
 ```
-
 
 ## SEE ALSO
 

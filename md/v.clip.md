@@ -34,10 +34,8 @@ Carolina data set).
 
 ```
 
-
 v.extract input=boundary_county where="NAME='WAKE' OR NAME='JOHNSTON'" output=county_WAKE_JOHNSTON
 v.clip input=railroads clip=county_WAKE_JOHNSTON output=railroads_WAKE_JOHNSTON
-
 
 ```
 
@@ -49,9 +47,7 @@ v.clip input=railroads clip=county_WAKE_JOHNSTON output=railroads_WAKE_JOHNSTON
 
 ```
 
-
 v.clip -d input=railroads clip=county_WAKE_JOHNSTON output=railroads_WAKE_JOHNSTON
-
 
 ```
 
@@ -64,10 +60,8 @@ the clip map will be omitted.
 
 ```
 
-
 v.extract input=boundary_county where="NAME='WAKE' OR NAME='JOHNSTON'" output=county_WAKE_JOHNSTON
 v.clip -r input=hospitals output=hospitals_clip
-
 
 ```
 

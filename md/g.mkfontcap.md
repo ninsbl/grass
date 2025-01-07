@@ -11,7 +11,6 @@ fonts. The list of directories scanned is currently:
 
 ```
 
-
     /usr/lib/X11/fonts
     /usr/share/X11/fonts
     /usr/share/fonts
@@ -20,7 +19,6 @@ fonts. The list of directories scanned is currently:
     /Library/Fonts
     /System/Library/Fonts
     ${WINDIR}/Fonts
-
 
 ```
 
@@ -39,14 +37,11 @@ use e.g.
 
 ```
 
-
-
 # use local file version instead of system copy
 GRASS_FONT_CAP=$HOME/.gfontcap
 export GRASS_FONT_CAP
 
 g.mkfontcap
-
 
 ```
 

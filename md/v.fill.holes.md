@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.fill.holes* fills empty spaces inside areas, specifically
@@ -63,23 +62,17 @@ Remove the islands by extracting everything else (results in holes):
 
 ```
 
-
 v.extract input=lakes where="FTYPE != 'ROCK/ISLAND'" output=lakes_only
 
-
 ```
-
 
 Remove the holes:
 
 ```
 
-
 v.fill.holes input=lakes_only output=lakes_filled
 
-
 ```
-
 
 [![Lake without holes overlapping with the lines marking the original](v_fill_holes.png)](v_fill_holes.png)
 
@@ -96,7 +89,6 @@ Figure shows a smaller area in the north of the data extent.*
   for filling empty spaces in raster maps using interpolation,
 * *[r.fill.stats](r.fill.stats.html)*
   for filling empty spaces in raster maps using statistics.
-
 
 ## AUTHOR
 

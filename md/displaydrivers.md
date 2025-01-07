@@ -12,9 +12,7 @@ running *[d.mon](d.mon.html)* module.
 * [PS driver (Postscript)](psdriver.html)
 * [HTMLMAP driver](htmldriver.html)
 
-
 ## NOTES
-
 
 ### GRASS\_RENDER\_COMMAND
 
@@ -25,8 +23,6 @@ defined by this variable. Currently only Python scrips are supported.
 Lets start with simple example of Python script called *render.py*:
 
 ```
-
-
 
 #!/usr/bin/env python3
 
@@ -46,20 +42,15 @@ gs.run_command('d.text', text="Test of GRASS_RENDER_COMMAND redirection")
 os.environ['GRASS_RENDER_FILE_READ'] = 'TRUE'
 gs.run_command(cmd, **dcmd)
 
-
 ```
-
 
 After defining GRASS\_RENDER\_COMMAND variable (example for Bash):
 
 ```
 
-
 export GRASS_RENDER_COMMAND=render.py
 
-
 ```
-
 
 Display GRASS modules like *[d.rast](d.rast.html)*
 or *[d.vect](d.vect.html)* will be executed
@@ -68,12 +59,9 @@ For example the command
 
 ```
 
-
 d.vect roadsmajor
 
-
 ```
-
 
 produces output PNG file *output.png* which will contain rendered
 features from vector map *roadsmajor* and sample text *"Test of

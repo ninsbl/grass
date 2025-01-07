@@ -36,13 +36,11 @@ maximum input line length (e.g. 4096 characters).
 
 ```
 
-
 g.region raster=landuse96_28m,aspect -p
 r.what map=landuse96_28m,aspect coordinates=633614.08,224125.12,632972.36,225382.87 -f
 
 633614.08|224125.12||2|Low Intensity Developed|209.5939|209 degrees ccw from east
 632972.36|225382.87||15|Southern Yellow Pine|140.7571|140 degrees ccw from east
-
 
 ```
 
@@ -55,14 +53,12 @@ each community college:
 
 ```
 
-
 g.region raster=boundary_county_500m -p
 r.what map=boundary_county_500m points=comm_colleges
 
 145096.859150|154534.264884||39
 616341.437150|146049.750884||51
 ...
-
 
 ```
 
@@ -76,14 +72,12 @@ number for each community college:
 
 ```
 
-
 g.region raster=boundary_county_500m -p
 r.what map=boundary_county_500m points=comm_colleges -v
 
 1|145096.859150|154534.264884||39
 2|616341.437150|146049.750884||51
 ...
-
 
 ```
 
@@ -96,7 +90,6 @@ row. Example: query North Carolina county number for each community college:
 
 ```
 
-
 g.region raster=boundary_county_500m -p
 r.what map=boundary_county_500m points=comm_colleges \
        separator=comma output=result.csv -n
@@ -107,7 +100,6 @@ easting,northing,site_name,boundary_county_500m
 616341.437150,146049.750884,,51
 410595.719150,174301.828884,,71
 ...
-
 
 ```
 
@@ -120,7 +112,6 @@ raster map values are extracted:
 
 ```
 
-
 cat input_coord.txt
 633614.08 224125.12 site 1
 632972.36 225382.87 site 2
@@ -129,7 +120,6 @@ r.what map=landuse96_28m,aspect < input_coord.txt
 
 633614.08|224125.12|site 1|2|209.5939
 632972.36|225382.87|site 2|15|140.7571
-
 
 ```
 
@@ -140,7 +130,6 @@ for example (input data appears between the "`EOF`" markers):
 
 ```
 
-
 r.what map=landuse96_28m,aspect << EOF
 633614.08 224125.12 site 1
 632972.36 225382.87 site 2
@@ -149,16 +138,13 @@ EOF
 633614.08|224125.12|site 1|2|209.5939
 632972.36|225382.87|site 2|15|140.7571
 
-
 ```
 
 ```
-
 
 echo "633614.08 224125.12" | r.what map=landuse96_28m,aspect
 
 633614.08|224125.12||2|209.5939
-
 
 ```
 
@@ -171,14 +157,12 @@ point coordinates are piped from the
 
 ```
 
-
 v.out.ascii comm_colleges separator=space | r.what map=boundary_county_500m
 
 145096.8591495|154534.26488388|1|39
 616341.4371495|146049.75088388|2|51
 410595.7191495|174301.82888388|3|71
 ...
-
 
 ```
 
@@ -189,7 +173,6 @@ associated with the raster cell(s), as well as values (categorical maps only).
 
 ```
 
-
 r.what -f map=landuse96_28m,aspect << EOF
 633614.08 224125.12 site 1
 632972.36 225382.87 site 2
@@ -197,7 +180,6 @@ EOF
 
 633614.08|224125.12|site 1|2|Low Intensity Developed|209.5939|209 degrees ccw from east
 632972.36|225382.87|site 2|15|Southern Yellow Pine|140.7571|140 degrees ccw from east
-
 
 ```
 

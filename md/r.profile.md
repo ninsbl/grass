@@ -35,9 +35,7 @@ be piped directly into this program.
 
 ```
 
-
 r.profile -g input=elevation coordinates=... | v.in.ascii output=elevation_profile separator=space
-
 
 ```
 
@@ -62,9 +60,7 @@ To extract the numbers in scripts, following parameters can be used:
 
 ```
 
-
 r.profile input=dgm12.5 coordinates=3570631,5763556 2>/dev/null
-
 
 ```
 
@@ -79,11 +75,9 @@ Extract a profile with coordinates (wayoints) provided on the command line
 
 ```
 
-
 g.region raster=elevation -p
 r.profile -g input=elevation output=profile_points.csv \
           coordinates=641712,226095,641546,224138,641546,222048,641049,221186
-
 
 ```
 
@@ -97,7 +91,6 @@ Coordinate pairs can also be "piped" into *r.profile* (variant 2a):
 
 ```
 
-
 r.profile elevation resolution=1000 file=- << EOF
 641712,226095
 641546,224138
@@ -105,13 +98,11 @@ r.profile elevation resolution=1000 file=- << EOF
 641049,221186
 EOF
 
-
 ```
 
 Coordinate pairs can also be "piped" into *r.profile* (variant 2b):
 
 ```
-
 
 echo "641712,226095
 641546,224138
@@ -119,14 +110,12 @@ echo "641712,226095
 641049,221186" > coors.txt
 cat coors.txt | r.profile elevation resolution=1000 file=-
 
-
 ```
 
 The output is printed into the terminal (unless the *output* parameter
 is used) and looks as follows:
 
 ```
-
 
 Using resolution: 1000 [meters]
 Output columns:
@@ -141,23 +130,19 @@ Approx. transect length: 2090.000000 [meters]
 Approx. transect length: 995.014070 [meters]
  4054.027749 73.988029
 
-
 ```
 
 ### JSON Output
 
 ```
 
-
 r.profile -g input=elevation coordinates=641712,226095,641546,224138,641546,222048,641049,221186 -c format=json resolution=1000
-
 
 ```
 
 The output looks as follows:
 
 ```
-
 
 [
     {
@@ -216,7 +201,6 @@ The output looks as follows:
     }
 ]
 
-
 ```
 
 ### Using JSON output with Python for plotting data
@@ -226,11 +210,9 @@ is an example of creating a scatterplot of distance vs elevation with color codi
 
 ```
 
-
 import grass.script as gs
 import pandas as pd
 import matplotlib.pyplot as plt
-
 
 # Run r.profile command
 elevation = gs.read_command(
@@ -241,14 +223,11 @@ elevation = gs.read_command(
     flags="gc"
 )
 
-
 # Load the JSON data into a dataframe
 df = pd.read_json(elevation)
 
-
 # Convert the RGB color values to hex format for matplotlib
 df["color"] = df.apply(lambda x: "#{:02x}{:02x}{:02x}".format(int(x["red"]), int(x["green"]), int(x["blue"])), axis=1)
-
 
 # Create the scatter plot
 plt.figure(figsize=(10, 6))
@@ -258,7 +237,6 @@ plt.xlabel('Distance (meters)')
 plt.ylabel('Elevation')
 plt.grid(True)
 plt.show()
-
 
 ```
 

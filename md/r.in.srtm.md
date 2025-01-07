@@ -22,9 +22,7 @@ visualized by *[d.grid](d.grid.html)*:
 
 ```
 
-
 d.grid size=1
-
 
 ```
 

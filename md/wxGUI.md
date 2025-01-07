@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 **wxGUI** is a native *Graphical User Interface* (GUI) for
@@ -20,7 +19,6 @@ The GUI is composed of *three* main components:
   under different tabs in the Layer Manager.
 * [Module dialogs](wxGUI.modules.html) enable running GRASS modules
   that can be searched and launched via Tools tab.
-
 
 ### Layer Manager
 
@@ -182,24 +180,18 @@ For example:
 
 ```
 
-
 d.rast soils;d.rast -o roads;d.vect streams col=blue
 
-
 ```
-
 
 Note that when an option of the command contains spaces, you need to
 "escape" them with the backslash ('\') character, for example:
 
 ```
 
-
 d.text text=Population\ density
 
-
 ```
-
 
 ![icon](icons/layer-remove.png)
 *Delete selected layer*
@@ -484,9 +476,7 @@ Puts display into raster digitizing mode and opens a new digitizing
 toolbar. The user can digitize a new raster map or edit an existing
 map.
 
-
 ### Keyboard short-cuts
-
 
 #### Layer Manager
 
@@ -553,24 +543,18 @@ running, the GUI can be also started manually using:
 
 ```
 
-
 g.gui
 
-
 ```
-
 
 If the wxGUI is not the default user interface, it can defined as default by
 typing at the GRASS GIS command line:
 
 ```
 
-
 g.gui -d wxpython
 
-
 ```
-
 
 Alternatively, it may be defined in the main configuration file
 (`$HOME/.grass8/rc` on GNU/Linux and macOS, `%APPDATA%\Roaming\GRASS8\rc`
@@ -580,24 +564,18 @@ To start with a previously saved workspace file:
 
 ```
 
-
 g.gui workspace=file.gxw
 
-
 ```
-
 
 The user can also start GRASS from the shell command line with the wxGUI
 specifying the `--gui` switch:
 
 ```
 
-
 grass --gui
 
-
 ```
-
 
 The GUI can be quit by selecting the 'File > Quit GRASS GIS' menu item
 which gives options to close only GUI or to quit GRASS GIS entirely

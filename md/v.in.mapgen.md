@@ -17,9 +17,7 @@ Output from Matlab with this command:
 
 ```
 
-
     save filename.txt arrayname -ASCII
-
 
 ```
 

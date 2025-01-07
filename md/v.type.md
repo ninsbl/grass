@@ -27,9 +27,7 @@ used internally to maintain correct topology for areas.
 
 ```
 
-
 v.type input=map_l output=map_b from_type=line to_type=boundary
-
 
 ```
 

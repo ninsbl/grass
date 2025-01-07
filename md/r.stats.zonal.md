@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.stats.zonal* is a tool to analyse exploratory statistics of a
@@ -26,22 +25,17 @@ the `elevation` raster map:
 
 ```
 
-
 g.region raster=zipcodes -p
-
 
 # pixel count in zipcode areas
 r.stats.zonal base=zipcodes cover=elevation method=count output=zipcodes_elev_count
 r.colors zipcodes_elev_count color=gyr -g
 
-
 # average elevation in zipcode areas
 r.stats.zonal base=zipcodes cover=elevation method=average output=zipcodes_elev_avg
 r.colors zipcodes_elev_avg color=elevation -g
 
-
 ```
-
 
 [![Zonal (average) elevation statistics](r_stats.zonal.png)](r_stats.zonal.png)
 
@@ -62,7 +56,6 @@ zonal statistics map on the right shows the average elevation per zone
   for zonal statistics with textual (non-spatial) output,
 * *[v.vect.stats](v.vect.stats.html)*
   for statistics of vector points in vector areas.
-
 
 ## AUTHOR
 

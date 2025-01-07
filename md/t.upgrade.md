@@ -10,9 +10,7 @@ The version 3 introduces a semantic label support, see
 
 ```
 
-
 t.upgrade
-
 
 ```
 

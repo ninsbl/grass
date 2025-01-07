@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.li.simpson* calculates the "Simpson's diversity index" as:
@@ -12,7 +11,6 @@ with:
 * **m**: number of different patch types
 * **pi**: proportional abundance of
   patch type *i*
-
 
 ## NOTES
 
@@ -34,36 +32,28 @@ To calculate Simpson's diversity index on map *my\_map*, using
 
 ```
 
-
 r.li.simpson input=my_map conf=my_conf output=my_out
 
-
 ```
-
 
 Forest map (Spearfish sample dataset) example:
 
 ```
-
 
 g.region raster=landcover.30m -p
 r.mapcalc "forests = if(landcover.30m >= 41 && landcover.30m <= 43,1,null())"
 r.li.simpson input=forests conf=movwindow7 out=forests_simpson_mov7
 r.univar forests_simpson_mov7
 
-
 ```
-
 
 Forest map (North Carolina sample dataset) example:
 
 ```
 
-
 g.region raster=landclass96 -p
 r.mapcalc "forests = if(landclass96 == 5, 1, null() )"
 r.li.simpson input=forests conf=movwindow7 out=forests_simpson_mov7
-
 
 # verify
 r.univar forests_simpson_mov7
@@ -72,9 +62,7 @@ d.mon wx0
 d.rast forests_simpson_mov7
 d.vect forests type=boundary
 
-
 ```
-
 
 ## SEE ALSO
 

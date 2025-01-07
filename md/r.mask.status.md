@@ -28,9 +28,7 @@ To generate JSON output in Bash, use the **format** option:
 
 ```
 
-
 r.mask.status format=json
-
 
 ```
 
@@ -38,10 +36,8 @@ In Python, use:
 
 ```
 
-
 import grass.script as gs
 gs.parse_command("r.mask.status", format="json")
-
 
 ```
 
@@ -57,9 +53,7 @@ and 1 to indicate absence of a file, so testing existence of a file with
 
 ```
 
-
 r.mask.status -t
-
 
 ```
 
@@ -67,15 +61,12 @@ In a Bash script:
 
 ```
 
-
-
 # Bash
 if r.mask.status -t; then
     echo "Masking is active"
 else
     echo "Masking is not active"
 fi
-
 
 ```
 

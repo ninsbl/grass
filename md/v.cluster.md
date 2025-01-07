@@ -103,31 +103,23 @@ and within the subregion, then do clustering and visualize the result:
 
 ```
 
-
-
 # pick a subregion of the vector urbanarea
 g.region -p n=272950 s=188330 w=574720 e=703090 res=10
-
 
 # create random points in areas
 v.random output=random_points npoints=1000 restrict=urbanarea
 
-
 # identify clusters
 v.cluster input=random_points output=clusters_optics method=optics
-
 
 # set random vector color table for the clusters
 v.colors map=clusters_optics layer=2 use=cat color=random
 
-
 # display in command line
 d.mon wx0
 
-
 # note the second layer and transparent (none) color of the circle border
 d.vect map=clusters_optics layer=2 icon=basic/point size=10 color=none
-
 
 ```
 
@@ -141,32 +133,23 @@ method for clustering and visualize using color stored the attribute table.
 
 ```
 
-
-
 # pick a subregion of the vector urbanarea
 g.region -p n=272950 s=188330 w=574720 e=703090 res=10
-
 
 # create clustered points
 v.random output=rand_clust npoints=100 restrict=urbanarea -a
 
-
 # identify clusters
 v.cluster in=rand_clust out=rand_clusters method=dbscan
-
 
 # create colors for clusters
 v.db.addtable map=rand_clusters layer=2 columns="cat integer,grassrgb varchar(11)"
 v.colors map=rand_clusters layer=2 use=cat color=random rgb_column=grassrgb
 
-
 # display with your preferred method
-
 # remember to use the second layer and RGB column
-
 # for example use
 d.vect map=rand_clusters layer=2 color=none rgb_column=grassrgb icon=basic/circle
-
 
 ```
 

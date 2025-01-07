@@ -34,10 +34,8 @@ To smooth the maps contained in a space time dataset run:
 
 ```
 
-
 t.rast.neighbors input=tempmean_monthly output=smooth_tempmean_monthly \
                  basename=tmean_smooth size=5 method=average nprocs=4
-
 
 # show some info about the new space time dataset
 t.info smooth_tempmean_monthly
@@ -89,7 +87,6 @@ t.info smooth_tempmean_monthly
  |
  +----------------------------------------------------------------------------+
 
-
 # now compare the values between the original and the smoothed dataset
 
 t.rast.list input=smooth_tempmean_monthly columns=name,start_time,min,max
@@ -111,7 +108,6 @@ name|start_time|min|max
 2012_10_tempmean|2012-10-01 00:00:00|9.070884|18.709297
 2012_11_tempmean|2012-11-01 00:00:00|1.785653|10.911189
 2012_12_tempmean|2012-12-01 00:00:00|1.761019|11.983857
-
 
 ```
 

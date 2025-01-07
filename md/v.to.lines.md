@@ -22,9 +22,7 @@ The examples are for the North Carolina sample dataset:
 
 ```
 
-
 v.to.lines input=boundary_municp output=boundary_municp_lines
-
 
 ```
 
@@ -32,9 +30,7 @@ v.to.lines input=boundary_municp output=boundary_municp_lines
 
 ```
 
-
 v.to.lines input=geodetic_pts output=geodetic_pts_lines
-
 
 ```
 

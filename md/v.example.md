@@ -16,10 +16,8 @@ Label all vectors with value 1 (North Carolina sample dataset):
 
 ```
 
-
 v.example input=zipcodes_wake output=newmap
 v.category newmap option=report
-
 
 ```
 

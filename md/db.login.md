@@ -26,9 +26,7 @@ without password):
 
 ```
 
-
 db.login driver=pg database=mydb
-
 
 ```
 
@@ -37,9 +35,7 @@ history will store the password in this way):
 
 ```
 
-
 db.login driver=pg database=mydb user=bacava password=secret host=db.example.com
-
 
 ```
 
@@ -47,9 +43,7 @@ Username and empty password specified:
 
 ```
 
-
 db.login driver=pg database=mydb user=bacava password=""
-
 
 ```
 

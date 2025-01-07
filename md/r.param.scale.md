@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.param.scale* extracts terrain parameters from a digital elevation model. Uses a
@@ -30,7 +29,6 @@ brackets):
   of of maximum curvature)
 * *feature*: Morphometric features: peaks, ridges, passes, channels, pits and planes
 
-
 ## NOTES
 
 In *r.param.scale* the direction of maximum gradient (considered
@@ -49,13 +47,10 @@ dataset region:
 
 ```
 
-
 g.region raster=elevation.10m -p
 r.param.scale in=elevation.10m output=morphology method=feature size=9
 
-
 ```
-
 
 [![r.param.scale example](r_param_scale_morph.jpg)](r_param_scale_morph.jpg)
 *Figure: Geomorphological map of a subregion in the Spearfish (SD) area*
@@ -76,7 +71,6 @@ tables for all output files (presently only on features).
   [LandSerf](http://www.geog.le.ac.uk/jwo/research/LandSerf)
   that implements the same procedure
 
-
 ## SEE ALSO
 
 *[r.geomorphon](r.geomorphon.html),
@@ -85,7 +79,6 @@ tables for all output files (presently only on features).
 ## AUTHORS
 
 Jo Wood
-
 * [ASSIST's home](http://www.geog.le.ac.uk/assist/index.html)
 
 Update to FP 3/2002: L. Potrich, M. Neteler, S. Menegon (ITC-irst)

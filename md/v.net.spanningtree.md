@@ -23,9 +23,7 @@ Find cheapest set of pipelines connecting all nodes.
 
 ```
 
-
 v.net.spanningtree input=projected_pipelines output=spanningtree accol=cost
-
 
 ```
 

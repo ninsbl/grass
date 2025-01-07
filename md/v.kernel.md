@@ -34,11 +34,9 @@ Compute density of points (using vector map of schools from North Carolina sampl
 
 ```
 
-
 g.region region=wake_30m
 v.kernel input=schools_wake output=schools_density radius=5000 multiplier=1000000
 r.colors map=schools_density color=bcyr
-
 
 ```
 

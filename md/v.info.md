@@ -18,7 +18,6 @@ with *v.db.connect*.
 
 ```
 
-
 v.info map=geology
 
  +----------------------------------------------------------------------------+
@@ -52,13 +51,11 @@ v.info map=geology
  |                                                                            |
  +----------------------------------------------------------------------------+
 
-
 ```
 
 ### Map history
 
 ```
-
 
 v.info -h map=geology
 
@@ -72,7 +69,6 @@ overlapping area: 0.000000e+00 (0 areas)
 area without category: 0.000000e+00 (0 areas)
 ---------------------------------------------------------------------------------
 
-
 ```
 
 Note that while "project" is used by *v.info* elsewhere, history output
@@ -82,7 +78,6 @@ native vector format.
 ### Attribute columns for given layer
 
 ```
-
 
 v.info -c map=geology
 
@@ -96,13 +91,11 @@ CHARACTER|GEO_NAME
 DOUBLE PRECISION|SHAPE_area
 DOUBLE PRECISION|SHAPE_len
 
-
 ```
 
 ### Basic metadata information in shell script style
 
 ```
-
 
 v.info -get map=geology
 
@@ -137,11 +130,9 @@ areas=1832
 islands=907
 primitives=5481
 
-
 ```
 
 ```
-
 
 v.info -g map=geology
 
@@ -152,13 +143,11 @@ west=123971.19498978
 top=0.000000
 bottom=0.000000
 
-
 ```
 
 ### Output in JSON format
 
 ```
-
 
 {
     "name": "geology",
@@ -200,7 +189,6 @@ bottom=0.000000
     "map3d": false
 }
 
-
 ```
 
 ## PYTHON
@@ -213,12 +201,10 @@ following code:
 
 ```
 
-
 import grass.script as gcore
 
 gcore.vector_columns('geology')   # for `v.info -c`
 gcore.vector_info_topo('geology') # for `v.info shell=topo`
-
 
 ```
 
@@ -226,22 +212,17 @@ Here is an example of how the JSON output format can be used to integrate Grass 
 
 ```
 
-
 import grass.script as gs
 import pandas as pd
-
 
 # Run v.info command
 busstops = gs.run_command("v.info", map="busstopsall", format="json")
 
-
 # Load data into dataframe
 df = pd.DataFrame([busstops])
 
-
 # Display the DataFrame
 print(df)
-
 
 ```
 

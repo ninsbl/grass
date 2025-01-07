@@ -32,7 +32,6 @@ the following combinations occur:
 
 ```
 
-
           map1   map2
           ___________
           NULL    1
@@ -41,13 +40,11 @@ the following combinations occur:
            1      2
            2      4
 
-
 ```
 
 *r.cross* would produce a new raster map layer with 5 categories:
 
 ```
-
 
           map1   map2   output
           ____________________
@@ -56,7 +53,6 @@ the following combinations occur:
            1      1       2
            1      2       3
            2      4       4
-
 
 ```
 
@@ -76,7 +72,6 @@ In the above example, the category labels would be:
 
 ```
 
-
           category   category
           value      label
           ______________________________
@@ -85,7 +80,6 @@ In the above example, the category labels would be:
              2       layer1(1) layer2(1)
              3       layer1(1) layer2(2)
              4       layer1(2) layer2(4)
-
 
 ```
 

@@ -51,10 +51,8 @@ flag is not used, an error message appears:
 
 ```
 
-
 r.slope.aspect elevation=elevation slope=slope
 ERROR: option <slope>: <slope> exists. To overwrite, use the --overwrite flag
-
 
 ```
 
@@ -63,9 +61,7 @@ prefixed with double dash:
 
 ```
 
-
 r.slope.aspect elevation=elevation slope=slope --overwrite --quiet
-
 
 ```
 
@@ -125,7 +121,6 @@ flag. The options and flags are the same as in the module GUI.
 
 ```
 
-
 r.neighbors --help
 
 Description:
@@ -169,7 +164,6 @@ count,variance,diversity,interspersion,quart1,quart3,
       gauss   Sigma (in cells) for Gaussian filter
    quantile   Quantile to calculate for method=quantile
               options: 0.0-1.0
-
 
 ```
 

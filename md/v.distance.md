@@ -74,9 +74,7 @@ to vector map "pnt":
 
 ```
 
-
 v.distance from=pnt to=ln upload=cat column=linecat
-
 
 ```
 
@@ -90,9 +88,7 @@ the distance is zero):
 
 ```
 
-
 v.distance from=pnt to=ar upload=cat column=areacat
-
 
 ```
 
@@ -105,9 +101,7 @@ needed for network analysis:
 
 ```
 
-
 v.distance from=pnt to=ln out=connections upload=dist column=dist
-
 
 ```
 
@@ -120,9 +114,7 @@ input maps:
 
 ```
 
-
 v.distance from=pnt to=ln out=connections upload=cat,dist column=to_cat,dist table=connections
-
 
 ```
 
@@ -136,9 +128,7 @@ Create query map (if not present):
 
 ```
 
-
 echo "123456|654321|1" | v.in.ascii output=pnt
-
 
 ```
 
@@ -146,9 +136,7 @@ Find nearest features:
 
 ```
 
-
 v.distance -p from=pnt to=map_to_query upload=cat
-
 
 ```
 
@@ -165,9 +153,7 @@ the attribute table attached to vector map "pnt":
 
 ```
 
-
 v.distance from=pnt to=ar dmax=0 upload=cat column=areacat
-
 
 ```
 
@@ -182,11 +168,8 @@ upload=cat,dist column=nearest_id,dist_to_nr`.
 
 ```
 
-
-
 # create working copy
 g.copy vect=bugsites,bugs
-
 
 # add new attribute column to hold nearest archsite category number
 v.db.addcolumn map=bugs column="nrst_arch INTEGER"
@@ -194,9 +177,7 @@ v.db.addcolumn map=bugs column="nrst_arch INTEGER"
 v.distance from=bugs to=archsites to_type=point upload=to_attr \
   to_column=cat column=nrst_arch out=vdistance_vectors_raw
 
-
 # we need to give the lines category numbers, create a table, and create
-
 #  a column in that table to hold the distance data.
 v.category vdistance_vectors_raw out=vdistance_vectors type=line op=add
 g.remove -f type=vector name=vdistance_vectors_raw
@@ -204,10 +185,8 @@ g.remove -f type=vector name=vdistance_vectors_raw
 v.db.addtable map=vdistance_vectors column="length DOUBLE"
 v.to.db map=vdistance_vectors option=length column=length
 
-
 # calculate statistics
 v.univar vdistance_vectors column=length
-
 
 ```
 
@@ -217,18 +196,14 @@ Example for a Latitude-longitude project (EPSG 4326):
 
 ```
 
-
-
 # points along the equator
 echo "0|-61|1" | v.in.ascii output=pnt1 input=-
 echo "0|-58|1" | v.in.ascii output=pnt2 input=-
-
 
 # here, distances are in degree units
 v.distance -p --q from=pnt1 to=pnt2 upload=dist
 from_cat|distance
 1|3
-
 
 ```
 
@@ -240,7 +215,6 @@ As linear matrix:
 
 ```
 
-
 v.distance -pa from=hospitals to=hospitals upload=dist,to_attr to_column=NAME separator=tab
 from_cat    to_cat  dist    to_attr
 1   1   0   Cherry Hospital
@@ -249,13 +223,11 @@ from_cat    to_cat  dist    to_attr
 1   4   70900.392145909267  Central Prison Hospital
 1   5   70406.227393921712  Dorothea Dix Hospital
 
-
 ```
 
 As square matrix (only possible with single upload option):
 
 ```
-
 
 v.distance -pas from=hospitals to=hospitals upload=dist separator=tab
 from_cat to_cat       dist
@@ -266,7 +238,6 @@ from_cat to_cat       dist
 4      70900.39   76025.46  274153.19          0     501.11 ...
 5      70406.23   75538.87  274558.98     501.11          0 ...
 ...
-
 
 ```
 

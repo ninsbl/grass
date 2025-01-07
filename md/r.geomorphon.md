@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.geomorphon* calculates terrain forms using machine-vison
@@ -138,17 +137,14 @@ be helpful to avoid this problem.
 
 ## EXAMPLES
 
-
 ### Geomorphon calculation: extraction of terrestrial landforms
 
 Geomorphon calculation example using the EU DEM 25m:
 
 ```
 
-
 g.region raster=eu_dem_25m -p
 r.geomorphon elevation=eu_dem_25m forms=eu_dem_25m_geomorph
-
 
 # verify terrestrial landforms found in DEM
 r.category eu_dem_25m_geomorph
@@ -163,12 +159,9 @@ r.category eu_dem_25m_geomorph
  9  valley
  10 pit
 
-
 ```
 
-
 ![Geomorphon calculation example using the EU DEM 25m (with search=11)](r_geomorphon.png)
-
 
 ### Extraction of peaks
 
@@ -177,18 +170,14 @@ be extracted, e.g. the peaks, and converted into a vector point map:
 
 ```
 
-
 r.mapcalc expression="eu_dem_25m_peaks = if(eu_dem_25m_geomorph == 2, 1, null())"
 r.thin input=eu_dem_25m_peaks output=eu_dem_25m_peaks_thinned
 r.to.vect input=eu_dem_25m_peaks_thinned output=eu_dem_25m_peaks type=point
 v.info input=eu_dem_25m_peaks
 
-
 ```
 
-
 ![Extraction of peaks from EU DEM 25m (with search=11)](r_geomorphon_peaks.png)
-
 
 ## REFERENCES
 
@@ -199,7 +188,6 @@ v.info input=eu_dem_25m_peaks
 * Jasiewicz, J., Stepinski, T., 2013, Geomorphons - a pattern
   recognition approach to classification and mapping of landforms,
   Geomorphology, vol. 182, 147-156 (DOI: [10.1016/j.geomorph.2012.11.005](https://doi.org/10.1016/j.geomorph.2012.11.005))
-
 
 ## SEE ALSO
 

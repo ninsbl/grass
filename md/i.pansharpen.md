@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.pansharpen* uses a high resolution panchromatic band from a
@@ -29,11 +28,9 @@ panchromatic band are combined using the following algorithm to calculate
 
 ```
 
-
                          band1
     new band1 = ----------------------- * panband
                  band1 + band2 + band3
-
 
 ```
 
@@ -43,12 +40,10 @@ original 3 lower resolution bands to create 3 principal component images
 
 ```
 
-
      band1  band2  band3
 PC1: EV1-1  EV1-2  EV1-3
 PC2: EV2-1  EV2-2  EV2-3
 PC3: EV3-1  EV3-2  EV3-3
-
 
 ```
 
@@ -56,9 +51,7 @@ and
 
 ```
 
-
 PC1 = EV1-1 * band1 + EV1-2 * band2 + EV1-3 * band3 - mean(bands 1,2,3)
-
 
 ```
 
@@ -70,9 +63,7 @@ band using the following algorithm (example for band 1):
 
 ```
 
-
 band1 = pan * EV1-1 + PC2 * EV1-2 + PC3 * EV1-3 + mean(band1)
-
 
 ```
 
@@ -111,21 +102,17 @@ the 3 pan sharpening algorithms differ in terms of spectral response.
 
 ## EXAMPLES
 
-
 ### Pan sharpening of LANDSAT ETM+ (Landsat 7)
 
 LANDSAT ETM+ (Landsat 7), North Carolina sample dataset, PCA method:
 
 ```
 
-
-
 # original at 28m
 g.region raster=lsat7_2002_10 -p
 
 d.mon wx0
 d.rgb b=lsat7_2002_10 g=lsat7_2002_20 r=lsat7_2002_30
-
 
 # i.pansharpen with PCA algorithm
 i.pansharpen red=lsat7_2002_30 \
@@ -133,26 +120,20 @@ i.pansharpen red=lsat7_2002_30 \
   pan=lsat7_2002_80 method=pca \
   output=lsat7_2002_15m_pca -l
 
-
 # color enhance
 i.colors.enhance blue=lsat7_2002_15m_pca_blue \
   green=lsat7_2002_15m_pca_green red=lsat7_2002_15m_pca_red
-
 
 # display at 14.25m, IHS pansharpened
 g.region raster=lsat7_2002_15m_pca_red -p
 d.erase
 d.rgb b=lsat7_2002_15m_pca_blue g=lsat7_2002_15m_pca_green r=lsat7_2002_15m_pca_red
 
-
 ```
-
 
 LANDSAT ETM+ (Landsat 7), North Carolina sample dataset, IHS method:
 
 ```
-
-
 
 # original at 28m
 g.region raster=lsat7_2002_10 -p
@@ -160,31 +141,25 @@ g.region raster=lsat7_2002_10 -p
 d.mon wx0
 d.rgb b=lsat7_2002_10 g=lsat7_2002_20 r=lsat7_2002_30
 
-
 # i.pansharpen with IHS algorithm
 i.pansharpen red=lsat7_2002_30 \
   green=lsat7_2002_20 blue=lsat7_2002_10 \
   pan=lsat7_2002_80 method=ihs \
   output=lsat7_2002_15m_ihs -l
 
-
 # color enhance
 i.colors.enhance blue=lsat7_2002_15m_ihs_blue \
   green=lsat7_2002_15m_ihs_green red=lsat7_2002_15m_ihs_red
-
 
 # display at 14.25m, IHS pansharpened
 g.region raster=lsat7_2002_15m_ihs_red -p
 d.erase
 d.rgb b=lsat7_2002_15m_ihs_blue g=lsat7_2002_15m_ihs_green r=lsat7_2002_15m_ihs_red
 
-
 # compare before/after (RGB support under "Advanced"):
 g.gui.mapswipe
 
-
 ```
-
 
 ### Pan sharpening comparison example
 
@@ -193,37 +168,29 @@ Pan sharpening of a Landsat image from Boulder, Colorado, USA
 
 ```
 
-
-
 # R, G, B composite at 30m
 g.region raster=p034r032_7dt20010924_z13_20 -p
 d.rgb b=p034r032_7dt20010924_z13_20 g=lp034r032_7dt20010924_z13_40
     r=p034r032_7dt20010924_z13_50
-
 
 # i.pansharpen with IHS algorithm
 i.pansharpen red=p034r032_7dt20010924_z13_50 green=p034r032_7dt20010924_z13_40
     blue=p034r032_7dt20010924_z13_20 pan=p034r032_7dp20010924_z13_80
     output=ihs321 method=ihs
 
-
 # ... likewise with method=brovey and method=pca
-
 
 # display at 15m
 g.region raster=ihs542_blue -p
 d.rgb b=ihs542_blue g=ihs542_green r=ihs542_red
 
-
 ```
-
 
 ***Results:***
 
 | R, G, B composite of Landsat at 30m  *R, G, B composite of Landsat at 30m* | R, G, B composite of Brovey sharpened image at 15m  *R, G, B composite of Brovey sharpened image at 15m* |
 | --- | --- |
 | R, G, B composite of IHS sharpened image at 15m  *R, G, B composite of IHS sharpened image at 15m* | R, G, B composite of PCA sharpened image at 15m  *R, G, B composite of PCA sharpened image at 15m"* |
-
 
 ## REFERENCES
 
@@ -249,7 +216,6 @@ d.rgb b=ihs542_blue g=ihs542_green r=ihs542_red
   ([PDF](https://neteler.org/wp-content/uploads/neteler/papers/neteler2005_IJG_051-061_draft.pdf))
 * Pohl, C, and J.L van Genderen (1998). Multisensor image fusion in remote
   sensing: concepts, methods and application. Int. J. of Rem. Sens., 19, 823-854.
-
 
 ## SEE ALSO
 

@@ -47,9 +47,7 @@ Define color table `wave` based on categories from layer 1
 
 ```
 
-
 v.colors map=soils_general layer=1 color=wave
-
 
 ```
 
@@ -60,10 +58,8 @@ column `AREA`. Attribute table is linked to layer 1.
 
 ```
 
-
 v.to.db map=soils_general layer=1 option=area column=AREA
 v.colors map=soils_general layer=1 color=wave use=attr column=AREA
-
 
 ```
 
@@ -74,9 +70,7 @@ instead of creating color table.
 
 ```
 
-
 v.colors map=soils_general layer=1 color=wave use=attr column=AREA rgb_column=GRASSRGB
-
 
 # See some GRASSRGB values:
 v.db.select map=soils_general where="cat < 4"
@@ -84,7 +78,6 @@ cat|OBJECTID|AREA|PERIMETER|GSLNC250_|GSLNC250_I|GSL_NAME|GRASSRGB
 1|1|0|164616.125|2|1|NC113|212:42:127
 2|2|0|30785.529297|3|2|NC096|212:42:127
 3|3|0|87572.882812|4|3|NC097|212:42:127
-
 
 ```
 
@@ -94,9 +87,7 @@ Convert existing RGB values to color table rules.
 
 ```
 
-
 v.colors -c map=soils_general rgb_column=GRASSRGB
-
 
 ```
 
@@ -110,24 +101,18 @@ over RGB values stored in attribute table.
 
 ```
 
-
-
 # create an example raster from census blocks (10m pixel resolution)
 g.region vector=censusblk_swwake res=10 -ap
 v.to.rast input=censusblk_swwake use=attr attribute_column=TOTAL_POP output=censusblk_swwake_total_pop
 r.colors -e map=censusblk_swwake_total_pop color=blues
 
-
 # transfer raster colors to vector attributes (raster values to attributes)
 r.colors.out map=censusblk_swwake_total_pop rules=- | v.colors map=censusblk_swwake use=attr column=TOTAL_POP rules=-
-
 # equivalent, but simpler
 v.colors map=censusblk_swwake use=attr column=TOTAL_POP raster=censusblk_swwake_total_pop
 
-
 # transfer raster colors to vector categories (raster values to categories)
 v.colors map=censusblk_swwake raster=censusblk_swwake_total_pop
-
 
 ```
 
@@ -137,9 +122,7 @@ Existing color table can be removed by **-r** flag.
 
 ```
 
-
 v.colors -r map=soils_general
-
 
 ```
 
@@ -149,10 +132,8 @@ assign by **rules** option.
 
 ```
 
-
 v.colors.out map=soils_general rules=soils.colr
 v.colors map=soils_general rules=soils.colr
-
 
 ```
 
@@ -161,9 +142,7 @@ use *[v.db.dropcolumn](v.db.dropcolumn.html)*.
 
 ```
 
-
 v.db.dropcolumn map=soils_general column=GRASSRGB
-
 
 ```
 

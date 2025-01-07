@@ -92,17 +92,14 @@ otherwise we multiply the maps. The command will look as follows:
 
 ```
 
-
 t.rast.mapcalc input=A,B output=C basename=c method=equal \
     expression="if(start_month() == 5 || start_month() == 6, (A + B), (A * B))"
-
 
 ```
 
 The resulting raster maps in dataset C can be listed with *[t.rast.list](t.rast.list.html)*:
 
 ```
-
 
 name    start_time              min     max
 c_1     2001-03-01 00:00:00     9.0     9.0
@@ -111,7 +108,6 @@ c_3     2001-05-01 00:00:00     10.0    10.0
 c_4     2001-06-01 00:00:00     12.0    12.0
 c_5     2001-07-01 00:00:00     49.0    49.0
 c_6     2001-08-01 00:00:00     64.0    64.0
-
 
 ```
 
@@ -123,14 +119,12 @@ expression will be passed to *[r.mapcalc](r.mapcalc.html)*, resulting in 6 runs:
 
 ```
 
-
 r.mapcalc expression="c_1 = if(3 == 5 || 3 == 6, (a3 + b3), (a3 * b3))"
 r.mapcalc expression="c_2 = if(4 == 5 || 4 == 6, (a4 + b4), (a4 * b4))"
 r.mapcalc expression="c_3 = if(5 == 5 || 5 == 6, (a5 + b5), (a5 * b5))"
 r.mapcalc expression="c_4 = if(6 == 5 || 6 == 6, (a6 + b6), (a6 * b6))"
 r.mapcalc expression="c_5 = if(7 == 5 || 7 == 6, (a7 + b7), (a7 * b7))"
 r.mapcalc expression="c_6 = if(8 == 5 || 8 == 6, (a8 + b8), (a8 * b8))"
-
 
 ```
 
@@ -148,10 +142,8 @@ of all January maps in the new STRDS as compared to the original one,
 
 ```
 
-
 t.rast.mapcalc input=tempmean_monthly output=january_under_0 basename=january_under_0 \
     expression="if(start_month() == 1 && tempmean_monthly > 0, null(), tempmean_monthly)"
-
 
 # print minimum and maximum only for January in the new strds
 t.rast.list january_under_0 columns=name,start_time,min,max | grep 01-01
@@ -161,16 +153,13 @@ january_under_0_13|2010-01-01 00:00:00|-5.266929|-0.000154
 january_under_0_25|2011-01-01 00:00:00|-4.968747|-6.1e-05
 january_under_0_37|2012-01-01 00:00:00|-0.534994|-0.014581
 
-
 # print minimum and maximum only for January in the original strds,
-
 # note that the maximum is different
 t.rast.list tempmean_monthly columns=name,start_time,min,max | grep 01-01
 2009_01_tempmean|2009-01-01 00:00:00|-3.380823|7.426054
 2010_01_tempmean|2010-01-01 00:00:00|-5.266929|5.71131
 2011_01_tempmean|2011-01-01 00:00:00|-4.968747|4.967295
 2012_01_tempmean|2012-01-01 00:00:00|-0.534994|9.69511
-
 
 ```
 
@@ -182,10 +171,8 @@ example below a new STRDS will be created and filled by NDVI products.
 
 ```
 
-
 t.rast.mapcalc inputs=test.S2_8,test.S2_4 output=ndvi basename=ndvi \
      expression="float(test.S2_8 - test.S2_4) / (test.S2_8 + test.S2_4)"
-
 
 ```
 

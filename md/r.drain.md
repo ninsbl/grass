@@ -56,7 +56,6 @@ Consider the following example:
 
 ```
 
-
 Input:                          Output:
   ELEVATION SURFACE               LEAST COST PATH
 . . . . . . . . . . . . . . .    . . . . . . . . . . . . . . .
@@ -75,7 +74,6 @@ Input:                          Output:
 . 17. 9 . 8 . 7 . 8 . 6 . 12.    .   .   .   .   .   .   .   .
 . . . . . . . . . . . . . . .    . . . . . . . . . . . . . . .
 
-
 ```
 
 The user-provided starting location in the above example is
@@ -87,7 +85,6 @@ would take in this landscape.
 With the **-c** *(copy)* flag, you get the following result:
 
 ```
-
 
 Input:                          Output:
   ELEVATION SURFACE               LEAST COST PATH
@@ -109,13 +106,11 @@ Input:                          Output:
 
 Note that the last 0 will not be put in the null values map.
 
-
 ```
 
 With the **-a** *(accumulate)* flag, you get the following result:
 
 ```
-
 
 Input:                          Output:
   ELEVATION SURFACE               LEAST COST PATH
@@ -135,13 +130,11 @@ Input:                          Output:
 . 17. 9 . 8 . 7 . 8 . 6 .12 .    .   .   .   .   .   .   .   .
 . . . . . . . . . . . . . . .    . . . . . . . . . . . . . . .
 
-
 ```
 
 With the **-n** *(number)* flag, you get the following result:
 
 ```
-
 
 Input:                          Output:
   ELEVATION SURFACE               LEAST COST PATH
@@ -161,7 +154,6 @@ Input:                          Output:
 . 17. 9 . 8 . 7 . 8 . 6 .12 .    .   .   .   .   .   .   .   .
 . . . . . . . . . . . . . . .    . . . . . . . . . . . . . . .
 
-
 ```
 
 With the **-d** *(direction)* flag, the direction raster is used
@@ -170,14 +162,12 @@ according to one of the **-can** flags.
 
 ```
 
-
 The directions are recorded as degrees CCW from East:
        112.5     67.5         i.e. a cell with the value 135
 157.5  135   90  45   22.5    means the next cell is to the North-West
        180   x   0
 202.5  225  270  315  337.5
        247.5     292.5
-
 
 ```
 
@@ -215,12 +205,10 @@ with EOF, in GUI just enter the values directly for the parameter input):
 
 ```
 
-
 v.in.ascii input=- output=start format=point separator=comma <<EOF
 638667.15686275,220610.29411765
 638610.78431373,220223.03921569
 EOF
-
 
 ```
 
@@ -228,9 +216,7 @@ Now we compute the drainage path:
 
 ```
 
-
 r.drain input=elev_lid792_1m output=drain_path drain=drain start_points=start
-
 
 ```
 
@@ -239,10 +225,8 @@ we are using and we create a shaded relief map:
 
 ```
 
-
 r.colors map=elev_lid792_1m color=elevation
 r.relief input=elev_lid792_1m output=relief
-
 
 ```
 
@@ -250,12 +234,10 @@ Finally we visualize all the input and output data:
 
 ```
 
-
 d.shade shade=relief color=elev_lid792_1m
 d.vect map=drain_path color=0:0:61 width=4 legend_label="drainage paths"
 d.vect map=start color=none fill_color=224:0:0 icon=basic/circle size=15 legend_label=origins
 d.legend.vect -b
-
 
 ```
 
@@ -273,9 +255,7 @@ continue from the depression. To get these directions, we use the
 
 ```
 
-
 r.watershed elevation=elev_lid792_1m accumulation=accum drainage=drain_dir
-
 
 ```
 
@@ -284,9 +264,7 @@ raster algebra:
 
 ```
 
-
 r.mapcalc "drain_deg = if(drain_dir != 0, 45. * abs(drain_dir), null())"
-
 
 ```
 
@@ -296,9 +274,7 @@ so we create a constant surface:
 
 ```
 
-
 r.mapcalc "const1 = 1"
-
 
 ```
 
@@ -307,9 +283,7 @@ We are using the two points from the previous example.
 
 ```
 
-
 r.drain -d input=const1 direction=drain_deg output=drain_path_2 drain=drain_2 start_points=start
-
 
 ```
 

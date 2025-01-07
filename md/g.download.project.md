@@ -20,9 +20,7 @@ HOME directory:
 
 ```
 
-
 g.download.project url=https://grass.osgeo.org/sampledata/north_carolina/nc_spm_full_v2alpha2.tar.gz path=$HOME
-
 
 ```
 
@@ -33,9 +31,7 @@ into the user's HOME directory:
 
 ```
 
-
 grass --tmp-project XY --exec g.download.project url=https://grass.osgeo.org/sampledata/north_carolina/nc_spm_full_v2alpha2.tar.gz path=$HOME
-
 
 ```
 

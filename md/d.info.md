@@ -9,12 +9,10 @@ by *[d.mon](d.mon.html)*.
 
 ```
 
-
 d.mon start=cairo
 
 d.info -r
 rectangle: 0.000000 640.000000 0.000000 480.000000
-
 
 ```
 

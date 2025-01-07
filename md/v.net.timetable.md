@@ -9,10 +9,8 @@ Each line of input must follow one of the following formats:
 
 ```
 
-
 PATH_ID FROM_X FROM_Y TO_X TO_Y START_TIME MIN_CHANGE MAX_CHANGES WALK_CHANGE
 PATH_ID FROM_STOP TO_STOP START_TIME MIN_CHANGE MAX_CHANGES WALK_CHANGE
-
 
 ```
 
@@ -33,9 +31,7 @@ below, for the following input:
 
 ```
 
-
 47 130 300 0 1 5 0
-
 
 ```
 
@@ -43,10 +39,8 @@ the following output is produced:
 
 ```
 
-
 Route 15, from 130 leaving at 15 arriving to 250 at 22
 Walk from 250 leaving at 22 arriving to 300 at 24
-
 
 ```
 
@@ -57,12 +51,10 @@ looks, after the query, as follows:
 
 ```
 
-
 cat|path_id|stop_id|index|arr_time|dep_time
 1|47|130|1|0|15
 2|47|250|2|22|22
 3|47|300|3|24|24
-
 
 ```
 
@@ -80,11 +72,9 @@ between stops. The following table is obtained for the above query:
 
 ```
 
-
 cat|path_id|from_id|to_id|route_id|index|from_time|to_time
 1|47|130|250|15|1|15|22
 2|47|250|300|-1|2|22|24
-
 
 ```
 
@@ -122,7 +112,6 @@ follows:
 
 ```
 
-
 cat|route_id|stop_time
 100|5|0
 130|5|10
@@ -137,7 +126,6 @@ cat|route_id|stop_time
 300|35|37
 100|35|50
 
-
 ```
 
 Note that **stop\_time** is an integer and so you can use any
@@ -151,10 +139,8 @@ following is a valid table:
 
 ```
 
-
 cat|length|to_stop
 250|2|300
-
 
 ```
 
@@ -170,10 +156,8 @@ route, we use the following command:
 
 ```
 
-
 echo "47 130 300 0 1 5 0" | v.net.timetable \
      input=buses output=path layer=5 walking=6 path=7
-
 
 ```
 
@@ -182,10 +166,8 @@ following command might be used:
 
 ```
 
-
 echo "47 10.31 54.31 90.21 28.21 0 1 5 0" | v.net.timetable \
      input=buses output=path layer=5 walking=6 path=7
-
 
 ```
 

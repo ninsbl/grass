@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.vect.stats* counts the number of points in vector map
@@ -59,7 +58,6 @@ string attributes to floating point numbers.
 
 ## EXAMPLES
 
-
 ### Preparation for examples
 
 The subsequent examples are based on randomly sampled
@@ -67,30 +65,22 @@ elevation data (North Carolina sample database):
 
 ```
 
-
-
 # work on map copy for attribute editing
 g.copy vector=zipcodes_wake,myzipcodes_wake
 
-
 # set computational region: extent of ZIP code map, raster pixels
-
 # aligned to raster map
 g.region vector=myzipcodes_wake align=elev_state_500m -p
-
 #  generate random elevation points
 r.random elev_state_500m vector=rand5000 n=5000
 v.colors rand5000 color=elevation
-
 
 # visualization
 d.mon wx0
 d.vect myzipcodes_wake -c
 d.vect rand5000
 
-
 ```
-
 
 These vector maps are used for the examples below.
 
@@ -102,12 +92,9 @@ Counting points per polygon, print results to terminal:
 
 ```
 
-
 v.vect.stats points=rand5000 area=myzipcodes_wake -p
 
-
 ```
-
 
 ### Count points per polygon with column update
 
@@ -118,15 +105,11 @@ Counting of points per polygon, with update of "num\_points" column
 
 ```
 
-
 v.vect.stats points=rand5000 area=myzipcodes_wake count_column=num_points
-
 # verify result
 v.db.select myzipcodes_wake column=ZIPCODE_,ZIPNAME,num_points
 
-
 ```
-
 
 ### Average values of points in polygon with printed output
 
@@ -137,16 +120,12 @@ polygon, printed to terminal in comma separated style:
 
 ```
 
-
-
 # check name of point map column:
 v.info -c rand5000
 v.vect.stats points=rand5000 area=myzipcodes_wake \
   method=average points_column=value separator=comma -p
 
-
 ```
-
 
 ### Average values of points in polygon with column update
 
@@ -159,19 +138,14 @@ created):
 
 ```
 
-
-
 # check name of point map column:
 v.info -c rand5000
 v.vect.stats points=rand5000 area=myzipcodes_wake count_column=num_points \
   method=average points_column=value stats_column=avg_elev
-
 # verify result
 v.db.select myzipcodes_wake column=ZIPCODE_,ZIPNAME,avg_elev
 
-
 ```
-
 
 ### Point statistics in a hexagonal grid
 
@@ -181,12 +155,9 @@ region. The extent is based on the vector map
 
 ```
 
-
 g.region vector=points_of_interest res=2000 -pa
 
-
 ```
-
 
 The hexagonal grid is created using
 the *[v.mkgrid](v.mkgrid.html)* module
@@ -195,12 +166,9 @@ selected extent and size of the grid.
 
 ```
 
-
 v.mkgrid map=hexagons -h
 
-
 ```
-
 
 The *v.vect.stats* module
 counts the number of points and does one statistics on a selected
@@ -208,13 +176,10 @@ column (here: *elev\_m*).
 
 ```
 
-
 v.vect.stats points=points_of_interest areas=hexagons method=average \
   points_column=elev_m count_column=count stats_column=average
 
-
 ```
-
 
 User should note that some of the points may be outside the grid
 since the hexagons cannot cover all the area around the edges
@@ -225,12 +190,9 @@ based on the `count` column.
 
 ```
 
-
 v.colors map=hexagons use=attr column=average color=viridis
 
-
 ```
-
 
 ![](v_vect_stats.png)
 
@@ -253,7 +215,6 @@ associated with point, standard deviation)
   for computing distances between objects in raster maps,
 * *[v.mkgrid](v.mkgrid.html)*
   for creating vector grids to aggregate point data.
-
 
 ## AUTHOR
 

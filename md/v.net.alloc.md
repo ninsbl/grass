@@ -57,7 +57,7 @@ Center nodes can also be assigned to vector nodes using
 
 ![v.net.alloc example using distance](v_net_alloc.png)
 
-1. Subnetwork allocation using traveling time:
+2. Subnetwork allocation using traveling time:
 
 ![v.net.alloc example using time](v_net_alloc_time.png)
 
@@ -65,10 +65,7 @@ Example 1: *Calculating subnets for 3 center nodes using distances*
 
 ```
 
-
-
 # Spearfish
-
 
 # center nodes:
 echo "591235.5|4926306.62|1
@@ -77,18 +74,14 @@ echo "591235.5|4926306.62|1
 
 g.copy vect=roads,myroads
 
-
 # connect points to network
 v.net myroads points=centernodes out=myroads_net op=connect thresh=200
-
 
 # allocate, specifying range of center cats (easier to catch all):
 v.net.alloc myroads_net out=myroads_net_alloc center_cats=1-100000 node_layer=2
 
-
 # report categories
 v.category myroads_net_alloc option=report
-
 
 ```
 
@@ -96,23 +89,18 @@ To display the result, run for example:
 
 ```
 
-
-
 # show result
 g.region vector=myroads_net
 d.mon x0
 d.vect myroads_net layer=1
-
 
 # the result has to be selected by category number of the relevant node:
 d.vect myroads_net_alloc cat=1 col=red layer=1
 d.vect myroads_net_alloc cat=2 col=green layer=1
 d.vect myroads_net_alloc cat=3 col=yellow layer=1
 
-
 # center nodes
 d.vect myroads_net col=red icon=basic/triangle fcol=green size=12 layer=2
-
 
 ```
 
@@ -120,10 +108,7 @@ Example 2: *Calculating subnets for 3 center nodes using traveling time*
 
 ```
 
-
-
 # Spearfish
-
 
 # center nodes:
 echo "591235.5|4926306.62|1
@@ -132,29 +117,22 @@ echo "591235.5|4926306.62|1
 
 g.copy vect=roads,myroads
 
-
 # create lines map connecting points to network
 v.net myroads points=centernodes out=myroads_net op=connect thresh=500 arc_layer=1 node_layer=2
 
-
 # set up costs
-
 
 # create unique categories for each road in layer 3
 v.category in=myroads_net out=myroads_net_time opt=add cat=1 layer=3 type=line
 
-
 # add new table for layer 3
 v.db.addtable myroads_net_time layer=3 col="cat integer,label varchar(43),length double precision,speed double precision,cost double precision,bcost double precision"
-
 
 # copy road type to layer 3
 v.to.db myroads_net_time layer=3 qlayer=1 opt=query qcolumn=label columns=label
 
-
 # upload road length in miles
 v.to.db myroads_net_time layer=3 type=line option=length col=length unit=miles
-
 
 # set speed limits in miles / hour
 v.db.update myroads_net_time layer=3 col=speed val="5.0"
@@ -164,20 +142,15 @@ v.db.update myroads_net_time layer=3 col=speed val="50.0" where="label='secondar
 v.db.update myroads_net_time layer=3 col=speed val="25.0" where="label='light-duty road, improved surface'"
 v.db.update myroads_net_time layer=3 col=speed val="5.0" where="label='unimproved road'"
 
-
 # define traveling costs as traveling time in minutes:
-
 
 # set forward costs
 v.db.update myroads_net_time layer=3 col=cost val="length / speed * 60"
-
 # set backward costs
 v.db.update myroads_net_time layer=3 col=bcost val="length / speed * 60"
 
-
 # subnetwork allocation with fastest paths
 v.net.alloc in=myroads_net_time arc_layer=3 node_layer=2 arc_column=cost arc_backward_column=bcost out=myroads_net_alloc_time center_cats=1-3
-
 
 ```
 
@@ -185,23 +158,18 @@ To display the result, run for example:
 
 ```
 
-
-
 # show result
 g.region vector=myroads_net
 d.mon x0
 d.vect myroads_net type=line layer=1
-
 
 # the result has to be selected by category number of the relevant node:
 d.vect myroads_net_alloc_time cat=1 col=red layer=1
 d.vect myroads_net_alloc_time cat=2 col=green layer=1
 d.vect myroads_net_alloc_time cat=3 col=yellow layer=1
 
-
 # center nodes
 d.vect myroads_net_time col=red icon=basic/triangle fcol=green size=12 type=point layer=2
-
 
 ```
 
@@ -215,7 +183,7 @@ Each lane of the two-lane road is a one-way road.
 
 A center reaches any point following the one-way lanes.
 
-1. Subnetwork allocation to centers:
+2. Subnetwork allocation to centers:
 
 ![v.net.alloc example to centers](v_net_alloc_to_centers.png)
 
@@ -226,35 +194,26 @@ In case of an accident, the ambulance should come from the nearest
 
 ```
 
-
-
 # North Carolina
 
-
 # center nodes are hospitals:
-
 # connect hospitals to streets as layer 2
 v.net input=streets_wake points=hospitals output=streets_hospitals operation=connect thresh=400 arc_layer=1 node_layer=2
 v.to.db map=streets_hospitals layer=1 type=line option=cat columns=cat
-
 
 # close oneway roads
 v.db.update map=streets_hospitals column=TF_COST value=-1 where="ONE_WAY = 'FT'"
 v.db.update map=streets_hospitals column=FT_COST value=-1 where="ONE_WAY = 'TF'"
 
-
 # add costs to newly created lines
 v.db.update map=streets_hospitals column=TF_COST value=0 where="cat > 49746"
 v.db.update map=streets_hospitals column=FT_COST value=0 where="cat > 49746"
 
-
 # from centers
 v.net.alloc in=streets_hospitals out=streets_hospitals_alloc_from center_cats=1-10000 arc_column=FT_COST arc_backward_column=TF_COST
 
-
 # to centers
 v.net.alloc in=streets_hospitals out=streets_hospitals_alloc_to method=to center_cats=1-10000 arc_column=FT_COST arc_backward_column=TF_COST
-
 
 ```
 

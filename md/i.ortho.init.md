@@ -27,7 +27,6 @@ The following menu is displayed:
 
 ```
 
-
         Please provide the following information
 
     INITIAL XC: Meters                __________
@@ -48,7 +47,6 @@ The following menu is displayed:
 
      AFTER COMPLETING ALL ANSWERS, HIT <ESC> TO CONTINUE
                   (OR <Ctrl-C> TO CANCEL)
-
 
 ```
 

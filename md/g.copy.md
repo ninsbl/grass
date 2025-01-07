@@ -51,14 +51,11 @@ called *rds.old*, the user could type:
 
 ```
 
-
 g.copy raster=soils,soils.ph
 g.copy vector=roads,rds.old
 
-
 # or even combined:
 g.copy raster=soils,soils.ph vector=roads,rds.old
-
 
 ```
 
@@ -70,9 +67,7 @@ current mapset:
 
 ```
 
-
 g.copy raster=soils@wilson,soils
-
 
 ```
 

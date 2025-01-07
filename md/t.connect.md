@@ -43,13 +43,10 @@ The SQLite database is created automatically when used the first time.
 
 ```
 
-
-
 # use single quotes here
 t.connect driver=sqlite database='$GISDBASE/$LOCATION_NAME/PERMANENT/tgis/sqlite.db'
 t.connect -p
 t.info -s
-
 
 ```
 
@@ -60,11 +57,9 @@ database connection for each mapset.
 
 ```
 
-
 t.connect driver=pg database="dbname=grass_test user=soeren password=abcdefgh"
 t.connect -p
 t.info -s
-
 
 ```
 

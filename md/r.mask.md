@@ -58,10 +58,8 @@ raster cells with 0 and 1 will be part of the MASK. This is because
 
 ```
 
-
 r.mapcalc -s "map1 = round(rand(0,1))"
 r.mask raster=map1
-
 
 ```
 
@@ -70,10 +68,8 @@ only the raster cells with value 1 will be part of the MASK.
 
 ```
 
-
 r.mapcalc -s "map2 = round(rand(0,1))"
 g.copy raster=map2,MASK
-
 
 ```
 
@@ -87,10 +83,8 @@ the MASK, i.e., nothing is blocked out from analysis and/or display.
 
 ```
 
-
 r.mapcalc -s "map3 = rand(0.0,1.0)"
 r.mask raster=map3
-
 
 ```
 
@@ -102,10 +96,8 @@ changed with r.quant).
 
 ```
 
-
 r.mapcalc -s "map4 = rand(0.0,1.0)"
 g.copy raster=map4,MASK
-
 
 ```
 
@@ -122,17 +114,12 @@ univariate statistics of the elevation values for "lakes":
 
 ```
 
-
-
 # set computation region to lakes raster map
 g.region raster=lakes -p
-
 # use lakes as MASK
 r.mask raster=lakes
-
 # get statistics for elevation pixels of lakes:
 r.univar elevation
-
 
 ```
 
@@ -140,9 +127,7 @@ Remove the raster mask ("MASK" map) with the -r flag:
 
 ```
 
-
 r.mask -r
-
 
 ```
 
@@ -151,7 +136,6 @@ Creating a mask from selected categories in the North Carolina
 
 ```
 
-
 g.region raster=geology_30m -p
 r.category geology_30m
 d.mon wx0
@@ -159,7 +143,6 @@ d.rast geology_30m
 r.mask raster=geology_30m maskcats="217 thru 720"
 d.mon wx0
 d.rast geology_30m
-
 
 ```
 

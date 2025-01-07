@@ -23,7 +23,6 @@ The space time dataset is then exported and re-imported.
 
 ```
 
-
 db.connect -d
 
 for i in `seq 1 5` ; do
@@ -54,7 +53,6 @@ new_map_2@user1|new_map_2|None|user1|2012-02-01 00:00:00|2012-03-01 00:00:00
 new_map_3@user1|new_map_3|None|user1|2012-03-01 00:00:00|2012-04-01 00:00:00
 new_map_4@user1|new_map_4|None|user1|2012-04-01 00:00:00|2012-05-01 00:00:00
 new_map_5@user1|new_map_5|None|user1|2012-05-01 00:00:00|2012-06-01 00:00:00
-
 
 ```
 

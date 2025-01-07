@@ -53,9 +53,7 @@ OBJECT DOUBLE PULSE (cat = 4, layer = 2)
 
 ```
 
-
 v.lidar.correction input=growing output=correction out_terrain=only_terrain
-
 
 ```
 
@@ -63,9 +61,7 @@ v.lidar.correction input=growing output=correction out_terrain=only_terrain
 
 ```
 
-
 v.lidar.correction input=correction output=correction_bis terrain=only_terrain_bis
-
 
 ```
 

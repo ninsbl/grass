@@ -25,9 +25,7 @@ proven by repeated application of the Pythagorean theorem.
 The formula is given by:
 
 ```
-
 d(dx,dy) = sqrt(dx^2 + dy^2)
-
 ```
 
 Cells grown using this metric would form isolines of distance that are
@@ -43,9 +41,7 @@ points' distance in taxicab geometry.
 The formula is given by:
 
 ```
-
 d(dx,dy) = abs(dx) + abs(dy)
-
 ```
 
 where cells grown using this metric would form isolines of distance that are
@@ -54,9 +50,7 @@ rhombus-shaped from a given point.
 The *Maximum metric* is given by the formula
 
 ```
-
 d(dx,dy) = max(abs(dx),abs(dy))
-
 ```
 
 where the isolines of distance from a point are squares.
@@ -72,12 +66,9 @@ North Carolina sample dataset is buffered:
 
 ```
 
-
 g.region raster=lakes -p
-
 # the lake raster map pixel resolution is 10m
 r.grow input=lakes output=lakes_grown_100m radius=10
-
 
 ```
 
@@ -85,12 +76,9 @@ Shrinking instead of growing:
 
 ```
 
-
 g.region raster=lakes -p
-
 # the lake raster map pixel resolution is 10m
 r.grow input=lakes output=lakes_shrunk_100m radius=-10
-
 
 ```
 

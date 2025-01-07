@@ -17,21 +17,17 @@ is the default setting)*
 
 ```
 
-
 db.describe driver=sqlite table=hospitals \
    database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
 
-
 # or simply
 db.describe myarchsites
-
 
 ```
 
 ### DBF example
 
 ```
-
 
 db.describe -c table=hospitals database='$GISDBASE/$LOCATION_NAME/PERMANENT/dbf/' \
             driver=dbf
@@ -42,11 +38,9 @@ Column 2: OBJECTID:INTEGER:11
 Column 3: AREA:DOUBLE PRECISION:20
 [...]
 
-
 ```
 
 ```
-
 
 db.describe table=hospitals database='$GISDBASE/$LOCATION_NAME/PERMANENT/dbf/' \
             driver=dbf
@@ -73,21 +67,17 @@ description:
 type:INTEGER
 [...]
 
-
 ```
 
 ### JSON Output
 
 ```
 
-
 db.describe table=hospitals format=json
 
-
 ```
 
 ```
-
 
 {
     "table": "hospitals",
@@ -307,7 +297,6 @@ db.describe table=hospitals format=json
         }
     ]
 }
-
 
 ```
 

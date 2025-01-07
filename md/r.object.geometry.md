@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.object.geometry* calculates form statistics of raster objects
@@ -28,34 +27,24 @@ mean coordinates):
 * mean x coordinate of object (in map units)
 * mean y coordinate of object (in map units)
 
-
 ## EXAMPLE
 
-
 ```
-
 
 g.region raster=soilsID
 r.object.geometry input=soilsID output=soils_geom.txt
 
-
 ```
-
 
 The **format=json** option can be used to change the output format to JSON:
 
 ```
 
-
 r.object.geometry input=zipcodes format=json
 
-
 ```
 
-
-
 ```
-
 
 [
     {
@@ -120,9 +109,7 @@ r.object.geometry input=zipcodes format=json
     }
 ]
 
-
 ```
-
 
 ## SEE ALSO
 

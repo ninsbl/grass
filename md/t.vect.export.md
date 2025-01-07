@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *t.vect.export* exports a space time vector dataset (stvds)
@@ -32,7 +31,6 @@ following suffix can be used:
 * **.tar.bzip2** in the case of **compress=bzip2**
 * **.tar.gzip** in the case of **compress=gzip**
 
-
 ## EXAMPLE
 
 In this example, five vector maps are created and
@@ -41,7 +39,6 @@ Each vector map represents random locations
 within the boundary of the state taken at 1 month intervals.
 
 ```
-
 
 t.vect.export input=shoreline output=shoreline_nc.tar.bzip2
 
@@ -116,9 +113,7 @@ Files:
  metadata.txt -- The output of t.info
    readme.txt -- This file
 
-
 ```
-
 
 ## SEE ALSO
 

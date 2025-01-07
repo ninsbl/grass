@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The *r.li* suite is a toolset for multiscale analysis of
@@ -44,7 +43,6 @@ The general procedure to calculate an index from a raster map is two-fold:
    *r.li.**patchdensity***) to calculate the selected index
    using on the areas selected on configuration file.
 
-
 ## EXAMPLES
 
 Calculate a patch density index on the entire 'geology' raster map
@@ -53,13 +51,11 @@ in the Spearfish sample dataset, using a 5x5 moving window:
 1. CREATE A NEW CONFIGURATION FILE
    1. run
 
-```
-
+      ```
 
       g.gui.rlisetup
 
-
-```
+      ```
 
    2. The main *g.gui.rlisetup* window is displayed, click on "New"
    3. The new configuration window is now displayed, enter the
@@ -79,41 +75,33 @@ in the Spearfish sample dataset, using a 5x5 moving window:
    7. Select "Rectangle" and enter 5 in the "height" and "width" fields
    8. Click on "Save settings"
    9. Close the *g.gui.rlisetup* window
-   2. CALCULATE PATCHDENSITY INDEX
+2. CALCULATE PATCHDENSITY INDEX
    1. set the region settings to the "`geology`" raster map:
 
-```
-
+      ```
 
       g.region raster=geology -p
 
-
-```
+      ```
 
    2. run *r.li.patchdensity*:
 
-```
-
+      ```
 
       r.li.patchdensity input=geology conf=my_conf out=patchdens
 
-
-```
-
+      ```
 
 The resulting patch density is stored in "`patchdens`" raster map.
 You can verify the result for example with contour lines:
 
 ```
 
-
 r.contour in=patchdens out=patchdens step=5
 d.rast patchdens
 d.vect -c patchdens
 
-
 ```
-
 
 Note that if you want to run another index with the same area
 configuration, you don't have to create another configuration file.
@@ -156,7 +144,6 @@ configuration file on a 200x200 raster map, then the sample area is
 
 * [r.li.daemon](r.li.daemon.html): library with common functionality (not visible to the user)
 
-
 ## ADDING NEW INDICES
 
 New indices can be defined and implemented by any C programmer, without
@@ -177,7 +164,6 @@ for more information about development.
 * Baker, W.L. and Y. Cai. 1992. The r.le programs for multiscale analysis of
   landscape structure using the GRASS geographical information system.
   Landscape Ecology 7(4):291-302.
-
 
 ## AUTHORS
 

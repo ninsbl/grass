@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.tasscap* calculates Tasseled Cap (Kauth Thomas, TC) transformation
@@ -20,14 +19,11 @@ The following tasseled cap components are generated:
 * tasscap.3: corresponds to wetness,
 * tasscap.4: corresponds to atmospheric haze (only selected sensors: Landsat 5,7,8).
 
-
 ## EXAMPLE
 
 Calculation of TC maps from North Carolina Landsat 7 ETM scene:
 
 ```
-
-
 
 # See manual page of i.landsat.toar for pre-processing
 
@@ -37,16 +33,13 @@ i.tasscap sensor=landsat7_etm \
   input=lsat7_2002_toar.1,lsat7_2002_toar.2,lsat7_2002_toar.3,lsat7_2002_toar.4,lsat7_2002_toar.5,lsat7_2002_toar.7 \
   output=lsat7_2002_tasscap
 
-
 ```
-
 
 Results:
 
 | 'Brightness' Tasseled Cap component 1  *'Brightness' Tasseled Cap component 1* | 'Greenness' Tasseled Cap component 2  *'Greenness' Tasseled Cap component 2* |
 | --- | --- |
 | 'Wetness' Tasseled Cap component 3  *'Wetness' Tasseled Cap component 3* | 'Atmospheric haze' Tasseled Cap component 4  *'Atmospheric haze' Tasseled Cap component 4* |
-
 
 ## REFERENCES
 
@@ -68,7 +61,6 @@ Results:
   Comptes rendus de l'Académie bulgare des sciences, 70:687-692.
 * Yarbrough, L., Navulur, R., 2014, Presentation of the Kauth-Thomas transform
   for WorldView-2 reflectance data. Remote Sensing Letters. 5. DOI: 10.1080/2150704X.2014.885148.
-
 
 ## SEE ALSO
 

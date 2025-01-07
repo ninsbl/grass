@@ -16,9 +16,7 @@ out-of-mapset database removal:
 
 ```
 
-
 db.dropdb driver=sqlite database=/opt/sqlite.db
-
 
 ```
 
@@ -26,9 +24,7 @@ db.dropdb driver=sqlite database=/opt/sqlite.db
 
 ```
 
-
 db.dropdb driver=pg database=grassdb
-
 
 ```
 

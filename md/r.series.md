@@ -38,11 +38,9 @@ aggregates to be computed in a single run, e.g.:
 
 ```
 
-
 r.series input=map1,...,mapN \
          output=map.mean,map.stddev \
-     method=average,stddev
-
+	 method=average,stddev
 
 ```
 
@@ -50,12 +48,10 @@ or:
 
 ```
 
-
 r.series input=map1,...,mapN \
          output=map.p10,map.p50,map.p90 \
          method=quantile,quantile,quantile \
          quantile=0.1,0.5,0.9
-
 
 ```
 
@@ -123,12 +119,9 @@ add an entry in:
 
 ```
 
-
 /etc/security/limits.conf
-
 # <domain>      <type>  <item>         <value>
 your_username  hard    nofile          4096
-
 
 ```
 
@@ -137,9 +130,7 @@ overall limit of the operating system
 
 ```
 
-
 cat /proc/sys/fs/file-max
-
 
 ```
 
@@ -189,10 +180,8 @@ Using *r.series* with wildcards:
 
 ```
 
-
 r.series input="`g.list pattern='insitu_data.*' sep=,`" \
          output=insitu_data.stddev method=stddev
-
 
 ```
 
@@ -204,11 +193,9 @@ Using *r.series* with NULL raster maps (in order to consider a
 
 ```
 
-
 r.mapcalc "dummy = null()"
 r.series in=map2001,map2002,dummy,dummy,map2005,map2006,dummy,map2008 \
          out=res_slope,res_offset,res_coeff meth=slope,offset,detcoeff
-
 
 ```
 
@@ -217,16 +204,13 @@ from two input maps):
 
 ```
 
-
 r.series in=one,two out=result_avg,res_slope,result_count meth=sum,slope,count
-
 
 ```
 
 Example to use the file option of r.series:
 
 ```
-
 
 cat > input.txt << EOF
 map1
@@ -236,7 +220,6 @@ EOF
 
 r.series file=input.txt out=result_sum meth=sum
 
-
 ```
 
 Example to use the file option of r.series including weights. The
@@ -244,7 +227,6 @@ weight 0.75 should be assigned to map2. As the other maps do not have
 weights we can leave it out:
 
 ```
-
 
 cat > input.txt << EOF
 map1
@@ -254,7 +236,6 @@ EOF
 
 r.series file=input.txt out=result_sum meth=sum
 
-
 ```
 
 Example for counting the number of days above a certain temperature using
@@ -262,18 +243,14 @@ daily average maps ('???' as DOY wildcard):
 
 ```
 
-
-
 # Approach for shell based systems
 r.series input=`g.list rast pattern="temp_2003_???_avg" separator=comma` \
          output=temp_2003_days_over_25deg range=25.0,100.0 method=count
-
 
 # Approach in two steps (e.g., for Windows systems)
 g.list rast pattern="temp_2003_???_avg" output=mapnames.txt
 r.series file=mapnames.txt \
          output=temp_2003_days_over_25deg range=25.0,100.0 method=count
-
 
 ```
 

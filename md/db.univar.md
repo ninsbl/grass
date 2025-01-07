@@ -17,7 +17,6 @@ In this example, random points are sampled from the elevation map
 
 ```
 
-
 g.region raster=elevation -p
 v.random output=samples n=100
 v.db.addtable samples column="heights double precision"
@@ -25,7 +24,6 @@ v.what.rast samples raster=elevation column=heights
 v.db.select samples
 
 db.univar samples column=heights
-
 
 ```
 

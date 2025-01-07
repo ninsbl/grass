@@ -12,9 +12,7 @@ Delete `map1` and `map2` raster maps in the current mapset:
 
 ```
 
-
 g.remove -f type=raster name=tmp1,tmp2
-
 
 ```
 
@@ -23,15 +21,11 @@ mapset:
 
 ```
 
-
-
 # show matching raster and vector maps but do not delete yet (as verification)
 g.remove type=raster,vector pattern="tmp_*"
 
-
 # actually delete the matching raster and vector maps
 g.remove -f type=raster,vector pattern="tmp_*"
-
 
 ```
 
@@ -40,9 +34,7 @@ but exclude those ending with "`_final`":
 
 ```
 
-
 g.remove -f type=vector pattern="stream_*" exclude="*_final"
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The module *v.edit* allows the user to edit a vector map
@@ -22,14 +21,11 @@ be used in various combinations. For example:
 
 ```
 
-
 v.edit map=roads tool=select \
   coord=599505,4921010,603389.0625,4918292.1875 \
   threshold=10000 where="label='interstate'"
 
-
 ```
-
 
 selects all features (and prints their id's to standard output)
 covered by two bounding boxes (center at 599505,4921010 and
@@ -42,7 +38,6 @@ If no vector features are selected or the flag **-b** is
 used, topology is not build at the end.
 
 ## USAGE
-
 
 ### Feature selection
 
@@ -63,7 +58,6 @@ Additional parameters for vector feature specification are:
   with **cats** or **where** option)
 * **threshold** - threshold distance used for selecting vector
   features by coordinates
-
 
 ### Tool description
 
@@ -153,9 +147,7 @@ Additional parameters for vector feature specification are:
 * **select** - Print comma separated list of selected line
   id's. No editing is done.
 
-
 ## EXAMPLES
-
 
 ### Create new vector map
 
@@ -163,35 +155,26 @@ Create new (empty) vector map:
 
 ```
 
-
 v.edit tool=create map=vectmap
 
-
 ```
-
 
 Create new vector map and read data from file 'roads.txt':
 
 ```
 
-
 v.out.ascii in=roads format=standard > roads.txt;
 v.edit tool=create map=vectmap input=roads.txt
 
-
 ```
-
 
 or alternatively
 
 ```
 
-
 cat roads.txt | v.edit tool=create map=vectmap input=-
 
-
 ```
-
 
 ### Add new features to existing vector map
 
@@ -199,18 +182,14 @@ Add a new point to the vector map (without header):
 
 ```
 
-
 echo "P 1 1
  640794 214874
  1 1" | v.edit -n tool=add map=vectmap input=-
 
-
 # insert new row for each category in attribute table if doesn't exist yet
 v.to.db map=vectmap option=cat
 
-
 ```
-
 
 The input must be in [GRASS ASCII vector
 format](vectorascii.html).
@@ -219,12 +198,9 @@ Add new features read from standard input:
 
 ```
 
-
 v.out.ascii in=railroads format=standard | v.edit tool=add map=vectmap input=-
 
-
 ```
-
 
 ### Delete selected features from vector map layer
 
@@ -232,37 +208,28 @@ Remove all vector features with category number 1 or 2:
 
 ```
 
-
 v.edit tool=delete map=roads cats=1,2
 
-
 ```
-
 
 Remove all vector features except of those with category number 1 or 2
 (reverse selection):
 
 ```
 
-
 v.edit -r tool=delete map=roads cats=1,2
 
-
 ```
-
 
 Remove features with category 1 or 2 located on coordinates
 600952.625,4926107 (bounding box based on the current 2D resolution):
 
 ```
 
-
 g.region -d;
 v.edit tool=delete map=roads cats=1,2 coords=600952.625,4926107
 
-
 ```
-
 
 Remove all features with category 1 and 2 covered by two bounding boxes
 (center coordinates 592542.892,4924766.996 and 603389.062,4918292.187,
@@ -270,14 +237,11 @@ size 1000 map units):
 
 ```
 
-
 v.edit map=roads tool=delete \
   coord=592542.892,4924766.996,603389.062,4918292.187 \
   threshold=1000 cat=1,2
 
-
 ```
-
 
 ### Copy selected features from background map
 
@@ -285,12 +249,9 @@ Copy all features with category number 1 from background map:
 
 ```
 
-
 v.edit map=roads tool=copy bgmap=archsites cat=1
 
-
 ```
-
 
 ### Move features
 
@@ -299,12 +260,9 @@ coordinates 603580,4919480:
 
 ```
 
-
 v.edit tool=move map=archsites coord=602580,4918480 th=1e-2 move=1000,1000
 
-
 ```
-
 
 Move all features with category 1 1000 map units to the west and 1000
 map units to the south. Moved features snap to nodes in threshold
@@ -312,12 +270,9 @@ distance 10 map units:
 
 ```
 
-
 v.edit tool=move map=roads cat=1 move=1000,-1000 snap=node threshold=-1,10
 
-
 ```
-
 
 Move all features defined by bounding box
 601530,4921560,602520,4922310 (W,S,E,N) 1000 map units to the
@@ -325,12 +280,9 @@ east and 1000 map units to the north:
 
 ```
 
-
 v.edit tool=move map=roads bbox=601530,4921560,602520,4922310 move=-1000,1000
 
-
 ```
-
 
 ### Flip direction of vector lines
 
@@ -338,12 +290,9 @@ Flip direction of all vector lines:
 
 ```
 
-
 v.edit tool=flip map=streams cats=1-9999 type=line
 
-
 ```
-
 
 ### Add / delete layer category number
 
@@ -351,25 +300,19 @@ Add new layer/category 2/1, 2/3, 2/4, 2/5 to features covered by given polygon:
 
 ```
 
-
 v.edit tool=catadd map=roads \
   polygon=599877.75,4925088.375,597164.812,4922524.5,601338.562,4920914.625 \
   layer=2 cat=1,3-5
 
-
 ```
-
 
 Delete layer/category 1/1, line id 1:
 
 ```
 
-
 v.edit tool=catdel map=roads id=1 cats=5
 
-
 ```
-
 
 ### Merge lines
 
@@ -377,12 +320,9 @@ Merge two lines with given category number:
 
 ```
 
-
 v.edit map=roads tool=merge cat=4
 
-
 ```
-
 
 ### Split line on given point
 
@@ -390,12 +330,9 @@ Split line id 810 on coordinates 604268,4923570 in threshold 50 map units:
 
 ```
 
-
 v.edit map=roads tool=break coords=604268,4923570 id=810 threshold=50
 
-
 ```
-
 
 ### Break selected lines at each intersection
 
@@ -403,12 +340,9 @@ Break selected lines (with category number 1) at each intersection:
 
 ```
 
-
 v.edit map=roads tool=break cat=1
 
-
 ```
-
 
 ### Snap lines
 
@@ -416,12 +350,9 @@ Snap all lines using threshold distance 20 map units:
 
 ```
 
-
 v.edit map=roads id=1-9999 tool=snap threshold=-1,20 type=line
 
-
 ```
-
 
 ### Connect lines
 
@@ -429,24 +360,18 @@ Connect line id 48 to line id 565:
 
 ```
 
-
 v.edit map=roads tool=connect id=48,565
 
-
 ```
-
 
 Connect line id 48 to line id 565; line id 60 to line id
 50. Maximum threshold distance is 700 map units:
 
 ```
 
-
 v.edit map=roads tool=connect id=48,565,60,50 threshold=-1,700
 
-
 ```
-
 
 ### Add vertex
 
@@ -455,12 +380,9 @@ set to 1 map unit:
 
 ```
 
-
 v.edit tool=vertexadd map=roads coords=600952,4926107 threshold=1
 
-
 ```
-
 
 ### Delete vertices
 
@@ -469,13 +391,10 @@ Modify only lines with category 1:
 
 ```
 
-
 v.edit tool=vertexdel map=roads coord=593191.608,4925684.849 \
   threshold=1-e1 cats=1
 
-
 ```
-
 
 ### Move vertices
 
@@ -484,13 +403,10 @@ Modify only lines with categories 1-10:
 
 ```
 
-
 v.edit tool=vertexmove map=roads cats=1-10 coord=604441,4921088 \
   threshold=100 move=1000,1000
 
-
 ```
-
 
 ### Select features and print their id's
 
@@ -498,18 +414,14 @@ Print id's of selected features, e.g.:
 
 ```
 
-
 v.edit map=soils@PERMANENT tool=select \
   bbox=595733.8125,4919781.75,598536.1875,4917396.75 --q
 
-
 ```
-
 
 Example with *[d.vect](d.vect.html)*:
 
 ```
-
 
 d.erase;
 d.vect roads;
@@ -517,31 +429,23 @@ d.vect -i map=roads cats=`v.edit map=roads tool=select \
   coord=592542.89243878,4924766.99622811,603389.0625,4918292.1875 \
   threshold=1000 --q` col=red
 
-
 ```
-
 
 Select all lines shorter (or equal) than 10 map units:
 
 ```
 
-
 v.edit map=roads tool=select query=length threshold=-1,0,-10
 
-
 ```
-
 
 Select from given bounding box all lines longer then 200 map units:
 
 ```
 
-
 v.edit map=roads tool=select bbox=598260,4919730,605100,4926240 query=length threshold=-1,0,200
 
-
 ```
-
 
 ### Fix height of contours
 
@@ -551,12 +455,9 @@ lines need to be converted to 3D lines:
 
 ```
 
-
 v.extrude input=line2 output=line3 height=0 type=line
 
-
 ```
-
 
 All lines which intersect with the line given by coordinates will be
 modified. First found line will get height 1000 map units, height of
@@ -564,13 +465,10 @@ other selected lines will be increased by 10 map units.
 
 ```
 
-
 v.edit a2 tool=zbulk bbox=586121.25049368,4911970.21547109,603092.60466035,4927071.25713776 \
    zbulk=1000,10
 
-
 ```
-
 
 ## SEE ALSO
 

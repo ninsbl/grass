@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.segment* identifies segments (objects) from
@@ -19,7 +18,6 @@ preprocessing step can reduce noise and speed up the classification.
 
 ## NOTES
 
-
 ### Region Growing and Merging
 
 This segmentation algorithm sequentially examines all current segments
@@ -32,7 +30,6 @@ including:
    distance will be smaller than to any other neighbor), and
 2. The similarity must be lower than the input threshold. The
    process is repeated until no merges are made during a complete pass.
-
 
 #### Similarity and Threshold
 
@@ -141,7 +138,6 @@ flag.
 
 ## EXAMPLES
 
-
 ### Segmentation of RGB orthophoto
 
 This example uses the ortho photograph included in the NC Sample
@@ -149,35 +145,26 @@ Dataset. Set up an imagery group:
 
 ```
 
-
 i.group group=ortho_group input=ortho_2001_t792_1m@PERMANENT
 
-
 ```
-
 
 Set the region to a smaller test region (resolution taken from
 input ortho photograph).
 
 ```
 
-
 g.region -p raster=ortho_2001_t792_1m n=220446 s=220075 e=639151 w=638592
 
-
 ```
-
 
 Try out a low threshold and check the results.
 
 ```
 
-
 i.segment group=ortho_group output=ortho_segs_l1 threshold=0.02
 
-
 ```
-
 
 ![](i_segment_ortho_segs_l1.jpg)
 
@@ -187,7 +174,6 @@ and setting a minimum size of 2:
 
 ```
 
-
 i.segment group=ortho_group output=ortho_segs_l2 threshold=0.05 seeds=ortho_segs_l1 min=2
 
 i.segment group=ortho_group output=ortho_segs_l3 threshold=0.1 seeds=ortho_segs_l2
@@ -196,9 +182,7 @@ i.segment group=ortho_group output=ortho_segs_l4 threshold=0.2 seeds=ortho_segs_
 
 i.segment group=ortho_group output=ortho_segs_l5 threshold=0.3 seeds=ortho_segs_l4
 
-
 ```
-
 
 ![](i_segment_ortho_segs_l2_l5.jpg)
 
@@ -213,23 +197,17 @@ Set the region to match the entire map(s) in the group.
 
 ```
 
-
 g.region -p raster=ortho_2001_t792_1m@PERMANENT
 
-
 ```
-
 
 Run *i.segment* on the full map:
 
 ```
 
-
 i.segment group=ortho_group output=ortho_segs_final threshold=0.25 min=10
 
-
 ```
-
 
 ![](i_segment_ortho_segs_final.jpg)
 
@@ -243,28 +221,21 @@ in the North Carolina sample dataset:
 
 ```
 
-
-
 # create group with single channel
 i.group group=singleband input=lsat7_2002_80
 
-
 # set computational region to Landsat7 PAN band
 g.region raster=lsat7_2002_80 -p
-
 
 # perform segmentation with minsize=5
 i.segment group=singleband threshold=0.05 minsize=5 \
   output=lsat7_2002_80_segmented_min5 goodness=lsat7_2002_80_goodness_min5
 
-
 # perform segmentation with minsize=100
 i.segment group=singleband threshold=0.05 minsize=100
   output=lsat7_2002_80_segmented_min100 goodness=lsat7_2002_80_goodness_min100
 
-
 ```
-
 
 ![](i_segment_lsat7_pan.png)
 
@@ -280,14 +251,12 @@ Segmented panchromatic channel, minsize=100
 
 ## TODO
 
-
 ### Functionality
 
 * Further testing of the shape characteristics (smoothness,
   compactness), if it looks good it should be added.
   (**in progress**)
 * Malahanobis distance for the similarity calculation.
-
 
 ### Use of Segmentation Results
 
@@ -296,11 +265,9 @@ Segmented panchromatic channel, minsize=100
   existing classification functionality.
 * Integration/workflow for *r.fuzzy* (Addon).
 
-
 ### Speed
 
 * See create\_isegs.c
-
 
 ## REFERENCES
 

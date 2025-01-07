@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The *r.in.pdal* module loads PDAL library supported point clouds
@@ -167,12 +166,9 @@ region bound. To capture those adjust the region with:
 
 ```
 
-
 g.region s=s-0.000001
 
-
 ```
-
 
 See *[g.region](g.region.html)* for details about
 computation region handling in GRASS GIS.
@@ -328,7 +324,6 @@ if more than one parameter is provided.
 
 ## NOTES
 
-
 ### Format and projection support
 
 The typical file extensions for the LAS format are .las and .laz
@@ -389,16 +384,12 @@ raster map in an existing project/mapset (using metric units):
 
 ```
 
-
-
 # set the computational region automatically, resol. for binning is 5m
 r.in.pdal -e -o input=points.las resolution=5 output=lidar_dem_mean
 g.region raster=lidar_dem_mean -p
 r.univar lidar_dem_mean
 
-
 ```
-
 
 ### Finding suitable extent and resolution
 
@@ -406,65 +397,44 @@ For the output raster map, a **suitable resolution** can be found by
 dividing the number of input points by the area covered (this requires
 an iterative approach as outlined here):
 
-
 ```
-
-
 
 # print LAS metadata (Number of Points)
 r.in.pdal -p input=points.las
-
 # Point count: 1287775
-
 
 # scan for LAS points cloud extent
 r.in.pdal -g input=points.las output=dummy -o
-
 # n=2193507.740000 s=2190053.450000 e=6070237.920000 w=6066629.860000 b=-3.600000 t=906.000000
-
 
 # set computation region to this extent
 g.region n=2193507.740000 s=2190053.450000 e=6070237.920000 w=6066629.860000 -p
 
-
 # print resulting extent
 g.region -p
-
 #  rows:       3454
-
 #  cols:       3608
 
-
 # points_per_cell = n_points / (rows * cols)
-
 # Here: 1287775 / (3454 * 3608) = 0.1033359 LiDAR points/raster cell
-
 # As this is too low, we need to select a lower raster resolution
 
 g.region res=5 -ap
-
 #  rows:       692
-
 #  cols:       723
-
 #  Now: 1287775 / (692 * 723) = 2.573923 LiDAR points/raster cell
-
 
 # import as mean
 r.in.pdal input=points.las output=lidar_dem_mean method=mean -o
 
-
 # import as max
 r.in.pdal input=points.las output=lidar_dem_max method=max -o
-
 
 # import as p'th percentile of the values
 r.in.pdal input=points.las output=lidar_dem_percentile_95 \
            method=percentile pth=95 -o
 
-
 ```
-
 
 ![Mean value DEM in perspective view](r_in_lidar_dem_mean3D.jpg)
 
@@ -474,7 +444,6 @@ Further hints: how to calculate number of LiDAR points/square meter:
 
 ```
 
-
 g.region -e
   # Metric project:
   # points_per_sq_m = n_points / (ns_extent * ew_extent)
@@ -482,9 +451,7 @@ g.region -e
   # Lat/Lon project:
   # points_per_sq_m = n_points / (ns_extent * ew_extent*cos(lat) * (1852*60)^2)
 
-
 ```
-
 
 ### Serpent Mound dataset
 
@@ -497,41 +464,30 @@ available at
 
 ```
 
-
-
 # print LAS file info
 r.in.pdal -p input="Serpent Mound Model LAS Data.laz"
 
-
 # using v.in.lidar to create a new project
-
 # create a project with CRS information of the LAS data
 v.in.lidar -i input="Serpent Mound Model LAS Data.laz" project=Serpent_Mound
 
-
 # quit and restart GRASS in the newly created project "Serpent_Mound"
-
 
 # scan the extents of the LAS data
 r.in.pdal -g input="Serpent Mound Model LAS Data.laz"
 
-
 # set the region to the extents of the LAS data, align to resolution
 g.region n=4323641.57 s=4320942.61 w=289020.90 e=290106.02 res=1 -ap
-
 
 # import as raster DEM
 r.in.pdal input="Serpent Mound Model LAS Data.laz" \
            output=Serpent_Mound_Model_LAS_Data method=mean
 
-
 ```
-
 
 ![](r_in_lidar.png)
 
 *Figure: Elevation for the whole area of Serpent Mound dataset*
-
 
 ### Height above ground
 
@@ -541,13 +497,10 @@ raster cell (the ground elevation is given by the raster map
 
 ```
 
-
 g.region raster=elevation -p
 r.in.pdal input=points.las output=mean_height_above_ground base_raster=elevation method=mean
 
-
 ```
-
 
 In this type of computation, it might be advantageous to change the resolution
 to match the precision of the points rather than deriving it from the base raster.
@@ -559,67 +512,51 @@ path. For example, a list of files in the directory /home/user/data:
 
 ```
 
-
 points1.laz
 points2.laz
 points3.laz
 
-
 ```
-
 
 would be lised in the file as:
 
 ```
 
-
 /home/user/data/points1.laz
 /home/user/data/points2.laz
 /home/user/data/points3.laz
 
-
 ```
-
 
 On Linux and OSX, this file can be automatically generated with the command:
 
 ```
 
-
 ls /home/user/data/*.laz > /home/user/data/filelist.txt
 
-
 ```
-
 
 On Windows:
 
 ```
 
-
 dir /b c:\users\user\data\*.laz > c:\users\user\data\filelist.txt
 
-
 ```
-
 
 The mean height above ground example above would then be:
 
 ```
 
-
 g.region raster=elevation -p
 r.in.pdal file=/home/user/data/filelist.txt output=mean_height_above_ground base_raster=elevation method=mean
 
-
 ```
-
 
 In Python, the list of files can be created using the *glob*
 Python module:
 
 ```
-
 
 import glob
 import gscript
@@ -633,9 +570,7 @@ gscript.run_command('r.in.pdal', file=file_list_name,
                     output='mean_height_above_ground',
                     base_raster='elevation' method='mean')
 
-
 ```
-
 
 ## KNOWN ISSUES
 
@@ -675,7 +610,6 @@ Development Team.
   XXIII ISPRS Congress 2016 [[ISPRS Archives](https://doi.org/10.5194/isprs-archives-XLI-B7-945-2016), [ResearchGate](https://www.researchgate.net/publication/304340172_Processing_UAV_and_lidar_point_clouds_in_GRASS_GIS)]
 * [ASPRS LAS format](http://www.asprs.org/Committee-General/LASer-LAS-File-Format-Exchange-Activities.html)
 * [PDAL - Point Data Abstraction Library](https://pdal.io/)
-
 
 ## AUTHORS
 

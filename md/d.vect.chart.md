@@ -32,17 +32,14 @@ Pie-charts of monthly winter precipitation (North Carolina sample dataset):
 
 ```
 
-
 g.region vector=nc_state -p
 d.vect nc_state
 d.vect.chart precip_30ynormals chart_type=pie columns=nov,dec,jan,feb -l
-
 
 # show pie chart as 3D
 d.erase
 d.vect nc_state
 d.vect.chart precip_30ynormals chart_type=pie columns=nov,dec,jan,feb -l -3
-
 
 ```
 
@@ -60,9 +57,7 @@ Bar-chart of different census map values:
 
 ```
 
-
 d.vect.chart map=vectmap columns=cens51,cens61,cens71,cens81 chart_type=bar
-
 
 ```
 
@@ -73,7 +68,6 @@ sample dataset:
 
 ```
 
-
 g.region raster=erode.index -p
 r.to.vect -s input=erode.index output=erode_index type=area
 v.extract input=erode_index output=erode_index_ctrds type=centroid
@@ -81,7 +75,6 @@ d.rast aspect
 d.vect.chart map=erode_index_ctrds chart_type=bar columns=cat \
              size=10 max_ref=12 scale=0.05 colors=yellow
 d.vect erode_index_ctrds icon=basic/circle fcol=black col=black size=5
-
 
 ```
 

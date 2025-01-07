@@ -22,9 +22,7 @@ The formula is given by:
 
 ```
 
-
 d(dx,dy) = sqrt(dx^2 + dy^2)
-
 
 ```
 
@@ -46,9 +44,7 @@ The formula is given by:
 
 ```
 
-
 d(dx,dy) = abs(dx) + abs(dy)
-
 
 ```
 
@@ -59,9 +55,7 @@ The *Maximum metric* is given by the formula
 
 ```
 
-
 d(dx,dy) = max(abs(dx),abs(dy))
-
 
 ```
 
@@ -92,11 +86,9 @@ North Carolina sample dataset:
 
 ```
 
-
 g.region raster=streams_derived -p
 r.grow.distance input=streams_derived distance=dist_from_streams
 r.colors map=dist_from_streams color=rainbow
-
 
 ```
 
@@ -113,11 +105,9 @@ with d.rast.num)*
 
 ```
 
-
 g.region raster=sea -p
 r.grow.distance -m input=sea distance=dist_from_sea_geodetic metric=geodesic
 r.colors map=dist_from_sea_geodetic color=rainbow
-
 
 ```
 

@@ -25,10 +25,8 @@ string which appears as the fourth field printed by
 
 ```
 
-
 v.db.connect -g map=census
 1/census|census|cat|/home/user/grassdata/nc_spm_base/PERMANENT/dbf/|dbf
-
 
 ```
 
@@ -61,10 +59,8 @@ to [SQLite](grass-sqlite.html) database:
 
 ```
 
-
 v.db.reconnect.all old_database='$GISDBASE/$LOCATION_NAME/$MAPSET/dbf/' \
  new_driver=sqlite new_database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
-
 
 ```
 
@@ -78,10 +74,8 @@ vector maps in the current mapset must be defined also **-c** flag.
 
 ```
 
-
 v.db.reconnect.all -c old_database='$GISDBASE/$LOCATION_NAME/$MAPSET/dbf/' \
  new_driver=sqlite new_database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
-
 
 ```
 
@@ -89,17 +83,12 @@ or alternatively
 
 ```
 
-
-
 # set default connection (sqlite)
 db.connect -d
-
 # verify default connection
 db.connect -g
-
 # reconnect
 v.db.reconnect.all -c old_database='$GISDBASE/$LOCATION_NAME/$MAPSET/dbf/'
-
 
 ```
 
@@ -114,19 +103,14 @@ To become usable in GRASS 7, all vector maps in a mapset need to be updated:
 
 ```
 
-
-
 # first rebuild topology for all vector maps
 v.build.all
-
 
 # set new default db connection (to SQLite default)
 db.connect -d
 
-
 # copy attribute tables from old DB to new SQLite DB, delete old tables in DBF format
 v.db.reconnect.all -cd
-
 
 ```
 

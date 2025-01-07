@@ -111,14 +111,12 @@ List of general management modules:
 * [t.support](t.support.html)
 * [t.topology](t.topology.html)
 
-
 ### Modules to visualize space-time datasets and temporal data
 
 * [g.gui.animation](g.gui.animation.html)
 * [g.gui.timeline](g.gui.timeline.html)
 * [g.gui.mapswipe](g.gui.mapswipe.html)
 * [g.gui.tplot](g.gui.tplot.html)
-
 
 ### Modules to process space-time raster datasets
 
@@ -195,7 +193,6 @@ input space-time raster dataset or a subset of it.
 * [t.rast.accumulate](t.rast.accumulate.html)
 * [t.rast.accdetect](t.rast.accdetect.html)
 
-
 #### Export/import conversion
 
 Space-time raster datasets can be exported with
@@ -215,12 +212,10 @@ time as one dimension.
 * [t.rast.to.rast3](t.rast.to.rast3.html)
 * [r3.out.netcdf](r3.out.netcdf.html)
 
-
 #### Statistics and gap filling
 
 * [t.rast.univar](t.rast.univar.html)
 * [t.rast.gapfill](t.rast.gapfill.html)
-
 
 ### Modules to manage, process and analyze STR3DS and STVDS
 
@@ -242,7 +237,6 @@ their raster pendants, but with 3D raster map layers:
 * [t.rast3d.extract](t.rast3d.extract.html)
 * [t.rast3d.mapcalc](t.rast3d.mapcalc.html)
 * [t.rast3d.univar](t.rast3d.univar.html)
-
 
 #### See also
 

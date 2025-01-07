@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 **wxGUI Cartographic Composer** also called *wx.psmap* is
@@ -45,7 +44,6 @@ Currently supported *[ps.map](ps.map.html)* instructions:
 * line
 * rectangle
 * labels
-
 
 ### CARTOGRAPHIC COMPOSER TOOLBAR
 

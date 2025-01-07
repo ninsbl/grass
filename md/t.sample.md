@@ -41,11 +41,8 @@ time stamped map layers in *A* and *P*.
 
 ```
 
-
-
 # Set an appropriate region
 g.region s=0 n=80 w=0 e=120 b=0 t=50 res=10 res3=10 -p3
-
 
 # Generate the raster map layer
 r.mapcalc expression="a1 = rand(0, 550)" -s
@@ -54,7 +51,6 @@ r.mapcalc expression="a3 = rand(0, 320)" -s
 r.mapcalc expression="a4 = rand(0, 510)" -s
 r.mapcalc expression="a5 = rand(0, 300)" -s
 r.mapcalc expression="a6 = rand(0, 650)" -s
-
 
 # Generate the vector map layer
 v.random -z output=pnts1 n=20 zmin=0 zmax=100 column=height
@@ -77,7 +73,6 @@ pnts1|2001-01-01|2001-03-01
 pnts2|2001-05-01|2001-07-01
 EOF
 
-
 # Register the maps in new space time datasets
 t.create type=strds temporaltype=absolute output=A \
     title="A test with raster input files" descr="A test with raster input files"
@@ -86,7 +81,6 @@ t.create type=stvds temporaltype=absolute output=P \
     title="A test with vector input files" descr="A test with vector input files"
 
 t.register type=raster -i input=A file="${n1}" start="2001-01-01" increment="1 months"
-
 
 # Raster map layer in A
 t.rast.list A
@@ -101,14 +95,12 @@ a6|PERMANENT|2001-06-01 00:00:00|2001-07-01 00:00:00
 
 t.register type=vector input=P file="${n2}"
 
-
 # Vector map layer in P
 t.vect.list P
 
 name|layer|mapset|start_time|end_time
 pnts1|None|PERMANENT|2001-01-01 00:00:00|2001-03-01 00:00:00
 pnts2|None|PERMANENT|2001-05-01 00:00:00|2001-07-01 00:00:00
-
 
 # Start time of maps in A located in maps in P
 t.sample method=start input=A samtype=stvds sample=P -c
@@ -118,7 +110,6 @@ pnts1@PERMANENT|a1@PERMANENT,a2@PERMANENT|2001-01-01 00:00:00|2001-03-01 00:00:0
 None|a3@PERMANENT,a4@PERMANENT|2001-03-01 00:00:00|2001-05-01 00:00:00|61.0|59.0
 pnts2@PERMANENT|a5@PERMANENT,a6@PERMANENT|2001-05-01 00:00:00|2001-07-01 00:00:00|61.0|120.0
 
-
 # P contains A
 t.sample method=contain input=A samtype=stvds sample=P -c
 
@@ -126,7 +117,6 @@ P@PERMANENT|A@PERMANENT|start_time|end_time|interval_length|distance_from_begin
 pnts1@PERMANENT|a1@PERMANENT,a2@PERMANENT|2001-01-01 00:00:00|2001-03-01 00:00:00|59.0|0.0
 None|a3@PERMANENT,a4@PERMANENT|2001-03-01 00:00:00|2001-05-01 00:00:00|61.0|59.0
 pnts2@PERMANENT|a5@PERMANENT,a6@PERMANENT|2001-05-01 00:00:00|2001-07-01 00:00:00|61.0|120.0
-
 
 # A during P
 t.sample method=during intype=stvds input=P samtype=strds sample=A -c
@@ -138,7 +128,6 @@ a3@PERMANENT|None|2001-03-01 00:00:00|2001-04-01 00:00:00|31.0|59.0
 a4@PERMANENT|None|2001-04-01 00:00:00|2001-05-01 00:00:00|30.0|90.0
 a5@PERMANENT|pnts2@PERMANENT|2001-05-01 00:00:00|2001-06-01 00:00:00|31.0|120.0
 a6@PERMANENT|pnts2@PERMANENT|2001-06-01 00:00:00|2001-07-01 00:00:00|30.0|151.0
-
 
 # No Overlapping
 t.sample method=overlap input=A samtype=stvds sample=P -cs
@@ -168,7 +157,6 @@ P@PERMANENT|A@PERMANENT|start_time|end_time|interval_length|distance_from_begin
 pnts1@PERMANENT|a3@PERMANENT|2001-01-01 00:00:00|2001-03-01 00:00:00|59.0|0.0
 None|a5@PERMANENT,a2@PERMANENT|2001-03-01 00:00:00|2001-05-01 00:00:00|61.0|59.0
 pnts2@PERMANENT|a4@PERMANENT|2001-05-01 00:00:00|2001-07-01 00:00:00|61.0|120.0
-
 
 ```
 

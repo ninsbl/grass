@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *t.rast.univar* calculates univariate statistics from the
@@ -32,14 +31,12 @@ to the current computational region. Supported spatial relations are:
 * "contains": process only maps that contain (fully cover) the current
   computational region
 
-
 ## EXAMPLE
 
 Obtain the univariate statistics for the raster space time dataset
 "tempmean\_monthly" (precision reduced to 2 decimals in this example):
 
 ```
-
 
 t.rast.univar -e tempmean_monthly
 id|start|end|mean|min|max|mean_of_abs|stddev|variance|coeff_var|sum|null_cells|cells|first_quartile|median|third_quartile|percentile_90
@@ -49,9 +46,7 @@ id|start|end|mean|min|max|mean_of_abs|stddev|variance|coeff_var|sum|null_cells|c
 2012_11_tempmean@climate_2009_2012|2012-11-01 00:00:00|2012-12-01 00:00:00|8.03|1.79|10.91|8.03|1.32|1.73|16.41|4072472.77|503233|1010600|7.49|8.13|8.96|9.48
 2012_12_tempmean@climate_2009_2012|2012-12-01 00:00:00|2013-01-01 00:00:00|8.71|1.76|11.98|8.71|1.72|2.95|19.74|4418403.77|503233|1010600|7.84|8.95|9.99|10.67
 
-
 ```
-
 
 ## SEE ALSO
 

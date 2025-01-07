@@ -9,16 +9,12 @@ allows users to manually edit them when necessary.
 
 ```
 
-
-
 # update scale to 1:24000
 v.support myvectmap scale=24000
-
 
 # update organization
 v.support myvectmap organization="OSGeo labs"
 v.info myvectmap
-
 
 ```
 

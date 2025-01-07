@@ -29,12 +29,10 @@ Generate fractal surface and export is as point in LAS format:
 
 ```
 
-
 g.region raster=elevation res=100
 r.surf.fractal output=fractals
 r.to.vect input=fractals output=fractals type=point -z
 v.out.lidar input=fractals output=fractals.las
-
 
 ```
 

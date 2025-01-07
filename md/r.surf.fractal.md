@@ -21,7 +21,6 @@ display with shade.
 
 ```
 
-
 g.region -p raster=elevation
 
 r.surf.fractal output=fractals
@@ -31,7 +30,6 @@ r.relief input=fractals output=fractals_shade
 
 d.mon wx0
 d.shade shade=fractals_shade color=fractals b=50
-
 
 ```
 
@@ -43,8 +41,6 @@ Compare results when using different fractal dimensions:
 
 ```
 
-
-
 # D=2.0005
 g.region -dp
 r.surf.fractal out=dem_d2_0005 dim=2.0005
@@ -53,14 +49,12 @@ r.mapcalc "dem_d2_0005_final = 1.0 * dem_d2_0005 + abs(min(dem_d2_0005))"
 r.colors dem_d2_0005_final color=terrain
 r.slope.aspect dem_d2_0005_final aspect=dem_d2_0005_final_as
 
-
 # D=2.90
 r.surf.fractal out=dem_d2_90 dim=2.90
 r.info -r dem_d2_90
 r.mapcalc "dem_d2_90_final = 1.0 * dem_d2_90 + abs(min(dem_d2_90))"
 r.colors dem_d2_90_final color=terrain
 r.slope.aspect dem_d2_90_final aspect=dem_d2_90_final_as
-
 
 ```
 

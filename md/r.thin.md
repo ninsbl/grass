@@ -64,15 +64,11 @@ the 10m resolution DEM by *r.watershed*, run:
 
 ```
 
-
 g.region raster=elevation -p
-
 # create flow accumulation map
 r.watershed elevation=elevation accumulation=accum_50K thresh=50000
-
 # extract streams from flow accumulation map
 r.mapcalc "streams_from_flow = if(abs(accum_50K) > 1000, 1, null())"
-
 
 # skeletonize map
 r.thin streams_from_flow out=streams_thin
@@ -81,7 +77,6 @@ d.mon wx0
 d.rast streams_from_flow
 d.erase
 d.rast streams_thin
-
 
 ```
 
@@ -93,13 +88,10 @@ The resulting map cabe optionally vectorized:
 
 ```
 
-
 r.to.vect streams_thin output=streams_thin type=line
-
 # visualize
 d.rast accum_50K
 d.vect streams_thin color=red width=2
-
 
 ```
 

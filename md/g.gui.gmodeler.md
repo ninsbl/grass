@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The **Graphical Modeler** is a *[wxGUI](wxGUI.html)*
@@ -38,7 +37,6 @@ The Graphical Modeler allows you to:
 * export model to Python script in the form of a PyWPS process
 * export model to an actinia process
 * export model to image file
-
 
 ### Main dialog
 
@@ -138,24 +136,17 @@ In the command console the procedure looks as follows:
 
 ```
 
-
-
 # input data import
 r.import input=elev_state_500m.tif output=elevation
 v.import input=zipcodes_wake.shp output=zipcodes_wake
-
 # computation region settings
 g.region vector=zipcodes_wake
-
 # raster statistics (average values), upload to vector map table calculation
 v.rast.stats -c map=zipcodes_wake raster=elevation column_prefix=rst method=average
-
 # univariate statistics on selected table column for zipcode map calculation
 v.db.univar map=zipcodes_wake column=rst_average
-
 # conversion from vector to raster layer (due to result presentation)
 v.to.rast input=zipcodes_wake output=zipcodes_avg use=attr attribute_column=rst_average
-
 # display settings
 r.colors -e map=zipcodes_avg color=bgyr
 d.mon start=wx0 bgcolor=white
@@ -165,9 +156,7 @@ d.vect map=zipcodes_wake type=boundary color=black
 d.northarrow style=1a at=85.0,15.0 color=black fill_color=black width=0 fontsize=10
 d.legend raster=zipcodes_avg lines=50 thin=5 labelnum=5 color=black fontsize=10
 
-
 ```
-
 
 ### Defining the workflow in the Graphical Modeler
 
@@ -355,26 +344,18 @@ ticked in the boxes of loop dialog. The final model and its results are shown be
 
 The steps to enter in the command console of the Graphical Modeler would be as follows:
 
-
 ```
-
-
 
 # note that the white space usage differs from the standard command line usage
 
-
 # rename original image with preselected suffix
 g.rename raster = %map,%map.%ndvi
-
 # convert integer values
 r.mapcalc expression = %map = %map.%ndvi * 0.0001
-
 # set color table appropriate for nvdi data
 r.colors = map = %map color = ndvi
 
-
 ```
-
 
 ## SEE ALSO
 

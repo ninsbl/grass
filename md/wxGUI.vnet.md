@@ -1,5 +1,4 @@
 
-
 ## KEYWORDS
 
 [vector](vector.html), [network](topic_network.html), [vector](keywords.html#vector)
@@ -37,7 +36,6 @@ Subsets for nearest centers (*[v.net.alloc](v.net.alloc.html)*)
 * show analysis results (maps and it's attribute tables)
 * snapping to nodes
 * browse previous analysis results
-
 
 ## NOTES
 

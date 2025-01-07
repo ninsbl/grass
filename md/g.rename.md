@@ -20,14 +20,12 @@ choose for possible renaming:
 
 ```
 
-
        raster   raster map(s) to be renamed
     raster_3d   3D raster map(s) to be renamed
        vector   vector map(s) to be renamed
        labels   paint label file(s) to be renamed
        region   region definition(s) to be renamed
         group   imagery group(s) to be renamed
-
 
 ```
 
@@ -55,19 +53,14 @@ the intended name.
 
 ```
 
-
-
 # rename raster map
 g.rename raster=oldrast,newrast
-
 
 # rename vector map
 g.rename vector=oldvect,newvect
 
-
 # combined renaming
 g.rename raster=oldrast,newrast vector=oldvect,newvect
-
 
 ```
 

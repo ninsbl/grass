@@ -38,9 +38,7 @@ If you want to change these -1 values to NULL, run subsequently on the resulting
 
 ```
 
-
 r.null setnull=-1 input=my_map
-
 
 ```
 
@@ -54,10 +52,8 @@ To calculate the contrast weighted edge density index on map *my\_map*, using
 
 ```
 
-
 r.li.cwed input=my_map conf=my_conf output=my_out \
           path=/path/to/weights.csv
-
 
 ```
 
@@ -65,12 +61,10 @@ Example for input "weights.csv" file:
 
 ```
 
-
 12,16,0.65
 44,123,0.32
 56,12,0.54
 23,66,0.99
-
 
 ```
 

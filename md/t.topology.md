@@ -10,7 +10,6 @@ In order to obtain information about space time dataset topology, run:
 
 ```
 
-
 t.topology tempmean_monthly@climate_2009_2012
  +-------------------- Basic information -------------------------------------+
  | Id: ........................ tempmean_monthly@climate_2009_2012
@@ -42,7 +41,6 @@ t.topology tempmean_monthly@climate_2009_2012
  | Starts: .................... 0
  | During: .................... 0
  +----------------------------------------------------------------------------+
-
 
 ```
 

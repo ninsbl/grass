@@ -22,11 +22,9 @@ Running the command below will generate the bar graph shown in the figure:
 
 ```
 
-
 g.region raster=elevation -p
 d.mon wx0
 d.histogram map=elevation
-
 
 ```
 
@@ -38,10 +36,8 @@ Running the command below will generate the pie graph shown in the figure:
 
 ```
 
-
 g.region raster=landuse96_28m -p
 d.histogram map=landuse96_28m style=pie
-
 
 ```
 

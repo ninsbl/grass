@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.watershed* generates a set of maps indicating: 1) flow
@@ -305,12 +304,9 @@ of flow accumulation, can be easily identified with e.g.
 
 ```
 
-
   r.mapcalc "problems = if(flow_acc < 0, basin, null())"
 
-
 ```
-
 
 If the region of interest contains such problem areas, and this is not
 desired, the computational region must be expanded until the catchment
@@ -368,12 +364,9 @@ The following command performs these replacements:
 
 ```
 
-
 r.mapcalc "drainage_degrees = if(drainage > 0, 45. * drainage, null())"
 
-
 ```
-
 
 Alternatively, the user can use the **-a** flag or later the
 `abs()` function in
@@ -393,18 +386,14 @@ ID as the vector category number.
 
 ```
 
-
   r.watershed elev=elevation.dem stream=rwater.stream
   r.to.vect -v in=rwater.stream out=rwater_stream
 
-
 ```
-
 
 Set a different color table for the accumulation map:
 
 ```
-
 
   MAP=rwater.accum
   r.watershed elev=elevation.dem accum=$MAP
@@ -427,9 +416,7 @@ Set a different color table for the accumulation map:
     100% red
   EOF
 
-
 ```
-
 
 Create a more detailed stream map using the accumulation map and
 convert it to a vector output map. The accumulation cut-off, and
@@ -439,7 +426,6 @@ example by *[r.univar](r.univar.html)*) as the
 cut-off value. This only works with SFD, not with MFD.
 
 ```
-
 
   r.watershed elev=elevation.dem accum=rwater.accum
 
@@ -457,38 +443,28 @@ cut-off value. This only works with SFD, not with MFD.
   r.to.vect in=rwater.course.Thin out=rwater_course type=line
   v.db.dropcolumn map=rwater_course column=label
 
-
 ```
-
-
 
 ### Create watershed basins map and convert to a vector polygon map
 
-
 ```
-
 
   r.watershed elev=elevation.dem basin=rwater.basin thresh=15000
   r.to.vect -s in=rwater.basin out=rwater_basins type=area
   v.db.dropcolumn map=rwater_basins column=label
   v.db.renamecolumn map=rwater_basins column=value,catchment
 
-
 ```
-
 
 Display output in a nice way
 
 ```
 
-
   r.relief map=elevation.dem
   d.shade shade=elevation.dem.shade color=rwater.basin bright=40
   d.vect rwater_course color=orange
 
-
 ```
-
 
 ## REFERENCES
 
@@ -531,7 +507,6 @@ Display output in a nice way
   Loss Equation for Western Rangelands*, **U.S.A./Mexico Symposium of
   Strategies for Classification and Management of Native Vegetation for
   Food Production In Arid Zones** (Tucson, AZ, 12-16 Oct. 1987).
-
 
 ## SEE ALSO
 

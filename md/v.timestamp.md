@@ -25,9 +25,7 @@ dates).
 
 ```
 
-
 v.timestamp map=lidar
-
 
 ```
 
@@ -35,9 +33,7 @@ Sets the timestamp for "lidar" to the single date "15 sep 1987".
 
 ```
 
-
 v.timestamp map=lidar date='15 sep 1987'
-
 
 ```
 
@@ -46,9 +42,7 @@ and the end date "20 feb 1988".
 
 ```
 
-
 v.timestamp map=lidar date='15 sep 1987/20 feb 1988'
-
 
 ```
 
@@ -56,9 +50,7 @@ Removes the timestamp for the "lidar" vector map.
 
 ```
 
-
 v.timestamp map=lidar date=none
-
 
 ```
 

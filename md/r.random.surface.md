@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.random.surface* generates a spatially dependent random surface.
@@ -108,17 +107,13 @@ Generate a random surface (using extent of North Carolina sample dataset):
 
 ```
 
-
 g.region raster=elevation res=100 -p
 r.surf.random output=randomsurf min=10 max=100
-
 
 # verify distribution
 r.univar -e map=randomsurf
 
-
 ```
-
 
 [![r.random.surface example (n_min: 10; n_max: 100)](r_random_surface.jpg)](r_random_surface.jpg)
 
@@ -159,7 +154,6 @@ use:
   in Spatial Data: Defining, Visualizing, and Managing Data
   Errors](http://www.geo.hunter.cuny.edu/~chuck/gislis/gislis.html). Proceedings, GIS/LIS'94, pp. 246-253, Phoenix AZ,
   1994.
-
 
 ## SEE ALSO
 

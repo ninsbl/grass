@@ -28,16 +28,12 @@ which respects the user settings. Example:
 
 ```
 
-
-
 # import:
 i.in.spotvgt 0001_NDV.HDF
-
 
 # export:
 g.region w=180W e=180E n=75:00:16.071429N s=56:00:16.069919S res=0:00:32.142857 -p
 r.out.gdal 0001_NDV format=GTiff out=spotndvi.tif
-
 
 ```
 

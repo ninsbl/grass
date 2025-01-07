@@ -13,11 +13,9 @@ extracted from the "tempmean\_monthly" space time raster dataset:
 
 ```
 
-
 t.vect.what.strds input=precip_stations@climate_2009_2012 \
                   strds=tempmean_monthly@climate_2009_2012 \
                   column=new_temp method=average
-
 
 ```
 

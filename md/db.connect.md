@@ -31,11 +31,9 @@ Local storage:
 
 ```
 
-
 db.connect -d
 db.connect -p
 db.tables -p
-
 
 ```
 
@@ -50,12 +48,10 @@ Local storage, database tables stored in database "mydb"
 
 ```
 
-
 db.connect driver=pg database=mydb
 db.login user=myname pass=secret
 db.connect -p
 db.tables -p
-
 
 ```
 
@@ -68,12 +64,10 @@ Network storage, database tables stored in database "mydb"
 
 ```
 
-
 db.connect driver=pg database=mydb
 db.login user=myname pass=secret host=myserver.com port=6666
 db.connect -p
 db.tables -p
-
 
 ```
 
@@ -86,12 +80,10 @@ the use of *[db.login](db.login.html)*):
 
 ```
 
-
 db.connect driver=mysql database=mydb
 db.login user=myname pass=secret
 db.connect -p
 db.tables -p
-
 
 ```
 
@@ -104,12 +96,10 @@ Network storage, database tables stored in database "mydb"
 
 ```
 
-
 db.connect driver=mysql database=mydb
 db.login user=myname pass=secret host=myserver.com
 db.connect -p
 db.tables -p
-
 
 ```
 
@@ -122,12 +112,10 @@ Network storage, database tables stored in database "mydb"
 
 ```
 
-
 db.connect driver=odbc database=mydb
 db.login user=myname pass=secret
 db.connect -p
 db.tables -p
-
 
 ```
 
@@ -140,10 +128,8 @@ created by the user):
 
 ```
 
-
 db.connect driver=dbf database='$GISDBASE/$LOCATION_NAME/$MAPSET/dbf/'
 db.tables -p
-
 
 ```
 

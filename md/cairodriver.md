@@ -14,7 +14,6 @@ is used.
 
 ## USAGE
 
-
 ### Environment variables
 
 The Cairo driver can be enabled by
@@ -22,12 +21,9 @@ setting **GRASS\_RENDER\_IMMEDIATE** variable, eg.
 
 ```
 
-
 export GRASS_RENDER_IMMEDIATE=cairo
 
-
 ```
-
 
 Several environment variables affect the operation of the Cairo driver:
 
@@ -84,16 +80,13 @@ Several environment variables affect the operation of the Cairo driver:
 
   defines Cairo visual
 
-
 ## EXAMPLES
-
 
 ### PNG Example
 
 Example: using the driver to generate a PNG file (bash-syntax):
 
 ```
-
 
 export GRASS_RENDER_IMMEDIATE=cairo
 export GRASS_RENDER_FILE=nc_spm.png
@@ -106,9 +99,7 @@ d.rast map=elevation
 d.vect map=streams width=1 color=blue fcolor=aqua type=area,line
 d.vect map=roadsmajor width=2
 
-
 ```
-
 
 ### PDF Examples
 
@@ -117,27 +108,22 @@ map (bash-syntax):
 
 ```
 
-
 export GRASS_RENDER_IMMEDIATE=cairo
 export GRASS_RENDER_FILE=nc_spm.pdf
 export GRASS_RENDER_WIDTH=800
 export GRASS_RENDER_HEIGHT=800
 
 g.region vector=roadsmajor
-
 # activate vector font
 d.font Vera
 d.vect map=roadsmajor layer=1 display=shape attrcolumn=ROAD_NAME lcolor=0:90:255
 
-
 ```
-
 
 Example: using the driver to generate a PDF raster file with a raster
 map (bash-syntax):
 
 ```
-
 
 export GRASS_RENDER_IMMEDIATE=cairo
 export GRASS_RENDER_FILE=nc_spm.pdf
@@ -147,9 +133,7 @@ export GRASS_RENDER_HEIGHT=800
 g.region raster=elevation
 d.rast map=elevation
 
-
 ```
-
 
 ### SVG Example
 
@@ -158,16 +142,13 @@ map (bash-syntax):
 
 ```
 
-
 export GRASS_RENDER_IMMEDIATE=cairo
 export GRASS_RENDER_FILE=vectormap.svg
 
 g.region vector=roadsmajor
 d.vect map=roadsmajor -c
 
-
 ```
-
 
 ## NOTES
 

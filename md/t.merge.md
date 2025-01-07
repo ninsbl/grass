@@ -28,7 +28,6 @@ time raster datasets together.
 
 ```
 
-
 r.mapcalc expression="map1 = rand(0, 10)"  -s
 r.mapcalc expression="map2 = rand(10, 20)" -s
 
@@ -211,7 +210,6 @@ t.info precipitation_daily_3
  |     output="precipitation_daily_3"
  |
  +----------------------------------------------------------------------------+
-
 
 ```
 

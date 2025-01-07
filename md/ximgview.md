@@ -18,7 +18,6 @@ a constant size, rather than being truncated whenever it is updated.
 
 ```
 
-
 export GRASS_RENDER_FILE=map.bmp
 export GRASS_RENDER_WIDTH=640
 export GRASS_RENDER_HEIGHT=480
@@ -30,7 +29,6 @@ d.erase
 ximgview $GRASS_RENDER_FILE percent=50 &
 d.rast elevation.dem
 d.vect roads
-
 
 ```
 

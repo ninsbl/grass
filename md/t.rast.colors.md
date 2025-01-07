@@ -19,7 +19,6 @@ Set Celsius color table to monthly dataset
 
 ```
 
-
 t.rast.colors input=tempmean_monthly color=celsius
 
 r.colors.out map=2009_01_tempmean
@@ -57,7 +56,6 @@ r.colors.out map=2009_01_tempmean
 80 155:10:155
 nv 255:255:255
 default 255:255:255
-
 
 ```
 

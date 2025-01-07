@@ -7,9 +7,7 @@ To get the resolution and region settings of the raster map, run:
 
 ```
 
-
 g.region -p raster=[mapname]
-
 
 ```
 
@@ -22,9 +20,7 @@ The greyscale conversion uses the NTSC conversion:
 
 ```
 
-
 Y = .30*Red + .59*Green + .11*Blue
-
 
 ```
 
@@ -49,10 +45,8 @@ Alternatively, you can use the *pnmtopng* program from
 
 ```
 
-
 r.out.ppm raster
 pnmtopng -transparent white raster.ppm > raster.png
-
 
 ```
 

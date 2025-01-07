@@ -15,7 +15,6 @@ for one year:
 
 ```
 
-
 t.vect.list shoreline@shoreline
 name|layer|mapset|start_time|end_time
 shoreline_1849_1873|None|shoreline|1849|1873
@@ -27,7 +26,6 @@ shoreline_2003|None|shoreline|2003|None
 shoreline_2004|None|shoreline|2004|None
 shoreline_2009|None|shoreline|2009|None
 
-
 ```
 
 ### Using method option
@@ -37,7 +35,6 @@ value is used, the value *deltagaps* will print the delta between
 maps and also the gaps if they exist (like in this example).
 
 ```
-
 
 t.vect.list method=deltagaps input=shoreline
 id|name|layer|mapset|start_time|end_time|interval_length|distance_from_begin
@@ -56,7 +53,6 @@ None|None|None|None|2003|2004|1|154
 shoreline_2004@shoreline|shoreline_2004|None|shoreline|2004|None|None|155
 None|None|None|None|2004|2009|5|155
 shoreline_2009@shoreline|shoreline_2009|None|shoreline|2009|None|None|160
-
 
 ```
 

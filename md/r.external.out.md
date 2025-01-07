@@ -25,36 +25,25 @@ directly in GeoTIFF format (any GDAL supported format can be used here):
 
 ```
 
-
-
 # define output directory for files resulting from GRASS calculation(s)
-
 # and target format:
 mkdir $HOME/gisoutput/
-
 # hint: the create options are not mandatory
 r.external.out directory=$HOME/gisoutput/ format="GTiff" option="BIGTIFF=YES,COMPRESS=DEFLATE"
-
 # prepare sample analysis
 g.region raster=elevation -p
 
-
 # perform GRASS calculation (here: filter by height, write > 120m, NULL otherwise)
-
 # this will store the output map directly as GeoTIFF, so we use .tif extension:
 r.mapcalc "elev_filt.tif = if(elevation > 120.0, elevation, null() )"
 
-
 # ...the "elev_filt.tif" is immediately written.
-
 
 # cease GDAL output connection and turn back to write out GRASS raster files:
 r.external.out -r
 
-
 # verify resulting file
 gdalinfo $HOME/gisoutput/elev_filt.tif
-
 
 ```
 
@@ -66,29 +55,21 @@ while writing out the results directly in GeoTIFF:
 
 ```
 
-
-
 # register GeoTIFF file to be used in current mapset:
 r.external input=terra_lst1km20030314.LST_Day.tif output=modis_celsius
-
 
 # define output directory for files resulting from GRASS calculation:
 r.external.out directory=$HOME/gisoutput/ format="GTiff"
 
-
 # perform GRASS calculation (here: extract pixels > 20 deg C)
-
 # this stores the output map directly as GeoTIFF:
 r.mapcalc "warm.tif = if(modis_celsius > 20.0, modis_celsius, null() )"
-
 
 # cease GDAL output connection and turn back to write GRASS raster files:
 r.external.out -r
 
-
 # now use the resulting file elsewhere
 gdalinfo $HOME/gisoutput/warm.tif
-
 
 ```
 

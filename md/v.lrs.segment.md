@@ -9,10 +9,8 @@ The format is as follows:
 
 ```
 
-
 P <point_id> <line_id> <milepost>+<offset> [<side offset>]
 L <segment_id> <line_id> <milepost>+<offset> <milepost>+<offset> [<side offset>]
-
 
 ```
 
@@ -31,24 +29,19 @@ position (point) along the LRS after bus stop 4:
 
 ```
 
-
-
 # new point on LRS
 echo "P 7 22 4+180" | v.lrs.segment route_lrs out=route_lrs_new rstable=route_lrs
 
 g.region vector=route_lrs n=n+100 s=s-100 -p
 d.erase
-
 # existing LRS
 d.vect route_lrs
 d.vect busstops disp=attr attr=cat size=10 bg=white lcol=blue yref=bottom
 d.vect busstops icon=basic/circle fcol=blue
 db.select table=route_lrs
 
-
 # show modified map
 d.vect route_lrs_new col=red
-
 
 ```
 

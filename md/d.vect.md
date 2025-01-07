@@ -17,9 +17,7 @@ carret symbol for escaping special characters `< > ( ) & | , ; "`.
 
 ```
 
-
 d.vect map=vector_map where="cat ˆ> 10 AND cat ˆ< 20"
-
 
 ```
 
@@ -28,9 +26,7 @@ outlined with **color**. Area outlines can be suppressed with
 
 ```
 
-
 d.vect map=vector_map color=none
-
 
 ```
 
@@ -38,9 +34,7 @@ and areas can be made transparent with
 
 ```
 
-
 d.vect map=vector_map fill_color=none
-
 
 ```
 
@@ -56,7 +50,6 @@ A table for a vector map might look like this:
 
 ```
 
-
 db.select sql="select * from testisola"
 cat|label|GRASSRGB
 0|no data|255:255:255
@@ -66,16 +59,13 @@ cat|label|GRASSRGB
 168|SANT'ORSOLA|223:45:67
 190|TENNA|123:45:67
 
-
 ```
 
 To add the GRASSRGB color column, use *[v.db.addcolumn](v.db.addcolumn.html)*:
 
 ```
 
-
 v.db.addcolumn map=testisola columns="GRASSRGB varchar(11)"
-
 
 ```
 
@@ -83,9 +73,7 @@ To add/change a color, use *[v.db.update](v.db.update.html)*:
 
 ```
 
-
 v.db.update map=testisola column=GRASSRGB value="123:45:237" where="cat=139"
-
 
 ```
 
@@ -110,19 +98,14 @@ Spearfish examples:
 
 ```
 
-
-
 # display roads with category numbers:
 d.vect map=roads display=shape,cat label_color=green
-
 
 # display randomly colorized soils map with attributes
 d.vect -c map=soils attribute_column=label
 
-
 # display randomly colorized selected vectors from soils map
 d.vect -c map=soils where="label='VBF'" display=shape attribute_column=label
-
 
 ```
 
@@ -132,29 +115,22 @@ line/area bounding box):
 
 ```
 
-
 g.region raster=elevation.10m
 r.random input=elevation.10m n=5000 vector=random3d -d
 d.mon start=x0
-
 # display as black points
 d.vect map=random3d
-
 # display 3D points colorized according to z height
 d.vect map=random3d zcolor=gyr
-
 
 # 3D contour lines
 r.contour input=elevation.10m output=contour20m step=20
 d.vect map=contour20m zcolor=gyr
 
-
 # generate 3D triangles
 v.delaunay input=random3d output=random3d_del
-
 # display 3D polygons colorized according to z height
 d.vect map=random3d_del type=area zcolor=gyr
-
 
 ```
 

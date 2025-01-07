@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.landsat.acca* implements the **Automated Cloud-Cover
@@ -30,15 +29,12 @@ named `226_62.acca`:
 
 ```
 
-
 i.landsat.toar sensor=7 gain=HHHLHLHHL date=2003-04-07 \
   product_date=2008-11-27 band_prefix=226_62 solar_elevation=49.51654
 
 i.landsat.acca -f band_prefix=226_62.toar output=226_62.acca
 
-
 ```
-
 
 ## REFERENCES
 
@@ -50,7 +46,6 @@ i.landsat.acca -f band_prefix=226_62.toar output=226_62.acca
   S.S. Shen and M.R. Descour (Eds.): Algorithms for Multispectral,
   Hyperspectral, and Ultraspectral Imagery VI. Proceedings of SPIE,
   4049: 348-355.
-
 
 ## SEE ALSO
 

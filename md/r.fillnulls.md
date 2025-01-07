@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.fillnulls* fills NULL pixels (no data areas) in input raster
@@ -68,21 +67,17 @@ a complete elevation map:
 
 ```
 
-
 g.region raster=elev_srtm_30m -p
 d.mon wx0
 d.histogram elev_srtm_30m
-
 
 # remove SRTM outliers, i.e. SRTM below 50m (esp. lakes), leading to no data areas
 r.mapcalc "elev_srtm_30m_filt = if(elev_srtm_30m < 50.0, null(), elev_srtm_30m)"
 d.histogram elev_srtm_30m_filt
 d.rast elev_srtm_30m_filt
 
-
 # using the default RST method to fill these holes in DEM
 r.fillnulls input=elev_srtm_30m_filt output=elev_srtm_30m_rst tension=20
-
 
 # using the bilinear method to fill these holes in DEM
 r.fillnulls input=elev_srtm_30m_filt output=elev_srtm_30m_bilin method=bilinear
@@ -102,9 +97,7 @@ d.erase
 d.rast diff_rst_bilin
 d.legend diff_rst_bilin
 
-
 ```
-
 
 ## REFERENCES
 
@@ -124,7 +117,6 @@ d.legend diff_rst_bilin
   and Hofierka L. 1993](http://fatra.cnr.ncsu.edu/~hmitaso/gmslab/papers/hmg.rev1.ps): Interpolation by Regularized Spline with Tension:
   II. Application to Terrain Modeling and Surface Geometry Analysis,
   *Mathematical Geology* 25, 657-667.
-
 
 ## SEE ALSO
 

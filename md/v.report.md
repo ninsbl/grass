@@ -23,9 +23,7 @@ North Carolina sample dataset:
 
 ```
 
-
 v.report zipcodes_wake option=area units=hectares
-
 
 ```
 

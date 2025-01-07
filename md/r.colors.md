@@ -74,7 +74,6 @@ For example the *slope* rule is defined as:
 
 ```
 
-
 0  255:255:255
 2  255:255:0
 5  0:255:0
@@ -83,7 +82,6 @@ For example the *slope* rule is defined as:
 30 255:0:255
 50 255:0:0
 90 0:0:0
-
 
 ```
 
@@ -95,14 +93,12 @@ Similarly, the *aspectcolr* rule:
 
 ```
 
-
 0 white
 1 yellow
 90 green
 180 cyan
 270 red
 360 yellow
-
 
 ```
 
@@ -128,14 +124,12 @@ have been left out. The format of such a specification is as follows:
 
 ```
 
-
 category_value color_name
 category_value color_name
 .. ..
 .. ..
 category_value color_name
 end
-
 
 ```
 
@@ -150,14 +144,12 @@ color numbers instead of color names is as follows:
 
 ```
 
-
 category_value red_number:green_number:blue_number
 category_value red_number:green_number:blue_number
 .. .. .. ..
 .. .. .. ..
 category_value red_number:green_number:blue_number
 end
-
 
 ```
 
@@ -170,14 +162,12 @@ ascending order. The format is as follows:
 
 ```
 
-
 percent_value% color_name
 percent_value% color_name
 .. ..
 .. ..
 percent_value% color_name
 end
-
 
 ```
 
@@ -188,14 +178,12 @@ color numbers instead of color names is as follows:
 
 ```
 
-
 percent_value% red_number:green_number:blue_number
 percent_value% red_number:green_number:blue_number
 .. .. .. ..
 .. .. .. ..
 percent_value% red_number:green_number:blue_number
 end
-
 
 ```
 
@@ -204,13 +192,11 @@ table specification; for example:
 
 ```
 
-
 0 black
 10% yellow
 78 blue
 100% 0:255:230
 end
-
 
 ```
 
@@ -218,12 +204,10 @@ To set the NULL (no data) color, use the "nv" (null values) parameter:
 
 ```
 
-
 0 black
 10% yellow
 nv white
 end
-
 
 ```
 
@@ -232,12 +216,10 @@ color rules) use the "default" parameter:
 
 ```
 
-
 0 red
 1 blue
 default grey
 end
-
 
 ```
 
@@ -262,12 +244,10 @@ name *rules.file*):
 
 ```
 
-
 1 red
 2 green
 3 blue
 end
-
 
 ```
 
@@ -276,15 +256,11 @@ following GRASS commands (two ways are available):
 
 ```
 
-
-
 # read input from stdin
 cat rules.file | r.colors map=threecats rules=-
 
-
 # read directly from file
 r.colors map=threecats rules=rules.file
-
 
 ```
 
@@ -298,7 +274,6 @@ of LUT).
 
 ```
 
-
 0% 0:230:0
 20% 0:160:0
 35% 50:130:0
@@ -307,16 +282,13 @@ of LUT).
 90% 170:160:50
 100% 255:255:100
 
-
 ```
 
 To invert the current rules:
 
 ```
 
-
 r.colors map=current_raster -n rast=current_raster
-
 
 ```
 

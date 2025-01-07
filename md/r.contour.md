@@ -33,10 +33,8 @@ points contributing to the contour line:
 
 ```
 
-
 r.contour input=elevation.dem output=elevation_dem_contours \
           minlevel=1000 maxlevel=2000 step=100 cut=200
-
 
 ```
 
@@ -45,13 +43,11 @@ the elevation map from the North Carolina database:
 
 ```
 
-
 g.region raster=elevation
 r.contour in=elevation out=contours levels=60,90,120,150 --o
 d.mon wx0
 d.rast elevation_shade
 d.vect contours color=red
-
 
 ```
 
@@ -63,11 +59,9 @@ the LiDAR data derived elevation map from the North Carolina database:
 
 ```
 
-
 g.region raster=elev_lid792_1m -p
 r.contour input=elev_lid792_1m output=elev_lid792_1m_contours \
           minlevel=100 maxlevel=150 step=10
-
 
 ```
 

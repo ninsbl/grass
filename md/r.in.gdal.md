@@ -16,7 +16,6 @@ Selected formats out of the more than 140 supported formats:
 
 ```
 
-
 Long Format Name                              Code           Creation  Georeferencing Maximum file size
 ---------------------------------------------+-------------+----------+--------------+-----------------
 ADRG/ARC Digitilized Raster Graphics          ADRG              Yes      Yes          --
@@ -116,7 +115,6 @@ VICAR                                         VICAR             No       Yes    
 VTP Binary Terrain Format (.bt)               BT                Yes      Yes          --
 WEBP                                          WEBP              Yes      No           --
 WMO GRIB1/GRIB2 (.grb)                        GRIB              No       Yes          2GB
-
 
 ```
 
@@ -245,9 +243,7 @@ resampling algorithm):
 
 ```
 
-
 gdalwarp rotated.tif northup.tif
-
 
 ```
 
@@ -299,16 +295,12 @@ Here, use *num\_digits=5* to have a 5 digit suffix with leading zeros (00001 - 9
 
 ```
 
-
-
 # Import of ECAD data split into chunks
-
 # Import precipitation data
 r.in.gdal -o input=rr_0.25deg_reg_1950-1964_v12.0.nc output=precipitation num_digits=5 offset=0
 r.in.gdal -o input=rr_0.25deg_reg_1965-1979_v12.0.nc output=precipitation num_digits=5 offset=5479
 r.in.gdal -o input=rr_0.25deg_reg_1980-1994_v12.0.nc output=precipitation num_digits=5 offset=10957
 r.in.gdal -o input=rr_0.25deg_reg_1995-2015_v12.0.nc output=precipitation num_digits=5 offset=16436
-
 
 # Import air pressure data
 r.in.gdal -o input=pp_0.25deg_reg_1950-1964_v12.0.nc output=air_pressure num_digits=5 offset=0
@@ -316,13 +308,11 @@ r.in.gdal -o input=pp_0.25deg_reg_1965-1979_v12.0.nc output=air_pressure num_dig
 r.in.gdal -o input=pp_0.25deg_reg_1980-1994_v12.0.nc output=air_pressure num_digits=5 offset=10957
 r.in.gdal -o input=pp_0.25deg_reg_1995-2015_v12.0.nc output=air_pressure num_digits=5 offset=16436
 
-
 # Import min temperature data
 r.in.gdal -o input=tn_0.25deg_reg_1950-1964_v12.0.nc output=temperatur_min num_digits=5 offset=0
 r.in.gdal -o input=tn_0.25deg_reg_1965-1979_v12.0.nc output=temperatur_min num_digits=5 offset=5479
 r.in.gdal -o input=tn_0.25deg_reg_1980-1994_v12.0.nc output=temperatur_min num_digits=5 offset=10957
 r.in.gdal -o input=tn_0.25deg_reg_1995-2015_v12.0.nc output=temperatur_min num_digits=5 offset=16436
-
 
 # Import max temperature data
 r.in.gdal -o input=tx_0.25deg_reg_1950-1964_v12.0.nc output=temperatur_max num_digits=5 offset=0
@@ -330,13 +320,11 @@ r.in.gdal -o input=tx_0.25deg_reg_1965-1979_v12.0.nc output=temperatur_max num_d
 r.in.gdal -o input=tx_0.25deg_reg_1980-1994_v12.0.nc output=temperatur_max num_digits=5 offset=10957
 r.in.gdal -o input=tx_0.25deg_reg_1995-2015_v12.0.nc output=temperatur_max num_digits=5 offset=16436
 
-
 # Import mean temperature data
 r.in.gdal -o input=tg_0.25deg_reg_1950-1964_v12.0.nc output=temperatur_mean num_digits=5 offset=0
 r.in.gdal -o input=tg_0.25deg_reg_1965-1979_v12.0.nc output=temperatur_mean num_digits=5 offset=5479
 r.in.gdal -o input=tg_0.25deg_reg_1980-1994_v12.0.nc output=temperatur_mean num_digits=5 offset=10957
 r.in.gdal -o input=tg_0.25deg_reg_1995-2015_v12.0.nc output=temperatur_mean num_digits=5 offset=16436
-
 
 ```
 
@@ -367,11 +355,9 @@ resolution, void-filled:
 
 ```
 
-
 r.in.gdal /vsicurl/https://www.datenatlas.de/geodata/public/srtmgl1/srtmgl1.003.tif output=srtmgl1_v003_30m memory=2000
 g.region raster=srtmgl1_v003_30m -p
 r.colors srtmgl1_v003_30m color=srtm_plus
-
 
 ```
 
@@ -381,8 +367,6 @@ The import of HDF bands requires the specification of the individual bands
 as seen by GDAL:
 
 ```
-
-
 
 # Example MODIS FPAR
 gdalinfo MOD15A2.A2003153.h18v04.004.2003171141042.hdf
@@ -394,13 +378,10 @@ Subdatasets:
   SUBDATASET_2_DESC=[1200x1200] Lai_1km MOD_Grid_MOD15A2 (8-bit unsigned integer)
 ...
 
-
 # import of first band, here FPAR 1km:
 r.in.gdal HDF4_EOS:EOS_GRID:"MOD15A2.A2003153.h18v04.004.2003171141042.hdf":MOD_Grid_MOD15A2:Fpar_1km \
           out=fpar_1km_2003_06_02
-
 # ... likewise for other HDF bands in the file.
-
 
 ```
 

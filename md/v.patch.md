@@ -45,9 +45,7 @@ Patch together two maps with mixed feature types:
 
 ```
 
-
    v.patch input=geology,streams out=geol_streams
-
 
 ```
 
@@ -55,10 +53,8 @@ Append one map to another:
 
 ```
 
-
    g.copy vect=roads,transport
    v.patch -a input=railroads output=transport --overwrite
-
 
 ```
 

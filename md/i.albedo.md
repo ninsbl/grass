@@ -21,10 +21,8 @@ LANDSAT-TM5 bands in the North Carolina dataset:
 
 ```
 
-
 g.region raster=lsat5_1987_10 -p
 i.albedo -l input=lsat5_1987_10,lsat5_1987_20,lsat5_1987_30,lsat5_1987_40,lsat5_1987_50,lsat5_1987_70 output=albedo_lsat7_1987
-
 
 ```
 
@@ -37,10 +35,8 @@ LANDSAT-TM7 bands in the North Carolina dataset:
 
 ```
 
-
 g.region raster=lsat7_2000_10 -p
 i.albedo -l input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30,lsat7_2000_40,lsat7_2000_50,lsat7_2000_70 output=albedo_lsat7_2000
-
 
 ```
 

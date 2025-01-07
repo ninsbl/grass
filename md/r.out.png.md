@@ -19,15 +19,11 @@ Export of the soil map to PNG format with world file:
 
 ```
 
-
 g.region raster=soils_Kfactor -p
-
 # export PNG file with additional world file
 r.out.png input=soils_Kfactor output=soils_Kfactor -w
-
 # verify
 gdalinfo soils_Kfactor.png
-
 
 ```
 

@@ -34,7 +34,6 @@ and by removing, adding or reordering lines users can change the main menu items
 
 ```
 
-
 <?xml version="1.0" encoding="UTF-8"?>
 <toolbox name="MyMainMenu">
   <label>Default GRASS GIS main menu bar</label>
@@ -51,7 +50,6 @@ and by removing, adding or reordering lines users can change the main menu items
   </items>
 </toolbox>
 
-
 ```
 
 ### Brief description of file `toolboxes.xml`
@@ -67,7 +65,6 @@ Apart from `subtoolbox` tag, tag `toolbox` can contain individual items (modules
 and separators (for visual separation in the menu tree).
 
 ```
-
 
 <?xml version="1.0" encoding="UTF-8"?>
 <toolboxes>
@@ -96,7 +93,6 @@ and separators (for visual separation in the menu tree).
     </items>
   </toolbox>
 
-
 ```
 
 To redefine a toolbox (or use it as a template),
@@ -116,7 +112,6 @@ where we omitted the two toolboxes:
 
 ```
 
-
 <?xml version="1.0" encoding="UTF-8"?>
 <toolbox name="CustomizedMainMenu">
   <label>Default GRASS GIS main menu bar</label>
@@ -131,7 +126,6 @@ where we omitted the two toolboxes:
   </items>
 </toolbox>
 
-
 ```
 
 ### Creating custom toolbox
@@ -142,7 +136,6 @@ created by the user and addon module.
 The `toolboxes.xml` file contains following lines:
 
 ```
-
 
 <?xml version="1.0" encoding="UTF-8"?>
 <toolboxes>
@@ -167,14 +160,12 @@ The `toolboxes.xml` file contains following lines:
   </toolbox>
 </toolboxes>
 
-
 ```
 
 Optionally, we can add this toolbox to the main menu items.
 The `main_menu.xml` file contains following lines:
 
 ```
-
 
 <?xml version="1.0" encoding="UTF-8"?>
 <toolbox name="CustomizedMainMenu">
@@ -192,7 +183,6 @@ The `main_menu.xml` file contains following lines:
     <subtoolbox name="Help"/>
   </items>
 </toolbox>
-
 
 ```
 

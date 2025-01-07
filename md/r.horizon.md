@@ -173,11 +173,9 @@ of horizon angles CCW from East):
 
 ```
 
-
 g.region raster=elevation -p
 r.horizon elevation=elevation direction=215 step=0 bufferzone=200 \
     coordinates=638871.6,223384.4 maxdistance=5000
-
 
 ```
 
@@ -186,10 +184,8 @@ step size of 5 deg, saving result as CSV file:
 
 ```
 
-
 r.horizon elevation=elevation direction=90 step=5 bufferzone=200 \
     coordinates=638871.6,223384.4 maxdistance=5000 file=horizon.csv
-
 
 ```
 
@@ -198,11 +194,9 @@ as CSV file for plotting the horizon around the highway intersection:
 
 ```
 
-
 g.region n=223540 s=220820 w=634650 e=638780 res=10 -p
 r.horizon elevation=elevation direction=0 step=5 bufferzone=200 \
     coordinates=636483.54,222176.25 maxdistance=5000 -d file=horizon.csv
-
 
 ```
 
@@ -218,7 +212,6 @@ We can plot horizon in polar coordinates using Matplotlib in Python:
 
 ```
 
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -228,14 +221,10 @@ horizon = horizon[1:, :]
 ax = plt.subplot(111, polar=True)
 bars = ax.plot(horizon[:, 0] / 180 * np.pi,
                (90 - horizon[:, 1]) / 180 * np.pi)
-
 # uncomment the 2 following lines when using -c flag
-
 # ax.set_theta_direction(-1)
-
 # ax.set_theta_zero_location('N')
 plt.show()
-
 
 ```
 
@@ -249,16 +238,12 @@ Raster map mode (output maps "horangle\*" become input for *r.sun*):
 
 ```
 
-
 g.region raster=elevation -p
 
-
 # we put a bufferzone of 10% of maxdistance around the study area
-
 # compute only direction between 90 and 270 degrees
 r.horizon elevation=elevation step=30 start=90 end=300 \
     bufferzone=200 output=horangle maxdistance=5000
-
 
 ```
 

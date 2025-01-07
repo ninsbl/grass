@@ -23,13 +23,11 @@ The function is defined in gain\_aster.c file.
 
 ```
 
-
 /*Gain Code*/
     /*0 - High (Not Applicable for band 10-14: TIR)*/
     /*1 - Normal*/
     /*2 - Low 1(Not Applicable for band 10-14: TIR)*/
     /*3 - Low 2(Not Applicable for Band 1-3N/B and 10-14)*/
-
 
 ```
 

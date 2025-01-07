@@ -9,10 +9,8 @@ to *[v.colors](v.colors.html)*.
 
 ```
 
-
 v.colors.out map=soils_general rules=rules.txt
 v.colors map=soils_wake rules=rules.txt
-
 
 ```
 

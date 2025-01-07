@@ -10,7 +10,6 @@ driver](cairodriver.html)* is not available.
 
 ## USAGE
 
-
 ### Environment variables
 
 The PNG driver can be enabled by setting **GRASS\_RENDER\_IMMEDIATE**
@@ -18,12 +17,9 @@ variable, eg.
 
 ```
 
-
 export GRASS_RENDER_IMMEDIATE=png
 
-
 ```
-
 
 Several environment variables affect the operation of the PNG driver:
 
@@ -64,12 +60,9 @@ Several environment variables affect the operation of the PNG driver:
   will map GRASS\_RENDER\_FILE as its framebuffer, rather than using
   memory. This only works with BMP files.
 
-
 ### Example
 
-
 ```
-
 
 export GRASS_RENDER_IMMEDIATE=png
 export GRASS_RENDER_TRUECOLOR=TRUE
@@ -78,9 +71,7 @@ g.region raster=elevation
 d.rast elevation
 d.vect roadsmajor color=red
 
-
 ```
-
 
 This writes a file named `map.png` in your current directory.
 

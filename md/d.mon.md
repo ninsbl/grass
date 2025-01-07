@@ -66,9 +66,7 @@ display](wxGUI.html#map-display-window)*, run
 
 ```
 
-
 d.mon start=wx0
-
 
 ```
 
@@ -80,10 +78,8 @@ All subsequently displayed data will be rendered on monitor `wx0`.
 
 ```
 
-
 g.region raster=elevation -p
 d.rast map=elevation
-
 
 ```
 
@@ -97,9 +93,7 @@ A CAIRO monitor can be started (and selected) by
 
 ```
 
-
 d.mon start=cairo output=out.pdf
-
 
 ```
 
@@ -112,13 +106,11 @@ To list the currently running monitors, use
 
 ```
 
-
 d.mon -l
 
 List of running monitors:
 wx0
 cairo
-
 
 ```
 
@@ -128,11 +120,9 @@ To identify the currently selected monitor, use
 
 ```
 
-
 d.mon -p
 
 cairo
-
 
 ```
 
@@ -143,9 +133,7 @@ still running wxGUI monitor, use
 
 ```
 
-
 d.mon select=wx0
-
 
 ```
 
@@ -155,9 +143,7 @@ To close the wxGUI monitor, run
 
 ```
 
-
 d.mon stop=wx0
-
 
 ```
 

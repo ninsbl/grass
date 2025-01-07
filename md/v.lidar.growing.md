@@ -43,9 +43,7 @@ classification in the same categories as above.
 
 ```
 
-
 v.lidar.growing input=edge output=growing first=firstpulse
-
 
 ```
 

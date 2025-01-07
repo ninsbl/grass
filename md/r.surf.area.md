@@ -44,7 +44,6 @@ impact, but will cause longer processing times.
 
 ```
 
-
 g.region -p raster=elevation
 
 r.surf.area map=elevation units=hectares
@@ -54,7 +53,6 @@ Surface area calculation(low, high, avg):
         20294.310421 20320.936368 20307.623395
 Current region plan area: 20250.000000
 Estimated region Surface Area: 20336.234719
-
 
 ```
 

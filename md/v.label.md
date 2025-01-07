@@ -17,7 +17,7 @@ A description of the labels file follows.
 The file is located in `$MAPSET/paint/labels/`.
 The file is a plain-text ASCII file containing the following fields:
 
-### Caution: The following information may be incomplete, out of date, and wrong
+#### Caution: The following information may be incomplete, out of date, and wrong
 
 The label information that must be provided in the *labels* file is:
 **TEXT**:
@@ -45,7 +45,6 @@ may be specified as:
 
 ```
 
-
     lower left    (lower left corner of the text)
     lower right    (lower right corner of the text)
     lower center    (bottom center of the text)
@@ -55,7 +54,6 @@ may be specified as:
     upper center    (top center of the text)
 
     center    (center of the text)
-
 
 ```
 
@@ -67,11 +65,9 @@ The following fonts are available for use with
 
 ```
 
-
   cyrilc gothgbt gothgrt gothitt greekc greekcs greekp greeks
   italicc italiccs italict romanc romancs romand romans romant
   scriptc scripts
-
 
 ```
 
@@ -101,7 +97,7 @@ text color can be specified in one of several ways:
 2. As red, green, blue component values. (0-255)
 
    for example: `128:100:200`
-3. Specify "`none`" to suppress the lettering.
+4. Specify "`none`" to suppress the lettering.
 
 **WIDTH**:
 This determines the line thickness of the border box.
@@ -148,12 +144,10 @@ Spearfish example with TrueType font (path may differ):
 
 ```
 
-
 v.label -a map=roads column=label labels=lroads \
         font=/usr/X11R6/lib/X11/fonts/TTF/luximri.ttf
 d.vect roads
 d.labels lroads
-
 
 ```
 
@@ -164,10 +158,8 @@ This example uses the standard UNIX `cat` program.
 
 ```
 
-
 cd $MAPSET/paint/labels/
 cat file1 file2 file3 file4 > file_all
-
 
 ```
 

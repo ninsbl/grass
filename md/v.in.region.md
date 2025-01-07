@@ -20,11 +20,9 @@ the raster map), resulting in a new vector polygon:
 
 ```
 
-
 g.region raster=soils_Kfactor -p
 v.in.region output=soils_Kfactor_bbox
 v.info map=soils_Kfactor_bbox
-
 
 ```
 

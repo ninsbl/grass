@@ -17,11 +17,9 @@ label is allowed but not required (see **-l** flag).
 
 ```
 
-
    P23 N 23:14:12 W 340
    P24 S 04:18:56 E 230
    ...
-
 
 ```
 
@@ -40,11 +38,9 @@ be in appropriate linear units).
 
 ```
 
-
    -134.140211 312.420236 P23
    -116.832837 83.072345 P24
    ...
-
 
 ```
 
@@ -81,9 +77,7 @@ and closed boundaries may be converted to areas with *v.centroids*.
 
 ```
 
-
    m.cogo -l in=cogo.dat
-
 
 ```
 
@@ -91,10 +85,7 @@ Where the `cogo.dat` input file looks like:
 
 ```
 
-
-
 # Sample COGO input file -- This defines an area.
-
 # <label> <bearing> <distance>
 P001 S 88:44:56 W 6.7195
 P002 N 33:34:15 W 2.25
@@ -113,16 +104,13 @@ P014 N 88:03:13 W 98.8567
 P015 S 88:44:56 W 146.2713
 P016 S 88:44:56 W 18.7164
 
-
 ```
 
 Round trip:
 
 ```
 
-
    m.cogo -l input=cogo.dat | m.cogo -rl in="-"
-
 
 ```
 
@@ -130,9 +118,7 @@ Import as a vector points map:
 
 ```
 
-
    m.cogo -l input=cogo.dat | v.in.ascii output=cogo_points x=1 y=2 separator=space
-
 
 ```
 
@@ -140,13 +126,11 @@ Shell script to import as a vector line map:
 
 ```
 
-
    m.cogo -l input=cogo.dat | tac | awk '
        BEGIN { FS=" " ; R=0 }
        $1~/\d*\.\d*/ { printf(" %.8f %.8f\n", $1, $2) ; ++R }
        END { printf("L %d\n", R) }' | tac | \
        v.in.ascii -n format=standard out=cogo_line
-
 
 ```
 
@@ -154,13 +138,11 @@ Convert that lines map into an area:
 
 ```
 
-
    # Add the -c flag to the above example to close the loop:
    m.cogo -l -c input=cogo.dat | ...
        ...
    v.type input=cogo_line output=cogo_boundary from_type=line to_type=boundary
    v.centroids input=cogo_boundary output=cogo_area
-
 
 ```
 

@@ -1,6 +1,5 @@
 
 
-
 ## KEYWORDS
 
 [display](display.html), [GUI](topic_GUI.html), [raster](keywords.html#raster), [editing](keywords.html#editing), [digitizer](keywords.html#digitizer)
@@ -34,7 +33,6 @@ The typical workflow includes these steps:
 9. If existing raster is used for the new raster, digitized areas will respect
    the color table, but you can always set different color table.
 
-
 ## NOTES
 
 Raster Digitizer respects computational region including the currently set resolution.
@@ -50,16 +48,12 @@ When we are done with digitizing, we save the result and explore cast shadows of
 
 ```
 
-
 g.region raster=elev_lid792_1m
-
 # now create elev_edited raster by digitizing and save
 r.slope.aspect elevation=elev_edited slope=elev_slope aspect=elev_aspect
 r.sun elevation=elev_edited aspect=elev_aspect slope=elev_slope beam_rad=beam day=172 time=6
 
-
 ```
-
 
 [![Raster digitizer example step 1](wxGUI_rdigit_step1.png)](wxGUI_rdigit_step1.png)
 [![Raster digitizer example step 2](wxGUI_rdigit_step2.png)](wxGUI_rdigit_step2.png)

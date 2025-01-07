@@ -17,12 +17,10 @@ Removing attribute table connected to layer 1:
 
 ```
 
-
 g.copy vect=roadsmajor,myroads
 v.db.droptable myroads
 v.db.droptable myroads -f
 v.db.connect -p myroads
-
 
 ```
 

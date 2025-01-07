@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.hull* computes the convex hull of a vector map and outputs
@@ -29,7 +28,6 @@ clouds, North Carolina sample data set):
 
 ```
 
-
 g.region rural_1m -p
 r.mapcalc "zero = 0"
 v.random -z output=random3d_a n=10 zmin=0 zmax=200
@@ -44,12 +42,9 @@ d.vect random3d_a color=red
 d.vect random3d_b_hull
 d.vect random3d_b color=red
 
-
 # 3D view in wxGUI (g.gui)
 
-
 ```
-
 
 ![](v_hull_3d.png)
 
@@ -61,7 +56,6 @@ Fig: Convex hull in 3D from 3D points created with *v.hull*
   (2000). Computational geometry, chapter 1.1, 2-8.
 * J. O'Rourke, (1998). Computational Geometry in C (Second
   Edition), chapter 4.
-
 
 ## SEE ALSO
 

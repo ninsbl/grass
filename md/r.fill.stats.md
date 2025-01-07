@@ -195,7 +195,6 @@ search distance of four cells from the center cell:
 
 ```
 
-
 000.00 000.01 000.04 000.07 000.09 000.07 000.04 000.01 000.00
 000.01 000.06 000.13 000.19 000.22 000.19 000.13 000.06 000.01
 000.04 000.13 000.25 000.37 000.42 000.37 000.25 000.13 000.04
@@ -205,7 +204,6 @@ search distance of four cells from the center cell:
 000.04 000.13 000.25 000.37 000.42 000.37 000.25 000.13 000.04
 000.01 000.06 000.13 000.19 000.22 000.19 000.13 000.06 000.01
 000.00 000.01 000.04 000.07 000.09 000.07 000.04 000.01 000.00
-
 
 ```
 
@@ -220,7 +218,6 @@ cell:
 
 ```
 
-
 ...... ...... ...... 000.00 000.00 000.00 ...... ...... ......
 ...... 000.00 000.02 000.06 000.09 000.06 000.02 000.00 ......
 ...... 000.02 000.11 000.22 000.28 000.22 000.11 000.02 ......
@@ -230,7 +227,6 @@ cell:
 ...... 000.02 000.11 000.22 000.28 000.22 000.11 000.02 ......
 ...... 000.00 000.02 000.06 000.09 000.06 000.02 000.00 ......
 ...... ...... ...... 000.00 000.00 000.00 ...... ...... ......
-
 
 ```
 
@@ -280,9 +276,7 @@ map:
 
 ```
 
-
 r.fill.stats input=measurements output=result dist=3.0 -m mode=wmean uncertainty=uncert_map
-
 
 ```
 
@@ -291,9 +285,7 @@ neighboring cells) on the input map:
 
 ```
 
-
 r.fill.stats input=measurements output=result dist=10 mode=mean
-
 
 ```
 
@@ -301,9 +293,7 @@ Fill data gaps in a categorized raster map; preserve existing data:
 
 ```
 
-
 r.fill.stats input=categories output=result dist=100 -m mode=mode -k
-
 
 ```
 
@@ -314,9 +304,7 @@ using the *[r.in.lidar](r.in.lidar.html)* module:
 
 ```
 
-
 r.in.lidar -e input=points.las output=density method=n resolution=5 class_filter=2
-
 
 ```
 
@@ -325,9 +313,7 @@ resolution:
 
 ```
 
-
 g.region -pa raster=density res=1
-
 
 ```
 
@@ -335,9 +321,7 @@ Import the point cloud as raster using binning:
 
 ```
 
-
 r.in.lidar input=points.las output=ground_raw method=mean class_filter=2
-
 
 ```
 
@@ -345,19 +329,15 @@ Check that there are more non-NULL cells than NULL ("no data") cells:
 
 ```
 
-
 r.univar map=ground_raw
 
-
 ```
 
 ```
-
 
 total null and non-null cells: 2340900
 total null cells: 639184
 ...
-
 
 ```
 
@@ -365,9 +345,7 @@ Fill in the NULL cells using the default 3-cell search radius:
 
 ```
 
-
 r.fill.stats input=ground output=ground_filled uncertainty=uncertainty distance=3 mode=wmean power=2.0 cells=8
-
 
 ```
 
@@ -386,20 +364,16 @@ a complete elevation map:
 
 ```
 
-
 g.region raster=elev_srtm_30m -p
 d.mon wx0
 d.histogram elev_srtm_30m
-
 
 # remove SRTM outliers, i.e. SRTM below 50m (esp. lakes), leading to no data areas
 r.mapcalc "elev_srtm_30m_filt = if(elev_srtm_30m < 50.0, null(), elev_srtm_30m)"
 d.histogram elev_srtm_30m_filt
 d.rast elev_srtm_30m_filt
 
-
 # using the IDW method to fill these holes in DEM without low-pass filter
-
 # increase distance to gap-fill larger holes
 r.fill.stats -k input=elev_srtm_30m_filt output=elev_srtm_30m_idw distance=100
 
@@ -413,7 +387,6 @@ r.univar -e diff_orig_idw
 d.erase
 d.rast diff_orig_idw
 d.legend diff_orig_idw
-
 
 ```
 

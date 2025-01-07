@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The purpose of the **Example Tool** is to make life easier
@@ -18,7 +17,6 @@ Following topics are covered:
 * access from main menu
 * writing programmer documentation
 * writing user documentation
-
 
 ## NOTE
 

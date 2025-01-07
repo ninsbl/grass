@@ -29,11 +29,8 @@ analysed (North Carolina sample dataset) and univariate statistics performed:
 
 ```
 
-
-
 # show columns of attribute table connected to precipitation map
 v.info -c precip_30ynormals
-
 
 # univariate statistics on 30 years annual precipitation in NC
 v.db.univar precip_30ynormals column=annual
@@ -44,7 +41,6 @@ v.db.univar precip_30ynormals column=annual
  Mean: 1289.31147058823
  [...]
 
-
 ```
 
 ### Univariate statistics on randomly sampled data points
@@ -54,7 +50,6 @@ In this example, random points are sampled from the elevation map
 
 ```
 
-
 g.region raster=elevation -p
 v.random output=samples n=100
 v.db.addtable samples column="heights double precision"
@@ -62,7 +57,6 @@ v.what.rast samples raster=elevation column=heights
 v.db.select samples
 
 v.db.univar samples column=heights
-
 
 ```
 
@@ -74,9 +68,7 @@ which selects just the relevant statistic.
 
 ```
 
-
 v.db.univar precip_30ynormals column=annual format=json | jq .statistics.mean
-
 
 ```
 

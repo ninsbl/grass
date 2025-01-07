@@ -25,9 +25,7 @@ the `elevation` raster map:
 
 ```
 
-
 g.region raster=zipcodes -p
-
 
 # print quantiles
 r.stats.quantile base=zipcodes cover=elevation quantiles=3 -p
@@ -39,11 +37,9 @@ r.stats.quantile base=zipcodes cover=elevation quantiles=3 -p
 27518:1:66.666667:129.893723
 [...]
 
-
 # write out percentile raster maps
 r.stats.quantile base=zipcodes cover=elevation percentiles=25,50,75 \
   output=zipcodes_elev_q25,zipcodes_elev_q50,zipcodes_elev_q75
-
 
 ```
 

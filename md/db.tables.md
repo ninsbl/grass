@@ -15,9 +15,7 @@ do not need to be spcified each time.
 
 ```
 
-
 db.tables -p
-
 
 ```
 
@@ -25,9 +23,7 @@ db.tables -p
 
 ```
 
-
 db.tables driver=dbf database=/grassdata/nc_spm_08/user1/PERMANENT/dbf
-
 
 ```
 
@@ -35,9 +31,7 @@ db.tables driver=dbf database=/grassdata/nc_spm_08/user1/PERMANENT/dbf
 
 ```
 
-
 db.tables -p driver=sqlite database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
-
 
 ```
 

@@ -6,9 +6,7 @@ the number of patches per square kilometer, as:
 
 ```
 
-
 PD = Npatch / A
-
 
 ```
 
@@ -40,9 +38,7 @@ To calculate patch density index on map *my\_map*, using
 
 ```
 
-
 r.li.patchdensity input=my_map conf=my_conf output=my_out
-
 
 ```
 
@@ -50,13 +46,10 @@ Example for Spearfish forest areas:
 
 ```
 
-
 g.region raster=landcover.30m -p
-
 # extract forested areas:
 r.category landcover.30m
 r.mapcalc "forests = if(landcover.30m >= 41 && landcover.30m <= 43, 1, null())"
-
 
 # patch density (7x7 moving window defined in g.gui.rlisetup):
 r.li.patchdensity forests conf=movwindow7 out=forests_p_dens7
@@ -66,18 +59,15 @@ d.rast.leg forests_p_dens7
 r.to.vect forests out=forests feature=area
 d.vect forests type=boundary
 
-
 ```
 
 Forest map (North Carolina sample dataset) example:
 
 ```
 
-
 g.region raster=landclass96 -p
 r.mapcalc "forests = if(landclass96 == 5, 1, null() )"
 r.li.patchdensity input=forests conf=movwindow7 out=forests_patchdensity_mov7
-
 
 # verify
 r.univar forests_patchdensity_mov7
@@ -85,7 +75,6 @@ r.to.vect input=forests output=forests type=area
 d.mon wx0
 d.rast forests_patchdensity_mov7
 d.vect forests type=boundary
-
 
 ```
 

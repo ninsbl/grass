@@ -20,39 +20,31 @@ be displayed to standard output or can be directed to a file
 
 ```
 
-
 db.select sql="select * from roads"
-
 
 ```
 
 or
 
 ```
-
 
 echo "select * from roads" | db.select input=-
 
-
 ```
 
 or
 
 ```
-
 
 db.select input=file.sql
 
-
 ```
 
 or
 
 ```
 
-
 cat file.sql | db.select input=-
-
 
 ```
 
@@ -60,10 +52,8 @@ Select all from table roads:
 
 ```
 
-
 db.select -c driver=odbc database=mydb table=hospitals \
           input=file.sql output=result.csv
-
 
 ```
 
@@ -71,9 +61,7 @@ Select some string attribute, exclude others:
 
 ```
 
-
 db.select sql="SELECT * FROM archsites WHERE str1 <> 'No Name'"
-
 
 ```
 
@@ -81,9 +69,7 @@ Select some string attribute with ZERO length:
 
 ```
 
-
 db.select sql="SELECT * FROM archsites WHERE str1 IS NULL"
-
 
 ```
 
@@ -91,9 +77,7 @@ Select coordinates from PostGIS table:
 
 ```
 
-
 db.select sql="SELECT x(geo),y(geo) FROM localizzazione"
-
 
 ```
 
@@ -101,13 +85,11 @@ db.select sql="SELECT x(geo),y(geo) FROM localizzazione"
 
 ```
 
-
 cat file.sql
 SELECT * FROM busstopsall WHERE cat = 1
 SELECT cat FROM busstopsall WHERE cat > 4 AND cat < 8
 
 db.select input=file.sql
-
 
 ```
 
@@ -119,10 +101,8 @@ table by *v.to.db*:
 
 ```
 
-
 db.select sql="SELECT long,lat,site_id,department,obs,COUNT(long) as count_cases \
                FROM diseases GROUP BY long,lat"
-
 
 ```
 

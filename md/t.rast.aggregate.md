@@ -60,7 +60,6 @@ data, running:
 
 ```
 
-
 t.rast.aggregate input=tempmean_monthly output=tempmean_yearly \
                  basename=tempmean_year \
                  granularity="1 years" method=average
@@ -122,7 +121,6 @@ t.info tempmean_yearly
  |        description="Aggregated precipitation dataset with yearly resolution"
  +----------------------------------------------------------------------------+
 
-
 ```
 
 ### Different aggregations and map name suffix variants
@@ -133,7 +131,6 @@ using the **suffix** option:
 #### Weekly aggregation
 
 ```
-
 
 t.rast.aggregate input=daily_temp output=weekly_avg_temp \
   basename=weekly_avg_temp method=average granularity="1 weeks"
@@ -148,13 +145,11 @@ weekly_avg_temp_2003_05|climate|2003-01-31 00:00:00|2003-02-07 00:00:00
 weekly_avg_temp_2003_06|climate|2003-02-07 00:00:00|2003-02-14 00:00:00
 weekly_avg_temp_2003_07|climate|2003-02-14 00:00:00|2003-02-21 00:00:00
 
-
 ```
 
 Variant with **suffix** set to granularity:
 
 ```
-
 
 t.rast.aggregate input=daily_temp output=weekly_avg_temp \
   basename=weekly_avg_temp suffix=gran method=average \
@@ -170,13 +165,11 @@ weekly_avg_temp_2003_01_31|climate|2003-01-31 00:00:00|2003-02-07 00:00:00
 weekly_avg_temp_2003_02_07|climate|2003-02-07 00:00:00|2003-02-14 00:00:00
 weekly_avg_temp_2003_02_14|climate|2003-02-14 00:00:00|2003-02-21 00:00:00
 
-
 ```
 
 #### Monthly aggregation
 
 ```
-
 
 t.rast.aggregate input=daily_temp output=monthly_avg_temp \
   basename=monthly_avg_temp suffix=gran method=average \
@@ -191,13 +184,11 @@ monthly_avg_temp_2003_04|climate|2003-04-01 00:00:00|2003-05-01 00:00:00
 monthly_avg_temp_2003_05|climate|2003-05-01 00:00:00|2003-06-01 00:00:00
 monthly_avg_temp_2003_06|climate|2003-06-01 00:00:00|2003-07-01 00:00:00
 
-
 ```
 
 #### Yearly aggregation
 
 ```
-
 
 t.rast.aggregate input=daily_temp output=yearly_avg_temp \
   basename=yearly_avg_temp suffix=gran method=average \
@@ -207,7 +198,6 @@ t.rast.list yearly_avg_temp
 name|mapset|start_time|end_time
 yearly_avg_temp_2003|climate|2003-01-01 00:00:00|2004-01-01 00:00:00
 yearly_avg_temp_2004|climate|2004-01-01 00:00:00|2005-01-01 00:00:00
-
 
 ```
 

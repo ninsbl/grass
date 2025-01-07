@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.out.postgis* exports an existing GRASS vector map layer to
@@ -111,7 +110,6 @@ by **options=**`TOPOSCHEMA_NAME=<name>`.
 
 ## EXAMPLES
 
-
 ### Export Simple Features
 
 Export vector map "urbanarea" as feature table "urbanarea"
@@ -120,18 +118,14 @@ database schema is automatically used when not defined by the user.
 
 ```
 
-
 v.out.postgis input=urbanarea output="PG:dbname=grass"
 
-
 ```
-
 
 GRASS areas are converted into polygons, isles into holes. We can
 check the number or created polygons by simple SQL query below.
 
 ```
-
 
 db.select driver=pg database=grass \
  sql="SELECT ST_GeometryType(geom) as geom_type, count(*) from urbanarea group by geom_type"
@@ -139,21 +133,16 @@ db.select driver=pg database=grass \
 geom_type|count
 ST_Polygon|657
 
-
 ```
-
 
 *Note:* same procedure can be done
 by *[v.out.ogr](v.out.ogr.html)* module, eg.
 
 ```
 
-
 v.out.ogr input=urbanarea output="PG:dbname=grass" format=PostgreSQL
 
-
 ```
-
 
 In this case GRASS vector data are exported to PostGIS database using
 OGR library, namely using PostgreSQL driver. Contrary to
@@ -175,12 +164,9 @@ schema "grassout".
 
 ```
 
-
 v.out.postgis input=bridges output="PG:dbname=grass" output_layer=grassout.bridges
 
-
 ```
-
 
 ### Export data with creation options
 
@@ -191,12 +177,9 @@ by `srid` identifier which corresponds in this case with EPSG
 
 ```
 
-
 v.out.postgis input=roadsmajor output="PG:dbname=grass" options="GEOMETRY_NAME=wkb_geometry,SPATIAL_INDEX=NO,SRID=3358"
 
-
 ```
-
 
 ### Link exported data
 
@@ -209,18 +192,14 @@ as a link to the PostGIS feature table.
 
 ```
 
-
 v.out.postgis input=busstopsall@PERMANENT output="PG:dbname=grass" output_link=busstopsall_pg
 
-
 ```
-
 
 Created link can be checked
 by *[v.info](v.info.html)*:
 
 ```
-
 
  v.info busstopsall_pg
 
@@ -235,9 +214,7 @@ by *[v.info](v.info.html)*:
  |----------------------------------------------------------------------------|
 ...
 
-
 ```
-
 
 ### Export data without attributes
 
@@ -248,12 +225,9 @@ will contain only two columns, the fid and geometry column.
 
 ```
 
-
 v.out.postgis -t input=railroads output="PG:dbname=grass"
 
-
 ```
-
 
 ### Export topological data
 
@@ -265,12 +239,9 @@ Topology](https://postgis.net/docs/Topology.html) schema.
 
 ```
 
-
 v.out.postgis -l input=busroutesall output="PG:dbname=grass"
 
-
 ```
-
 
 For more info about PostGIS Topology implementation in GRASS see
 the [wiki
@@ -285,18 +256,15 @@ page](https://grasswiki.osgeo.org/wiki/PostGIS_Topology).
   from *[v.out.ogr](v.out.ogr.html)*: **-a**, **-s**, **-c**, **-p**, **-n**
 * Add options: **cats**, **where**
 
-
 ## REQUIREMENTS
 
 * PostGIS 2.x or later for topological export (flag **-l**)
-
 
 ## REFERENCES
 
 * [OGC Simple Feature Access](https://www.ogc.org/publications/standard/sfa/) specification
 * [PostGIS Topology](https://postgis.net/docs/Topology.html) documentation
 * [GRASS-PostGIS data provider](https://grass.osgeo.org/programming8/vlibPg.html)
-
 
 ## SEE ALSO
 

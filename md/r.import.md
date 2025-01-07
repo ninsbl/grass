@@ -91,28 +91,19 @@ Example for North Carolina sample dataset (the tile name is "n35\_w079\_1arc\_v3
 
 ```
 
-
-
 # set computational region to e.g. 10m elevation model:
 g.region raster=elevation -p
 
-
 # Import with reprojection on the fly. Recommended parameters:
-
 # resample   Resampling method to use for reprojection - bilinear
-
 # extent     Output raster map extent - region: extent of current region
-
 # resolution Resolution of output raster map
-
 #  - region: current region resolution - limit to g.region setting from above
 r.import input=n35_w079_1arc_v3.tif output=srtmv3_resamp10m resample=bilinear \
   extent=region resolution=region title="SRTM V3 resampled to 10m resolution"
 
-
 # beautify colors:
 r.colors srtmv3_resamp10m color=elevation
-
 
 ```
 
@@ -126,37 +117,27 @@ North Carolina region using the *extent* parameter:
 
 ```
 
-
-
 # download selected Bioclim data (2.5 arc-minutes resolution)
-
 # optionally tiles are available for the 30 arc-sec resolution
 wget https://geodata.ucdavis.edu/climate/worldclim/1_4/grid/cur/bio_2-5m_bil.zip
-
 
 # extract BIO1 from package (BIO1 = Annual Mean Temperature):
 unzip bio_2-5m_bil.zip bio1.bil bio1.hdr
 
-
 # prior to import, fix broken WorldClim extent using GDAL tool
 gdal_translate -a_ullr -180 90 180 -60 bio1.bil bio1_fixed.tif
-
 
 # set computational region to North Carolina, 4000 m target pixel resolution
 g.region -d res=4000 -ap
 
-
 # subset to current region and reproject on the fly to current project CRS,
-
 # using -n since whole-world map is imported:
 r.import input=bio1_fixed.tif output=bioclim01 resample=bilinear \
          extent=region resolution=region -n
 
-
 # temperature data are in °C * 10
 r.info bioclim01
 r.univar -e bioclim01
-
 
 ```
 

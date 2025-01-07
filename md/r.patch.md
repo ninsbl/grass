@@ -73,14 +73,12 @@ The example assumes zero values to be treated as NULLs (**-z** flag).
 
 ```
 
-
   1 1 1 0 2 2 0 0    0 0 1 1 0 0 0 0    1 1 1 1 2 2 0 0
   1 1 0 2 2 2 0 0    0 0 1 1 0 0 0 0    1 1 1 2 2 2 0 0
   3 3 3 3 2 2 0 0    0 0 0 0 0 0 0 0    3 3 3 3 2 2 0 0
   3 3 3 3 0 0 0 0    4 4 4 4 4 4 4 4    3 3 3 3 4 4 4 4
   3 3 3 0 0 0 0 0    4 4 4 4 4 4 4 4    3 3 3 4 4 4 4 4
   0 0 0 0 0 0 0 0    4 4 4 4 4 4 4 4    4 4 4 4 4 4 4 4
-
 
 ```
 
@@ -89,14 +87,12 @@ produces the following results:
 
 ```
 
-
   0 0 1 1 0 0 0 0    1 1 1 0 2 2 0 0    1 1 1 1 2 2 0 0
   0 0 1 1 0 0 0 0    1 1 0 2 2 2 0 0    1 1 1 1 2 2 0 0
   0 0 0 0 0 0 0 0    3 3 3 3 2 2 0 0    3 3 3 3 2 2 0 0
   4 4 4 4 4 4 4 4    3 3 3 3 0 0 0 0    4 4 4 4 4 4 4 4
   4 4 4 4 4 4 4 4    3 3 3 0 0 0 0 0    4 4 4 4 4 4 4 4
   4 4 4 4 4 4 4 4    0 0 0 0 0 0 0 0    4 4 4 4 4 4 4 4
-
 
 ```
 
@@ -116,9 +112,7 @@ program can be used:
 
 ```
 
-
 g.region raster=map1[,map2[,...]]
-
 
 ```
 
@@ -146,12 +140,9 @@ limit. If it is too low, you can as superuser add an entry in
 
 ```
 
-
 /etc/security/limits.conf
-
 # <domain>      <type>  <item>         <value>
 your_username  hard    nofile          1500
-
 
 ```
 
@@ -195,10 +186,8 @@ Then we perform the patching.
 
 ```
 
-
 g.region raster=roads
 r.patch input=roads,water,forest output=result
-
 
 ```
 
@@ -210,11 +199,9 @@ used in the order listed.
 
 ```
 
-
 MAPS=`g.list type=raster separator=comma pat="map_*"`
 g.region raster=$MAPS -p
 r.patch input=$MAPS output=maps_mosaic
-
 
 ```
 

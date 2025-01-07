@@ -7,7 +7,6 @@ The PS driver generates a PostScript file from GRASS display commands.
 
 ## USAGE
 
-
 ### Environment variables
 
 The PS driver can be enabled by setting **GRASS\_RENDER\_IMMEDIATE**
@@ -15,12 +14,9 @@ variable, eg.
 
 ```
 
-
 export GRASS_RENDER_IMMEDIATE=ps
 
-
 ```
-
 
 Several environment variables affect the operation of the PS driver:
 
@@ -54,12 +50,9 @@ Several environment variables affect the operation of the PS driver:
 
   if `FALSE`, no trailer section is generated.
 
-
 ### Example
 
-
 ```
-
 
 export GRASS_RENDER_IMMEDIATE=ps
 export GRASS_RENDER_TRUECOLOR=TRUE
@@ -68,9 +61,7 @@ g.region raster=elevation
 d.rast elevation
 d.vect roadsmajor color=red
 
-
 ```
-
 
 This writes a file named `map.ps` in your current directory.
 

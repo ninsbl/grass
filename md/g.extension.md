@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *g.extension* downloads and installs, removes or updates
@@ -18,7 +17,6 @@ Two types of extensions are supported:
   based systems the installation is preceded by the automated download of the
   extension's source code along with subsequent compilation and installation.
   This requires a compiler environment to be present on the user's computer.
-
 
 ### Managing installed extensions
 
@@ -54,7 +52,6 @@ the option **prefix**. Ensuring that these extensions will be accessible
 in GRASS GIS is in this case in the responsibility of the user.
 
 ### Source code sources and repositories
-
 
 #### GRASS GIS Addons repository on GitHub
 
@@ -128,31 +125,24 @@ necessary to compile just in case of C).
 
 ## EXAMPLES
 
-
 ### Download and install of an extension
 
 Download and install *r.stream.distance* into current GRASS installation
 
 ```
 
-
 g.extension extension=r.stream.distance
 
-
 ```
-
 
 This installs the extension from the official repository.
 For convenience, a shorter syntax can be used:
 
 ```
 
-
 g.extension r.stream.distance
 
-
 ```
-
 
 ### Download and install of an extension when behind a proxy
 
@@ -160,27 +150,19 @@ Example for an open http proxy:
 
 ```
 
-
-
 # syntax: http://proxyurl:proxyport
 g.extension extension=r.stream.distance proxy="http=http://proxy.example.com:8080"
 
-
 ```
-
 
 Example for a proxy with proxy authentication:
 
 ```
 
-
-
 # syntax: http://username:password@proxyurl:proxyport
 g.extension extension=r.stream.distance proxy="http=http://username:password@proxy.example.com:8080"
 
-
 ```
-
 
 ### Managing the extensions
 
@@ -188,34 +170,25 @@ List all available extensions in the official GRASS GIS Addons repository:
 
 ```
 
-
 g.extension -l
 
-
 ```
-
 
 List all locally installed extensions:
 
 ```
 
-
 g.extension -a
 
-
 ```
-
 
 Removal of a locally installed extension:
 
 ```
 
-
 g.extension extension=r.stream.distance operation=remove
 
-
 ```
-
 
 ### Installing from various online repositories: GitHub, GitLab, Bitbucket
 
@@ -223,45 +196,33 @@ Simple URL to GitHub, GitLab, Bitbucket repositories:
 
 ```
 
-
 g.extension r.example.plus url="https://github.com/wenzeslaus/r.example.plus"
 
-
 ```
-
 
 Simple URL to GitHub, GitLab, Bitbucket repositories from a specific (e.g. development) branch:
 
 ```
 
-
 g.extension r.example.plus url="https://github.com/wenzeslaus/r.example.plus" branch=master
 
-
 ```
-
 
 Simple URL to OSGeo Trac (downloads a ZIP file, requires download to be enabled in Trac):
 
 ```
 
-
 g.extension r.example url=trac.osgeo.org/.../r.example
 
-
 ```
-
 
 In general, when a ZIP file or other archive is provided, the full URL can be used:
 
 ```
 
-
 g.extension r.example url=http://example.com/.../r.example?format=zip
 
-
 ```
-
 
 Note that because of MS-Windows operating system architecture,
 only official repository is supported on this platform.
@@ -275,12 +236,9 @@ r.local.relief module:
 
 ```
 
-
 g.extension r.local.relief url="https://trac.osgeo.org/grass/browser/grass-addons/grass7/raster/r.local.relief?rev=57854&format=zip"
 
-
 ```
-
 
 ### Installing when writing a module locally
 
@@ -289,12 +247,9 @@ one can install it using:
 
 ```
 
-
 g.extension r.example url=/local/directory/r.example/
 
-
 ```
-
 
 ## REQUIREMENTS
 

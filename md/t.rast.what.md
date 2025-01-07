@@ -40,9 +40,7 @@ In the following examples we sample a space time raster dataset that contains
 
 ```
 
-
 g.region s=0 n=80 w=0 e=120 b=0 t=50 res=10
-
 
 # Generate data
 r.mapcalc expression="a_1 = 1" -s
@@ -55,7 +53,6 @@ t.create type=strds output=A title="A test" descr="A test"
 t.register -i type=raster input=A maps=a_1,a_2,a_3,a_4 \
     start='1990-01-01' increment="1 month"
 
-
 ```
 
 ### Example 1
@@ -65,7 +62,6 @@ the layout is one coordinate(point per column:
 
 ```
 
-
 t.rast.what strds=A coordinates="115,36,79,45" layout=col -n
 
 start|end|115.0000000000;36.0000000000|79.0000000000;45.0000000000
@@ -73,7 +69,6 @@ start|end|115.0000000000;36.0000000000|79.0000000000;45.0000000000
 1990-02-01 00:00:00|1990-03-01 00:00:00|2|2
 1990-03-01 00:00:00|1990-04-01 00:00:00|3|3
 1990-04-01 00:00:00|1990-05-01 00:00:00|4|4
-
 
 ```
 
@@ -84,11 +79,8 @@ three available layouts are demonstrated using the vector map for sampling.
 
 ```
 
-
-
 # First create the vector map layer based on random points
 v.random output=points n=3 seed=1
-
 
 # Row layout using a text file as output
 t.rast.what strds=A points=points output=result.txt layout=row -n
@@ -108,7 +100,6 @@ cat result.txt
 97.4892579600|79.2347263950|1990-03-01 00:00:00|1990-04-01 00:00:00|3
 97.4892579600|79.2347263950|1990-04-01 00:00:00|1990-05-01 00:00:00|4
 
-
 # Column layout order using stdout as output
 t.rast.what strds=A points=points layout=col -n
 
@@ -118,11 +109,8 @@ start|end|115.0043586274;36.3593955783|79.6816763826;45.2391522853|97.4892579600
 1990-03-01 00:00:00|1990-04-01 00:00:00|3|3|3
 1990-04-01 00:00:00|1990-05-01 00:00:00|4|4|4
 
-
 # Timerow layout, one time series per row
-
 # using the where statement to select a subset of the STRDS
-
 # and stdout as output
 t.rast.what strds=A points=points \
     where="start_time >= '1990-03-01'" layout=timerow -n
@@ -131,7 +119,6 @@ x|y|1990-03-01 00:00:00;1990-04-01 00:00:00|1990-04-01 00:00:00;1990-05-01 00:00
 115.004358627375|36.3593955782903|3|4
 79.681676382576|45.2391522852909|3|4
 97.4892579600048|79.2347263950131|3|4
-
 
 ```
 

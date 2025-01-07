@@ -9,15 +9,11 @@ driver to the DBF driver, the following step is required:
 
 ```
 
-
-
 # keep single quotes:
 db.connect driver=dbf database='$GISDBASE/$LOCATION_NAME/$MAPSET/dbf/'
 db.connect -p
 
-
 ```
-
 
 The dbf/ subdirectory in the mapset must exist or must be created by the user.
 
@@ -33,9 +29,7 @@ tables.
 
 ## Supported SQL commands by DBF driver
 
-
 ```
-
 
   ALTER TABLE table ADD [COLUMN] columndef
   ALTER TABLE table DROP COLUMN colname
@@ -51,15 +45,11 @@ tables.
   UPDATE table SET assignment1[,assignment2,...]
   UPDATE table SET assignment1[,assignment2,...] WHERE condition
 
-
 ```
-
 
 ## Operators available in conditions
 
-
 ```
-
 
   "="  : equal
   "<"  : smaller than
@@ -70,9 +60,7 @@ tables.
   "~"  : Substring matching  (non-standard SQL)
   "%"  : Substring matching  (limited functionality)
 
-
 ```
-
 
 Arithmetic expressions using constants and field values are allowed
 in condition clauses and in the RHS of assignments.
@@ -101,20 +89,16 @@ intended for simple table storage. DBF column names are limited to 10 characters
   in expressions;
 * SQL query with IN are **not** supported.
 
-
 ## ERROR MESSAGES
 
 An error message such as:
 
 ```
 
-
 DBMI-DBF driver error:
 SQL parser error: syntax error, unexpected NAME processing 'IN'..
 
-
 ```
-
 
 indicates that an unsupported SQL statement (here, 'IN') was used. The only
 solution is to switch the DBMI backend to a real SQL engine (SQLite,
@@ -124,13 +108,10 @@ An error message such as:
 
 ```
 
-
 DBMI-DBF driver error:
 SQL parser error: syntax error, unexpected DESC, expecting NAME processing 'DESC'
 
-
 ```
-
 
 indicates that a column name corresponds to a reserved SQL word (here: 'DESC').
 A different column name should be used. If this happens during import with

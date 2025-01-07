@@ -3,13 +3,11 @@
 
 ---
 
-
 ## NAME
 
 ***g.setproj*** allows the user to create the PROJ\_INFO and the
 PROJ\_UNITS files to record the coordinate reference system (CRS) information
 associated with a current project (previously called location).
-
 
 ## SYNOPSIS
 
@@ -68,7 +66,6 @@ parallel for the output map.
 * [ASPRS Grids and Datum](https://www.asprs.org/asprs-publications/grids-and-datums)
 * [MapRef - The Collection of Map Projections and Reference Systems for Europe](https://mapref.org)
 * [Projections Transform List](http://geotiff.maptools.org/proj_list/) (PROJ)
-
 
 ## AUTHORS
 

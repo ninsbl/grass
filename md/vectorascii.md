@@ -10,7 +10,6 @@ contains bounding box also. Key words are:
 
 ```
 
-
 ORGANIZATION
 DIGIT DATE
 DIGIT NAME
@@ -25,25 +24,19 @@ SOUTH EDGE
 NORTH EDGE
 MAP THRESH
 
-
 ```
-
 
 The body begins with the row:
 
 ```
 
-
 VERTI:
 
-
 ```
-
 
 followed by records of primitives:
 
 ```
-
 
 TYPE NUMBER_OF_COORDINATES [NUMBER_OF_CATEGORIES]
  X Y [Z]
@@ -53,9 +46,7 @@ TYPE NUMBER_OF_COORDINATES [NUMBER_OF_CATEGORIES]
 ....
 [ LAYER CATEGORY]
 
-
 ```
-
 
 Everything above in `[ ]` is optional.
 
@@ -79,24 +70,18 @@ The order of coordinates is
 
 ```
 
-
 X Y [Z]
 
-
 ```
-
 
 In pre-GRASS 6 versions of the ASCII format, the order of coordinates
 was different:
 
 ```
 
-
 Y X
 
-
 ```
-
 
 Latitude/Longitude data may be given in a number of ways.
 Decimal degrees must be positive or negative instead of using a hemisphere
@@ -115,12 +100,9 @@ Acceptable formats:
 * `DDD:MM:SSh`
 * `DDD:MM:SS.SSSSSh`
 
-
 ## EXAMPLES
 
-
 ```
-
 
 ORGANIZATION: GRASS Development Team
 DIGIT DATE:   1/9/2005
@@ -151,9 +133,7 @@ C  1 1
  5959063.08352122 3401386.98533277
  1 21
 
-
 ```
-
 
 In this case the vector map contains 2 boundaries (first boundary with
 6 vertices, second with 4 vertices) without category and 2 centroids

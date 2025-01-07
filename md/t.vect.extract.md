@@ -12,7 +12,6 @@ with all the data later than the year 2000:
 
 ```
 
-
 t.vect.extract input=shoreline where="start_time > 2000" \
                output=shoreline_later_2000 basename=new_shoreline
 
@@ -77,7 +76,6 @@ name|layer|mapset|start_time|end_time
 shoreline_2003|None|shoreline|2003|None
 shoreline_2004|None|shoreline|2004|None
 shoreline_2009|None|shoreline|2009|None
-
 
 ```
 

@@ -16,9 +16,7 @@ List all raster maps as continuous, sorted list:
 
 ```
 
-
 g.list type=rast
-
 
 ```
 
@@ -27,9 +25,7 @@ fully-qualified map names):
 
 ```
 
-
 g.list type=vector -m
-
 
 ```
 
@@ -37,9 +33,7 @@ List all raster and vector maps ordered by mapset:
 
 ```
 
-
 g.list type=raster -p
-
 
 ```
 
@@ -47,9 +41,7 @@ List all raster and vector maps as continuous, sorted list:
 
 ```
 
-
 g.list type=rast,vect
-
 
 ```
 
@@ -57,9 +49,7 @@ List all available GRASS data base files:
 
 ```
 
-
 g.list type=all
-
 
 ```
 
@@ -72,7 +62,6 @@ See `g.mapsets -p`.
 
 ```
 
-
 g.list rast -p
 
 raster map(s) available in mapset <user1>:
@@ -82,7 +71,6 @@ raster map(s) available in mapset <PERMANENT>:
 aspect
 ...
 
-
 ```
 
 Option **mapset**=. (one dot) lists only data files from
@@ -90,10 +78,8 @@ the current mapset:
 
 ```
 
-
 g.list rast mapset=.
 ...
-
 
 ```
 
@@ -102,7 +88,6 @@ available mapsets also including those that are not listed in the
 current search path (see `g.mapsets -l`).
 
 ```
-
 
 g.list rast mapset=* -p
 
@@ -116,7 +101,6 @@ raster map(s) available in mapset <PERMANENT>:
 aspect
 ...
 
-
 ```
 
 ### Wildcards
@@ -125,9 +109,7 @@ List all vector maps starting with letter "r":
 
 ```
 
-
 g.list type=vector pattern="r*"
-
 
 ```
 
@@ -135,9 +117,7 @@ List all vector maps starting with letter "r" or "a":
 
 ```
 
-
 g.list type=vector pattern="[ra]*"
-
 
 ```
 
@@ -145,9 +125,7 @@ List all raster maps starting with "soil\_" or "landuse\_":
 
 ```
 
-
 g.list type=raster pattern="{soil,landuse}_*"
-
 
 ```
 
@@ -155,17 +133,13 @@ List certain raster maps with one variable character/number:
 
 ```
 
-
 g.list type=raster pattern="N45E00?.meters"
-
 
 ```
 
 Use of **exclude** parameter:
 
 ```
-
-
 
 # without exclude:
   g.list rast pat="r*" mapset=PERMANENT
@@ -174,19 +148,16 @@ Use of **exclude** parameter:
   rstrct.areas
   rushmore
 
-
 # exclude only complete word(s):
   g.list rast pat="r*" exclude=roads mapset=PERMANENT
   railroads
   rstrct.areas
   rushmore
 
-
 # exclude with wildcard:
   g.list rast pat="r*" exclude="*roads*" mapset=PERMANENT
   rstrct.areas
   rushmore
-
 
 ```
 
@@ -196,9 +167,7 @@ List all soil maps starting with "soils" in their name:
 
 ```
 
-
 g.list -r type=raster pattern='^soils'
-
 
 ```
 
@@ -206,9 +175,7 @@ List "tmp" if "tmp" raster map exists:
 
 ```
 
-
 g.list -r type=raster pattern='^tmp$'
-
 
 ```
 
@@ -217,9 +184,7 @@ List "tmp0" ..."tmp9" if corresponding vector map exists
 
 ```
 
-
 g.list -r type=vector pattern='^tmp[0-9]$'
-
 
 ```
 
@@ -228,9 +193,7 @@ List "tmp0"..."tmp9" if corresponding vector map exists
 
 ```
 
-
 g.list -r type=vector separator=comma pattern='^tmp[0-9]$'
-
 
 ```
 
@@ -240,9 +203,7 @@ List all precipitation maps for the years 1997-2012, comma separated:
 
 ```
 
-
 g.list -e type=raster separator=comma pattern="precip_total.(199[7-9]|200[0-9]|201[0-2]).sum"
-
 
 ```
 
@@ -253,10 +214,8 @@ the region of "test" raster map:
 
 ```
 
-
 g.region raster=test save=test_region
 g.list type=raster pattern='tmp_*' region=test_region
-
 
 ```
 
@@ -265,9 +224,7 @@ the current region:
 
 ```
 
-
 g.list -r type=vector pattern='^tmp[0-9]$' region=.
-
 
 ```
 
@@ -276,9 +233,7 @@ of the PERMANENT mapset in the current project (DEFAULT\_WIND):
 
 ```
 
-
 g.list type=rast,vect region=*
-
 
 ```
 

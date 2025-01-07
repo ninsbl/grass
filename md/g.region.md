@@ -100,7 +100,7 @@ region settings before printing occurs.
 The **-g** flag prints the current region settings in shell script style.
 This format can be given back to *g.region* on its command line.
 This may also be used to save region settings as shell environment variables
-with the UNIX eval command, "`eval`g.region -g``".
+with the UNIX eval command, "`eval `g.region -g``".
 
 With **-u** flag current region is not updated even if one or more
 options for changing region is used (**res=**, **raster=**, etc).
@@ -144,7 +144,6 @@ map's edges. To perform the latter function, use the
 
 ```
 
-
 projection: 1 (UTM)
 zone:       13
 datum:      nad27
@@ -158,7 +157,6 @@ ewres:      20
 rows:       700
 cols:       950
 
-
 ```
 
 `g.region -p3`
@@ -166,7 +164,6 @@ cols:       950
 in the format:
 
 ```
-
 
 projection: 1 (UTM)
 zone:       13
@@ -189,7 +186,6 @@ cols:       950
 cols3:      950
 depths:     1
 
-
 ```
 
 `g.region -g`
@@ -197,7 +193,6 @@ depths:     1
 following script style (key=value) format:
 
 ```
-
 
 n=4928000
 s=4914000
@@ -208,7 +203,6 @@ ewres=20
 rows=700
 cols=950
 
-
 ```
 
 `g.region -bg`
@@ -217,7 +211,6 @@ following script style (key=value) format plus the
 boundary box in latitude-longitude/WGS84:
 
 ```
-
 
 n=4928000
 s=4914000
@@ -232,7 +225,6 @@ LL_E=-103.62942884
 LL_N=44.50164277
 LL_S=44.37302019
 
-
 ```
 
 `g.region -l`
@@ -240,7 +232,6 @@ LL_S=44.37302019
 following format:
 
 ```
-
 
 long: -103.86789484 lat: 44.50165890 (north/west corner)
 long: -103.62895703 lat: 44.49904013 (north/east corner)
@@ -251,7 +242,6 @@ cols:       950
 Center longitude: 103:44:59.170374W [-103.74977]
 Center latitude:  44:26:14.439781N [44.43734]
 
-
 ```
 
 `g.region -pm`
@@ -259,7 +249,6 @@ Center latitude:  44:26:14.439781N [44.43734]
 (latitude-longitude project):
 
 ```
-
 
 projection: 3 (Latitude-Longitude)
 zone:       0
@@ -272,7 +261,6 @@ nsres:      928.73944902
 ewres:      352.74269109
 rows:       6000
 cols:       4800
-
 
 ```
 
@@ -368,10 +356,8 @@ using the OGR *ogr2ogr* tool:
 
 ```
 
-
 eval `g.region -g`
 ogr2ogr -spat $w $s $e $n soils_cut.shp soils.shp
-
 
 ```
 
@@ -386,12 +372,10 @@ map `p016r035_7t20020524_nc_spm_wake_nn30.tif` using the GDAL
 
 ```
 
-
 eval `g.region -g`
 gdalwarp -t_srs "`g.proj -wf`" -te $w $s $e $n \
          p016r035_7t20020524_z17_nn30.tif \
          p016r035_7t20020524_nc_spm_wake_nn30.tif
-
 
 ```
 
@@ -402,14 +386,11 @@ coordinate reference system since it is reprojected on the fly.
 
 ```
 
-
 g.region -p format=json
 
-
 ```
 
 ```
-
 
 {
     "projection": "99 (Lambert Conformal Conic)",
@@ -438,19 +419,15 @@ g.region -p format=json
     "cells3": 2526500
 }
 
-
 ```
 
 ```
-
 
 g.region -l format=json
 
-
 ```
 
 ```
-
 
 {
     "nw_long": -78.688888505507336,
@@ -466,7 +443,6 @@ g.region -l format=json
     "rows": 165,
     "cols": 179
 }
-
 
 ```
 

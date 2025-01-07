@@ -32,10 +32,8 @@ them to a national grid, we can use *v.transform* together with
 
 ```
 
-
 v.transform -t in=watertowerXY out=watertower_z zscale=0.04 zshift=1320
 v.rectify in=watertower_z out=watertowerUTM points=wt.points order=1
-
 
 ```
 
@@ -45,22 +43,16 @@ Spearfish example with manual table editing for vertical shift:
 
 ```
 
-
-
 # work on own map copy:
 g.copy vect=archsites@PERMANENT,myarchsites
-
 # add new 'zs' column to later store height of each site:
 v.db.addcolumn myarchsites col="zs double precision"
 v.db.update myarchsites layer=1 column=zs value="cat * 1000"
 
-
 # perform z transformation:
 v.transform -t input=archsites output=myarchsites3d column="zshift:zs" table="archsites_t"
-
 # drop table containing transformation parameters:
 echo "drop table archsites_t" | db.execute
-
 
 ```
 
@@ -72,29 +64,21 @@ Spearfish example with automated elevation extraction for vertical shift:
 
 ```
 
-
-
 # work on own map copy:
 g.copy vect=archsites@PERMANENT,myarchsites
-
 # add new 'zs' column to later store height of each site:
 v.db.addcolumn myarchsites col="zs double precision"
-
 
 # set region to elevation map and fetch individual heights:
 g.region raster=elevation.10m -p
 v.what.rast myarchsites rast=elevation.10m col=zs
-
 # verify:
 v.db.select myarchsites
 
-
 # perform transformation to 3D
 v.transform -t myarchsites output=myarchsites3d column="zshift:zs" layer=1
-
 # drop table containing transformation parameters
 v.db.dropcolumn myarchsites3d col=zs
-
 
 ```
 

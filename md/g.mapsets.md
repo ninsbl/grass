@@ -57,9 +57,7 @@ command:
 
 ```
 
-
 g.copy raster=soils@PERMANENT,my_soils
-
 
 ```
 
@@ -103,9 +101,7 @@ the PERMANENT mapset are always selected):
 
 ```
 
-
 g.mapsets -s
-
 
 ```
 
@@ -117,19 +113,16 @@ All available mapsets in the current project can be printed out by
 
 ```
 
-
 g.mapsets -l
 
 Available mapsets:
 PERMANENT user1 user2
-
 
 ```
 
 Mapsets can be also printed out as json by setting the format option to "json" (**format="json"**).
 
 ```
-
 
     g.mapsets format="json" -l
 
@@ -141,7 +134,6 @@ Mapsets can be also printed out as json by setting the format option to "json" (
       ]
     }
 
-
 ```
 
 ### Add new mapset
@@ -150,9 +142,7 @@ Add mapset 'user2' to the current mapset search path
 
 ```
 
-
 g.mapsets mapset=user2 operation=add
-
 
 ```
 
@@ -160,12 +150,10 @@ The current mapset search path is changed accordingly
 
 ```
 
-
 g.mapsets -p
 
 Accessible mapsets:
 user1 user2
-
 
 ```
 
@@ -175,9 +163,7 @@ Overwrite current search path
 
 ```
 
-
 g.mapsets mapset=user1,PERMANENT operation=set
-
 
 ```
 
@@ -187,9 +173,7 @@ The current mapset can be defined by a shortcut "." (dot)
 
 ```
 
-
 g.mapsets mapset=.,PERMANENT operation=set
-
 
 ```
 
@@ -199,12 +183,10 @@ current mapset from the **mapset** option.
 
 ```
 
-
 g.mapsets -p
 
 Accessible mapsets:
 user1 PERMANENT
-
 
 ```
 

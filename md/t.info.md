@@ -30,7 +30,6 @@ In order to obtain information about temporal DBMI backend, run:
 
 ```
 
-
 t.info -d
  +------------------- Temporal DBMI backend information ----------------------+
  | DBMI Python interface:...... sqlite3
@@ -41,7 +40,6 @@ t.info -d
  | tgis_version .......... 2
  +----------------------------------------------------------------------------+
 
-
 ```
 
 ### Space time dataset information
@@ -49,7 +47,6 @@ t.info -d
 In order to obtain information about a space time dataset, run:
 
 ```
-
 
 t.info input=tempmean_monthly
  +-------------------- Space Time Raster Dataset -----------------------------+
@@ -102,7 +99,6 @@ t.info input=tempmean_monthly
  |
  +----------------------------------------------------------------------------+
 
-
 ```
 
 The "granularity" is the smallest gap size between the found time instances, i.e.
@@ -113,7 +109,6 @@ it the greatest common divisor between all gaps in the time series.
 In order to obtain information about a map in a space time dataset, run:
 
 ```
-
 
 t.info input=2009_01_tempmean type=raster
  +-------------------- Raster Dataset ----------------------------------------+
@@ -147,7 +142,6 @@ t.info input=2009_01_tempmean type=raster
  | Registered datasets ........ tempmean_monthly@climate_2000_2012
  +----------------------------------------------------------------------------+
 
-
 ```
 
 ### Space time dataset with semantic labels assigned
@@ -158,7 +152,6 @@ or *[t.register](t.register.html#support-for-semantic-labels)* module.
 
 ```
 
-
 t.info input=test
 ...
 +-------------------- Metadata information ----------------------------------+
@@ -166,20 +159,17 @@ t.info input=test
  | Number of registered bands:. 13
 ...
 
-
 ```
 
 Similarly for temporal maps information:
 
 ```
 
-
 t.info input=T33UYP_20190331T094039_B01 type=raster
 ...
  +-------------------- Metadata information ----------------------------------+
  | Semantic label:............. S2_1
 ...
-
 
 ```
 

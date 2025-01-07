@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.lidar.edgedetection* is the first of three steps to filter
@@ -45,14 +44,11 @@ in the output vector map will be classified as:
 
 ```
 
-
 TERRAIN (cat = 1, layer = 1)
 EDGE (cat = 2, layer = 1)
 UNKNOWN (cat = 3, layer = 1)
 
-
 ```
-
 
 The final result of the whole procedure (*v.lidar.edgedetection*,
 *[v.lidar.growing](v.lidar.growing.html)*,
@@ -61,73 +57,53 @@ will be a point classification in four categories:
 
 ```
 
-
 TERRAIN SINGLE PULSE (cat = 1, layer = 2)
 TERRAIN DOUBLE PULSE (cat = 2, layer = 2)
 OBJECT SINGLE PULSE (cat = 3, layer = 2)
 OBJECT DOUBLE PULSE (cat = 4, layer = 2)
 
-
 ```
-
 
 ## EXAMPLES
 
-
 ### Basic edge detection
 
-
 ```
-
-
 
 # last return points
 v.lidar.edgedetection input=vector_last output=edge ew_step=8 ns_step=8 lambda_g=0.5
 
-
 ```
-
 
 ### Complete workflow
 
-
 ```
-
-
 
 # region settings (using an existing raster)
 g.region raster=elev_lid792_1m
 
-
 # import
 v.in.lidar -tr input=points.las output=points
 v.in.lidar -tr input=points.las output=points_first return_filter=first
-
 
 # detection
 v.lidar.edgedetection input=points output=edge ew_step=8 ns_step=8 lambda_g=0.5
 v.lidar.growing input=edge output=growing first=points_first
 v.lidar.correction input=growing output=correction terrain=only_terrain
 
-
 # visualization of selected points
-
 # zoom somewhere first, to make it faster
 d.rast map=orthophoto
 d.vect map=correction layer=2 cats=2,3,4 color=red size=0.25
 d.vect map=correction layer=2 cats=1 color=0:128:0 size=0.5
 
-
 # interpolation (this may take some time)
 v.surf.rst input=only_terrain elevation=terrain
-
 
 # get object points for 3D visualization
 v.extract input=correction layer=2 cats=2,3,4 output=objects
 
-
 ```
-
 
 ![](v_lidar_edgedetection.png)
 
@@ -137,7 +113,6 @@ v.extract input=correction layer=2 cats=2,3,4 output=objects
 
 *Figure 2: 3D visualization of filtered object points (red)
 and terrain created from terrain points (gray)*
-
 
 ## REFERENCES
 
@@ -157,7 +132,6 @@ and terrain created from terrain points (gray)*
 * Performances of the filter can be seen in the
   [ISPRS WG III/3 Comparison of Filters](https://www.itc.nl/isprs/wgIII-3/filtertest/)
   report by Sithole, G. and Vosselman, G., 2003.
-
 
 ## SEE ALSO
 

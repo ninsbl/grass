@@ -44,10 +44,8 @@ North Carolina sample dataset is generated:
 
 ```
 
-
 g.region raster=aspect -p
 d.polar aspect
-
 
 ```
 

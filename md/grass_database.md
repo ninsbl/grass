@@ -168,15 +168,11 @@ in a given mapset with only command line interface:
 
 ```
 
-
-
 # Linux, Mac, *BSD, ...:
 grass --text ~/grassdata/nc_spm_08_grass7/user1
 
-
 # Windows
 grass --text D:\grassdata\nc_spm_08_grass7\user1
-
 
 ```
 
@@ -186,15 +182,11 @@ system given by the EPSG code and it will start the default interface
 
 ```
 
-
-
 # Linux, Mac, *BSD, ...:
 grass -c EPSG:5514:3 ~/grassdata/myproject
 
-
 # Windows
 grass -c EPSG:5514:3 D:\grassdata\myproject
-
 
 ```
 

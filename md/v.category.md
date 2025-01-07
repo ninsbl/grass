@@ -63,9 +63,7 @@ Use
 
 ```
 
-
   [v.edit](v.edit.html) map=inputname tool=select
-
 
 ```
 
@@ -76,7 +74,6 @@ to find out the geometry ids of certain features.
 ### Report vector categories
 
 ```
-
 
 v.category input=testmap option=report
 
@@ -89,16 +86,13 @@ centroid       0          0          0
 area           0          0          0
 all         1379          1       1379
 
-
 ```
 
 ### Delete all vector categories in layer 1
 
 ```
 
-
 v.category input=testmap output=outmap option=del cat=-1
-
 
 ```
 
@@ -106,9 +100,7 @@ v.category input=testmap output=outmap option=del cat=-1
 
 ```
 
-
 v.category input=outmap output=stepmap option=add step=2
-
 
 # report
 v.category input=stepmap option=report
@@ -121,16 +113,13 @@ centroid       0          0          0
 area           0          0          0
 all         1379          1       2757
 
-
 ```
 
 ### Add categories/centroids to a vector map without categories
 
 ```
 
-
 v.category input=wkt output=wktnew option=add
-
 
 ```
 
@@ -143,9 +132,7 @@ Existing layer will be overwritten, non-existing will be created.
 
 ```
 
-
 v.category input=observer output=observer_new option=transfer layer=1,2,3,4,5,6,7,8
-
 
 ```
 
@@ -155,9 +142,7 @@ Print vector categories from the first layer, only for feature ids 1-50.
 
 ```
 
-
 v.category input=roads option=print layer=1 id=1-50
-
 
 ```
 

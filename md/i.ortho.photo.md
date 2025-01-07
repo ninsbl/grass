@@ -81,17 +81,15 @@ The steps to follow are described below:
    a new file *mapset/group/name\_of\_group/**REF***
    is created that contatins the names of all images in a group.
 
-```
-
+   ```
 
    IMG_0020 source_mapset
    IMG_0021 source_mapset
    IMG_0022 source_mapset
 
+   ```
 
-```
-
-1. *Select/Modify target project and mapset for orthorectification:
+2. *Select/Modify target project and mapset for orthorectification:
    [i.ortho.target](i.ortho.target.html)*
 
    This step is to be run in the **source project**.
@@ -104,16 +102,14 @@ The steps to follow are described below:
    *mapset/group/name\_of\_group/**TARGET***
    is created contatining the names of target project and mapset.
 
-```
-
+   ```
 
    ETRS_33N
    target_mapset
 
+   ```
 
-```
-
-1. *Select/Modify target elevation model used for orthorectification:
+3. *Select/Modify target elevation model used for orthorectification:
    [i.ortho.elev](i.ortho.elev.html)*
 
    This step is to be run in the **source project**.
@@ -130,8 +126,7 @@ The steps to follow are described below:
    of this step, a new file *mapset/group/name\_of\_group/**ELEVATION***
    is created contatining the name and mapset of the chosen DEM.
 
-```
-
+   ```
 
    elevation layer :ELEVATION
    mapset elevation:target_mapset
@@ -140,10 +135,9 @@ The steps to follow are described below:
    units           :(null)
    no data values  :(null)
 
+   ```
 
-```
-
-1. *Create/Modify camera file of imagery group:
+4. *Create/Modify camera file of imagery group:
    [i.ortho.camera](i.ortho.camera.html)*
 
    This step is to be run in the **source project**.
@@ -160,8 +154,7 @@ The steps to follow are described below:
    *mapset/camera/**name\_of\_reference***, contatining the
    camera parameters.
 
-```
-
+   ```
 
    CAMERA NAME   sony
    CAMERA ID     123
@@ -174,10 +167,9 @@ The steps to follow are described below:
          2 11.6 0
          3 0 -7.7
 
+   ```
 
-```
-
-1. *Compute image-to-photo transformation:
+5. *Compute image-to-photo transformation:
    [g.gui.photo2image](g.gui.photo2image.html)*
 
    This step is to be run in the **source project**.
@@ -190,8 +182,7 @@ The steps to follow are described below:
    is created, contatining a list of pairs of coordinates in image and photo
    coordinate systems.
 
-```
-
+   ```
 
    # Ground Control Points File
    #
@@ -205,8 +196,7 @@ The steps to follow are described below:
    5456 1816     11.6 0.0     1
    2728 0.0     0.0 -7.7     1
 
-
-```
+   ```
 
    [![i.ortho.photo example](i_ortho_photo_step5.png)](i_ortho_photo_step5.png)
 
@@ -218,17 +208,16 @@ The steps to follow are described below:
 
    In Step 6, initial camera exposure station parameters and initial variances
    may be selected or modified.
-
-* **X**: East aircraft position;
-* **Y**: North aircraft position;
-* **Z**: Flight height above surface;
-* **Omega (pitch)**: Raising or lowering of the aircraft's front
-  (turning around the wings' axis);
-* **Phi (roll)**: Raising or lowering of the wings (turning
-  around the aircraft's axis);
-* **Kappa (yaw)**: Rotation needed to align the aerial photo to
-  true north: needs to be denoted as +90° for clockwise turn and
-  -90° for a counter-clockwise turn.
+   * **X**: East aircraft position;
+   * **Y**: North aircraft position;
+   * **Z**: Flight height above surface;
+   * **Omega (pitch)**: Raising or lowering of the aircraft's front
+     (turning around the wings' axis);
+   * **Phi (roll)**: Raising or lowering of the wings (turning
+     around the aircraft's axis);
+   * **Kappa (yaw)**: Rotation needed to align the aerial photo to
+     true north: needs to be denoted as +90° for clockwise turn and
+     -90° for a counter-clockwise turn.
    [![i.ortho.photo example](i_ortho_photo_step6.png)](i_ortho_photo_step6.png)
 
    *Principle of pitch and yaw*
@@ -236,8 +225,7 @@ The steps to follow are described below:
    In Step 6, a new file *mapset/group/name\_of\_group/**INIT\_EXP***
    is created, contatining camera parameters.
 
-```
-
+   ```
 
    INITIAL XC    215258.345387
    INITIAL YC    6911444.022270
@@ -253,10 +241,9 @@ The steps to follow are described below:
    VARIANCE KAPPA 0.017453
    STATUS (1=OK, 0=NOT OK) 0
 
+   ```
 
-```
-
-1. *Compute ortho-rectification parameters from ground control points:
+7. *Compute ortho-rectification parameters from ground control points:
    [g.gui.image2target](g.gui.image2target.html)*
 
    This step is to be run in the **target project**.
@@ -271,25 +258,23 @@ The steps to follow are described below:
    is created, containing a list of pairs of coordinates of ground control
    points in photo and target coordinate systems.
 
-```
-
+   ```
 
    # Ground Control Points File
    #
    # target location: ETRS_33N
    # target mapset: target_mapset
-   #    source                          target                     status
-   #    east    north   height          east    north   height    (1=ok, 0=ignore)
+   #	source                          target                     status
+   #	east	north	height          east	north	height    (1=ok, 0=ignore)
    #------------------------------     ----------------------    ---------------
-   98.3679932698 906.327649515 0.0  1.0 5.0  100.0             1
-   733.293023813 1329.61100321 0.0  2.0 6.0  100.0             1
-   1292.6317412  1703.76325335 0.0  3.0 7.0  100.0             1
-   1625.54617472 1368.11694482 0.0  4.0 6.0  100.3             1
-   3239.82849913 1390.97403968 0.0  7.4 6.0  100.3             1
-   1570.09788497 2790.06537829 0.0  3.0 11.0 100.0             1
+   98.3679932698 906.327649515 0.0 	1.0 5.0  100.0             1
+   733.293023813 1329.61100321 0.0 	2.0 6.0  100.0             1
+   1292.6317412  1703.76325335 0.0 	3.0 7.0  100.0             1
+   1625.54617472 1368.11694482 0.0 	4.0 6.0  100.3             1
+   3239.82849913 1390.97403968 0.0 	7.4 6.0  100.3             1
+   1570.09788497 2790.06537829 0.0 	3.0 11.0 100.0             1
 
-
-```
+   ```
 
    [![i.ortho.photo example](i_ortho_photo_step7.png)](i_ortho_photo_step7.png)
 

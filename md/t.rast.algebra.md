@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *t.rast.algebra* performs temporal and spatial map algebra operations on
@@ -43,12 +42,9 @@ example:
 
 ```
 
-
 t.rast.algebra expression="C = A + B" basename=result
 
-
 ```
-
 
 Where **C** is the new space time raster dataset that will contain
 maps with the basename "result" and a numerical suffix separated by an
@@ -69,7 +65,6 @@ Several temporal topology relations are supported between maps registered
 in space time datasets:
 
 ```
-
 
 equals            A ------
                   B ------
@@ -106,9 +101,7 @@ overlaps          A ------
 
 over              both overlaps and overlapped
 
-
 ```
-
 
 The relations must be read as: A is related to B, like - A equals B - A
 is during B - A contains B.
@@ -125,16 +118,13 @@ five possible different ways.
 
 ```
 
-
 LEFT REFERENCE     l       Use the time stamp of the left space time dataset
 INTERSECTION       i       Intersection
 DISJOINT UNION     d       Disjoint union
 UNION              u       Union
 RIGHT REFERENCE    r       Use the time stamp of the right space time dataset
 
-
 ```
-
 
 ### TEMPORAL SELECTION
 
@@ -146,12 +136,9 @@ following expression
 
 ```
 
-
 C = A : B
 
-
 ```
-
 
 means: select all parts of space time dataset A that are equal to B and
 store them in space time dataset C. These parts are time stamped maps.
@@ -161,12 +148,9 @@ complement of the selection operator, hence the following expression
 
 ```
 
-
 C = A !: B
 
-
 ```
-
 
 means: select all parts of space time time dataset A that are not equal
 to B and store them in space time dataset C.
@@ -183,25 +167,19 @@ are separated by comma and surrounded by curly brackets as follows:
 
 ```
 
-
 C = A {:,equals} B
 C = A {!:,equals} B
 
-
 ```
-
 
 We can now define arbitrary topological relations using the OR operator "|"
 to connect them:
 
 ```
 
-
 C = A {:,equals|during|overlaps} B
 
-
 ```
-
 
 Select all parts of A that are equal to B, during B or overlaps B.
 
@@ -210,12 +188,9 @@ adding the temporal operator.
 
 ```
 
-
 C = A {:,during,r} B
 
-
 ```
-
 
 Select all parts of A that are during B and use the temporal extents
 from B for C.
@@ -225,29 +200,23 @@ selection operator, so that the following statements are exactly the same:
 
 ```
 
-
 C = A : B
 C = A {:} B
 C = A {:,equal} B
 C = A {:,equal,l} B
 
-
 ```
-
 
 Same for the complementary selection:
 
 ```
-
 
 C = A !: B
 C = A {!:} B
 C = A {!:,equal} B
 C = A {!:,equal,l} B
 
-
 ```
-
 
 ### CONDITIONAL STATEMENTS
 
@@ -260,7 +229,6 @@ conclusion must be always equal.
 
 ```
 
-
 if statement                        decision option                        temporal relations
   if(if, then, else)
   if(conditions, A)                   A if conditions are True;              temporal topological relation between if and then is equal.
@@ -268,9 +236,7 @@ if statement                        decision option                        tempo
   if(topologies, conditions, A)       A if conditions are True;              temporal topological relation between if and then is explicitly specified by topologies.
   if(topologies, conditions, A, B)    A if conditions are True, B otherwise; temporal topological relation between if, then and else is explicitly specified by topologies.
 
-
 ```
-
 
 The conditions are comparison expressions that are used to evaluate
 space time datasets. Specific values of temporal variables are
@@ -280,9 +246,7 @@ compared by logical operators and evaluated for each map of the STRDS.
 
 #### Logical operators
 
-
 ```
-
 
 Symbol  description
 
@@ -295,9 +259,7 @@ Symbol  description
   &&    and
   ||    or
 
-
 ```
-
 
 #### Temporal functions
 
@@ -305,7 +267,6 @@ The following temporal functions are evaluated only for the STDS that
 must be given in parenthesis.
 
 ```
-
 
 td(A)                    Returns a list of time intervals of STDS A
 
@@ -335,9 +296,7 @@ end_hour(A)              The hour of the end time [0 - 23]
 end_minute(A)            The minute of the end time [0 - 59]
 end_second(A)            The second of the end time [0 - 59]
 
-
 ```
-
 
 In order to use the numbers returned by the functions in the last block above, an
 offset value needs to be added. For example, start\_doy(A, 0) would return the
@@ -369,17 +328,13 @@ comparison operator -> aggregation operator:
 
 ```
 
-
 || -> | and && -> &
 
-
 ```
-
 
 **Examples:**
 
 ```
-
 
 Condition 1 {||, equal, r} Condition 2
 Condition 1 {&&, equal|during, l} Condition 2
@@ -387,9 +342,7 @@ Condition 1 {&&, equal|contains, |, l} Condition 2
 Condition 1 {&&, equal|during, l} Condition 2 && Condition 3
 Condition 1 {&&, equal|during, l} Condition 2 {&&,contains, |, r} Condition 3
 
-
 ```
-
 
 #### Hash operator
 
@@ -398,12 +351,9 @@ conditional statements with the hash (#) operator.
 
 ```
 
-
 A {#, contains} B
 
-
 ```
-
 
 This expression computes the number of maps from space time dataset B
 which are during the time intervals of maps from space time dataset A.
@@ -413,12 +363,9 @@ maps from B will be returned.
 
 ```
 
-
 C = if({equal}, A {#, contains} B > 2, A {:, contains} B)
 
-
 ```
-
 
 This expression selects all maps from A that temporally contain at least 2
 maps from B and stores them in space time dataset C. The leading equal
@@ -433,14 +380,11 @@ respectively.
 
 ```
 
-
 buff_t(A, size)         Buffer STDS A with granule ("1 month" or 5)
 tshift(A, size)         Shift STDS A with granule ("1 month" or 5)
 tsnap(A)                Snap time instances and intervals of STDS A
 
-
 ```
-
 
 #### Single map with temporal extent
 
@@ -449,23 +393,17 @@ tmap() function.
 
 ```
 
-
 tmap()
 
-
 ```
-
 
 For example:
 
 ```
 
-
 C = A {:, during} tmap(event)
 
-
 ```
-
 
 This statement selects all maps from space time data set A that are during
 the temporal extent of the single map 'event'
@@ -476,7 +414,6 @@ The module supports the following raster operations:
 
 ```
 
-
 Symbol  description     precedence
 
   %     modulus         1
@@ -485,14 +422,11 @@ Symbol  description     precedence
   +     addition        2
   -     subtraction     2
 
-
 ```
-
 
 And raster functions:
 
 ```
-
 
 abs(x)                  return absolute value of x
 float(x)                convert x to foating point
@@ -507,9 +441,7 @@ isntnull(x)             check if x is not NULL
 null                    set null value
 exist(x)                Check if x is in the current mapset
 
-
 ```
-
 
 #### Single raster map
 
@@ -518,23 +450,17 @@ raster maps without time stamps into the expressions.
 
 ```
 
-
 map()
 
-
 ```
-
 
 For example:
 
 ```
 
-
 C = A * map(constant_value)
 
-
 ```
-
 
 This statement multiplies all raster maps from space time raster data
 set A with the raster map 'constant\_value'
@@ -547,12 +473,9 @@ operators as follows:
 
 ```
 
-
 {"spatial or select operator", "list of temporal relations", "temporal operator"}
 
-
 ```
-
 
 For multiple topological relations or several related maps the spatio-temporal
 operators feature implicit aggregation.
@@ -565,25 +488,19 @@ a1 of A:
 
 ```
 
-
  C = A {+, contains} B --> c1 = a1 + b1 + b2 + b3
 
-
 ```
-
 
 **Important**: the aggregation behaviour is not symmetric
 
 ```
 
-
  C = B {+, during} A --> c1 = b1 + a1
                          c2 = b2 + a1
                          c3 = b3 + a1
 
-
 ```
-
 
 ### Temporal neighbourhood modifier
 
@@ -595,44 +512,33 @@ while two neighborhood modifiers are interpreted as row and column offsets [r,c]
 
 ```
 
-
 strds[2]
-
 
 ```
 
 refers to the second successor of the current map.
 
-
 ```
 
-
 strds[1,2]
-
 
 ```
 
 refers to the cell one row below and two columns to the right of the current
 cell in the current map.
 
-
 ```
 
-
 strds[1,-2,-1]
-
 
 ```
 
 refers to the cell two rows above and one column to the left of the current
 cell of the first successor map.
 
-
 ```
 
-
 strds[-2,0,1]
-
 
 ```
 
@@ -641,13 +547,9 @@ second predecessor map.
 
 ## EXAMPLES
 
-
 ### Computation of NDVI
 
-
 ```
-
-
 
 # Sentinel-2 bands are stored separately in two STDRS "S2_b4" and "S2_b8"
 g.region raster=sentinel2_B04_10m -p
@@ -656,9 +558,7 @@ t.rast.list S2_b8
 t.rast.algebra basename=ndvi expression="ndvi = float(S2_b8 - S2_b4) / ( S2_b8 + S2_b4 )"
 t.rast.colors input=ndvi color=ndvi
 
-
 ```
-
 
 ### Sum of space-time raster datasets
 
@@ -667,24 +567,18 @@ and are temporally before Jan. 1. 2005 and store them in STRDS D:
 
 ```
 
-
 D = if(start_date(A) < "2005-01-01", A + B)
 
-
 ```
-
 
 Create the sum of all maps from STRDS A and B that have equal time stamps
 and store the new maps in STRDS C:
 
 ```
 
-
 C = A + B
 
-
 ```
-
 
 ### Sum of space-time raster datasets with temporal topology relation
 
@@ -693,12 +587,9 @@ and temporal operators:
 
 ```
 
-
 C = A {+,equal,l} B
 
-
 ```
-
 
 ### Selection of raster cells
 
@@ -708,12 +599,9 @@ more than 30 days (Jan, Mar, May, Jul, Aug, Oct, Dec):
 
 ```
 
-
 C = if(A > 100 && A < 1600 && td(A) > 30, B)
 
-
 ```
-
 
 ### Selection of raster cells with temporal topology relation
 
@@ -722,12 +610,9 @@ and temporal operators:
 
 ```
 
-
 C = if({equal}, A > 100 && A < 1600 {&&,equal} td(A) > 30, B)
 
-
 ```
-
 
 ### Conditional computation
 
@@ -739,12 +624,9 @@ computed using the td() function that has as argument the STRDS "Prec":
 
 ```
 
-
 C = if(Temp > 10.0, Prec / 3600.0 / 24.0 / td(Prec))
 
-
 ```
-
 
 ### Conditional computation with temporal topology relation
 
@@ -753,12 +635,9 @@ and temporal operators:
 
 ```
 
-
 C = if({equal}, Temp > 10.0, Prec / 3600.0 / 24.0 {/,equal,l} td(Prec))
 
-
 ```
-
 
 ### Computation with time intervals
 
@@ -768,12 +647,9 @@ of B, use A otherwise. The resulting time intervals are either from B or A:
 
 ```
 
-
 C = if(B {#,contain} A > 1, (B {+,contain,l} A - B) / (B {#,contain} A), A)
 
-
 ```
-
 
 ### Computation with time intervals with temporal topology relation
 
@@ -782,12 +658,9 @@ and temporal operators:
 
 ```
 
-
 C = if({equal}, B {#,contain} A > 1, (B {+,contain,l} A {-,equal,l} B) {equal,=/} (B {#,contain} A), A)
 
-
 ```
-
 
 ### Compute DOY for spatio-temporal conditions
 
@@ -796,12 +669,9 @@ consecutive time intervals (e.g. temperature > 0):
 
 ```
 
-
 B = if(A > 0.0 && A[-1] > 0.0 && A[-2] > 0.0, start_doy(A, -1), 0)"
 
-
 ```
-
 
 ## SEE ALSO
 
@@ -819,25 +689,18 @@ B = if(A > 0.0 && A[-1] > 0.0 && A[-2] > 0.0, start_doy(A, -1), 0)"
 The use of this module requires the following software to be installed:
 [PLY(Python-Lex-Yacc)](https://www.dabeaz.com/ply/)
 
-
 ```
-
-
 
 # Ubuntu/Debian
 sudo apt-get install python3-ply
 
-
 # Fedora
 sudo dnf install python3-ply
-
 
 # MS-Windows (OSGeo4W: requires "python3-pip" package to be installed)
 python3-pip install ply
 
-
 ```
-
 
 Related publications:
 
@@ -848,7 +711,6 @@ Related publications:
   Geographical Information Science 31, 1273-1292 ([DOI](https://doi.org/10.1080/13658816.2017.1306862))
 * Gebbert, S., Leppelt, T., Pebesma, E., 2019. *A topology based spatio-temporal map algebra for big data analysis*.
   Data 4, 86. ([DOI](https://doi.org/10.3390/data4020086))
-
 
 ## SEE ALSO
 

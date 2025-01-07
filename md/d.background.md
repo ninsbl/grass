@@ -17,13 +17,11 @@ using *cairo* display monitor (creates file called *map.png*):
 
 ```
 
-
 g.region vector=streets_wake
 d.mon cairo
 d.background color=#ADEFD1
 d.vect map=streets_wake color=#00203F legend_label="Streets"
 d.legend.vect -b at=70,30 title="Wake County"
-
 
 ```
 

@@ -15,13 +15,10 @@ mapset's history file as follows:
 
 ```
 
-
-
 # bash example
 history -w
 history -r /"$GISDBASE/$LOCATION/$MAPSET"/.bash_history
 HISTFILE=/"$GISDBASE/$LOCATION/$MAPSET"/.bash_history
-
 
 ```
 
@@ -34,9 +31,7 @@ shown below:
 
 ```
 
-
 g.mapset -p
-
 
 ```
 
@@ -46,9 +41,7 @@ To list available mapsets, use the **-l** command as shown below:
 
 ```
 
-
 g.mapset -l
-
 
 ```
 
@@ -60,9 +53,7 @@ To change the current mapset to "user1" use the following command:
 
 ```
 
-
 g.mapset mapset=user1 project=nc_spm_08_grass7
-
 
 ```
 
@@ -75,9 +66,7 @@ To create a new mapset, use the **-c** tag as shown below:
 
 ```
 
-
 g.mapset -c mapset=new project=nc_spm_08_grass7
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.vi* calculates vegetation indices based on biophysical
@@ -23,7 +22,6 @@ parameters.
 * SAVI: Soil Adjusted Vegetation Index
 * SR: Simple Vegetation ratio
 * WDVI: Weighted Difference Vegetation Index
-
 
 ### Background for users new to remote sensing
 
@@ -77,15 +75,12 @@ channels (Kaufman and Tanre 1996).
 
 ```
 
-
 arvi( redchan, nirchan, bluechan )
 
 ARVI = (nirchan - (2.0*redchan - bluechan)) /
        ( nirchan + (2.0*redchan - bluechan))
 
-
 ```
-
 
 **CI: Crust Index**
 
@@ -99,28 +94,22 @@ the normalized difference between the RED and the BLUE spectral values
 
 ```
 
-
 ci ( bluechan, redchan )
 
 CI = 1 - (redchan - bluechan) /
        (redchan + bluechan)
 
-
 ```
-
 
 **DVI: Difference Vegetation Index**
 
 ```
 
-
 dvi( redchan, nirchan )
 
 DVI = ( nirchan - redchan )
 
-
 ```
-
 
 **EVI: Enhanced Vegetation Index**
 
@@ -134,15 +123,12 @@ images for EOS-MODIS. Remote Sensing of Environment, 59:440-451).
 
 ```
 
-
 evi( bluechan, redchan, nirchan )
 
 EVI = 2.5 * ( nirchan - redchan ) /
       ( nirchan + 6.0 * redchan - 7.5 * bluechan + 1.0 )
 
-
 ```
-
 
 **EVI2: Enhanced Vegetation Index 2**
 
@@ -157,15 +143,12 @@ Sustainability IV, 667905 (october 09, 2007)
 
 ```
 
-
 evi2( redchan, nirchan )
 
 EVI2 = 2.5 * ( nirchan - redchan ) /
        ( nirchan + 2.4 * redchan + 1.0 )
 
-
 ```
-
 
 **GARI: green atmospherically resistant vegetation index**
 
@@ -177,20 +160,16 @@ MODIS, Remote Sensing of Environment 58 (3), 289-298.
 
 ```
 
-
 gari( redchan, nirchan, bluechan, greenchan )
 
 GARI = ( nirchan - (greenchan - (bluechan - redchan))) /
        ( nirchan + (greenchan - (bluechan - redchan)))
 
-
 ```
-
 
 **GEMI: Global Environmental Monitoring Index**
 
 ```
-
 
 gemi( redchan, nirchan )
 
@@ -200,14 +179,11 @@ GEMI = (( (2*((nirchan * nirchan)-(redchan * redchan)) +
        1.5*nirchan+0.5*redchan) / (nirchan + redchan + 0.5))) -
        ( (redchan - 0.125) / (1 - redchan))
 
-
 ```
-
 
 **GVI: Green Vegetation Index**
 
 ```
-
 
 gvi( bluechan, greenchan, redchan, nirchan, chan5chan, chan7chan)
 
@@ -215,48 +191,37 @@ GVI = ( -0.2848 * bluechan - 0.2435 * greenchan -
       0.5436 * redchan + 0.7243 * nirchan + 0.0840 * chan5chan-
       0.1800 * chan7chan)
 
-
 ```
-
 
 **IPVI: Infrared Percentage Vegetation Index**
 
 ```
 
-
 ipvi( redchan, nirchan )
 
 IPVI = nirchan/(nirchan+redchan)
 
-
 ```
-
 
 **MSAVI2: second Modified Soil Adjusted Vegetation Index**
 
 ```
 
-
 msavi2( redchan, nirchan )
 
 MSAVI2 = (1/2)*(2*NIR+1-sqrt((2*NIR+1)^2-8*(NIR-red)))
 
-
 ```
-
 
 **MSAVI: Modified Soil Adjusted Vegetation Index**
 
 ```
 
-
 msavi( redchan, nirchan )
 
 MSAVI = s(NIR-s*red-a) / (a*NIR+red-a*s+X*(1+s*s))
 
-
 ```
-
 
 where a is the soil line intercept, s is the
 soil line slope, and X is an adjustment factor
@@ -266,7 +231,6 @@ original papers).
 **NDVI: Normalized Difference Vegetation Index**
 
 ```
-
 
 ndvi( redchan, nirchan )
 
@@ -281,9 +245,7 @@ Satellite specific band numbers ([NIR, Red]):
 
 NDVI = (NIR - Red) / (NIR + Red)
 
-
 ```
-
 
 **NDWI: Normalized Difference Water Index** (after McFeeters, 1996)
 
@@ -291,28 +253,22 @@ This index is suitable to detect water bodies.
 
 ```
 
-
 ndwi( greenchan, nirchan )
 
 NDWI = (green - NIR) / (green + NIR)
 
-
 ```
-
 
 The water content of leaves can be estimated with another NDWI (after
 Gao, 1996):
 
 ```
 
-
 ndwi( greenchan, nirchan )
 
 NDWI = (NIR - SWIR) / (NIR + SWIR)
 
-
 ```
-
 
 This index is important for monitoring vegetation health (not implemented).
 
@@ -320,40 +276,31 @@ This index is important for monitoring vegetation health (not implemented).
 
 ```
 
-
 pvi( redchan, nirchan, soil_line_slope )
 
 PVI = sin(a)NIR-cos(a)red
 
-
 ```
-
 
 **SAVI: Soil Adjusted Vegetation Index**
 
 ```
 
-
 savi( redchan, nirchan )
 
 SAVI = ((1.0+0.5)*(nirchan - redchan)) / (nirchan + redchan +0.5)
 
-
 ```
-
 
 **SR: Simple Vegetation ratio**
 
 ```
 
-
 sr( redchan, nirchan )
 
 SR = (nirchan/redchan)
 
-
 ```
-
 
 **VARI: Visible Atmospherically Resistant Index**
 VARI was designed to introduce an atmospheric self-correction
@@ -363,19 +310,15 @@ Environment (80), pp76-87.)
 
 ```
 
-
 vari = ( bluechan, greenchan, redchan )
 
 VARI = (green - red ) / (green + red - blue)
 
-
 ```
-
 
 **WDVI: Weighted Difference Vegetation Index**
 
 ```
-
 
 wdvi( redchan, nirchan, soil_line_weight )
 
@@ -383,12 +326,9 @@ WDVI = nirchan - a * redchan
 if(soil_weight_line == None):
    a = 1.0   #slope of soil line
 
-
 ```
 
-
 ## EXAMPLES
-
 
 ### Calculation of DVI
 
@@ -396,14 +336,11 @@ The calculation of DVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.1 -p
 i.vi blue=band.1 red=band.3 nir=band.4 viname=dvi output=dvi
 r.univar -e dvi
 
-
 ```
-
 
 ### Calculation of EVI
 
@@ -411,14 +348,11 @@ The calculation of EVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.1 -p
 i.vi blue=band.1 red=band.3 nir=band.4 viname=evi output=evi
 r.univar -e evi
 
-
 ```
-
 
 ### Calculation of EVI2
 
@@ -426,14 +360,11 @@ The calculation of EVI2 from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=evi2 output=evi2
 r.univar -e evi2
 
-
 ```
-
 
 ### Calculation of GARI
 
@@ -441,14 +372,11 @@ The calculation of GARI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.1 -p
 i.vi blue=band.1 green=band.2 red=band.3 nir=band.4 viname=gari output=gari
 r.univar -e gari
 
-
 ```
-
 
 ### Calculation of GEMI
 
@@ -456,14 +384,11 @@ The calculation of GEMI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=gemi output=gemi
 r.univar -e gemi
 
-
 ```
-
 
 ### Calculation of GVI
 
@@ -472,16 +397,12 @@ reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
-
 # assuming Landsat-7
 i.vi blue=band.1 green=band.2 red=band.3 nir=band.4 band5=band.5 band7=band.7 viname=gvi output=gvi
 r.univar -e gvi
 
-
 ```
-
 
 ### Calculation of IPVI
 
@@ -489,14 +410,11 @@ The calculation of IPVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=ipvi output=ipvi
 r.univar -e ipvi
 
-
 ```
-
 
 ### Calculation of MSAVI
 
@@ -504,15 +422,11 @@ The calculation of MSAVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=msavi output=msavi
 r.univar -e msavi
 
-
 ```
-
-
 
 ### Calculation of NDVI
 
@@ -520,14 +434,11 @@ The calculation of NDVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=ndvi output=ndvi
 r.univar -e ndvi
 
-
 ```
-
 
 ### Calculation of NDWI
 
@@ -535,15 +446,12 @@ The calculation of NDWI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.2 -p
 i.vi green=band.2 nir=band.4 viname=ndwi output=ndwi
 r.colors ndwi color=byg -n
 r.univar -e ndwi
 
-
 ```
-
 
 ### Calculation of PVI
 
@@ -551,14 +459,11 @@ The calculation of PVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 soil_line_slope=0.45 viname=pvi output=pvi
 r.univar -e pvi
 
-
 ```
-
 
 ### Calculation of SAVI
 
@@ -566,14 +471,11 @@ The calculation of SAVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=savi output=savi
 r.univar -e savi
 
-
 ```
-
 
 ### Calculation of SR
 
@@ -581,14 +483,11 @@ The calculation of SR from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi red=band.3 nir=band.4 viname=sr output=sr
 r.univar -e sr
 
-
 ```
-
 
 ### Calculation of VARI
 
@@ -596,15 +495,11 @@ The calculation of VARI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=band.3 -p
 i.vi blue=band.2 green=band.3 red=band.4 viname=vari output=vari
 r.univar -e vari
 
-
 ```
-
-
 
 ### Landsat TM7 example
 
@@ -618,9 +513,7 @@ converted to reflectance using *i.landsat.toar*. To do so, we
 make a copy (or rename the channels) to match *i.landsat.toar*'s
 input scheme:
 
-
 ```
-
 
 g.copy raster=lsat7_2002_10,lsat7_2002.1
 g.copy raster=lsat7_2002_20,lsat7_2002.2
@@ -632,24 +525,18 @@ g.copy raster=lsat7_2002_62,lsat7_2002.62
 g.copy raster=lsat7_2002_70,lsat7_2002.7
 g.copy raster=lsat7_2002_80,lsat7_2002.8
 
-
 ```
-
 
 Calculation of reflectance values from DN using DOS1 (metadata obtained
 from [p016r035\_7x20020524.met.gz](https://grassbook.org/wp-content/uploads/ncexternal/landsat/2002/p016r035_7x20020524.met.gz)):
 
-
 ```
-
 
 i.landsat.toar input=lsat7_2002. output=lsat7_2002_toar. sensor=tm7 \
   method=dos1 date=2002-05-24 sun_elevation=64.7730999 \
   product_date=2004-02-12 gain=HHHLHLHHL
 
-
 ```
-
 
 The resulting Landsat channels are names `lsat7_2002_toar.1 .. lsat7_2002_toar.8`.
 
@@ -659,7 +546,6 @@ The calculation of NDVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=lsat7_2002_toar.3 -p
 i.vi red=lsat7_2002_toar.3 nir=lsat7_2002_toar.4 viname=ndvi \
      output=lsat7_2002.ndvi
@@ -668,9 +554,7 @@ r.colors lsat7_2002.ndvi color=ndvi
 d.mon wx0
 d.rast.leg lsat7_2002.ndvi
 
-
 ```
-
 
 ![North Carolina dataset: NDVI](i_vi_ndvi.png)
 
@@ -682,7 +566,6 @@ The calculation of ARVI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=lsat7_2002_toar.3 -p
 i.vi blue=lsat7_2002_toar.1 red=lsat7_2002_toar.3 nir=lsat7_2002_toar.4 \
      viname=arvi output=lsat7_2002.arvi
@@ -690,9 +573,7 @@ i.vi blue=lsat7_2002_toar.1 red=lsat7_2002_toar.3 nir=lsat7_2002_toar.4 \
 d.mon wx0
 d.rast.leg lsat7_2002.arvi
 
-
 ```
-
 
 ![North Carolina dataset: ARVI](i_vi_arvi.png)
 
@@ -704,7 +585,6 @@ The calculation of GARI from the reflectance values is done as follows:
 
 ```
 
-
 g.region raster=lsat7_2002_toar.3 -p
 i.vi blue=lsat7_2002_toar.1 green=lsat7_2002_toar.2 red=lsat7_2002_toar.3 \
      nir=lsat7_2002_toar.4 viname=gari output=lsat7_2002.gari
@@ -712,9 +592,7 @@ i.vi blue=lsat7_2002_toar.1 green=lsat7_2002_toar.2 red=lsat7_2002_toar.3 \
 d.mon wx0
 d.rast.leg lsat7_2002.gari
 
-
 ```
-
 
 ![North Carolina dataset: GARI](i_vi_gari.png)
 
@@ -747,7 +625,6 @@ AVHRR, Landsat TM5:
   thesis, Wageningen Agricultural Univ., The Netherland, 271 pp.
   ([PDF](https://edepot.wur.nl/206553))
 * [Index DataBase: List of available Indices](https://www.indexdatabase.de/db/i.php)
-
 
 ## SEE ALSO
 

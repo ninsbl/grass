@@ -13,10 +13,8 @@ Render elevation map in a 3D space.
 
 ```
 
-
 g.region raster=elevation
 m.nviz.image elevation_map=elevation output=elev perspective=15
-
 
 ```
 

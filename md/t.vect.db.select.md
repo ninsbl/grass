@@ -10,7 +10,6 @@ The example is querying the *shoreline* space time dataset:
 
 ```
 
-
 t.vect.db.select input=shoreline
 start_time|end_time|cat|DESCR|SOURCE|DATE
 1849|1873|1|T-736|NOAA/USGS|01/01/1858
@@ -24,14 +23,12 @@ start_time|end_time|cat|DESCR|SOURCE|DATE
 2009||46|2009 USDA NAIP|2009-07-11|Carolina Beach, REVETMENT-ROCK, Hard Structure
 2009||47|2009 USDA NAIP|2009-07-11|Fort Fisher, REVETMENT-ROCK, Hard Structure
 
-
 ```
 
 In the following example it print only DATE and SOURCE columns for data
 before 1900-01-01.
 
 ```
-
 
 t.vect.db.select input=shoreline column=DATE,SOURCE t_where="start_time < 1900"
 start_time|end_time|DATE|SOURCE
@@ -45,7 +42,6 @@ start_time|end_time|DATE|SOURCE
 1849|1873|01/01/1873|Coastal Carolina University
 1849|1873|01/01/1873|Coastal Carolina University
 1849|1873|01/01/1873|Coastal Carolina University
-
 
 ```
 

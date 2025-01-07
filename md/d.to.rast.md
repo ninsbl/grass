@@ -14,17 +14,14 @@ First, we add a couple of maps to layer manager:
 
 ```
 
-
 g.region raster=elevation
 d.rast map=elevation
 d.rast map=lakes
 d.vect map=roadsmajor width=4
 d.vect map=roadsmajor width=2 color=yellow
 
-
 # create a raster map from the display
 d.to.rast output=composite
-
 
 ```
 

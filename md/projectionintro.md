@@ -1,5 +1,4 @@
 
-
 ### Projection management in general
 
 A GRASS project is referenced with a single projection and coordinate system
@@ -63,7 +62,6 @@ A graphical user interface is provided by [wxGUI](wxGUI.html).
 * [Coordinate operations](https://proj.org/operations/index.html) by PROJ (projections, conversions, transformations, pipeline operator)
 * [MapRef - The Collection of Map Projections and Reference Systems for Europe](https://mapref.org)
 * [Information and Service System for European Coordinate Reference Systems - CRS](https://www.crs-geo.eu/)
-
 
 ### See also
 

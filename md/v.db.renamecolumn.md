@@ -25,12 +25,10 @@ Renaming a column:
 
 ```
 
-
 g.copy vect=roadsmajor,myroads
 v.info -c myroads
 v.db.renamecolumn myroads column=ROAD_NAME,roadname
 v.info -c myroads
-
 
 ```
 

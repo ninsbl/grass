@@ -33,7 +33,6 @@ The general format for absolute values is:
 
 ```
 
-
   day month year [bc] hour:minute:seconds timezone
 
          day is 1-31
@@ -45,13 +44,11 @@ The general format for absolute values is:
          second is 0-59.9999 (fractions of second allowed)
          timezone is +hhmm or -hhmm (eg, -0600)
 
-
 ```
 
 Some parts can be missing, for example
 
 ```
-
 
          1994 [bc]
          Jan 1994 [bc]
@@ -59,7 +56,6 @@ Some parts can be missing, for example
          15 jan 1994 [bc] 10 [+0000]
          15 jan 1994 [bc] 10:00 [+0100]
          15 jan 1994 [bc] 10:00:23.34 [-0500]
-
 
 ```
 
@@ -70,10 +66,8 @@ day-second. The formats are:
 
 ```
 
-
          [-] # years # months
          [-] # days # hours # minutes # seconds
-
 
 ```
 
@@ -81,7 +75,6 @@ The words years, months, days, hours, minutes, seconds are literal
 words, and the # are the numeric values. Examples:
 
 ```
-
 
          2 years
          5 months
@@ -91,7 +84,6 @@ words, and the # are the numeric values. Examples:
          100 days 25 minutes
          1000 hours 35.34 seconds
 
-
 ```
 
 The following are *illegal* because it mixes year-month and
@@ -99,10 +91,8 @@ day-second (because the number of days in a month or in a year vary):
 
 ```
 
-
          3 months 15 days
          3 years 10 days
-
 
 ```
 
@@ -116,9 +106,7 @@ dates).
 
 ```
 
-
 r.timestamp map=soils
-
 
 ```
 
@@ -126,9 +114,7 @@ Sets the timestamp for "soils" to the single date "15 sep 1987".
 
 ```
 
-
 r.timestamp map=soils date='15 sep 1987'
-
 
 ```
 
@@ -137,9 +123,7 @@ and the end date "20 feb 1988".
 
 ```
 
-
 r.timestamp map=soils date='15 sep 1987/20 feb 1988'
-
 
 ```
 
@@ -148,9 +132,7 @@ Sets the timestamp for "soils" to have the start date "18 feb 2005
 
 ```
 
-
 r.timestamp map=soils date='18 feb 2005 10:30:00/20 jul 2007 20:30:00'
-
 
 ```
 
@@ -158,9 +140,7 @@ Removes the timestamp for the "soils" raster map.
 
 ```
 
-
 r.timestamp map=soils date=none
-
 
 ```
 

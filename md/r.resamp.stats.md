@@ -30,13 +30,10 @@ North Carolina sample dataset):
 
 ```
 
-
 g.region raster=el_D782_6m -p
 g.region res=20 -ap
-
 # from 6m to 20m: weighted resampling -w
 r.resamp.stats -w input=el_D782_6m output=el_D782_20m
-
 
 ```
 

@@ -42,10 +42,8 @@ This example uses the hospitals in the North Carolina dataset.
 
 ```
 
-
 g.region -p raster=elev_state_500m
 v.voronoi input=hospitals output=hospitals_voronoi
-
 
 ```
 
@@ -60,10 +58,8 @@ This example uses urban areas in the North Carolina dataset.
 
 ```
 
-
 g.region -p n=162500 s=80000 w=727000 e=846000 res=500
 v.voronoi input=urbanarea output=urbanarea_voronoi -a
-
 
 ```
 
@@ -78,11 +74,9 @@ This example uses urban areas in the North Carolina dataset.
 
 ```
 
-
 g.region -p n=161000 s=135500 w=768500 e=805500 res=500
 v.voronoi input=urbanarea output=urbanarea_centerline -s
 v.voronoi input=urbanarea output=urbanarea_skeleton -s thin=2000
-
 
 ```
 

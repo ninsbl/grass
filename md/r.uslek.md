@@ -20,8 +20,6 @@ Calculate the USLE K factor (synthetic values, North Carolina sample dataset):
 
 ```
 
-
-
 # NC data: simulation
 g.region rural_1m -p
 
@@ -32,17 +30,13 @@ r.mapcalc "organ = 0.0136"
 
 r.uslek psand=sand pclay=clay psilt=silt pomat=organ output=usle_k
 r.univar usle_k
-
 # Result: uslek = 0.25
-
 
 ```
 
 Example with small variations (condition: d\_sand + d\_clay + d\_silt => 1.0)
 
 ```
-
-
 
 # NC data: simulation
 r.mapcalc -s "sand_r = rand(0.09,0.13)"
@@ -60,9 +54,7 @@ g.remove -f rast name=sand_r,clay_r,silt_r,temp_sum,test
 
 r.uslek psand=sand pclay=clay psilt=silt pomat=organ output=usle_k
 r.univar usle_k
-
 # Result: uslek =  variable values
-
 
 ```
 

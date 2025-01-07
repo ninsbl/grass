@@ -19,9 +19,7 @@ List SQLite databases in the current mapset:
 
 ```
 
-
 db.databases driver=sqlite
-
 
 ```
 
@@ -29,9 +27,7 @@ List SQLite databases in a given directory:
 
 ```
 
-
 db.databases driver=sqlite location=/opt/sqlite
-
 
 ```
 
@@ -39,9 +35,7 @@ List PostgreSQL databases from database server running on given port:
 
 ```
 
-
 db.databases driver=pg location="host=server_name port=5333"
-
 
 ```
 

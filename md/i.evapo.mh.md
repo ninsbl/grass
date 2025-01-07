@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.evapo.mh* calculates the reference evapotranspiration (ET) after
@@ -18,7 +17,6 @@ Hargreaves version found in Droogers and Allen (2002).
 * Hargreaves GH, Samani ZA, 1985. Reference crop evapotranspiration from
   ambient air temperature. American Society of Agricultural Engineers
   (Microfiche collection)(USA). no. fiche no. 85-2517.
-
 
 ## SEE ALSO
 

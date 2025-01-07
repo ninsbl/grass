@@ -10,10 +10,7 @@ manual](https://www.postgresql.org/docs/manuals/) for details.
 
 ## Connecting GRASS to PostgreSQL
 
-
 ```
-
-
 
 # example for connecting to a PostgreSQL server:
 db.connect driver=pg database=mydb
@@ -21,9 +18,7 @@ db.login user=myname password=secret host=myserver.osgeo.org  # port=5432
 db.connect -p
 db.tables -p
 
-
 ```
-
 
 ### Username and password
 
@@ -41,12 +36,9 @@ This file should contain lines of the following format:
 
 ```
 
-
 hostname:port:database:username:password
 
-
 ```
-
 
 ## Supported SQL commands
 
@@ -65,15 +57,12 @@ be generated as follows in a PostgreSQL table:
 
 ```
 
-
 db.execute sql="ALTER TABLE mytable ADD ID integer"
 db.execute sql="CREATE SEQUENCE mytable_seq"
 db.execute sql="UPDATE mytable SET ID = nextval('mytable_seq')"
 db.execute sql="DROP SEQUENCE mytable_seq"
 
-
 ```
-
 
 ## Attribute import into PostgreSQL
 
@@ -81,13 +70,10 @@ CSV import into PostgreSQL:
 
 ```
 
-
 \h copy
 COPY t1 FROM 'filename' USING DELIMITERS ',';
 
-
 ```
-
 
 ## Geometry import from PostgreSQL table into GRASS
 
@@ -106,7 +92,6 @@ In an existing PostGIS database, create the following table:
 
 ```
 
-
 CREATE TABLE test
 (
  id serial NOT NULL,
@@ -116,33 +101,26 @@ CREATE TABLE test
  CONSTRAINT test_pkey PRIMARY KEY (id)
 ) WITHOUT OIDS;
 
-
 # insert value
 INSERT INTO test (text, wkb_geometry)
  VALUES ('Name',geometryFromText('POLYGON((600000 200000,650000
  200000,650000 250000,600000 250000,600000 200000))',-1));
 
-
 # register geometry column
 select AddGeometryColumn ('postgis', 'test', 'geometry', -1, 'GEOMETRY', 2);
 
-
 ```
-
 
 GRASS can import this PostGIS polygon map as follows:
 
 ```
-
 
 v.in.ogr input="PG:host=localhost dbname=postgis user=neteler" layer=test \
          output=test type=boundary,centroid
 v.db.select test
 v.info -t test
 
-
 ```
-
 
 #### Geometry Converters
 
@@ -155,7 +133,6 @@ v.info -t test
   GIS vector format converter and library, e.g. ArcInfo or SHAPE to PostGIS.
 
   `ogr2ogr -f "PostgreSQL" shapefile ??`
-
 
 ## SEE ALSO
 

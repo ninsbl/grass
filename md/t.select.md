@@ -42,9 +42,7 @@ expression, for example:
 
 ```
 
-
 t.select expression="C = A : B"
-
 
 ```
 
@@ -63,7 +61,6 @@ Several temporal topology relations between registered maps of space
 time datasets are supported:
 
 ```
-
 
 equals            A ------
                   B ------
@@ -100,7 +97,6 @@ overlaps          A ------
 
 over              booth overlaps and overlapped
 
-
 ```
 
 The relations must be read as: A is related to B, like - A equals B - A is
@@ -117,13 +113,11 @@ related maps and calculate the result temporal extent by five different possibil
 
 ```
 
-
 LEFT REFERENCE     l       Use the time stamp of the left space time dataset
 INTERSECTION       i       Intersection
 DISJOINT UNION     d       Disjoint union
 UNION              u       Union
 RIGHT REFERENCE    r       Use the time stamp of the right space time dataset
-
 
 ```
 
@@ -137,9 +131,7 @@ by default. The following expression
 
 ```
 
-
 C = A : B
-
 
 ```
 
@@ -151,9 +143,7 @@ complement of the selection operator, hence the following expression
 
 ```
 
-
 C = A !: B
-
 
 ```
 
@@ -168,9 +158,7 @@ All three parts are separated by comma and surrounded by curly braces:
 
 ```
 
-
 {"temporal selection operator", "topological relations", "temporal operator"}
-
 
 ```
 
@@ -178,10 +166,8 @@ Examples:
 
 ```
 
-
 C = A {:, equals} B
 C = A {!:, equals} B
-
 
 ```
 
@@ -190,9 +176,7 @@ to connect them:
 
 ```
 
-
 C = A {:,equals|during|overlaps} B
-
 
 ```
 
@@ -203,9 +187,7 @@ temporal operator.
 
 ```
 
-
 C = A {:, during,r} B
-
 
 ```
 
@@ -217,12 +199,10 @@ selection operator, so that the following statements are exactly the same:
 
 ```
 
-
 C = A : B
 C = A {:} B
 C = A {:,equal} B
 C = A {:,equal,l} B
-
 
 ```
 
@@ -230,12 +210,10 @@ Same for the complementary selection:
 
 ```
 
-
 C = A !: B
 C = A {!:} B
 C = A {!:,equal} B
 C = A {!:,equal,l} B
-
 
 ```
 
@@ -244,7 +222,6 @@ C = A {!:,equal,l} B
 Selection operations can be evaluated within conditional statements.
 
 ```
-
 
 Note A and B can either be space time datasets or expressions. The temporal
 relationship between the conditions and the conclusions can be defined at the
@@ -258,7 +235,6 @@ if statement                           decision option                        te
   if(topologies, conditions, A)        A if conditions are True;              temporal topological relation between if and then is explicit specified by topologies.
   if(topologies, conditions, A, B)     A if conditions are True, B otherwise; temporal topological relation between if, then and else is explicit specified by topologies.
 
-
 ```
 
 The conditions are comparison expressions that are used to evaluate
@@ -271,7 +247,6 @@ compared by logical operators and evaluated for each map of the STDS.
 
 ```
 
-
 Symbol  description
 
   ==    equal
@@ -283,7 +258,6 @@ Symbol  description
   &&    and
   ||    or
 
-
 ```
 
 #### Temporal functions
@@ -292,7 +266,6 @@ The following temporal function are evaluated only for the STDS that must
 be given in parenthesis.
 
 ```
-
 
 td(A)                    Returns a list of time intervals of STDS A
 
@@ -322,7 +295,6 @@ end_hour(A)              The hour of the end time [0 - 23]
 end_minute(A)            The minute of the end time [0 - 59]
 end_second(A)            The second of the end time [0 - 59]
 
-
 ```
 
 #### Comparison operator
@@ -347,9 +319,7 @@ Comparison operator -> aggregation operator:
 
 ```
 
-
 || -> | and && -> &
-
 
 ```
 
@@ -357,13 +327,11 @@ Examples:
 
 ```
 
-
 Condition 1 {||, equal, r} Condition 2
 Condition 1 {&&, equal|during, l} Condition 2
 Condition 1 {&&, equal|contains, |, l} Condition 2
 Condition 1 {&&, equal|during, l} Condition 2 && Condition 3
 Condition 1 {&&, equal|during, l} Condition 2 {&&,contains, |, r} Condition 3
-
 
 ```
 
@@ -374,9 +342,7 @@ conditional statements with the hash (#) operator.
 
 ```
 
-
 A{#, contains}B
-
 
 ```
 
@@ -389,9 +355,7 @@ that contain maps from B will be returned.
 
 ```
 
-
 C = if({equal}, A {#, contains} B > 2, A {:, contains} B)
-
 
 ```
 
@@ -407,11 +371,9 @@ respectively.
 
 ```
 
-
 buff_t(A, size)         Buffer STDS A with granule ("1 month" or 5)
 tshift(A, size)         Shift STDS A with granule ("1 month" or 5)
 tsnap(A)                Snap time instances and intervals of STDS A
-
 
 ```
 
@@ -422,9 +384,7 @@ map function.
 
 ```
 
-
 tmap()
-
 
 ```
 
@@ -432,9 +392,7 @@ For example:
 
 ```
 
-
  C = A {:,during} tmap(event)
-
 
 ```
 
@@ -449,9 +407,7 @@ store them in space time dataset D.
 
 ```
 
-
 D = if(start_date(A) < "2005-01-01", A : B : C)
-
 
 ```
 
@@ -461,9 +417,7 @@ stamps that are not equal to A and store them in space time dataset D.
 
 ```
 
-
 D = if(A {#, contains} B > 3, A {:, contains} B, C)
-
 
 ```
 
@@ -473,9 +427,7 @@ select maps from C and store them in space time dataset D.
 
 ```
 
-
 D = if(contains, td(buff_t(A, "1 days")) == 3, B, C)
-
 
 ```
 

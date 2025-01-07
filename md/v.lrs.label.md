@@ -7,7 +7,6 @@ from *v.lrs.create*).
 
 ```
 
-
 v.lrs.label route_lrs rstable=route_lrs output=route_lrs_labels \
             labels=labels col=red size=50 xoffset=100
 
@@ -18,7 +17,6 @@ d.vect route_lrs_labels col=grey type=line
 d.vect busstops disp=attr attr=cat size=10 bg=white lcol=green yref=bottom
 d.vect busstops icon=basic/circle fcol=green
 d.labels labels
-
 
 ```
 

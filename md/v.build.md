@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.build* builds support files for GRASS vector maps. These
@@ -35,9 +34,7 @@ includes:
 * intersecting boundaries, i.e. overlapping areas,
 * areas without centroids that are not isles.
 
-
 ## EXAMPLES
-
 
 ### Build topology
 
@@ -48,12 +45,9 @@ index is created.
 
 ```
 
-
 v.build map=urbanarea option=build
 
-
 ```
-
 
 Note that the vector map *urbanarea* must be located in the
 current mapset.
@@ -68,12 +62,9 @@ section "Vector library topology management".
 
 ```
 
-
 v.build map=urbanarea option=dump
 
-
 ```
-
 
 ## SEE ALSO
 

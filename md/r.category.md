@@ -43,10 +43,8 @@ must be used after the separator):
 
 ```
 
-
 cat:Label
 val1:val2:Label
-
 
 ```
 
@@ -61,12 +59,10 @@ which override the format label generation.
 
 ```
 
-
    0:no data
-   2:   .
-   5:   .             ## explicit category labels
-   7:   .
-
+   2:	.
+   5:	.		      ## explicit category labels
+   7:	.
 
 ```
 
@@ -74,11 +70,9 @@ explicit labels can be also of the form:
 
 ```
 
-
    5.5:5:9 label description
    or
    15:30  label description
-
 
 ```
 
@@ -128,16 +122,14 @@ North Carolina sample dataset:
 
 ```
 
-
 r.category map=landclass96
-1   developed
-2   agriculture
-3   herbaceous
-4   shrubland
-5   forest
-6   water
-7   sediment
-
+1	developed
+2	agriculture
+3	herbaceous
+4	shrubland
+5	forest
+6	water
+7	sediment
 
 ```
 
@@ -146,13 +138,11 @@ prints the values and labels associated with all of the categories in the
 
 ```
 
-
 r.category map=landclass96 cats=2,5-7
-2   agriculture
-5   forest
-6   water
-7   sediment
-
+2	agriculture
+5	forest
+6	water
+7	sediment
 
 ```
 
@@ -161,11 +151,9 @@ categories `2` and `5` through `7`.
 
 ```
 
-
 r.category map=landclass96 cats=3,4 separator=comma
 3,herbaceous
 4,shrubland
-
 
 ```
 
@@ -176,16 +164,13 @@ values in the output.
 
 ```
 
-
 r.category map=landclass96 cats=3,4 output_format=json
-
 
 ```
 
 generates the following JSON output:
 
 ```
-
 
 [
     {
@@ -198,7 +183,6 @@ generates the following JSON output:
     }
 ]
 
-
 ```
 
 ### Adding categories
@@ -207,12 +191,10 @@ Example for defining new category labels, using a colon as separator:
 
 ```
 
-
 r.category diseasemap separator=":" rules=- << EOF
 1:potential absence
 2:potential presence
 EOF
-
 
 ```
 

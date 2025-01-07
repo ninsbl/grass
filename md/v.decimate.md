@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.decimate* reduces number of points in the input vector map
@@ -45,7 +44,6 @@ selections or filters, these are:
 * selection by category (**cats** option)
 * selection by z values (**zrange** option)
 
-
 ## NOTES
 
 The grid-based decimation requires all points which will be saved in output
@@ -67,24 +65,18 @@ Keep only every forth point, throw away the rest:
 
 ```
 
-
 v.decimate input=points_all output=points_decimated_every_4 preserve=4
 
-
 ```
-
 
 Keep only points within a grid cell (given by the current computational
 region) which has unique categories (e.g. LIDAR classes):
 
 ```
 
-
 v.decimate input=points_all output=points_decimated_unique_cats layer=1 -g -c
 
-
 ```
-
 
 ![](v_decimate_original.png)
 ![](v_decimate_count.png)
@@ -98,13 +90,9 @@ Keep only points with category 2 and keep only approximately 80% of the points:
 
 ```
 
-
 v.decimate input=points_all output=points_decimated_ skip=5 cats=2 layer=1
 
-
 ```
-
-
 
 ## REFERENCES
 
@@ -112,7 +100,6 @@ v.decimate input=points_all output=points_decimated_ skip=5 cats=2 layer=1
   and LiDAR point clouds in grass GIS. The International Archives of Photogrammetry,
   Remote Sensing and Spatial Information Sciences, 41, 945
   ([DOI](https://doi.org/10.5194/isprsarchives-XLI-B7-945-2016))
-
 
 ## SEE ALSO
 

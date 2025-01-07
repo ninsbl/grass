@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 This program allows a user to convert coordinates from one projection
@@ -74,12 +73,9 @@ through the *sed* stream editor as follows.
 
 ```
 
-
 m.proj -o ... | sed -e 's/d/:/g' -e "s/'/:/g"  -e 's/"//g'
 
-
 ```
-
 
 ## EXAMPLES
 
@@ -95,18 +91,13 @@ following example shows.
 
 ```
 
-
-
 # Long/Lat WGS84 output in DMS
 v.out.ascii bridges | m.proj -o input=-
-
 
 # Long/Lat WGS84 output in decimal degree
 v.out.ascii bridges | m.proj -o -d input=-
 
-
 ```
-
 
 ### Reproject Long/Lat WGS84 coordinate pair to current map projection
 
@@ -116,21 +107,16 @@ automatically from the current project definition:
 
 ```
 
-
 echo "-78.61168178 33.92225767" | m.proj -i input=-
 645513.47|19180.31|0.00
 
-
 ```
-
 
 The same, but load points from a file named `waypoints.txt` and
 continue on to import the results into a GRASS vector points map in
 the current map projection:
 
 ```
-
-
 
 # check file content
 cat waypoints.txt
@@ -139,10 +125,8 @@ cat waypoints.txt
 -78.51078074 33.88141495
 -77.14037951 35.60543020
 
-
 # reproject points and generate vector map on the fly
 m.proj -i input=waypoints.txt | v.in.ascii input=- output=test_pnts
-
 
 # verify result
 v.db.select test_pnts cat|dbl_1|dbl_2|dbl_3
@@ -151,9 +135,7 @@ v.db.select test_pnts cat|dbl_1|dbl_2|dbl_3
 3|654867.21|14690.64|0
 4|778074.58|207402.6|0
 
-
 ```
-
 
 ### Custom projection parameter usage
 
@@ -163,15 +145,12 @@ Gauss-Krüger Grid System, importing from and exporting to files:
 
 ```
 
-
 m.proj proj_in="+proj=utm +name=utm +a=6378137.0 +es=0.006694380 \
     +zone=32 +unfact=1.0" proj_out="+proj=tmerc +name=tmerc \
     +a=6377397.155 +es=0.0066743720 +lat_0=0.0 +lon_0=9.0 +k=1.0 \
     +x_0=3500000.0" input=utm.coord.txt output=new.gk.coord.txt
 
-
 ```
-
 
 Projection parameters provided in the above case: `+proj`
 (projection type), `+name` (projection name), `+a`
@@ -198,25 +177,19 @@ Another custom parameter usage example:
 
 ```
 
-
 m.proj proj_in="+proj=tmerc +datum=ire65 +lat_0=53.5 +lon_0=-8 +x_0=200000 \
     +y_0=250000 +k=1.000035" proj_out="+proj=ll +datum=wgs84" input=wpt.txt
 
-
 ```
-
 
 or without datum transformation:
 
 ```
 
-
 m.proj proj_in="+proj=tmerc +ellps=modif_airy +lat_0=53.5 +lon_0=-8 +x_0=200000 \
     +y_0=250000 +k=1.000035" proj_out="+proj=ll +datum=wgs84" input=wpt.txt
 
-
 ```
-
 
 In this example no datum transformation will take place as a datum was
 not specified for the input projection. The datum specified for the
@@ -237,7 +210,6 @@ For more usage examples, see the documentation for the
   also there: Interim Report and 2nd Interim Report on Release 4,
   Evenden 1994).
 * [PROJ](https://proj.org) Cartographic Projection Library
-
 
 ## SEE ALSO
 

@@ -34,7 +34,6 @@ It has the following format:
 
 ```
 
-
      TITLE      TITLE
      MATRIX     n
                   .
@@ -42,7 +41,6 @@ It has the following format:
                   .
      DIVISOR    d
      TYPE        S/P
-
 
 ```
 
@@ -81,7 +79,6 @@ For example, the following describes two filters:
 
 ```
 
-
       TITLE     3x3 average, non-null data only, followed by 5x5 average
      MATRIX    3
      1 1 1
@@ -98,7 +95,6 @@ For example, the following describes two filters:
      1 1 1 1 1
      DIVISOR   25
      TYPE      P
-
 
 ```
 

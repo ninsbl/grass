@@ -58,21 +58,16 @@ report area sizes for each lake individually rather by waterbody type:
 
 ```
 
-
 g.region raster=lakes -p
-
 
 # report sizes by waterbody type
 r.report lakes units=h
 
-
 # clump per raster polygon
 r.clump lakes out=lakes_individual
 
-
 # report sizes by individual waterbody
 r.report lakes_individual units=h
-
 
 ```
 
@@ -86,16 +81,13 @@ Perform fuzzy clumping on Landsat 7 2002 imagery (North Carolina sample dataset)
 
 ```
 
-
 g.region raster=lsat7_2002_10 -p
 r.clump in=lsat7_2002_10,lsat7_2002_20,lsat7_2002_30,lsat7_2002_40,lsat7_2002_50,lsat7_2002_70 \
         out=lsat7_2002_clump threshold=0.045
 
-
 # reduce noise
 r.clump in=lsat7_2002_10,lsat7_2002_20,lsat7_2002_30,lsat7_2002_40,lsat7_2002_50,lsat7_2002_70 \
         out=lsat7_2002_clump_min10 threshold=0.045 minsize=10
-
 
 ```
 

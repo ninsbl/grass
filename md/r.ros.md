@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.ros* is part of the wildfire simulation toolset. Preparational
@@ -54,12 +53,9 @@ values to the missing option using the formula:
 
 ```
 
-
 moisture_100h = moisture_10h + 1 = moisture_1h + 2
 
-
 ```
-
 
 However, at least one of them should be given.
 
@@ -79,14 +75,11 @@ Assume we have inputs, the following generates ROSes and spotting distances:
 
 ```
 
-
 r.ros -s model=fire_model moisture_1h=1hour_moisture moisture_live=live_moisture \
     velocity=wind_speed direction=wind_direction \
     slope=slope aspect=aspect elevation=elevation output=ros
 
-
 ```
-
 
 ## NOTES
 
@@ -105,7 +98,6 @@ r.ros -s model=fire_model moisture_1h=1hour_moisture moisture_live=live_moisture
    As far as the user just use *r.ros* together with
    *[r.spread](r.spread.html)*, there is no need to
    concern about these output units.
-
 
 ## REFERENCES
 
@@ -130,7 +122,6 @@ r.ros -s model=fire_model moisture_1h=1hour_moisture moisture_live=live_moisture
   a geographic information system and remote sensing, Ph. D. Dissertation,
   Rutgers University, New Brunswick, Jersey
   ([ref](https://dl.acm.org/citation.cfm?id=921466)).
-
 
 ## SEE ALSO
 

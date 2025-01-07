@@ -64,9 +64,7 @@ Boundaries (usually without categories) can be rasterized with
 
 ```
 
-
 v.to.rast type=boundary layer=-1 use=value
-
 
 ```
 
@@ -76,7 +74,6 @@ v.to.rast type=boundary layer=-1 use=value
 
 ```
 
-
 db.describe -c table=vect_map
 
 ncols:3
@@ -84,14 +81,11 @@ Column 1: CAT
 Column 2: SPEED
 Column 3: WIDTH
 
-
 ```
 
 ```
-
 
 v.to.rast input=vect_map output=raster_map attribute_column=SPEED type=line
-
 
 ```
 
@@ -99,9 +93,7 @@ v.to.rast input=vect_map output=raster_map attribute_column=SPEED type=line
 
 ```
 
-
 v.to.rast input=streams output=streamsdir use=dir
-
 
 ```
 
@@ -111,19 +103,15 @@ Using slope and aspect maps, compute slope along a bus route (use full NC sample
 
 ```
 
-
 g.region raster=elevation -p
 r.slope.aspect elevation=elevation slope=slope aspect=aspect
-
 
 # compute direction of the bus route
 v.to.rast input=busroute11 type=line output=busroute11_dir use=dir
 
-
 # extract steepest slope values and transform them into slope along path
 r.mapcalc "route_slope = if(busroute11, slope)"
 r.mapcalc "route_slope_dir = abs(atan(tan(slope) * cos(aspect - busroute11_dir)))"
-
 
 ```
 
@@ -138,14 +126,10 @@ sample dataset):
 
 ```
 
-
-
 # rasterize ZIP codes at 50m raster resolution
 g.region vector=zipcodes_wake res=50 -ap
-
 # vector to raster conversion, with category labels
 v.to.rast input=zipcodes_wake output=myzipcodes use=attr attribute_column="ZIPNUM" label_column="NAME"
-
 
 ```
 
@@ -156,23 +140,18 @@ In this example, the number of schools per raster cell are counted
 
 ```
 
-
 g.copy vector=schools_wake,myschools_wake
-
 
 # set computation region for raster binning
 g.region vector=myschools_wake res=5000 -p -a
-
 
 # add new column for counting
 v.db.addcolumn myschools_wake column="value integer"
 v.db.update myschools_wake column=value value=1
 
-
 # verify attributes
 v.db.select myschools_wake column=cat,value
 v.out.ascii input=myschools_wake output=- column=value
-
 
 # export and import on the fly, use 4th column (value) as input
 v.out.ascii input=myschools_wake output=- column=value | r.in.xyz input=- \
@@ -182,7 +161,6 @@ d.mon wx0
 d.rast schools_wake_aggreg
 d.vect schools_wake
 d.grid 5000
-
 
 ```
 

@@ -156,16 +156,13 @@ A dynamic example can be found in the *d.polar* shell script.
 
 ```
 
-
 echo "symbol basic/star 20 2264417 5413182 black red" | d.graph -m
-
 
 ```
 
 ### Split the screen into quadrants
 
 ```
-
 
 d.frame -s full_screen
 
@@ -182,7 +179,6 @@ d.graph << EOF
    50.15 100
    49.85 100
 EOF
-
 
 ```
 

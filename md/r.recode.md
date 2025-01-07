@@ -13,12 +13,10 @@ Rules are defined in one of these formats:
 
 ```
 
-
 old_low:old_high:new_low:new_high
 old_low:old_high:new_val  (i.e. new_high == new_low)
 *:old_val:new_val         (interval [inf, old_val])
 old_val:*:new_val         (interval [old_val, inf])
-
 
 ```
 
@@ -53,9 +51,7 @@ would use the first argument. For example
 
 ```
 
-
 10:1500:0.1:15.0
-
 
 ```
 
@@ -70,13 +66,11 @@ values 1, 2 and 3 are replaced by 1.1, 7.5 resp. 0.4:
 
 ```
 
-
 r.recode input=oldmap output=newmap rules=- << EOF
 1:1:1.1:1.1
 2:2:7.5:7.5
 3:3:0.4:0.4
 EOF
-
 
 ```
 

@@ -29,34 +29,25 @@ Bash:
 
 ```
 
-
 export VARIABLE=value
 
-
 ```
-
 
 Csh:
 
 ```
 
-
 setenv VARIABLE value
 
-
 ```
-
 
 Cmd.exe (Windows):
 
 ```
 
-
 set VARIABLE=value
 
-
 ```
-
 
 To set up shell environment variables permanently:
 
@@ -69,7 +60,6 @@ To set up shell environment variables permanently:
 
   `$HOME/.grass8/cshrc`
 
-
 ## Setting GRASS gisenv variables
 
 Use *[g.gisenv](g.gisenv.html)* within GRASS. This permanently
@@ -81,12 +71,9 @@ Usage:
 
 ```
 
-
 g.gisenv set="VARIABLE=VALUE"
 
-
 ```
-
 
 It looks unusual with two equals signs, but *g.gisenv* serves dual duty for
 getting and setting GRASS variables.
@@ -96,13 +83,10 @@ For example:
 
 ```
 
-
 g.gisenv MAPSET
 PERMANENT
 
-
 ```
-
 
 ## List of selected (GRASS related) shell environment variables
 
@@ -469,7 +453,6 @@ For specific driver-related variables see:
 * *[PS (Postscript) display driver](psdriver.html)*
 * *[HTML display driver](htmldriver.html)*
 
-
 ### List of selected internal GRASS environment variables
 
 > [ These variables are intended **for internal use only** by the GRASS
@@ -534,12 +517,9 @@ sets level of debug message output (0: no debug messages)
 
 ```
 
-
 g.gisenv set=DEBUG=0
 
-
 ```
-
 
 WX\_DEBUG
 [wxGUI]
@@ -566,28 +546,20 @@ sets the maximum memory to be used (in MB), i.e. the cache size for raster rows
 
 ```
 
-
-
 # set to 6 GB (default: 300 MB)
 g.gisenv set="MEMORYMB=6000"
 
-
 ```
-
 
 NPROCS
 sets the number of threads for parallel computing
 
 ```
 
-
-
 # set to use 12 threads (default: 1)
 g.gisenv set="NPROCS=12"
 
-
 ```
-
 
 OVERWRITE
 [all modules]

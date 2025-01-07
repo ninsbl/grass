@@ -11,10 +11,8 @@ Test current SQL backend driver:
 
 ```
 
-
 db.connect -p
 db.test test=test1
-
 
 ```
 

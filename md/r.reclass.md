@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.reclass* creates an *output* map layer
@@ -19,7 +18,6 @@ Before using *r.reclass* the user must know the following:
 1. The new categories desired; and, which old categories fit into
    which new categories.
 2. The names of the new categories.
-
 
 ## NOTES
 
@@ -56,12 +54,9 @@ a reclass map to a regular raster map layer as well:
 
 ```
 
-
   r.mapcalc "raster_map = reclass_map"
 
-
 ```
-
 
 where *raster\_map* is the name to be given to the new raster map,
 and *reclass\_map* is an existing reclass map.
@@ -118,7 +113,6 @@ input.
 
 ## EXAMPLES
 
-
 ### Reclass rules examples
 
 The following examples may help clarify the reclass rules.
@@ -130,13 +124,10 @@ category 2 with the label "poor quality" in the output map layer.
 
 ```
 
-
     1 2 3   = 1    good quality
     4 5     = 2    poor quality
 
-
 ```
-
 
 The following example reclassifies categories 1, 3 and 5 in the input raster
 map layer to category 1 with category label "poor quality" in the output
@@ -146,14 +137,11 @@ All other values are reclassified to NULL.
 
 ```
 
-
     1 3 5   = 1    poor quality
     2 4 6   = 2    good quality
     *       = NULL
 
-
 ```
-
 
 The following example reclassifies input raster map layer categories
 1 thru 10 to output
@@ -164,15 +152,12 @@ NULL.
 
 ```
 
-
-     1 thru 10  = 1
-    11 thru 20  = 2
-    21 thru 30  = 3
+     1 thru 10	= 1
+    11 thru 20	= 2
+    21 thru 30	= 3
     30 thru 40  = NULL
 
-
 ```
-
 
 The following example shows overlapping rules. Subsequent rules override
 previous rules. Therefore, the below example
@@ -184,42 +169,33 @@ to the output category 3.
 
 ```
 
-
-     1 thru 100 = 1    poor quality
-    20 thru 50  = 2    medium quality
-    25          = 3    good quality
-
+     1 thru 100	= 1    poor quality
+    20 thru 50	= 2    medium quality
+    25	        = 3    good quality
 
 ```
-
 
 The previous example could also have been entered as:
 
 ```
 
-
-     1 thru 19  51 thru 100 = 1    poor quality
-    20 thru 24  26 thru 50  = 2    medium quality
-    25              = 3    good quality
-
+     1 thru 19  51 thru 100	= 1    poor quality
+    20 thru 24  26 thru 50	= 2    medium quality
+    25				= 3    good quality
 
 ```
-
 
 or as:
 
 ```
 
-
-     1 thru 19   = 1    poor quality
-    51 thru 100  = 1
-    20 thru 24   = 2
-    26 thru 50   = 2    medium quality
-    25       = 3    good quality
-
+     1 thru 19	 = 1    poor quality
+    51 thru 100	 = 1
+    20 thru 24	 = 2
+    26 thru 50	 = 2    medium quality
+    25		 = 3    good quality
 
 ```
-
 
 The final example was given to show how the labels are handled. If a new
 category value appears in more than one rule (as is the case with new
@@ -234,16 +210,14 @@ dataset) are simplified to 7 classes:
 
 ```
 
-
 r.category landuse96_28m
-0   not classified
-1   High Intensity Developed
-2   Low Intensity Developed
-3   Cultivated
+0	not classified
+1	High Intensity Developed
+2	Low Intensity Developed
+3	Cultivated
 [...]
-20  Water Bodies
+20	Water Bodies
 21      Unconsolidated Sediment
-
 
 # use this command or save rules with editor in textfile "landuserecl.txt"
 echo "0 = NULL
@@ -259,20 +233,17 @@ r.reclass input=landuse96_28m output=landclass96_recl \
   rules=landuserecl.txt \
   title="Simplified landuse classes 1996"
 
-
 # verify result
 r.category landuse96_recl
-1   developed
-2   agriculture
-3   herbaceous
-4   shrubland
-5   forest
-6   water
-7   sediment
-
+1	developed
+2	agriculture
+3	herbaceous
+4	shrubland
+5	forest
+6	water
+7	sediment
 
 ```
-
 
 ## SEE ALSO
 

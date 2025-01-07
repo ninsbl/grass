@@ -112,7 +112,6 @@ internal data structure. A minimalistic example is shown below.
 
 ```
 
-
 {
     "Sentinel2": {
         "description": "The Sentinel-2 A/B bands",
@@ -149,7 +148,6 @@ internal data structure. A minimalistic example is shown below.
     }
 }
 
-
 ```
 
 Each series starts with an unique identifier ("Sentinel2"
@@ -182,7 +180,6 @@ details.
 
 ```
 
-
 i.band.library
 
 S2_1 Visible (Coastal/Aerosol)
@@ -195,7 +192,6 @@ L8_1 Visible (Coastal/Aerosol)
 L8_2 Visible (Blue)
 ...
 
-
 ```
 
 The module prints band reference and related tag if defined.
@@ -207,13 +203,11 @@ printed.
 
 ```
 
-
 i.band.library pattern=S2
 
 S2_1 Visible (Coastal/Aerosol)
 ...
 S2_12 SWIR 2
-
 
 ```
 
@@ -223,14 +217,12 @@ Print all available 2nd bands:
 
 ```
 
-
 i.band.library pattern=.*_2
 
 S2_2 Visible (Blue)
 L7_2 Visible (Green)
 L8_2 Visible (Blue)
 ...
-
 
 ```
 
@@ -240,7 +232,6 @@ Extended metadata related to the first band of Sentinel-2 satellite
 will be printed.
 
 ```
-
 
 i.band.library -e pattern=S2_1
 
@@ -258,7 +249,6 @@ source: https://sentinel.esa.int/web/sentinel/missions/sentinel-2
                 bandwidth (nm): 45
         spatial resolution (meters): 60
         tag: Visible (Coastal/Aerosol)
-
 
 ```
 

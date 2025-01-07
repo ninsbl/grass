@@ -8,11 +8,8 @@ for all vectors in the current mapset.
 
 ```
 
-
-
 # rebuild topology for all vector maps in the current mapset
 v.build.all
-
 
 ```
 

@@ -22,9 +22,7 @@ Copy the landuse map to the current mapset
 
 ```
 
-
 g.copy raster=landuse,my_landuse
-
 
 ```
 
@@ -32,9 +30,7 @@ g.copy raster=landuse,my_landuse
 
 ```
 
-
 r.support -s map=my_landuse
-
 
 ```
 
@@ -42,9 +38,7 @@ r.support -s map=my_landuse
 
 ```
 
-
 r.support map=my_landuse title="Landuse copied"
-
 
 ```
 
@@ -52,9 +46,7 @@ r.support map=my_landuse title="Landuse copied"
 
 ```
 
-
 r.support map=my_landuse history="Copied from PERMANENT mapset"
-
 
 ```
 
@@ -62,9 +54,7 @@ r.support map=my_landuse history="Copied from PERMANENT mapset"
 
 ```
 
-
 r.support map=my_landuse units=meter
-
 
 ```
 
@@ -74,9 +64,7 @@ Note: landuse map doesn't confirm to CORINE specification. This is an example on
 
 ```
 
-
 r.support map=my_landuse semantic_label=CORINE_LULC
-
 
 ```
 

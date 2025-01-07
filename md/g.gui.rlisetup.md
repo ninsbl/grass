@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The **g.gui.rlisetup** is a *[wxGUI](wxGUI.html)*
@@ -34,7 +33,6 @@ Definition of region for analysis:
 * Whole map layer: entire map (current region),
 * Keyboard setting: based on keyboard selection for region definition,
 * Draw the sampling frame: based on interactive region selection via mouse.
-
 
 ### Usage details
 
@@ -119,7 +117,6 @@ The startup window shows your configuration files, you can:
    * ***Help***: open this help text.
    * ***Close*** module window.
 
-
 ## NOTES
 
 Configuration files are raster map independent because areas are saved using
@@ -133,9 +130,7 @@ Screenshots of the wizard window frames:
 | g.gui.rlisetup: Frame for defining circular moving window  *g.gui.rlisetup: Frame for defining circular moving window* | g.gui.rlisetup: Frame for choosing the sampling frame with keyboard  *g.gui.rlisetup: Frame for choosing the sampling frame with keyboard* |
 | g.gui.rlisetup: Frame for drawing the sampling frame  *g.gui.rlisetup: Frame for drawing the sampling frame* | g.gui.rlisetup: Summary frame before saving  *g.gui.rlisetup: Summary frame before saving* |
 
-
 ## EXAMPLES
-
 
 ### Moving window analysis on full region
 
@@ -173,14 +168,11 @@ Now an anaysis can be performed using one of the analytical modules, e.g.
 
 ```
 
-
 g.region raster=forests -p
 r.li.patchdensity input=forests conf=movwindow7 output=forests_p_dens7
 r.univar forests_p_dens7
 
-
 ```
-
 
 The result is the new raster map "forests\_p\_dens7" which shows (in this example)
 the patch density of the forest areas.
@@ -211,13 +203,10 @@ Now an anaysis can be performed using one of the analytical modules, e.g.
 
 ```
 
-
 g.region raster=lsat7_2002_40 -p
 r.li.shannon input=lsat7_2000_40 conf=whole_region output=lsat7_2000_40_shannon
 
-
 ```
-
 
 The result is the new text file "forests\_p\_dens7" (stored in folder `$HOME/.r.li/output/`.
 

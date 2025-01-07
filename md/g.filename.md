@@ -26,9 +26,7 @@ be set in the */bin/sh* as follows:
 
 ```
 
-
 eval `g.filename element=name mapset=name file=name`
-
 
 ```
 

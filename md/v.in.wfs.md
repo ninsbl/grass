@@ -12,19 +12,13 @@ Import of Copernicus Sentinel-2 satellite scene footprints:
 
 ```
 
-
-
 # run in Latitude-Longitude project (EPGS code 4326):
-
 # download "sentinel:mgrs" layer:
 v.in.wfs url="https://geoserver.mundialis.de/geoserver/sentinel/wfs?" name="sentinel:mgrs" output=sentinel2_mgrs
-
 # download NRW ALKIS "ave:Flurstueck" attribute:
-
 # set the AOI beforehand with g.region and limit import to current region with -r flag
 v.in.wfs url="https://www.wfs.nrw.de/geobasis/wfs_nw_alkis_vereinfacht?" -r output=wfs_alkis_vereinfacht srs=25832
 name="ave:Flurstueck" version="2.0.0" layer="Flurstueck"
-
 
 ```
 
@@ -37,15 +31,11 @@ Download 25 ship wrecks from LINZ data service:
 
 ```
 
-
-
 # run in LatLong project:
 URL='http://wfs.data.linz.govt.nz/<PUT YOUR API KEY HERE>/wfs?'
 
-
 # download list of available layers to wms_capabilities.xml
 v.in.wfs -l url="$URL"
-
 
 ```
 
@@ -54,9 +44,7 @@ and that EPSG code 4326 (LatLong WGS84) is a supported SRS for this data layer.
 
 ```
 
-
 v.in.wfs url="$URL" output=linz_hydro_25_wrecks name="v:x633" srs="EPSG:4326" max=25
-
 
 ```
 

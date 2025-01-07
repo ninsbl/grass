@@ -13,12 +13,9 @@ A new database is created within MySQL:
 
 ```
 
-
 mysql> CREATE DATABASE mydb;
 
-
 ```
-
 
 See the MySQL manual for details.
 
@@ -40,13 +37,10 @@ Examples of connection parameters:
 
 ```
 
-
 db.connect driver=mysql database=mytest
 db.connect driver=mysql database='dbname=mytest,host=test.grass.org'
 
-
 ```
-
 
 ## Data types
 
@@ -63,7 +57,6 @@ GRASS supports almost all MySQL data types with following limitations:
   on most platforms.
 * GRASS does not currently distinguish types TIMESTAMP and
   DATETIME. Both types are in GRASS interpreted as TIMESTAMP.
-
 
 ## Indexes
 
@@ -85,16 +78,12 @@ to grant select privilege to them on the MySQL database used
 for that mapset. For example, to allow everybody to read data
 in from your database 'mydb':
 
-
 ```
-
 
 shell> mysql --user=root mysql
 mysql> GRANT SELECT ON mydb.* TO ''@'%';
 
-
 ```
-
 
 ## Schemas
 

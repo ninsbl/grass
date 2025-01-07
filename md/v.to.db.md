@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.to.db* loads vector map features or metrics into a database
@@ -54,109 +53,75 @@ created in the table if it doesn't already exist, except when using the
 
 ## EXAMPLES
 
-
 ### Updating attribute tables
 
 Upload category numbers to attribute table (used for new map):
 
-
 ```
-
 
 v.to.db map=soils type=centroid option=cat
 
-
 ```
-
 
 Upload polygon areas to corresponding centroid record in the attribute table:
 
-
 ```
-
 
 v.to.db map=soils type=centroid option=area columns=area_size unit=h
 
-
 ```
-
 
 Upload line lengths (in meters) of each vector line to attribute table
 (use *v.category* in case of missing categories):
 
-
 ```
-
 
 v.to.db map=roads option=length type=line columns=linelength units=me
 
-
 ```
-
 
 Upload x and y coordinates from vector geometry to attribute table:
 
-
 ```
-
 
 v.to.db map=pointsmap option=coor columns=x,y
 
-
 ```
-
 
 Upload x, y and z coordinates from vector geometry to attribute table:
 
-
 ```
-
 
 v.to.db map=pointsmap option=coor columns=x,y,z
 
-
 ```
-
 
 Transfer attributes from a character column (with numeric contents) to a new
 integer column:
 
-
 ```
-
 
 v.db.addcolumn usa_income_employment2002 col="FIPS_NUM integer"
 v.to.db usa_income_employment2002 option=query columns=FIPS_NUM query_column=STATE_FIPS
 
-
 ```
-
 
 Upload category numbers of left and right area, to an attribute table of
 boundaries common for the areas:
 
-
 ```
-
-
 
 # add categories for boundaries of the input vector map, in layer 2:
 v.category soils out=mysoils layer=2 type=boundary option=add
-
 # add a table with columns named "left" and "right" to layer 2 of the input
-
 # vector map:
 v.db.addtable mysoils layer=2 columns="left integer,right integer"
-
 # upload categories of left and right areas:
 v.to.db mysoils option=sides columns=left,right layer=2
-
 # display the result:
 v.db.select mysoils layer=2
 
-
 ```
-
 
 Compute DL, the Fractal Dimension (Mandelbrot, 1982), of the
 boundary defining a polygon based on the formula:
@@ -164,7 +129,6 @@ boundary defining a polygon based on the formula:
 `D = 2 * (log perimeter) / (log area):`
 
 ```
-
 
 g.copy vect=soils,mysoils
 v.db.addcolumn mysoils col="d double precision"
@@ -178,78 +142,55 @@ d.mon wx0
 d.rast.leg soils_fd
 d.vect mysoils type=boundary
 
-
 ```
-
 
 ### Printing reports
 
 Report x,y,z coordinates of points in the input vector map:
 
-
 ```
-
 
 v.to.db -p bugsites option=coor type=point
 
-
 ```
-
 
 Report all area sizes of the input vector map:
 
-
 ```
-
 
 v.to.db -p soils option=area type=boundary units=h
 
-
 ```
-
 
 Report all area sizes of the input vector map, in hectares, sorted by category
 number (requires GNU *sort* utility installed):
 
-
 ```
-
 
 v.to.db -p soils option=area type=boundary units=h | sort -n
 
-
 ```
-
 
 Report all line lengths of the input vector map, in kilometers:
 
-
 ```
-
 
 v.to.db -p roads option=length type=line units=k
 
-
 ```
-
 
 Report number of features for each category in the input vector map:
 
-
 ```
-
 
 v.to.db -p roads option=count type=line
 
-
 ```
-
 
 ## REFERENCES
 
 * Mandelbrot, B. B. (1982). The fractal geometry of nature. New York: W. H. Freeman.
 * Xu, Y. F. & Sun, D. A. (2005). Geotechnique 55, No. 9, 691-695
-
 
 ## SEE ALSO
 

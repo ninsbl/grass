@@ -35,7 +35,6 @@ with a granularity of 12 hours.
 
 ```
 
-
 r.mapcalc expression="prec_1 = rand(0, 550)" -s
 r.mapcalc expression="prec_2 = rand(0, 450)" -s
 r.mapcalc expression="prec_3 = rand(0, 320)" -s
@@ -184,7 +183,6 @@ prec_3|PERMANENT|2012-01-03 12:00:00|2012-01-04 12:00:00
 prec_4|PERMANENT|2012-01-04 12:00:00|2012-01-05 12:00:00
 prec_5|PERMANENT|2012-01-05 12:00:00|2012-01-06 12:00:00
 prec_6|PERMANENT|2012-01-06 12:00:00|2012-01-07 12:00:00
-
 
 ```
 

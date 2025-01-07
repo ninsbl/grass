@@ -20,10 +20,8 @@ North Carolina sample dataset:
 
 ```
 
-
 g.region raster=elevation -p
 r.colors.stddev elevation
-
 
 ```
 

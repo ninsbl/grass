@@ -45,7 +45,7 @@ command line or the GUI, or it can be invoked as OPTION 8 through
 [i.ortho.photo](i.ortho.photo.html), an interactive terminal
 is used to determine the options.
 
-### Interactive mode
+#### Interactive mode
 
 You are first asked if all images within the imagery group should
 be rectified. If this option is not chosen, you are asked to specify for
@@ -65,12 +65,10 @@ The next prompt asks you to select one of two windows:
 
 ```
 
-
       Please select one of the following options
       1.   Use the current window in the target project
       2.   Determine the smallest window which covers the image
       >
-
 
 ```
 
@@ -85,7 +83,6 @@ Next you are asked to select an interpolation method.
 
 ```
 
-
       Please select one of the following interpolation methods
       1. nearest neighbor
       2. bilinear
@@ -93,7 +90,6 @@ Next you are asked to select an interpolation method.
       4. bilinear with fallback
       5. bicubic with fallback
       >
-
 
 ```
 

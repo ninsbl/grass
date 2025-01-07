@@ -28,15 +28,11 @@ As first step, bus route data are prepared.
 
 ```
 
-
-
 # break into segments for correct route selection
 v.clean roads_net out=busroute_tmp tool=break
 
-
 # make polyline for easier line selection by coordinate pairs
 v.build.polylines busroute_tmp out=busroute_tmp2
-
 
 # reverse delete: reduce route map to bus route (enter in one line)
 v.edit -r busroute_tmp2 tool=delete coords=590273,4927304,\
@@ -45,12 +41,10 @@ v.edit -r busroute_tmp2 tool=delete coords=590273,4927304,\
 590830,4926726,590935,4926751,590993,4926830,590972,4926949,\
 590948,4927066,590922,4927182,590957,4927251 threshold=5
 
-
 # vector line needs to be polyline
 v.build.polylines busroute_tmp2 out=busroute_tmp3
 v.category busroute_tmp3 out=busroute op=add
 g.remove -f type=vector name=busroute_tmp,busroute_tmp2,busroute_tmp3
-
 
 ```
 
@@ -58,12 +52,10 @@ The result can be visualized:
 
 ```
 
-
 g.region vector=busroute n=n+100 s=s-100 w=w-100 e=e+100
 d.mon x0
 d.vect roads_net
 d.vect busroute col=red width=2
-
 
 ```
 
@@ -72,13 +64,11 @@ The vector map 'busroute' needs have an attribute table which contain an integer
 
 ```
 
-
 v.db.addtable busroute col="lid integer"
 v.db.update busroute col=lid value=22
 v.db.select busroute
 cat|lid
 1|22
-
 
 ```
 
@@ -86,8 +76,6 @@ A new point map 'busstops' shall contain mileposts (bus stops) along
 this line (use *thresh* to define maximal accepted deviation from this line):
 
 ```
-
-
 
 # generate points map
 echo "590263|4927361
@@ -101,19 +89,16 @@ echo "590263|4927361
 d.vect busstops icon=basic/triangle col=blue
 d.vect busstops disp=cat lcol=blue
 
-
 ```
 
 The milepost attributes table needs to be created with specific columns:
 
 ```
 
-
 v.db.addtable busstops col="lid integer, start_mp double precision, \
             start_off double precision, end_mp double precision, \
             end_off double precision"
 v.db.update busstops col=lid value=22
-
 
 ```
 
@@ -123,9 +108,7 @@ order number in column *start\_mp*:
 
 ```
 
-
 v.db.update busstops col=start_mp qcol=cat
-
 # verify table
 v.db.select busstops
 cat|lid|start_mp|start_off|end_mp|end_off
@@ -137,14 +120,12 @@ cat|lid|start_mp|start_off|end_mp|end_off
 6|22|6|||
 7|22|7|||
 
-
 # visualize with start_mp to check order
 d.erase
 d.vect roads_net
 d.vect busroute col=red width=2
 d.vect busstops icon=basic/triangle col=blue
 d.vect busstops disp=attr attrcol=start_mp lcol=blue
-
 
 ```
 
@@ -155,10 +136,8 @@ As second step, the linear reference network is created:
 
 ```
 
-
 v.lrs.create busroute points=busstops out=route_lrs err=lrs_error \
              lidcol=lid pidcol=lid rstable=route_lrs threshold=50
-
 
 ```
 
@@ -168,13 +147,10 @@ be shown:
 
 ```
 
-
-
 # show LRS table
 db.select table=route_lrs
 
 d.vect route_lrs col=blue width=2
-
 
 ```
 

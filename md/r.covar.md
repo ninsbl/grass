@@ -26,10 +26,8 @@ For example,
 
 ```
 
-
 g.region raster=layer.1 -p
 r.covar -r map=layer.1,layer.2,layer.3
-
 
 ```
 
@@ -37,11 +35,9 @@ would produce a 3x3 matrix (values are example only):
 
 ```
 
-
      1.000000  0.914922  0.889581
      0.914922  1.000000  0.939452
      0.889581  0.939452  1.000000
-
 
 ```
 
@@ -50,12 +46,10 @@ for the covariance matrix are:
 
 ```
 
-
 component   eigen value               eigen vector
     1       1159.745202   <0.691002  0.720528  0.480511>
     2          5.970541   <0.711939 -0.635820 -0.070394>
     3        146.503197   <0.226584  0.347470 -0.846873>
-
 
 ```
 
@@ -65,11 +59,9 @@ as follows:
 
 ```
 
-
 r.mapcalc "pc.1 = 0.691002*layer.1 + 0.720528*layer.2 + 0.480511*layer.3"
 r.mapcalc "pc.2 = 0.711939*layer.1 - 0.635820*layer.2 - 0.070394*layer.3"
 r.mapcalc "pc.3 = 0.226584*layer.1 + 0.347470*layer.2 - 0.846873*layer.3"
-
 
 ```
 

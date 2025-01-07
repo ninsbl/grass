@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.spread* is part of the wildfire simulation toolset. Preparational
@@ -58,15 +57,12 @@ time, backlink information in UTM northing and easting coordinates:
 
 ```
 
-
 r.spread -s max=my_ros.max dir=my_ros.maxdir base=my_ros.base \
     start=fire_origin spot_dist=my_ros.spotdist w_speed=wind_speed \
     f_mois=1hour_moisture output=my_spread \
     x_output=my_spread.x y_output=my_spread.y
 
-
 ```
-
 
 ## NOTES
 
@@ -121,7 +117,6 @@ much accuracy while requiring greatly additional running time.
   geographic information system and remote sensing, Ph. D. Dissertation,
   Rutgers University, New Brunswick, New Jersey
   ([ref](https://dl.acm.org/citation.cfm?id=921466)).
-
 
 ## SEE ALSO
 

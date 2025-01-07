@@ -1,5 +1,4 @@
 
-
 ## KEYWORDS
 
 [display](display.html), [GUI](topic_GUI.html), [imagery](keywords.html#imagery), [scatterplot](keywords.html#scatterplot), [plot](keywords.html#plot)
@@ -20,7 +19,6 @@ The main feature of the tool is the interactivity, which allows user to:
 * be able to define areas in plots and the tool will highlight pixels in
   map display window and corresponding points in other plots,
 * plot of confidence ellipses.
-
 
 ## TOOL CONTROLS LAYOUT
 
@@ -45,7 +43,6 @@ The tool is capable of processing data up to 12 bit range, however it is not rec
 It could require significant amount of memory and plot rendering time can be longer.
 Analyzing of raster data with higher range is not recommended.
 The raster range can be lowered using *[r.rescale](r.rescale.html)*.
-
 
 ## KNOWN ISSUES
 

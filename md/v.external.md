@@ -44,9 +44,7 @@ To list supported OGR formats, type
 
 ```
 
-
 v.external -f
-
 
 ```
 
@@ -62,9 +60,7 @@ Assuming that 'test\_shape.shp' is located in directory
 
 ```
 
-
 v.external input=/home/user/shape_data layer=test_shape output=grass_map
-
 
 ```
 
@@ -81,21 +77,17 @@ flag.
 
 ```
 
-
 v.external input="PG:host=localhost user=postgres dbname=postgis" -l
 
 ...
 polymap
 ...
 
-
 ```
 
 ```
-
 
 v.external input="PG:host=localhost user=postgres dbname=postgis" layer=polymap
-
 
 ```
 
@@ -109,9 +101,7 @@ directory (".").
 
 ```
 
-
 v.external input=./ layer=mapinfo_test output=grass_map
-
 
 ```
 
@@ -121,9 +111,7 @@ Note: you have to select the CATD file
 
 ```
 
-
 v.external input=CITXCATD.DDF output=cities
-
 
 ```
 
@@ -131,9 +119,7 @@ v.external input=CITXCATD.DDF output=cities
 
 ```
 
-
 v.external input=input/2000/56015/ layer=CompleteChain,PIP output=t56015_all
-
 
 ```
 
@@ -145,12 +131,10 @@ linked as a new GRASS vector map.
 
 ```
 
-
 v.external in="PG:dbname=tiles" layer=wrs2_descending where="pr=191026"
 ...
 Number of areas: 1
 ...
-
 
 ```
 

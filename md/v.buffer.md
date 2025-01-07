@@ -68,9 +68,7 @@ All examples are based on the North Carolina sample dataset.
 
 ```
 
-
 v.buffer input=roadsmajor output=roadsmajor_buffer type=line distance=100
-
 
 ```
 
@@ -83,9 +81,7 @@ shown in black)
 
 ```
 
-
 v.buffer input=hospitals output=hospitals_circled type=point distance=2000
-
 
 ```
 
@@ -98,18 +94,13 @@ shown in black, new area centroids in red)
 
 ```
 
-
 v.buffer input=hospitals output=hospitals_circled type=point distance=1000 -t
 
-
 # display buffer around hospital with category 36,
-
 # this buffer is composed of several areas:
 d.vect map=hospitals_circled type=area layer=1 cats=36
-
 # extract this buffer, dissolving boundaries
 v.extract in=hospitals_circled output=hospital_36_circled layer=1 cats=36 -d
-
 
 ```
 
@@ -117,9 +108,7 @@ v.extract in=hospitals_circled output=hospital_36_circled layer=1 cats=36 -d
 
 ```
 
-
 v.buffer input=lakes output=lakes_buffer type=area distance=100
-
 
 ```
 
@@ -135,9 +124,7 @@ is generated using a negative **distance** value:
 
 ```
 
-
 v.buffer input=lakes output=lakes_buffer type=area distance=-50
-
 
 ```
 

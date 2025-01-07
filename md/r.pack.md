@@ -21,9 +21,7 @@ Pack up the entire raster map *aspect* into *aspect.pack* file:
 
 ```
 
-
 r.pack input=aspect
-
 
 ```
 
@@ -31,9 +29,7 @@ The packed raster map file *aspect.pack* can afterwards be unpacked by
 
 ```
 
-
 r.unpack input=aspect.pack
-
 
 ```
 

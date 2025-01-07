@@ -19,9 +19,7 @@ is linked as non-default layer to a vector map.
 
 ```
 
-
 db.out.ogr input=precip_30ynormals output=precip_30ynormals.csv
-
 
 ```
 
@@ -29,9 +27,7 @@ db.out.ogr input=precip_30ynormals output=precip_30ynormals.csv
 
 ```
 
-
 db.out.ogr input=precip_30ynormals output=precip_30ynormals.dbf format=DBF
-
 
 ```
 
@@ -39,14 +35,11 @@ db.out.ogr input=precip_30ynormals output=precip_30ynormals.dbf format=DBF
 
 ```
 
-
 db.out.ogr input=precip_30ynormals \
            output="PG:host=localhost dbname=meteo user=neteler" \
            format=PostgreSQL
-
 # verify
 echo "SELECT * FROM precip_30ynormals" | psql meteo
-
 
 ```
 

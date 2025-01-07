@@ -13,7 +13,6 @@ contained in the raster map shown on the left.
 
 ```
 
-
       000000000000000000000000 222233333333333333444444
       111000000000000000000000 111222222222223333333333
       000111111111100000000000 222111111111122223333333
@@ -29,7 +28,6 @@ contained in the raster map shown on the left.
       Category 2: Buffer Zone 1 around roads
       Category 3: Buffer Zone 2 around roads
       Category 4: Buffer Zone 3 around roads
-
 
 ```
 
@@ -84,17 +82,14 @@ would be (in the default map units of meters): 0-100, 101-200, 201-300,
 
 ```
 
-
 g.region raster=roadsmajor -p
 r.buffer input=roadsmajor output=roadsmajor_buf distances=100,200,300,400,500
-
 
 ```
 
 Result:
 
 ```
-
 
 r.category input=roads.buf
       1       distances calculated from these locations
@@ -103,7 +98,6 @@ r.category input=roads.buf
       4       200-300 meters
       5       300-400 meters
       6       400-500 meters
-
 
 ```
 

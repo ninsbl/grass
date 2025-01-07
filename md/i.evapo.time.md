@@ -21,10 +21,8 @@ let assume i belongs to range [DOYmin;DOYmax]
 
 ```
 
-
 DOYbeforeETa[i] = ( DOYofETa[i] - DOYofETa[i-1] ) / 2
 DOYafterETa[i] = ( DOYofETa[i+1] - DOYofETa[i] ) / 2
-
 
 ```
 
@@ -35,14 +33,12 @@ If you only have one meteorological station data set, the easiest way is:
 
 ```
 
-
 n=0
 for ETo_val in Eto[1] Eto[2] ...
 do
     r.mapcalc "eto$n = $ETo_val"
     `expr n = n + 1`
 done
-
 
 ```
 

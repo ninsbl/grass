@@ -57,7 +57,6 @@ close to sunset/sunrise:
 
 ```
 
-
  [...]
  sunangleabovehorizont=0.434240
  sunrise=07:59:19
@@ -65,7 +64,6 @@ close to sunset/sunrise:
  Time (07:59:02) is before sunrise (07:59:19)!
  WARNING: Nothing to calculate. Please verify settings.
  No map calculation requested. Finished.
-
 
 ```
 
@@ -85,11 +83,8 @@ of sun position angles and more:
 
 ```
 
-
-
 # set the region to a place near Raleigh (NC)
 g.region raster=elev_lid792_1m -p
-
 
 # compute only sun position and no output map
 r.sunmask -s elev_lid792_1m year=2012 month=2 \
@@ -101,7 +96,6 @@ long: -78.678856, lat: 35.736160, timezone: -5.000000
 Solar position: sun azimuth: 143.006409, sun angle above horz. (refraction corrected): 36.233879
 Sunrise time (without refraction): 06:58:11
 Sunset time  (without refraction): 17:58:47
-
 
 # with -g flag, useful for eval() shell function
 r.sunmask -s -g elev_lid792_1m  year=2012 month=2 \
@@ -119,7 +113,6 @@ sunazimuth=143.006409
 sunangleabovehorizon=36.233879
 sunrise=06:58:11
 sunset=17:58:47
-
 
 ```
 

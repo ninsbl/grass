@@ -50,9 +50,7 @@ encoding, for example by using the `iconv` utility:
 
 ```
 
-
 iconv -f UTF-8 -t ISO_8859-1 utf_file > iso_file
-
 
 ```
 
@@ -173,12 +171,10 @@ Controls the border which is drawn around the map area.
 
 ```
 
-
 USAGE:  border [y|n]
     color color
     width #
     end
-
 
 ```
 
@@ -196,13 +192,11 @@ This example would create a grey border 0.1" wide.
 
 ```
 
-
 EXAMPLE:
     border
     color grey
     width 0.1i
     end
-
 
 ```
 
@@ -211,7 +205,6 @@ EXAMPLE:
 Prints the color table legend for the raster map layer anywhere on the page.
 
 ```
-
 
 USAGE:    colortable [y|n]
     where x y
@@ -227,7 +220,6 @@ USAGE:    colortable [y|n]
     tickbar [y|N]
     discrete [y|n]
     end
-
 
 ```
 
@@ -292,13 +284,11 @@ information, starting at the left margin, with 4 columns:
 
 ```
 
-
 EXAMPLE:
     colortable y
         cols 4
         width 4
         end
-
 
 ```
 
@@ -308,14 +298,12 @@ Prints comments anywhere on the page.
 
 ```
 
-
 USAGE:    comments commentfile
     where x y
     font font name
     fontsize font size
     color text color
     end
-
 
 ```
 
@@ -333,7 +321,6 @@ the page, using a 15/72 inch Helvetica Bold font.
 
 ```
 
-
 EXAMPLE:
     raster vegetation
     comments veg.comments
@@ -342,7 +329,6 @@ EXAMPLE:
     fontsize 15
     color blue
     end
-
 
 ```
 
@@ -358,9 +344,7 @@ Specifies the number of copies to be printed.
 
 ```
 
-
 USAGE:    copies n
-
 
 ```
 
@@ -374,7 +358,6 @@ Places EPS (Encapsulated PostScript) pictures on the output map.
 
 ```
 
-
 USAGE:    eps east north
     eps x% y%
     epsfile EPS file
@@ -382,7 +365,6 @@ USAGE:    eps east north
     rotate #
     masked [y|n]
     end
-
 
 ```
 
@@ -406,7 +388,6 @@ in original file and would not be masked by the current mask.
 
 ```
 
-
 EXAMPLE:
     eps 456000 7890000
     epsfile ./epsf/logo.eps
@@ -414,7 +395,6 @@ EXAMPLE:
     rotate 20
     masked n
     end
-
 
 ```
 
@@ -428,7 +408,6 @@ Overlays a geographic grid onto the output map.
 
 ```
 
-
 USAGE:    geogrid spacing unit
     color color
     numbers # [color]
@@ -436,7 +415,6 @@ USAGE:    geogrid spacing unit
     fontsize font size
     width #
     end
-
 
 ```
 
@@ -461,13 +439,11 @@ lines would be numbered with yellow numbers.
 
 ```
 
-
 EXAMPLE:
     geogrid 30 m
     color blue
     numbers 2 yellow
     end
-
 
 ```
 
@@ -477,9 +453,7 @@ Selects a raster map layer for output in shades of grey.
 
 ```
 
-
 USAGE:    greyrast mapname
-
 
 ```
 
@@ -494,7 +468,6 @@ Overlays a coordinate grid onto the output map.
 
 ```
 
-
 USAGE:    grid spacing
     color color
     numbers # [color]
@@ -503,7 +476,6 @@ USAGE:    grid spacing
     fontsize font size
     width #
     end
-
 
 ```
 
@@ -525,13 +497,11 @@ lines would be numbered with red numbers.
 
 ```
 
-
 EXAMPLE:
     grid 10000
     color green
     numbers 2 red
     end
-
 
 ```
 
@@ -541,9 +511,7 @@ Selects an RGB imagery group for output.
 
 ```
 
-
 USAGE:    group groupname
-
 
 ```
 
@@ -557,14 +525,12 @@ Prints the map header above the map.
 
 ```
 
-
 USAGE:    header
     file header file
     font font name
     fontsize font size
     color text color
     end
-
 
 ```
 
@@ -593,7 +559,6 @@ Example header file:
 
 ```
 
-
 %_
 LOCATION: %-27l  DATE: %d
 MAPSET:   %-27m  USER: %u
@@ -605,14 +570,12 @@ Produced by: US Army CERL, Champaign Illinois
 Software:    GRASS
 %_
 
-
 ```
 
 This example prints (in red) whatever is in the file *soils.hdr* above
 the map, using a 20/72 inch `Courier` font.
 
 ```
-
 
 EXAMPLE:
     header
@@ -621,7 +584,6 @@ EXAMPLE:
     fontsize 20
     color red
     end
-
 
 ```
 
@@ -633,11 +595,9 @@ Selects a labels file for output (see manual entry for
 
 ```
 
-
 USAGE:    labels  labelfile
     font font name
     end
-
 
 ```
 
@@ -650,11 +610,9 @@ towns on the map.
 
 ```
 
-
 EXAMPLE:
     labels town.names
     end
-
 
 ```
 
@@ -664,14 +622,12 @@ Draws lines on the output map.
 
 ```
 
-
 USAGE:    line east north east north
     line x% y% x% y%
     color color
     width #
     masked [y|n]
     end
-
 
 ```
 
@@ -693,14 +649,12 @@ there is a mask.
 
 ```
 
-
 EXAMPLE:
     line 10% 80% 30% 70%
     color yellow
     width 2
     masked n
     end
-
 
 ```
 
@@ -715,7 +669,6 @@ region information, on or below the map.
 
 ```
 
-
 USAGE:    mapinfo
     where x y
     font font name
@@ -724,7 +677,6 @@ USAGE:    mapinfo
     background box color|none
     border color|none
     end
-
 
 ```
 
@@ -742,7 +694,6 @@ of the page, using a 12/72 inch `Courier` font.
 
 ```
 
-
 EXAMPLE:
     mapinfo
     where 1.5 0
@@ -750,7 +701,6 @@ EXAMPLE:
     fontsize 12
     color brown
     end
-
 
 ```
 
@@ -760,9 +710,7 @@ Positions the map on the page.
 
 ```
 
-
 USAGE:    maploc  x y [width height]
-
 
 ```
 
@@ -776,10 +724,8 @@ the left edge and 3.5 inches from the top edge of the map.
 
 ```
 
-
 EXAMPLE:
     maploc 2.0 3.5
-
 
 ```
 
@@ -789,9 +735,7 @@ Color to be used for mask.
 
 ```
 
-
 USAGE:    maskcolor  color
-
 
 ```
 
@@ -801,12 +745,10 @@ Outlines the areas of a raster map layer with a specified color.
 
 ```
 
-
 USAGE:    outline
     color  color
     width  width of line in points
     end
-
 
 ```
 
@@ -829,14 +771,12 @@ in grey.
 
 ```
 
-
 EXAMPLE:
     raster soils
     outline
     color grey
     width 2
     end
-
 
 ```
 
@@ -846,7 +786,6 @@ Specifies paper size and margins.
 
 ```
 
-
 USAGE:    paper paper name
     height #
     width #
@@ -855,7 +794,6 @@ USAGE:    paper paper name
     bottom #
     top #
     end
-
 
 ```
 
@@ -868,16 +806,13 @@ are applied to the *rotated* page.
 
 ```
 
-
 EXAMPLE:
     paper a3
     end
 
-
 ```
 
 ```
-
 
 EXAMPLE:
     paper
@@ -889,7 +824,6 @@ EXAMPLE:
     top 2
     end
 
-
 ```
 
 ## point
@@ -897,7 +831,6 @@ EXAMPLE:
 Places additional points or icons on the output map.
 
 ```
-
 
 USAGE:    point east north
     point x% y%
@@ -909,7 +842,6 @@ USAGE:    point east north
     rotate #
     masked [y|n]
     end
-
 
 ```
 
@@ -931,7 +863,6 @@ the size of a 15 points and would not be masked by the current mask.
 
 ```
 
-
 EXAMPLE:
     point 456000 7890000
     fcolor purple
@@ -940,7 +871,6 @@ EXAMPLE:
     size 15
     masked n
     end
-
 
 ```
 
@@ -960,9 +890,7 @@ correct directory or specify the full path on the **psfile** instruction.
 
 ```
 
-
 USAGE:    psfile filename
-
 
 ```
 
@@ -970,10 +898,8 @@ This example copies the file "logo.ps" into the output file.
 
 ```
 
-
 EXAMPLE:
     psfile logo.ps
-
 
 ```
 
@@ -983,9 +909,7 @@ Selects a raster map layer for output.
 
 ```
 
-
 USAGE:    raster mapname
-
 
 ```
 
@@ -1007,10 +931,8 @@ This example would paint a map of the raster map layer *soils*.
 
 ```
 
-
 EXAMPLE:
     raster soils
-
 
 ```
 
@@ -1020,9 +942,7 @@ Provides *ps.map* with a previously prepared input stream.
 
 ```
 
-
 USAGE:    read previously prepared UNIX file
-
 
 ```
 
@@ -1041,10 +961,8 @@ the vector map layer *roads* onto the output map.
 
 ```
 
-
 EXAMPLE:
     read pmap.roads
-
 
 ```
 
@@ -1060,7 +978,6 @@ Draws rectangle on the output map.
 
 ```
 
-
 USAGE:    rectangle east north east north
     rectangle x% y% x% y%
     color color
@@ -1068,7 +985,6 @@ USAGE:    rectangle east north east north
     width #
     masked [y|n]
     end
-
 
 ```
 
@@ -1093,7 +1009,6 @@ The border line would be 1/16" wide and would appear even if there is a mask.
 
 ```
 
-
 EXAMPLE:
     rectangle 10% 80% 30% 70%
     color yellow
@@ -1101,7 +1016,6 @@ EXAMPLE:
     width 0.0625i
     masked n
     end
-
 
 ```
 
@@ -1112,12 +1026,10 @@ on the output.
 
 ```
 
-
 USAGE:    region regionfile
     color color
     width #
     end
-
 
 ```
 
@@ -1139,13 +1051,11 @@ This geographic region would have been created and saved using
 
 ```
 
-
 EXAMPLE:
     region fire.zones
     color white
     width 2
     end
-
 
 ```
 
@@ -1155,9 +1065,7 @@ Selects three raster map layers for output as an RGB color image.
 
 ```
 
-
 USAGE:    rgb red green blue
-
 
 ```
 
@@ -1177,9 +1085,7 @@ Selects a scale for the output map.
 
 ```
 
-
 USAGE:    scale scale
-
 
 ```
 
@@ -1196,10 +1102,8 @@ units.
 
 ```
 
-
 EXAMPLE:
     scale 1:25000
-
 
 ```
 
@@ -1208,7 +1112,6 @@ EXAMPLE:
 Draws a scalebar on the map.
 
 ```
-
 
 USAGE:    scalebar [f|s]
     where x y
@@ -1220,7 +1123,6 @@ USAGE:    scalebar [f|s]
     fontsize font size
     background [Y|n]
     end
-
 
 ```
 
@@ -1250,7 +1152,6 @@ and is 0.25 inches high.
 
 ```
 
-
 EXAMPLE:
     scalebar s
     where 4 5
@@ -1259,7 +1160,6 @@ EXAMPLE:
     segment 5
     numbers 2
     end
-
 
 ```
 
@@ -1270,9 +1170,7 @@ of the raster map layer.
 
 ```
 
-
 USAGE:    setcolor cat(s) color
-
 
 ```
 
@@ -1282,12 +1180,10 @@ map layer *watersheds* to white and category 10 to green.
 
 ```
 
-
 EXAMPLE:
     raster watersheds
     setcolor 2,5,8 white
     setcolor 10 green
-
 
 ```
 
@@ -1303,7 +1199,6 @@ can be included, for example "1,2,6-10,12". Colors for "`null`" and the
 Places text on the map.
 
 ```
-
 
 USAGE:    text  east north text
     text  x% y% text
@@ -1322,7 +1217,6 @@ USAGE:    text  east north text
     yoffset #
     opaque [y|n]
     end
-
 
 ```
 
@@ -1394,7 +1288,6 @@ vectors on the map would stop at the border of this text.
 
 ```
 
-
 EXAMPLE:
     text 650000 7365000 SPEARFISH LAND COVER
     font romand
@@ -1409,7 +1302,6 @@ EXAMPLE:
     opaque y
     end
 
-
 ```
 
 ## vareas
@@ -1417,7 +1309,6 @@ EXAMPLE:
 Selects a vector map layer for output and plots areas.
 
 ```
-
 
 USAGE:    vareas vectormap
     layer # (layer number used with cats/where option)
@@ -1434,7 +1325,6 @@ USAGE:    vareas vectormap
     pwidth #
     scale #
     end
-
 
 ```
 
@@ -1482,14 +1372,12 @@ Example of pattern file:
 
 ```
 
-
 %!PS-Adobe-2.0 EPSF-1.2
 %%BoundingBox: 0 0 10 10
 newpath
 5 0 moveto
 5 10 lineto
 stroke
-
 
 ```
 
@@ -1500,7 +1388,6 @@ in pattern file.
 
 ```
 
-
 EXAMPLE:
     vareas forest
     color blue
@@ -1509,7 +1396,6 @@ EXAMPLE:
     cats 2,5-7
     end
 
-
 ```
 
 ## vlines
@@ -1517,7 +1403,6 @@ EXAMPLE:
 Selects a vector map layer for output and plots lines.
 
 ```
-
 
 USAGE:    vlines vectormap
     type line and/or boundary
@@ -1539,7 +1424,6 @@ USAGE:    vlines vectormap
     label label
     lpos #
     end
-
 
 ```
 
@@ -1606,7 +1490,6 @@ first vector is used.
 
 ```
 
-
 EXAMPLE:
     vlines streams
     color blue
@@ -1618,7 +1501,6 @@ EXAMPLE:
     label Streams - category 2
     end
 
-
 ```
 
 ## vpoints
@@ -1626,7 +1508,6 @@ EXAMPLE:
 Selects vector point data to be placed on the output map
 
 ```
-
 
 USAGE:    vpoints vectormap
     type point and/or centroid
@@ -1649,7 +1530,6 @@ USAGE:    vpoints vectormap
     lpos position in legend
     end
 
-
 ```
 
 The user may specify the
@@ -1669,14 +1549,12 @@ and the rotation angle read from **rotatecolumn**.
 
 ```
 
-
 EXAMPLE:
     vpoints windmills
     color blue
     symbol mills/windmill
     size 10
     end
-
 
 ```
 
@@ -1687,7 +1565,6 @@ vector information, on or below the map.
 
 ```
 
-
 USAGE:    vlegend
     where x y
     font font name
@@ -1697,7 +1574,6 @@ USAGE:    vlegend
     span column separation
     border color|none
     end
-
 
 ```
 
@@ -1735,14 +1611,12 @@ of the page, using a 12/72 inch Helvetica font.
 
 ```
 
-
 EXAMPLE:
     vlegend
     where 4.5 0
     font Courier
     fontsize 12
     end
-
 
 ```
 
@@ -1752,9 +1626,7 @@ Terminates input and begin painting the map.
 
 ```
 
-
 USAGE:    end
-
 
 ```
 
@@ -1768,8 +1640,6 @@ The file has been named *simple\_map.txt*:
 
 ```
 
-
-
 # this ps.map example draws a map of Wake county, NC
 raster elevation
 vlines roadsmajor
@@ -1781,16 +1651,13 @@ text 50% 105% Wake County Terrain and Roads
    end
 end
 
-
 ```
 
 Generate map as Postsript file:
 
 ```
 
-
 ps.map input=simple_map.txt output=simple_map.ps
-
 
 ```
 
@@ -1803,8 +1670,6 @@ ps.map input=simple_map.txt output=simple_map.ps
 The following is content of a file named *elevation\_map.txt*:
 
 ```
-
-
 
 # this ps.map example draws a map of Wake county, NC
 raster elevation
@@ -1864,22 +1729,17 @@ paper a4
    end
 end
 
-
 ```
 
 This script file can be entered at the command line:
 
 ```
 
-
-
 # First set the region
 g.region raster=elevation
 
-
 # Generate map as Postsript file
 ps.map input=elevation_map.txt output=elevation.ps
-
 
 ```
 

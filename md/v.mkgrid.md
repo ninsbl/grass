@@ -32,8 +32,6 @@ To be run in a latitude-longitude project (WGS84)
 
 ```
 
-
-
 # set the region:
 g.region n=90 s=-90 w=-180 e=180 res=10 -p
 projection: 3 (Latitude-Longitude)
@@ -50,14 +48,11 @@ rows:       18
 cols:       36
 cells:      648
 
-
 # create 10 degree size grid:
 v.mkgrid map=grid_10deg
 
-
 # create 20 degree size grid:
 v.mkgrid map=grid_20deg box=20,20
-
 
 ```
 
@@ -67,9 +62,7 @@ Creating a 4x3 grid, cells 20km a side, with lower left corner at 2716500,644700
 
 ```
 
-
 v.mkgrid map=coro_grid grid=4,3 position=coor coordinates=2716500,6447000 box=20000,20000
-
 
 ```
 
@@ -84,9 +77,7 @@ just use *d.grid -w* from the project with projected CRS for the same effect):
 
 ```
 
-
 v.mkgrid map=p2min_grid grid=10,12 position=coor coordinates=167:52E,47:06S box=0:02,0:02
-
 
 ```
 
@@ -97,10 +88,8 @@ based on the current region extent defined by the "elevation" map:
 
 ```
 
-
 g.region raster=elevation res=1000 -pa
 v.mkgrid type=point map=pointpattern
-
 
 ```
 
@@ -112,24 +101,18 @@ a two-step approach:
 
 ```
 
-
-
 # create first set of points, covering extent of "elevation" raster map
 g.region raster=elevation res=1000 -pa
 v.mkgrid type=point map=pointpattern1
 
-
 # shift grid by half point distance (map units)
 g.region n=n+500 w=w+500 e=e+500 s=s+500 -p
-
 
 # create second set of points
 v.mkgrid type=point map=pointpattern2
 
-
 # merge into final point pattern
 v.patch input=pointpattern1,pointpattern2 output=pointpattern3
-
 
 ```
 
@@ -145,12 +128,10 @@ raster resolution for the hexagon size:
 
 ```
 
-
 g.region raster=elevation res=5000 -pa
 v.mkgrid map=hexagons -h
 
 d.grid 5000
-
 
 ```
 
@@ -167,9 +148,7 @@ The resolution is based on the desired size of hexagons.
 
 ```
 
-
 g.region vector=points_of_interest res=2000 -pa
-
 
 ```
 
@@ -178,9 +157,7 @@ selected extent and size of the grid.
 
 ```
 
-
 v.mkgrid map=hexagons -h
-
 
 ```
 
@@ -189,9 +166,7 @@ The following counts the number of points per hexagon using the
 
 ```
 
-
 v.vect.stats points=points_of_interest areas=hexagons count_column=count
-
 
 ```
 
@@ -204,9 +179,7 @@ based on the `count` column.
 
 ```
 
-
 v.colors map=hexagons use=attr column=count color=viridis
-
 
 ```
 

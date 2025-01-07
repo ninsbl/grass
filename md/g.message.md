@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *g.message* prints a message, warning, progress info, or fatal error
@@ -29,12 +28,9 @@ A blank line may be obtained with
 
 ```
 
-
 g.message message=""
 
-
 ```
-
 
 Redundant whitespace will be stripped away.
 
@@ -70,28 +66,21 @@ for *g.message*.
 Note: The Python tab in the *wxGUI* can be used for entering the
 following sample code:
 
-
 ```
-
 
 import grass.script as gcore
 
 gcore.warning("This is a warning")
 
-
 ```
-
 
 is identical with
 
 ```
 
-
 g.message -w message="This is a warning"
 
-
 ```
-
 
 ### VERBOSITY LEVELS
 
@@ -102,7 +91,6 @@ is set using the **--quiet** or **--verbose** command line options.
 * 1 - progress messages are printed
 * 2 - all module messages are printed
 * 3 - additional verbose messages are printed
-
 
 ### DEBUG LEVELS
 
@@ -115,30 +103,23 @@ Recommended levels:
 * 3 - each row (raster) or line (vector)
 * 5 - each cell (raster) or point (vector)
 
-
 ## EXAMPLES
 
 This basic example prints the message "hello" in the console:
 
 ```
 
-
 g.message message="hello"
 
-
 ```
-
 
 To print a message as an error message use the **-e** flag:
 
 ```
 
-
 g.message -e message="my error"
 
-
 ```
-
 
 To print a message highlighted as a debug message ("D0/0: debug") in the
 console, use the **-d** flag. Optionally the debug level can be defined (see
@@ -146,34 +127,23 @@ also [g.gisenv](g.gisenv.html) for details):
 
 ```
 
-
-
 # Levels: (recommended levels)
-
 #   0 - silence
-
 #   1 - message is printed once or few times per module
-
 #   3 - each row (raster) or line (vector)
-
 #   5 - each cell (raster) or point (vector)
 g.message -d message="debug" debug=0
 
-
 ```
-
 
 To print a message highlighted as a warning message ("WARNING: my warning")
 in the console, use the **-w** flag:
 
 ```
 
-
 g.message -w message="my warning"
 
-
 ```
-
 
 ## SEE ALSO
 

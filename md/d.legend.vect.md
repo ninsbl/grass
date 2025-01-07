@@ -61,9 +61,7 @@ Legend file has this format:
 
 ```
 
-
 label|symbol_name|size|color_type|feature_color|fill_color|line_width|geometry_type|feature_count
-
 
 ```
 
@@ -74,14 +72,12 @@ Here is an example of legend file with subtitles:
 
 ```
 
-
 Infrastructure||||||||
 major roads|legend/line|5|lf|black|200:200:200|2|line|355
 bridges|extra/bridge|15|lf|black|black|1|point|10938
 Hydrology||||||||
 streams|legend/line_crooked|5|lf|30:144:255|200:200:200|3|line|8554
 water bodies|legend/area_curved|5|lf|none|30:144:255|1|area|27764
-
 
 ```
 
@@ -93,7 +89,6 @@ Open cairo monitor to render to file:
 
 ```
 
-
 g.region vector=nc_state
 d.mon cairo
 d.vect map=nc_state color=26:26:26 fill_color=229:229:229 width=2 legend_label="state boundaries"
@@ -101,7 +96,6 @@ d.vect map=urbanarea color=none fill_color=127:127:127 width=1 legend_label="urb
 d.vect map=railroads color=red width=1
 d.vect map=hospitals color=77:77:77 fill_color=0:187:0 width=1 icon=basic/cross3 size=10
 d.legend.vect -b at=2,40 title="Hospitals in North Carolina" symbol_size=26 fontsize=16 title_fontsize=20
-
 
 ```
 

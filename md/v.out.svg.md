@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.out.svg* converts GRASS vector data to SVG (Scalable Vector Graphics) code notation.
@@ -19,42 +18,32 @@ Export **polygons** from GRASS vector map soils (Spearfish sample data) to SVG f
 
 ```
 
-
 v.out.svg input=soils output=/tmp/output.svg type=poly
 
-
 ```
-
 
 Export **lines** from GRASS vector map t\_hydro (Spearfish sample
 data) to SVG format, set coordinate precision to 0:
 
 ```
 
-
 v.out.svg input=t_hydro output=/tmp/output.svg type=line precision=0
 
-
 ```
-
 
 Export **points** from GRASS vector map archsites (Spearfish sample
 data) to SVG format, include attribute **str1** (name):
 
 ```
 
-
 v.out.svg input=archsites output=/tmp/output.svg type=point precision=0 attrib=str1
 
-
 ```
-
 
 ## REFERENCES
 
 * [Module v.out.svg at svg.cc](http://svg.cc/grass/index.html)
 * [SVG (Scalable Vector Graphics) at w3c.org](http://www.w3.org/Graphics/SVG/)
-
 
 ## SEE ALSO
 

@@ -69,11 +69,9 @@ the scene, run the following:
 
 ```
 
-
 g.region raster=elevation.dem
 d.rast elevation.dem
 m.nviz.script -k input=elevation.dem output=nviz.script dist=2400 ht=1220 frames=1000
-
 
 ```
 
@@ -82,9 +80,7 @@ The output script, 'nviz.script.nvscr', can then be run in NVIZ:
 
 ```
 
-
 nviz elevation=elevation.dem script=nviz.script.nvscr
-
 
 ```
 
@@ -117,9 +113,7 @@ user can run nviz with a previuosly saved state and the
 
 ```
 
-
 nviz state=saved.state script=nviz.script.nvscr
-
 
 ```
 

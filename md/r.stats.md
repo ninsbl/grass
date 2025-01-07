@@ -25,18 +25,15 @@ For example, if one raster map was specified, the output would look like:
 
 ```
 
-
 1 1350000.00
 2 4940000.00
 3 8870000.00
-
 
 ```
 
 If three raster maps were specified, the output would look like:
 
 ```
-
 
 0 0 0 8027500.00
 0 1 0 1152500.00
@@ -51,7 +48,6 @@ If three raster maps were specified, the output would look like:
 3 0 0 17140000.00
 3 1 0 11270000.00
 3 1 1 2500.00
-
 
 ```
 
@@ -79,7 +75,6 @@ Report area for each category in the single raster map:
 
 ```
 
-
 g.region raster=geology_30m
 r.stats -a in=geology_30m nv=no-data sep=tab
 
@@ -97,7 +92,6 @@ r.stats -a in=geology_30m nv=no-data sep=tab
 948     80000.000000
 no-data 33375200000.000004
 
-
 ```
 
 ### Report sorted number of cells for each category
@@ -106,7 +100,6 @@ Report sorted number of cells for each category in the single raster
 map (suppress NULL data):
 
 ```
-
 
 g.region raster=geology_30m
 r.stats -cn input=geology_30m sort=desc
@@ -124,7 +117,6 @@ r.stats -cn input=geology_30m sort=desc
 946 9
 948 2
 
-
 ```
 
 ### Report area, number of cells, and percents in multiple raster maps
@@ -133,7 +125,6 @@ Report area, number of cells, and percents (separated by tabs) for
 each category in multiple raster maps (suppress NULL data):
 
 ```
-
 
 g.region raster=towns
 r.stats -nacp input=towns,urban separator=tab
@@ -145,7 +136,6 @@ r.stats -nacp input=towns,urban separator=tab
 5       55      98240000.000000 2456    48.98%
 6       55      19760000.000000 494     9.85%
 
-
 ```
 
 ### Report sorted area intervals of floating-point raster map
@@ -154,7 +144,6 @@ Report sorted area for each interval of floating-point input raster
 map. Number of intervals are given by **nsteps** option.
 
 ```
-
 
 g.region raster=elevation
 r.stats -an input=elevation nsteps=10 sort=desc separator=tab
@@ -170,7 +159,6 @@ r.stats -an input=elevation nsteps=10 sort=desc separator=tab
 146.254757-156.329865   5720000.000000
 55.578793-65.6539       760000.000000
 
-
 ```
 
 ### Report raster cell counts in multiple raster maps
@@ -180,16 +168,12 @@ zipcode areas:
 
 ```
 
-
 g.region raster=zipcodes
-
 # landuse/landcover and zipcodes
 r.stats -c input=landclass96,zipcodes separator=comma
 
-
 # landuse/landcover, geology and zipcodes with category labels
 r.stats -c input=landclass96,zipcodes,geology_30m separator=comma -l
-
 
 ```
 

@@ -33,10 +33,8 @@ North Carolina sample dataset is generated:
 
 ```
 
-
 g.region raster=landclass96 -p
 d.rast.leg landclass96
-
 
 ```
 

@@ -30,9 +30,7 @@ only the visible light bands of Landsat-7:
 
 ```
 
-
 i.group group=vis_bands subgroup=vis_bands input=lsat7_2000_10,lsat7_2000_20,lsat7_2000_30
-
 
 ```
 

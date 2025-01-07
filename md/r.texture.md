@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.texture* creates raster maps with textural features from a
@@ -203,25 +202,18 @@ Calculation of Angular Second Moment of B/W orthophoto (North Carolina data set)
 
 ```
 
-
 g.region raster=ortho_2001_t792_1m -p
-
 # set grey level color table 0% black 100% white
 r.colors ortho_2001_t792_1m color=grey
-
 # extract grey levels
 r.mapcalc "ortho_2001_t792_1m.greylevel = ortho_2001_t792_1m"
-
 # texture analysis
 r.texture ortho_2001_t792_1m.greylevel output=ortho_texture method=asm -s
-
 # display
 g.region n=221461 s=221094 w=638279 e=638694
 d.shade color=ortho_texture_ASM_0 shade=ortho_2001_t792_1m
 
-
 ```
-
 
 This calculates four maps (requested texture at four orientations):
 ortho\_texture\_ASM\_0, ortho\_texture\_ASM\_45, ortho\_texture\_ASM\_90, ortho\_texture\_ASM\_135.
@@ -229,17 +221,13 @@ Reducing the number of gray levels (equal-probability quantizing):
 
 ```
 
-
 g.region -p raster=ortho_2001_t792_1m
-
 
 # enter as one line or with \
 r.quantile input=ortho_2001_t792_1m quantiles=16 -r | r.recode \
            input=ortho_2001_t792_1m output=ortho_2001_t792_1m_q16 rules=-
 
-
 ```
-
 
 The recoded raster map can then be used as input for *r.texture* as before.
 
@@ -247,8 +235,6 @@ Second example: analysis of IDM (homogeneity) on a simple raster with
 North-South line pattern.
 
 ```
-
-
 
 # import raster
 r.in.ascii in=- output=lines << EOF
@@ -269,17 +255,13 @@ cols: 9
 0 0 0 1 0 0 0 1 0
 EOF
 
-
 # adjust region to raster
 g.region raster=lines
-
 
 # calculate IDM (homogeneity) in all directions
 r.texture -s lines method=idm output=text_lines
 
-
 ```
-
 
 The following image shows the original map, the result in East-West direction
 and the result in North-South direction, showing how texture can depend on
@@ -313,7 +295,6 @@ Over the years, the source code of *r.texture* was further improved.
   Proceedings of the IEEE, vol. 67, No.5, pp. 786-804
 * Hall-Beyer, M. (2007). [The GLCM Tutorial Home Page](http://www.fp.ucalgary.ca/mhallbey/tutorial.htm)
   (Grey-Level Co-occurrence Matrix texture measurements). University of Calgary, Canada
-
 
 ## SEE ALSO
 

@@ -57,7 +57,6 @@ The name is misleading. The actual conversion used is
 
 ```
 
-
   H.i.s + G.(1-s)
 
 where
@@ -66,7 +65,6 @@ where
   i   is the red value from the intensity map
   s   is the red value from the saturation map
   G   is 50% gray (R = G = B = 0.5)
-
 
 ```
 
@@ -90,13 +88,11 @@ First, create shaded relief and show it.
 
 ```
 
-
 g.region raster=elevation
 r.relief input=elevation output=elevation_shaded_relief
 
 d.mon wx0
 d.his hue=elevation intensity=elevation_shaded_relief brighten=50
-
 
 ```
 
@@ -105,7 +101,6 @@ Then convert from HIS model to RGB and show the result.
 
 ```
 
-
 r.mapcalc "elevation_shaded_relief_bright_50 = #elevation_shaded_relief * 1.5"
 r.colors elevation_shaded_relief_bright_50 color=grey255
 r.his hue=elevation intensity=elevation_shaded_relief_bright_50 \
@@ -113,7 +108,6 @@ r.his hue=elevation intensity=elevation_shaded_relief_bright_50 \
 
 d.mon wx1
 d.rgb red=shadedmap_r green=shadedmap_g blue=shadedmap_b
-
 
 ```
 

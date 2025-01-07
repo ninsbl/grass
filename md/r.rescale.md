@@ -26,9 +26,7 @@ be used):
 
 ```
 
-
 r.rescale input=elevation from=1090,1800 output=elevation.255 to=0,255
-
 
 ```
 

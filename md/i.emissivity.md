@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *i.emissivity* calculates the emissivity in the longwave radiation
@@ -31,7 +30,6 @@ grey body radiation is equal to the black body radiation times the emissivity.
   Emissivity measurements of several soils and vegetation types in the
   8-14 µm wave band: Analysis of two field methods. Remote Sensing of
   Environment 59(3): 490-521.
-
 
 ## SEE ALSO
 

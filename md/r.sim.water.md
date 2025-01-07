@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.sim.water* is a landscape scale simulation model
@@ -140,22 +139,16 @@ Using the North Carolina full sample dataset:
 
 ```
 
-
-
 # set computational region
 g.region raster=elev_lid792_1m -p
-
 
 # compute dx, dy
 r.slope.aspect elevation=elev_lid792_1m dx=elev_lid792_dx dy=elev_lid792_dy
 
-
 # simulate (this may take a minute or two)
 r.sim.water elevation=elev_lid792_1m dx=elev_lid792_dx dy=elev_lid792_dy depth=water_depth disch=water_discharge nwalk=10000 rain_value=100 niter=5
 
-
 ```
-
 
 Now, let's visualize the result using rendering to a file
 (note the further management of computational region and
@@ -164,26 +157,19 @@ which are not needed when working in GUI):
 
 ```
 
-
-
 # increase the computational region by 350 meters
 g.region e=e+350
-
 # initiate the rendering
 d.mon start=cairo output=r_sim_water_water_depth.png
-
 # render raster, legend, etc.
 d.rast map=water_depth_1m
 d.legend raster=water_depth_1m title="Water depth [m]" label_step=0.10 font=sans at=20,80,70,75
 d.barscale at=67,10 length=250 segment=5 font=sans
 d.northarrow at=90,25
-
 # finish the rendering
 d.mon stop=cairo
 
-
 ```
-
 
 ![r.sim.water generated depth map](r_sim_water_water_depth.png)
 
@@ -196,12 +182,9 @@ If the module fails with
 
 ```
 
-
 ERROR: nwalk (7000001) > maxw (7000000)!
 
-
 ```
-
 
 then a lower **nwalkers** parameter value has to be selected.
 
@@ -236,7 +219,6 @@ then a lower **nwalkers** parameter value has to be selected.
 - Neteler, M. and Mitasova, H., 2008,
   [Open Source GIS: A GRASS GIS Approach. Third Edition.](https://grassbook.org)
   The International Series in Engineering and Computer Science: Volume 773. Springer New York Inc, p. 406.
-
 
 ## SEE ALSO
 

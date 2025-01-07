@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The module *r.random* creates a raster map with values in random places.
@@ -80,12 +79,9 @@ given the current computational region and raster mask:
 
 ```
 
-
 r.univar map=inputmap
 
-
 ```
-
 
 The text output contains total number of null and non-null cells
 (called `cells` in the machine-readable shell script style output),
@@ -96,13 +92,10 @@ region and the raster map:
 
 ```
 
-
 g.region -p
 r.report map=inputmap units=c null="*" nsteps=1
 
-
 ```
-
 
 To create random vector point locations within some, but not all,
 categories of a integer input raster map (aka CELL raster map),
@@ -114,7 +107,6 @@ and then use the reclassed raster map as input to *r.random*.
 
 ## EXAMPLES
 
-
 ### Random 2D vector elevation points
 
 Random vector elevation points sampled from elevation map in the
@@ -122,15 +114,12 @@ North Carolina sample dataset region, result stored in 2D vector map:
 
 ```
 
-
 g.region raster=elevation -p
 r.random elevation vector=elevrand n=100
 v.db.select elevrand
 v.univar elevrand col=value type=point
 
-
 ```
-
 
 ### Random 3D vector elevation points
 
@@ -140,10 +129,8 @@ landuse map, result stored in 3D vector map:
 
 ```
 
-
 g.region raster=elevation -p
 r.random -z elevation cover=landclass96 vector=luserand3d n=100
-
 
 # data output (value: elevation, covervalue: landuse class):
 v.db.select luserand3d
@@ -154,9 +141,7 @@ cat|value|covervalue
 4|146.17395|4
 ...
 
-
 ```
-
 
 ## SEE ALSO
 
@@ -172,7 +157,6 @@ cat|value|covervalue
   as an option for generating random cell values,
 * *[v.surf.rst](v.surf.rst.html)*
   as an option for creating a surface from sampled points.
-
 
 ## AUTHORS
 

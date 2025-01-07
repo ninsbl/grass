@@ -26,11 +26,9 @@ landuse type WETLAND:
 
 ```
 
-
 g.copy vect=lakes,mylakes
 v.db.select mylakes
 v.db.select mylakes where="FTYPE IS NULL"
-
 
 # display the lakes, show undefined FTYPE lakes in red
 g.region vector=mylakes
@@ -38,12 +36,10 @@ d.mon wx0
 d.vect mylakes where="FTYPE NOT NULL" type=area col=blue
 d.vect mylakes where="FTYPE IS NULL" type=area col=red
 
-
 # replace NULL with FTYPE WETLAND
 v.db.update mylakes col=FTYPE value=WETLAND \
             where="FTYPE IS NULL"
 v.db.select mylakes
-
 
 ```
 
@@ -54,12 +50,10 @@ column with on the fly calculation:
 
 ```
 
-
 g.copy vect=fields,myfields
 v.db.addcolumn myfields col="polynum integer"
 v.db.update myfields col=polynum qcol="cat*2"
 v.db.select myfields
-
 
 ```
 
@@ -70,11 +64,9 @@ Type cast (type conversion) of strings to double precision
 
 ```
 
-
 g.copy vect=geodetic_pts,mygeodetic_pts
 v.db.update mygeodetic_pts col=zval qcol="CAST(z_value AS double precision)" \
             where="z_value <> 'N/A'"
-
 
 ```
 
@@ -89,7 +81,6 @@ another table column with on the fly calculation:
 
 ```
 
-
 g.copy vect=precip_30ynormals,myprecip_30ynormals
 v.db.addcolumn myprecip_30ynormals column="logjuly double precision"
 v.db.update myprecip_30ynormals column="logjuly" query_column="log(jul)" \
@@ -103,7 +94,6 @@ jul|logjuly
 104.648|4.65060233738593
 98.298|4.58800368106618
 ...
-
 
 ```
 

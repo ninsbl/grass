@@ -44,9 +44,7 @@ of the MPEG produced using **quality=1**.
 
 ```
 
-
 r.out.mpeg view1="rain[1-9]","rain1[0-2]" view2="temp*"
-
 
 ```
 

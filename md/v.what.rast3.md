@@ -17,9 +17,7 @@ into a column of the attribute table connected to the vector map:
 
 ```
 
-
 v.what.rast3 map=pnts raster3d=plume column=concentration
-
 
 ```
 
@@ -29,28 +27,21 @@ queried from the raster map:
 
 ```
 
-
-
 # create new random 3d vector points map
 v.random -z output=pnts npoints=100 zmin=0  zmax=50
 
-
 # add new table, link to map
 v.db.addtable map=pnts column="concentration double precision"
-
 
 # query raster map and upload values to vector table into specified column
 g.region raster3d=plume -p
 v.what.rast3 map=pnts raster3d=plume column=concentration
 
-
 # verify new attribute table:
 v.db.select map=pnts
 
-
 # verify statistics of uploaded values:
 v.univar map=pnts column=concentration type=point
-
 
 ```
 

@@ -77,9 +77,7 @@ functions applied, e.g.,
 
 ```
 
-
 aggregate_columns="sum(cows) / sum(animals)".
-
 
 ```
 
@@ -103,10 +101,8 @@ example, setting the following parameters:
 
 ```
 
-
 aggregate_columns=A,B
 aggregate_methods=sum,n
-
 
 ```
 
@@ -120,11 +116,9 @@ For example, setting the following parameter:
 
 ```
 
-
 aggregate_columns=A,B
 aggregate_methods=sum,max
 result_column=sum_a, n_b
-
 
 ```
 
@@ -171,9 +165,7 @@ parameter adds a call to *v.reclass* before.
 
 ```
 
-
 v.dissolve input=undissolved output=dissolved
-
 
 ```
 
@@ -183,10 +175,8 @@ North Carolina data set:
 
 ```
 
-
 g.copy vect=soils_general,mysoils_general
 v.dissolve mysoils_general output=mysoils_general_families column=GSL_NAME
-
 
 ```
 
@@ -198,19 +188,14 @@ boundaries:
 
 ```
 
-
-
 # patch tiles after import:
 v.patch -e `g.list type=vector pat="clc2000_*" separator=","` out=clc2000_patched
-
 
 # remove duplicated tile boundaries:
 v.clean clc2000_patched out=clc2000_clean tool=snap,break,rmdupl thresh=.01
 
-
 # dissolve based on column attributes:
 v.dissolve input=clc2000_clean output=clc2000_final col=CODE_00
-
 
 ```
 
@@ -224,10 +209,8 @@ based on the name in the DOTURBAN\_N column
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities \
     aggregate_columns=ACRES
-
 
 ```
 
@@ -236,9 +219,7 @@ for `DOTURBAN_N == 'Wadesboro'`:
 
 ```
 
-
 v.db.select municipalities where="DOTURBAN_N == 'Wadesboro'" separator=tab
-
 
 ```
 
@@ -246,10 +227,8 @@ The resulting table may look like this:
 
 ```
 
-
 cat  DOTURBAN_N    ACRES_n    ACRES_min    ACRES_max    ACRES_mean    ACRES_sum
 66   Wadesboro     2          634.987      3935.325     2285.156      4570.312
-
 
 ```
 
@@ -259,10 +238,8 @@ the method which should be used:
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities_2 \
     aggregate_columns=ACRES aggregate_methods=sum
-
 
 ```
 
@@ -278,10 +255,8 @@ We will compute average of values in the NEW\_PERC\_G column:
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities_3 \
     aggregate_columns=ACRES,NEW_PERC_G aggregate_methods=sum,avg
-
 
 ```
 
@@ -298,11 +273,9 @@ specified manually with the **result\_columns** option:
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities_4 \
     aggregate_columns=ACRES,NEW_PERC_G aggregate_methods=sum,avg \
     result_columns=acres,new_perc_g
-
 
 ```
 
@@ -312,11 +285,9 @@ aggregate methods are the same:
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities_5 \
     aggregate_columns=ACRES,DOTURBAN_N,TEXT_NAME aggregate_methods=sum,count,count \
     result_columns=acres,number_of_parts,named_parts
-
 
 ```
 
@@ -346,11 +317,9 @@ comma-separated list using `group_concat(MB_NAME)`:
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities_6 \
     aggregate_columns="total(ACRES),count(*),count(distinct MB_NAME),group_concat(MB_NAME)" \
     result_columns="acres REAL,named_parts INTEGER,unique_names INTEGER,names TEXT"
-
 
 ```
 
@@ -366,11 +335,9 @@ used with *group\_concat*:
 
 ```
 
-
 v.dissolve input=boundary_municp column=DOTURBAN_N output=municipalities_7 \
     aggregate_columns="group_concat(MB_NAME, ';')" \
     result_columns="names TEXT"
-
 
 ```
 
@@ -379,9 +346,7 @@ one row for `DOTURBAN_N == 'Wadesboro'`:
 
 ```
 
-
 v.db.select municipalities_7 where="DOTURBAN_N == 'Wadesboro'" separator=tab
-
 
 ```
 
@@ -389,10 +354,8 @@ The resulting table may look like this:
 
 ```
 
-
-cat DOTURBAN_N  names
-66  Wadesboro   Wadesboro;Lilesville
-
+cat	DOTURBAN_N	names
+66	Wadesboro	Wadesboro;Lilesville
 
 ```
 

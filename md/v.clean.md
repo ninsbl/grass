@@ -83,7 +83,6 @@ Features allow it). The *rmbridge* tool removes bridges and the
 
 ```
 
-
     +-------------+             +-------------+   +-------------+
     |            P|  P: polygon |            P|   |            P|
     |    +---+    |  I: island  |    +---+    |   |    +---+    |
@@ -94,7 +93,6 @@ Features allow it). The *rmbridge* tool removes bridges and the
     |      | B    |             |             |   |      . L    |
     |      |      |             |             |   |      .      |
     +------+------+             +-------------+   +-------------+
-
 
 ```
 
@@ -222,9 +220,7 @@ topology is always built for *error* vector.
 
 ```
 
-
 v.clean input=testmap output=cleanmap tool=snap threshold=1
-
 
 ```
 
@@ -235,10 +231,8 @@ collect the topological errors into a vector map:
 
 ```
 
-
 v.build -e map=imported error=build_errors
 v.clean -c input=imported output=clean error=cleaning_errors tool=snap,rmdangle,rmbridge,chbridge,bpol,prune threshold=5
-
 
 ```
 
@@ -247,11 +241,9 @@ by the following set of display commands:
 
 ```
 
-
 d.vect map=imported color=26:26:26 fill_color=77:77:77 width=5
 d.vect map=build_errors color=255:33:36 fill_color=none width=5 icon=basic/point size=30
 d.vect map=cleaning_errors color=255:33:36 fill_color=none width=5 icon=basic/point size=30
-
 
 ```
 
@@ -270,9 +262,7 @@ collinear lines etc). The tools used for that are *bpol* and
 
 ```
 
-
 v.clean input=areamap output=areamap_clean tool=bpol,rmdupl type=boundary
-
 
 ```
 
@@ -280,9 +270,7 @@ v.clean input=areamap output=areamap_clean tool=bpol,rmdupl type=boundary
 
 ```
 
-
 v.clean input=lines1 output=lines2 err=points tool=break type=line
-
 
 ```
 
@@ -294,7 +282,6 @@ Intersection points are written to 'points' map.
 creating new node if needed. Example:
 
 ```
-
 
 v.in.ascii -n out=crossed_lines format=standard << EOF
 L 2
@@ -308,13 +295,11 @@ EOF
 v.clean in=crossed_lines out=crossed_lines_brk \
         error=intersection tool=break type=line
 
-
 ```
 
 ### Remove all lines of zero length
 
 ```
-
 
 v.out.ascii zero format=standard
 L  2 1
@@ -334,7 +319,6 @@ L  2 1
  -806227.28362601 -971104.80702988
  1     1
 
-
 ```
 
 v.clean type=boundary would remove nothing.
@@ -343,10 +327,8 @@ v.clean type=boundary would remove nothing.
 
 ```
 
-
 v.clean input=testmap output=cleanmap type=line \
         tool=rmdangle,rmdangle,rmdangle,rmdangle threshold=5,10,20,50
-
 
 ```
 

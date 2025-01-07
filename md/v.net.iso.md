@@ -65,27 +65,21 @@ Isonetwork using time:
 
 ![v.net.iso example with traveling time](vnetisotime.png)
 
-### Subdivision of a network using distance
+#### Subdivision of a network using distance
 
 ```
 
-
-
 # Spearfish
-
 
 # start node:
 echo "591280.5|4926396.0|1" | v.in.ascii in=- out=startnode
 g.copy vect=roads,myroads
 
-
 # connect point to network
 v.net myroads points=startnode out=myroads_net op=connect thresh=200
 
-
 # define iso networks using distance:
 v.net.iso input=myroads_net output=myroads_net_iso center_cats=1-100000 costs=1000,2000,5000
-
 
 ```
 
@@ -93,28 +87,19 @@ The network is divided into 4 categories:
 
 ```
 
-
 v.category myroads_net_iso option=report
-
 # ... reports 4 categories:
-
 #cat | distance from point in meters
-
 #1          0 - < 1000
-
 #2       1000 - < 2000
-
 #3       2000 - < 5000
-
 #4             >= 5000
-
 
 ```
 
 To display the result, run for example:
 
 ```
-
 
 g.region n=4928200 s=4922300 w=589200 e=596500
 d.mon x0
@@ -124,7 +109,6 @@ d.vect myroads_net_iso col=orange cats=3
 d.vect myroads_net_iso col=magenta  cats=4
 d.vect myroads_net col=red icon=basic/triangle fcol=green size=12 layer=2
 
-
 ```
 
 #### Subdivision of a network using traveling time
@@ -133,19 +117,14 @@ Prepare the network as above:
 
 ```
 
-
-
 # Spearfish
-
 
 # start node:
 echo "591280.5|4926396.0|1" | v.in.ascii in=- out=startnode
 g.copy vect=roads,myroads
 
-
 # connect point to network
 v.net myroads points=startnode out=myroads_net op=connect thresh=200
-
 
 ```
 
@@ -153,26 +132,19 @@ Define costs as traveling time dependent on speed limits:
 
 ```
 
-
-
 # set up costs
-
 
 # create unique categories for each road in layer 3
 v.category in=myroads_net out=myroads_net_time opt=add cat=1 layer=3 type=line
 
-
 # add new table for layer 3
 v.db.addtable myroads_net_time layer=3 col="cat integer,label varchar(43),length double precision,speed double precision,cost double precision,bcost double precision"
-
 
 # copy road type to layer 3
 v.to.db myroads_net_time layer=3 qlayer=1 opt=query qcolumn=label columns=label
 
-
 # upload road length in miles
 v.to.db myroads_net_time layer=3 type=line option=length col=length unit=miles
-
 
 # set speed limits in miles / hour
 v.db.update myroads_net_time layer=3 col=speed val="5.0"
@@ -182,20 +154,15 @@ v.db.update myroads_net_time layer=3 col=speed val="50.0" where="label='secondar
 v.db.update myroads_net_time layer=3 col=speed val="25.0" where="label='light-duty road, improved surface'"
 v.db.update myroads_net_time layer=3 col=speed val="5.0" where="label='unimproved road'"
 
-
 # define traveling costs as traveling time in minutes:
-
 
 # set forward costs
 v.db.update myroads_net_time layer=3 col=cost val="length / speed * 60"
-
 # set backward costs
 v.db.update myroads_net_time layer=3 col=bcost val="length / speed * 60"
 
-
 # define iso networks using traveling time:
 v.net.iso input=myroads_net_time output=myroads_net_iso_time arc_layer=3 node_layer=2 arc_column=cost arc_backward_column=bcost center_cats=1-100000 costs=1,2,5
-
 
 ```
 
@@ -203,38 +170,28 @@ To display the result, run for example:
 
 ```
 
-
-
 # add table with labels and coloring
 v.db.addtable myroads_net_iso_time columns="cat integer,trav_time varchar(20),GRASSRGB varchar(11)"
-
 # labels
 v.db.update map=myroads_net_iso_time layer=1 column=trav_time value="0 - 1" where="cat = 1"
 v.db.update map=myroads_net_iso_time layer=1 column=trav_time value="1 - 2" where="cat = 2"
 v.db.update map=myroads_net_iso_time layer=1 column=trav_time value="2 - 5" where="cat = 3"
 v.db.update map=myroads_net_iso_time layer=1 column=trav_time value="> 5" where="cat = 4"
-
 # colors
-
 # cats=1: blue
 v.db.update map=myroads_net_iso_time layer=1 column=GRASSRGB value="000:000:255" where="cat = 1"
-
 # cats=2: green
 v.db.update map=myroads_net_iso_time layer=1 column=GRASSRGB value="000:255:000" where="cat = 2"
-
 # cats=3: orange
 v.db.update map=myroads_net_iso_time layer=1 column=GRASSRGB value="255:128:000" where="cat = 3"
-
 # cats=4: magenta
 v.db.update map=myroads_net_iso_time layer=1 column=GRASSRGB value="255:000:255" where="cat = 4"
-
 
 # show results
 g.region n=4928200 s=4922300 w=589200 e=596500
 d.mon x0
 d.vect myroads_net_iso_time layer=1 -a rgb_col=GRASSRGB
 d.vect myroads_net col=red icon=basic/triangle fcol=green size=12 layer=2
-
 
 ```
 

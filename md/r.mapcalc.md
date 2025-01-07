@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.mapcalc* performs arithmetic on raster map layers.
@@ -29,72 +28,54 @@ Example ('foo' is the resulting map):
 
 ```
 
-
 r.mapcalc "foo = 1"
 
-
 ```
-
 
 or:
 
 ```
 
-
 r.mapcalc 'foo = 1'
 
-
 ```
-
 
 An unquoted expression (i.e. split over multiple arguments) won't
 work, nor will omitting the space before the = sign:
 
 ```
 
-
 r.mapcalc 'foo=1'
 Sorry, <foo> is not a valid parameter
 
-
 ```
-
 
 To read command from the file, use file=
 explicitly, e.g.:
 
 ```
 
-
 r.mapcalc file=file
 
-
 ```
-
 
 or:
 
 ```
-
 
 r.mapcalc file=- < file
 
-
 ```
-
 
 or:
 
 ```
-
 
 r.mapcalc file=- <<EOF
 foo = 1
 EOF
 
-
 ```
-
 
 The formula entered to *r.mapcalc* by the user is recorded both in the
 *result* map title (which appears in the category file for *result*)
@@ -103,7 +84,6 @@ and in the history file for *result*.
 Some characters have special meaning to the command shell. If the user
 is entering input to *r.mapcalc* on the command line, expressions
 should be enclosed within single quotes. See NOTES, below.
-
 
 ### Computational regions in r.mapcalc
 
@@ -140,13 +120,11 @@ all raster maps in an expression. Three modes are supported:
   The smallest spatial resolution
   of all raster maps will be used for processing.
 
-
 ### Operators and order of precedence
 
 The following operators are supported:
 
 ```
-
 
      Operator   Meaning                    Type        Precedence
      --------------------------------------------------------------
@@ -176,9 +154,7 @@ The following operators are supported:
      |||        logical or[1]              Logical      2
      ?:         conditional                Logical      1
 
-
 ```
-
 
 (modulus is the remainder upon division)
 
@@ -191,76 +167,55 @@ applied before those with lower precedence.
 Division by 0 and modulus by 0 are acceptable and give a NULL result.
 The logical operators give a 1 result if the comparison is true, 0 otherwise.
 
-
 ### Raster map layer names
 
 Anything in the expression which is not a number, operator, or function name
 is taken to be a raster map layer name.
 Examples:
 
-
 ```
-
 
 elevation
 x3
 3d.his
 
-
 ```
-
 
 Most GRASS raster map layers meet this naming convention.
 However, if a raster map layer has a name which conflicts with the
 above rule, it should be quoted. For example, the expression
 
-
 ```
-
 
 x = a-b
 
-
 ```
-
 
 would be interpreted as: x equals a minus b, whereas
 
-
 ```
-
 
 x = "a-b"
 
-
 ```
-
 
 would be interpreted as: x equals the raster map layer named *a-b*
 
 Also
 
-
 ```
-
 
 x = 3107
 
-
 ```
-
 
 would create *x* filled with the number 3107, while
 
-
 ```
-
 
 x = "3107"
 
-
 ```
-
 
 would copy the raster map layer *3107* to the raster map layer *x*.
 
@@ -275,32 +230,23 @@ It is possible to override the search path and specify the mapset
 from which to select the raster map layer.
 This is done by specifying the raster map layer name in the form:
 
-
 ```
-
 
 name@mapset
 
-
 ```
-
 
 For example, the following is a legal expression:
 
-
 ```
-
 
 result = x@PERMANENT / y@SOILS
 
-
 ```
-
 
 The mapset specified does not have to be in the mapset search path.
 (This method of overriding the mapset search path is common to all
 GRASS commands, not just *r.mapcalc*.)
-
 
 ### The neighborhood modifier
 
@@ -319,7 +265,6 @@ map or across multiple maps.
 The neighborhood modifier cannot be used on maps generated within same *r.mapcalc*
 command run (see "KNOWN ISSUES" section).
 
-
 ### Raster map layer values from the category file
 
 Sometimes it is desirable to use a value associated with a category's
@@ -331,9 +276,7 @@ are used in the expression instead of the category value.
 For example, suppose that the raster map layer *soil.ph*
 (representing soil pH values) has a category file with labels as follows:
 
-
 ```
-
 
 cat     label
 ------------------
@@ -346,21 +289,15 @@ cat     label
 6       8.8
 7       9.4
 
-
 ```
-
 
 Then the expression:
 
-
 ```
-
 
 result = @soils.ph
 
-
 ```
-
 
 would produce a result with category values
 0, 1.4, 2.4, 3.5, 5.8, 7.2, 8.8 and 9.4.
@@ -385,79 +322,54 @@ The # operator can be used to either convert map category values to their
 grey scale equivalents or to extract the red, green, or blue components
 of a raster map layer into separate raster map layers.
 
-
 ```
-
 
 result = #map
 
-
 ```
-
 
 converts each category value in *map* to a value in the range 0-255 which
 represents the grey scale level implied by the color for the category.
 If the map has a grey scale color table, then the grey level is what
-
-# map evaluates to. Otherwise, it is computed as
-
+# map evaluates to. Otherwise, it is computed as:
 
 ```
-
 
  0.10 * red + 0.81 * green + 0.01 * blue
 
-
 ```
-
 
 Alternatively, you can use:
 
-
 ```
-
 
 result = y#map
 
-
 ```
-
 
 to use the NTSC weightings:
 
-
 ```
-
 
  0.30 * red + 0.59 * green + 0.11 * blue
 
-
 ```
-
 
 Or, you can use:
 
-
 ```
-
 
 result = i#map
 
-
 ```
-
 
 to use equal weightings:
 
-
 ```
-
 
  0.33 * red + 0.33 * green + 0.33 * blue
 
-
 ```
-
 
 The # operator has three other forms: r#map, g#map, b#map.
 These extract the red, green, or blue components in the named raster map,
@@ -469,44 +381,31 @@ extract the red component from *map*
 and store it in the new 0-255 map layer *red*,
 the user could type:
 
-
 ```
-
 
 red = r#map
 
-
 ```
-
 
 To assign this map grey colors type:
 
-
 ```
-
 
 [r.colors](r.colors.html) map=red color=rules
 black
 white
 
-
 ```
-
 
 To assign this map red colors type:
 
-
 ```
-
 
 [r.colors](r.colors.html) map=red color=rules
 black
 red
 
-
 ```
-
-
 
 ### Functions
 
@@ -517,9 +416,7 @@ The type of the result is indicated in the last column.
 *\** indicates that the result is float if any of the arguments to the
 function are floating point values and integer if all arguments are integer.
 
-
 ```
-
 
 function                description                                     type
 ---------------------------------------------------------------------------
@@ -568,13 +465,9 @@ sqrt(x)                 square root of x                                F
 tan(x)                  tangent of x (x is in degrees)                  F
 xor(x,y)                exclusive-or (XOR) of x and y                   I
 
-
 ```
 
-
-
 ```
-
 
 Internal variables:
  row()                  current row of moving window                    I
@@ -588,9 +481,7 @@ Internal variables:
  area()                 area of current cell in square meters           F
  null()                 NULL value
 
-
 ```
-
 
 Note, that the row() and col() indexing starts with 1.
 
@@ -602,9 +493,7 @@ following table reports precision and value range info on AMD64 (x86-64)
 architectures compiled with GCC/CLANG. Note that although this setting is the
 most frequent one, the ranges could differ for different architectures.
 
-
 ```
-
 
 data type               precision and value range info
 -------------------------------------------------------------------------------
@@ -620,9 +509,7 @@ data type               precision and value range info
                         1.79E308. It is 8 bytes, 15-17 digits precision.
  null                   NULL value. Refer to section "NULL support" below.
 
-
 ```
-
 
 Note that the value counter wraps around when the value overflows its range.
 E.g., if your expression is `a = int(2147483648)`, you will get NULL
@@ -636,12 +523,9 @@ number is a number which contains a decimal point:
 
 ```
 
-
     2.3   12.0   12.   .81
 
-
 ```
-
 
 Floating point values in the expression are handled in a special way.
 With arithmetic and logical operators, if either operand is float,
@@ -661,12 +545,9 @@ produce a floating-point result, as will using float():
 
 ```
 
-
       r.mapcalc "ndvi = float(lsat.4 - lsat.3) / (lsat.4 + lsat.3)"
 
-
 ```
-
 
 ### NULL support
 
@@ -676,24 +557,21 @@ produce a floating-point result, as will using float():
   in NULL. (however, &&& and ||| are treated specially, as described below).
 * The &&& and ||| operators observe the following axioms even when x is NULL:
 
-```
-
+  ```
 
       x &&& false == false
       false &&& x == false
       x ||| true == true
       true ||| x == true
 
-
-```
+  ```
 
 * NULL-values in function arguments should result in NULL (however,
   if(), eval() and isnull() are treated specially, as described below).
 * The eval() function always returns its last argument
 * The situation for if() is:
 
-```
-
+  ```
 
   if(x)
       NULL if x is NULL; 0 if x is zero; 1 otherwise
@@ -705,25 +583,21 @@ produce a floating-point result, as will using float():
       NULL if x is NULL; n if x is negative;
   z if x is zero; p if x is positive
 
-
-```
+  ```
 
 * The (new) function isnull(x) returns: 1 if x is NULL;
   0 otherwise. The (new) function null()
   (which has no arguments) returns an integer NULL.
 * Non-NULL, but invalid, arguments to functions should result in NULL.
 
-```
-
+  ```
 
   Examples:
   log(-2)
   sqrt(-2)
   pow(a,b) where a is negative and b is not an integer
 
-
-```
-
+  ```
 
 NULL support: Please note that any math performed with NULL cells always
 results in a NULL value for these cells. If you want to replace a NULL cell
@@ -733,15 +607,11 @@ Example: The users wants the NULL-valued cells to be treated like zeros. To
 add maps A and B (where B contains NULLs) to get a map C the user can use a
 construction like:
 
-
 ```
-
 
 C = A + if(isnull(B),0,B)
 
-
 ```
-
 
 **NULL and conditions:**
 
@@ -749,54 +619,42 @@ For the one argument form:
 
 ```
 
-
 if(x) = NULL        if x is NULL
 if(x) = 0        if x = 0
 if(x) = 1        otherwise (i.e. x is neither NULL nor 0).
 
-
 ```
-
 
 For the two argument form:
 
 ```
 
-
 if(x,a) = NULL        if x is NULL
 if(x,a) = 0        if x = 0
 if(x,a) = a        otherwise (i.e. x is neither NULL nor 0).
 
-
 ```
-
 
 For the three argument form:
 
 ```
 
-
 if(x,a,b) = NULL    if x is NULL
 if(x,a,b) = b        if x = 0
 if(x,a,b) = a        otherwise (i.e. x is neither NULL nor 0).
 
-
 ```
-
 
 For the four argument form:
 
 ```
-
 
 if(x,a,b,c) = NULL    if x is NULL
 if(x,a,b,c) = a        if x > 0
 if(x,a,b,c) = b        if x = 0
 if(x,a,b,c) = c        if x < 0
 
-
 ```
-
 
 More generally, all operators and most functions return NULL if \*any\*
 of their arguments are NULL.
@@ -813,13 +671,10 @@ NULL, e.g.:
 
 ```
 
-
 if(0,a,b) = b    regardless of whether a is NULL
 if(1,a,b) = a    regardless of whether b is NULL
 
-
 ```
-
 
 eval() always returns its last argument, so it only returns NULL if
 the last argument is NULL.
@@ -836,7 +691,6 @@ values, the user doesn't know whether or not they both have the same value.
 
 ## NOTES
 
-
 ### Usage from command line
 
 Extra care must be taken if the expression is given on the command line.
@@ -845,23 +699,17 @@ These include, among others:
 
 ```
 
-
 * ( ) > & |
 
-
 ```
-
 
 It is advisable to put single quotes around the expression; e.g.:
 
 ```
 
-
 'result = elevation * 2'
 
-
 ```
-
 
 Without the quotes, the `*`, which has special meaning to the UNIX shell,
 would be altered and *r.mapcalc* would see something other than the `*`.
@@ -873,19 +721,15 @@ r.mapcalc command. E.g. rather than:
 
 ```
 
-
         r.mapcalc "$GIS_OPT_OUTPUT.r = r#$GIS_OPT_FIRST * .$GIS_OPT_PERCENT + (1.0 - .$GIS_OPT_PERCENT) * r#$GIS_OPT_SECOND"
         r.mapcalc "$GIS_OPT_OUTPUT.g = g#$GIS_OPT_FIRST * .$GIS_OPT_PERCENT + (1.0 - .$GIS_OPT_PERCENT) * g#$GIS_OPT_SECOND"
         r.mapcalc "$GIS_OPT_OUTPUT.b = b#$GIS_OPT_FIRST * .$GIS_OPT_PERCENT + (1.0 - .$GIS_OPT_PERCENT) * b#$GIS_OPT_SECOND"
 
-
 ```
-
 
 use:
 
 ```
-
 
     r.mapcalc <<EOF
         $GIS_OPT_OUTPUT.r = r#$GIS_OPT_FIRST * .$GIS_OPT_PERCENT + (1.0 - .$GIS_OPT_PERCENT) * r#$GIS_OPT_SECOND
@@ -893,9 +737,7 @@ use:
         $GIS_OPT_OUTPUT.b = b#$GIS_OPT_FIRST * .$GIS_OPT_PERCENT + (1.0 - .$GIS_OPT_PERCENT) * b#$GIS_OPT_SECOND
         EOF
 
-
 ```
-
 
 as the latter will read each input map only once.
 
@@ -908,25 +750,19 @@ stdin), so you can continue to use e.g.:
 
 ```
 
-
 r.mapcalc < file
 
-
 ```
-
 
 or:
 
 ```
 
-
 r.mapcalc <<EOF
 foo = 1
 EOF
 
-
 ```
-
 
 But unless you need compatibility with previous GRASS GIS versions, use `file=`
 explicitly, as stated above.
@@ -937,13 +773,10 @@ be valid also without quotes:
 
 ```
 
-
 r.mapcalc elevation_A=1
 r.mapcalc elevation.1=1
 
-
 ```
-
 
 However, this syntax is not recommended as quotes as stated above more safe.
 Using quotes is both backwards compatible and valid in future.
@@ -969,12 +802,9 @@ This implies that, for example, the command:
 
 ```
 
-
 r.mapcalc "elevation_exaggerated = elevation * 3"
 
-
 ```
-
 
 create a map respecting the masked pixels if MASK is active.
 
@@ -983,12 +813,9 @@ e.g. a map from a constant:
 
 ```
 
-
 r.mapcalc "base_height = 200.0"
 
-
 ```
-
 
 the created raster map is limited only by a computation region
 but it is not affected by an active MASK.
@@ -1000,12 +827,9 @@ MASK should be used, e.g.:
 
 ```
 
-
 r.mapcalc "base_height = if(MASK, 200.0, null())"
 
-
 ```
-
 
 When testing MASK related expressions keep in mind that when MASK is active
 you don't see data in masked areas even if they are not NULL.
@@ -1019,7 +843,6 @@ to several expressions, the `eval` function can be used:
 
 ```
 
-
 r.mapcalc << EOF
 eval(elev_200 = elevation - 200, \
      elev_5 = 5 * elevation, \
@@ -1027,9 +850,7 @@ eval(elev_200 = elevation - 200, \
 elevation_result = (0.5 * elev_200) + 0.8 * elev_p
 EOF
 
-
 ```
-
 
 This example uses unix-like `<< EOF` syntax to provide
 input to *r.mapcalc*.
@@ -1054,13 +875,10 @@ needed when the same name is desired:
 
 ```
 
-
 r.mapcalc "newmap = oldmap + 1"
 g.rename raster=newmap,oldmap
 
-
 ```
-
 
 ### Random number generator initialization
 
@@ -1090,68 +908,50 @@ To compute the average of two raster map layers
 
 ```
 
-
 ave = (a + b)/2
 
-
 ```
-
 
 To form a weighted average:
 
 ```
 
-
 ave = (5*a + 3*b)/8.0
 
-
 ```
-
 
 To produce a binary representation of the raster map layer
 *a* so that category 0 remains 0 and all other categories become 1:
 
 ```
 
-
 mapmask = a != 0
 
-
 ```
-
 
 This could also be accomplished by:
 
 ```
 
-
 mapmask = if(a)
 
-
 ```
-
 
 To mask raster map layer *b* by raster map layer *a*:
 
 ```
 
-
 result = if(a,b)
 
-
 ```
-
 
 To change all values below 5 to NULL, keep 5 otherwise:
 
 ```
 
-
 newmap = if(map<5, null(), 5)
 
-
 ```
-
 
 To create a map with random values in a defined range (needs either the
 usage of **-s** flag or the *seed* parameter). The precision of
@@ -1160,22 +960,16 @@ the input values determines the output precision (the resulting
 
 ```
 
-
-
 # write result as integer map (CELL)
 random_int   = rand(-100,100)
-
 
 # write result as double precision floating point map (DCELL)
 random_dcell = rand(-100.0,100.0)
 
-
 # write result as single precision floating point map (FCELL)
 random_fcell = float(rand(-100.0,100.0))
 
-
 ```
-
 
 The graph() function allows users to specify a x-y conversion using
 pairs of x,y coordinates.
@@ -1194,17 +988,13 @@ request:
 
 ```
 
-
 newmap = graph(map, 1,10, 2,25, 3,50)
 
-
 ```
-
 
 X (map) values supplied and y (newmap) values returned:
 
 ```
-
 
 0, 10
 1, 10
@@ -1213,9 +1003,7 @@ X (map) values supplied and y (newmap) values returned:
 4, 50
 100, 50
 
-
 ```
-
 
 ## KNOWN ISSUES
 
@@ -1224,12 +1012,9 @@ appear in the *expression* on the right hand side.
 
 ```
 
-
 mymap = if( mymap > 0, mymap, 0)
 
-
 ```
-
 
 Any maps generated by a *r.mapcalc* command only exist after the entire
 command has completed. All maps are generated concurrently, row-by-row
@@ -1240,13 +1025,10 @@ Consequently, the following (strikethrough code) does not work:
 
 ```
 
-
 newmap = oldmap * 3.14
 othermap = newmap[-1, 0] / newmap[1, 0]
 
-
 ```
-
 
 Continuation lines must end with a `\` and have *no* trailing
 white space (blanks or tabs). If the user does leave white space at the end of

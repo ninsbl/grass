@@ -19,9 +19,7 @@ out-of-mapset database file creation:
 
 ```
 
-
 db.createdb driver=sqlite database=/opt/sqlite.db
-
 
 ```
 
@@ -32,9 +30,7 @@ established through the *pg* driver):
 
 ```
 
-
 db.createdb driver=pg database=grassdb
-
 
 ```
 
@@ -43,9 +39,7 @@ established through the *odbc* driver):
 
 ```
 
-
 db.createdb driver=odbc database=grassdb
-
 
 ```
 

@@ -37,12 +37,9 @@ hard limit. If the latter is too low, you can as superuser add an entry in
 
 ```
 
-
 /etc/security/limits.conf
-
 # <domain>      <type>  <item>         <value>
 your_username  hard    nofile          4096
-
 
 ```
 
@@ -51,9 +48,7 @@ limit of the operating system
 
 ```
 
-
 cat /proc/sys/fs/file-max
-
 
 ```
 
@@ -66,16 +61,12 @@ space time dataset, run:
 
 ```
 
-
-
 # create the subset for 2012 data
 t.rast.extract input=tempmean_monthly output=tempmean_monthly_later_2012 \
                where="start_time >= '2012-01-01'"
 
-
 # set the right 3D region
 g.region -p3 res3=500
-
 
 # convert to 3D raster map
 t.rast.to.rast3 input=tempmean_monthly_later_2012@climate_2009_2012 output=tempmean_monthly_2012
@@ -163,7 +154,6 @@ r3.info tempmean_monthly_2012
  |    ze=32                                                                   |
  |                                                                            |
  +----------------------------------------------------------------------------+
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The **GCP Manager** is a *[wxGUI](wxGUI.html)*
@@ -27,7 +26,6 @@ The GCP Manager is structured into three panels:
   the left pane showing a map from the source project and the right
   pane showing a reference map from the target project. Numbered Ground
   Control Points are shown on both map displays.
-
 
 ### Components of the GCP Manager
 
@@ -226,7 +224,6 @@ use (activated checkbox in first row).
 *Georectify*
 Uses *[i.rectify](i.rectify.html)* to georectify
 all images in the source imagery group.
-
 
 #### GCP Map Display Statusbar
 

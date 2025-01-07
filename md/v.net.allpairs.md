@@ -26,26 +26,19 @@ dataset):
 
 ```
 
-
-
 # prepare network: connect archsites to roads with threshold 200
 v.net input=roads@PERMANENT points=archsites@PERMANENT \
 output=roads_net operation=connect thresh=200
 
-
 # verify result
 v.category input=roads_net option=report
 
-
 # only lines should have a category in layer 1
-
 # only points should have a category in layer 2
-
 
 # shortest path between all points with categories 1 - 5 in layer 2
 v.net.allpairs input=roads_net cats=1-5 out=roads_net_all
 v.db.select roads_net_all
-
 
 ```
 
@@ -53,13 +46,11 @@ Result in matrix form:
 
 ```
 
-
-from\to 1       3       4       5
-1   0       18820.386   17206.651   17373.274
-3   18820.386   0       1739.079    9040.575
-4   17206.651   1739.079    0       7426.84
-5   17373.274   9040.575    7426.84     0
-
+from\to	1		3		4		5
+1	0		18820.386	17206.651	17373.274
+3	18820.386	0		1739.079	9040.575
+4	17206.651	1739.079	0		7426.84
+5	17373.274	9040.575	7426.84		0
 
 ```
 

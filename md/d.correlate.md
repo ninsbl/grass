@@ -22,10 +22,8 @@ Scatterplot of two LANDSAT TM7 channels (North Carolina sample dataset):
 
 ```
 
-
 g.region raster=lsat7_2002_30 -p
 d.correlate map=lsat7_2002_30,lsat7_2002_40
-
 
 ```
 

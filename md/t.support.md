@@ -21,10 +21,8 @@ Modification of title and description of space time raster dataset *A*.
 
 ```
 
-
 t.support type=strds input=tempmean_monthly title="Monthly temperature for North Carolina" \
           description="Dataset with monthly temperature for North Carolina"
-
 
 ```
 
@@ -33,9 +31,7 @@ for removed map layers.
 
 ```
 
-
 t.support -m type=strds input=tempmean_monthly
-
 
 ```
 

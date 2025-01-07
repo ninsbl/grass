@@ -81,7 +81,6 @@ The name is misleading. The actual conversion used is
 
 ```
 
-
   H.i.s + G.(1-s)
 
 where
@@ -90,7 +89,6 @@ where
   i   is the red value from the intensity map
   s   is the red value from the saturation map
   G   is 50% gray (R = G = B = 0.5)
-
 
 ```
 
@@ -107,13 +105,11 @@ command *[r.his](r.his.html)*.
 
 ```
 
-
 g.region raster=elevation
 r.relief input=elevation output=elevation_shaded_relief
 
 d.mon wx0
 d.his hue=elevation intensity=elevation_shaded_relief brighten=50
-
 
 ```
 

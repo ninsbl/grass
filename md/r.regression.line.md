@@ -6,9 +6,7 @@ raster maps, according to the formula
 
 ```
 
-
 y = a + b*x
-
 
 ```
 
@@ -16,10 +14,8 @@ where
 
 ```
 
-
 x
 y
-
 
 ```
 
@@ -44,7 +40,6 @@ provided in the North Carolina sample dataset:
 
 ```
 
-
 g.region raster=elev_srtm_30m -p
 r.regression.line mapx=elev_ned_30m mapy=elev_srtm_30m
  y = a + b*x
@@ -58,7 +53,6 @@ r.regression.line mapx=elev_ned_30m mapy=elev_srtm_30m
    meanY (Mean of map2): 113.498292
    sdY (Standard deviation of map2): 23.718307
 
-
 ```
 
 Using the script style flag AND *eval* to make results
@@ -66,10 +60,8 @@ available in the shell:
 
 ```
 
-
 g.region raster=elev_srtm_30m -p
 eval `r.regression.line -g mapx=elev_ned_30m mapy=elev_srtm_30m`
-
 
 # print result stored in respective variables
 echo $a
@@ -80,7 +72,6 @@ echo $b
 
 echo $R
 0.894038
-
 
 ```
 

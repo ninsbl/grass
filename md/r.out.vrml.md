@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 This module exports a GRASS raster map to the Virtual Reality Modeling
@@ -24,7 +23,6 @@ region would be something less than about 75x75. For improved
 performance and smaller file size, leave off a color map. Since VRML
 is ascii text, gzip works very well to significantly compress file
 size.
-
 
 ## NOTES
 
@@ -61,7 +59,6 @@ Other possible additions:
   user interaction.
 * Degradation of the raster to produce TINs for improved
   performance.
-
 
 ## AUTHOR
 

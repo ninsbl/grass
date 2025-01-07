@@ -6,16 +6,13 @@ raster maps, according to the formula
 
 ```
 
-
 Y = b0 + sum(bi*Xi) + E
-
 
 ```
 
 where
 
 ```
-
 
 X = {X1, X2, ..., Xm}
 m = number of explaining variables
@@ -24,17 +21,14 @@ Xi = {xi1, xi2, ..., xin}
 E = {e1, e2, ..., en}
 n = number of observations (cases)
 
-
 ```
 
 In R notation:
 
 ```
 
-
 Y ~ sum(bi*Xi)
 b0 is the intercept, X0 is set to 1
-
 
 ```
 
@@ -47,7 +41,7 @@ the gain in AIC (AIC without a given variable minus AIC global must be
 positive) whether the inclusion of a given explaining variable in the
 model is justified.
 
-### The global model
+#### The global model
 
 The *b* coefficients (b0 is offset), R squared or coefficient of
 determination (Rsq) and F are identical to the ones obtained from
@@ -92,11 +86,9 @@ Multiple regression with soil K-factor and elevation, aspect, and slope
 
 ```
 
-
 g.region raster=soils_Kfactor -p
 r.regression.multi mapx=elevation,aspect,slope mapy=soils_Kfactor \
   residuals=soils_Kfactor.resid estimates=soils_Kfactor.estim
-
 
 ```
 

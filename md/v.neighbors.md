@@ -23,14 +23,12 @@ dataset):
 
 ```
 
-
 g.region vector=schools_wake res=100 -p -a
 v.neighbors input=schools_wake output=schools_wake_3000m method=count size=3000
 
 d.mon wx0
 d.rast schools_wake_3000m
 d.vect schools_wake
-
 
 ```
 
@@ -42,10 +40,8 @@ Calculate the mean capacity of schools for the same grid:
 
 ```
 
-
 v.neighbors input=schools_wake output=schools_capacity point_column=CAPACITYTO \
             method=average size=3000
-
 
 ```
 

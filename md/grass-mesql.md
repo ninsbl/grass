@@ -21,10 +21,8 @@ Examples of connection parameters:
 
 ```
 
-
 db.connect driver=mesql database='$GISDBASE/$LOCATION_NAME/$MAPSET/mysql'
 db.connect driver=mesql database=/home/user1/db
-
 
 ```
 

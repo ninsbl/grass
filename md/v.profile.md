@@ -42,10 +42,8 @@ that are within 500 m range to profiling line.
 
 ```
 
-
 v.profile input=geonames@PERMANENT output=/home/user/NC_96_geonames.csv\
   separator=comma dp=3 buffer=500 profile_map=roadsmajor@PERMANENT profile_where=cat=56
-
 
 # Now lets see the output:
 cat NC_96_geonames.csv
@@ -57,24 +55,19 @@ Number,Distance,cat,GEONAMEID,NAME,ASCIINAME,ALTERNATEN,FEATURECLA,FEATURECOD,CO
 5,2999.214,39338,4496159,"Union Chapel","Union Chapel","","","","US","","NC",0,0,96,"America/Iqaluit","2006-01-15 00:00:00",0,0,0
 6,3784.992,43034,4500325,"Zebulon Airport","Zebulon Airport","","S","AIRP","US","","NC",0,108,98,"America/Iqaluit","2006-01-15 00:00:00",0,0,0
 
-
 ```
 
 Create river valley crossection and provide river marker (Spearfish dataset):
 
 ```
 
-
-
 # Take elevation samples
 r.profile input=elevation.dem@PERMANENT output=/home/user/elevation.profile \
   profile=600570.27364,4920613.41838,600348.034348,4920840.38617
 
-
 # Now get distance to place where river marker should be set
 v.profile input=streams@PERMANENT output=/home/user/river_profile.csv \
   east_north=600570.27364,4920613.41838,600348.034348,4920840.38617
-
 
 ```
 

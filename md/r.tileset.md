@@ -30,9 +30,7 @@ formatted as follows:
 
 ```
 
-
 5|125|45|175|80|100
-
 
 ```
 
@@ -44,9 +42,7 @@ changing the fs option.
 
 ```
 
-
 w=5;s=125;e=45;n=175;cols=80;rows=100;
-
 
 ```
 
@@ -55,9 +51,7 @@ script.
 
 ```
 
-
 bbox=5,125,45,175&width=80&height=100
-
 
 ```
 
@@ -72,9 +66,7 @@ across. The bounds and sizes of tiles in the output are separated by | (pipe):
 
 ```
 
-
 r.tileset sourceproj=+init=epsg:4326 maxrows=1024 maxcols=2048
-
 
 ```
 
@@ -84,9 +76,7 @@ output format will be strings like the bbox requests for WMS servers:
 
 ```
 
-
 r.tileset sourceproj=+init=epsg:4326 overlap=2 -w region=ne-rio
-
 
 ```
 
@@ -99,9 +89,7 @@ work in a unix style shell:
 
 ```
 
-
 r.tileset sourceproj="`g.proj -j project=IrishGrid`" maxrows=400 maxcols=300 overlap=3 -g
-
 
 ```
 

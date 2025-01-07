@@ -103,9 +103,7 @@ use the same method to simplify the lines. Note that
 
 ```
 
-
 v.generalize input=boundary_county output=boundary_county_dp20 method=douglas threshold=20
-
 
 ```
 
@@ -113,10 +111,8 @@ is equivalent to
 
 ```
 
-
 v.generalize input=boundary_county output=boundary_county_dp_red20_100 \
              method=douglas_reduction threshold=20 reduction=100
-
 
 ```
 
@@ -127,10 +123,8 @@ and that, in general, *douglas* is more efficient than
 
 ```
 
-
 v.generalize input=boundary_county output=boundary_county_dp_red0_30 \
              method=douglas_reduction threshold=0 reduction=30
-
 
 ```
 
@@ -279,10 +273,8 @@ threshold given in mapset units (here: meters):
 
 ```
 
-
 v.generalize input=boundary_county output=boundary_county_dp20 \
   method=douglas threshold=20 error=boundary_county_dp20_leftover
-
 
 ```
 
@@ -298,10 +290,8 @@ threshold given in mapset units (here: meters):
 
 ```
 
-
 v.generalize input=roads output=roads_chaiken method=chaiken \
   threshold=1 error=roads_chaiken_leftover
-
 
 ```
 

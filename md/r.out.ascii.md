@@ -15,9 +15,7 @@ header) use the *-s* flag:
 
 ```
 
-
 r.out.ascii -s input=inname output=outname.grd [dp=value]
-
 
 ```
 
@@ -31,9 +29,7 @@ UNIX redirection mechanism; e.g.:
 
 ```
 
-
 r.out.ascii input=soils output=- > out.file
-
 
 ```
 

@@ -49,9 +49,7 @@ following command:
 
 ```
 
-
 r.mapcalc "int_map = int(MATFile_map)"
-
 
 ```
 
@@ -68,13 +66,11 @@ be used to determine and check the map's resolution information will be correct:
 
 ```
 
-
     [rows cols] = size(map_data)
     x_range = map_eastern_edge - map_western_edge
     y_range = map_northern_edge - map_southern_edge
     ns_res = y_range/rows
     ew_res = x_range/cols
-
 
 ```
 
@@ -91,9 +87,7 @@ In Matlab, save with:
 
 ```
 
-
 save filename.mat map_* -v4
-
 
 ```
 
@@ -101,9 +95,7 @@ In Octave, save with:
 
 ```
 
-
 save -mat4-binary filename.mat map_*
-
 
 ```
 

@@ -15,8 +15,6 @@ A new vector space time dataset will be created, renamed and in the end removed
 
 ```
 
-
-
 # Create new and empty STVDS
 t.create type=stvds output=toberenamed semantictype=mean \
   title="Example to rename" \
@@ -25,7 +23,6 @@ t.create type=stvds output=toberenamed semantictype=mean \
 t.rename input=toberenamed output=newname type=stvds
 
 t.remove input=newname type=stvds
-
 
 ```
 

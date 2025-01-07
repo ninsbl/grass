@@ -13,10 +13,8 @@ Commands used with the North Carolina dataset to create the above figure (subset
 
 ```
 
-
 g.region n=220750 s=219950 w=638300 e=639000 -p
 v.delaunay input=elev_lid792_randpts output=elev_lid792_randpts_delaunay
-
 
 ```
 

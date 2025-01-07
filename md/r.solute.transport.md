@@ -79,23 +79,17 @@ Make sure you are not in a lat/lon projection.
 
 ```
 
-
-
 #!/usr/bin/env python3
-
 # This is an example script how groundwater flow and solute transport are
-
 # computed within GRASS GIS
 import sys
 import os
 import grass.script as gs
 
-
 # Overwrite existing maps
 gs.run_command("g.gisenv", set="OVERWRITE=1")
 
 gs.message(_("Set the region"))
-
 
 # The area is 200m x 100m with a cell size of 1m x 1m
 gs.run_command("g.region", res=1, res3=1, t=10, b=0, n=100, s=0, w=0, e=200)
@@ -124,13 +118,11 @@ gs.run_command("r.mapcalc", expression="tstatus = if(col() == 1 || col() == 200 
 gs.run_command("r.mapcalc", expression="diff = 0.0000001")
 gs.run_command("r.mapcalc", expression="R = 1.0")
 
-
 # Compute the initial state
 gs.run_command("r.solute.transport", solver="bicgstab", top="top_conf",\
   bottom="bottom", phead="gwresult_conf", status="tstatus", hc_x="hydcond", hc_y="hydcond",\
   rd="R", cs="cs", q="well", nf="poros", output="stresult_conf_0", dt=3600, diff_x="diff",\
   diff_y="diff", c="c", al=0.1, at=0.01)
-
 
 # Compute the solute transport for 300 days in 10 day steps
 for dt in range(30):
@@ -138,7 +130,6 @@ for dt in range(30):
     bottom="bottom", phead="gwresult_conf", status="tstatus", hc_x="hydcond", hc_y="hydcond",\
     rd="R", cs="cs", q="well", nf="poros", output="stresult_conf_" + str(dt + 1), dt=864000, diff_x="diff",\
     diff_y="diff", c="stresult_conf_" + str(dt), al=0.1, at=0.01)
-
 
 ```
 

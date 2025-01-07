@@ -1,5 +1,4 @@
 
-
 ### Image processing in general
 
 GRASS GIS provides a powerful suite of tools for the processing and
@@ -79,7 +78,6 @@ As a general rule in GRASS:
    rescaled (using nearest-neighbor resampling) to match the current
    region.
 
-
 ### Imagery import
 
 The module [r.in.gdal](r.in.gdal.html) offers a common
@@ -142,7 +140,6 @@ GRASS is able to geocode raster and image data of various types:
 * orthophoto generation based on DEM: [i.ortho.photo](i.ortho.photo.html)
 * digital handheld camera geocoding: modified procedure for
   [i.ortho.photo](i.ortho.photo.html)
-
 
 ### Visualizing (true) color composites
 
@@ -254,7 +251,6 @@ Several modules support the calculation of the energy balance:
 * Sensible heat flux iteration ([i.eb.hsebal01](i.eb.hsebal01.html));
 * Net radiation approximation ([i.eb.netrad](i.eb.netrad.html));
 * Soil heat flux approximation ([i.eb.soilheatflux](i.eb.soilheatflux.html)).
-
 
 ### See also
 

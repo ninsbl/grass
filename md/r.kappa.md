@@ -114,14 +114,11 @@ Example for North Carolina sample dataset:
 
 ```
 
-
 g.region raster=landclass96 -p
 r.kappa -w classification=landuse96_28m reference=landclass96
 
-
 # export Kappa matrix as CSV file "kappa.csv"
 r.kappa classification=landuse96_28m reference=landclass96 output=kappa.csv -m -h
-
 
 ```
 
@@ -129,9 +126,7 @@ Verification of classified LANDSAT scene against training areas:
 
 ```
 
-
 r.kappa -w classification=lsat7_2002_classes reference=training
-
 
 ```
 

@@ -20,7 +20,6 @@ flag of *[r.cost](r.cost.html)* and
 
 ```
 
-
 Direction encoding for neighbors of x
 
   135  90  45          7 8 1
@@ -29,7 +28,6 @@ Direction encoding for neighbors of x
 
   degrees           bit positions
   CCW from East
-
 
 ```
 
@@ -66,13 +64,11 @@ of r.cost and r.walk is considered:
 
 ```
 
-
        112.5     67.5
 157.5  135   90  45   22.5
        180   x   0
 202.5  225  270  315  337.5
        247.5     292.5
-
 
 ```
 
@@ -92,12 +88,10 @@ with EOF, in GUI just enter the values directly for the parameter input):
 
 ```
 
-
 v.in.ascii input=- output=start format=point separator=comma <<EOF
 638667.15686275,220610.29411765
 638610.78431373,220223.03921569
 EOF
-
 
 ```
 
@@ -107,9 +101,7 @@ To get these directions, we use the
 
 ```
 
-
 r.watershed elevation=elev_lid792_1m accumulation=accum drainage=drain_dir
-
 
 ```
 
@@ -118,9 +110,7 @@ raster algebra:
 
 ```
 
-
 r.mapcalc "drain_deg = if(drain_dir != 0, 45. * abs(drain_dir), null())"
-
 
 ```
 
@@ -128,9 +118,7 @@ Now we are ready to extract the drainage paths starting at the two points.
 
 ```
 
-
 r.path input=drain_deg raster_path=drain_path vector_path=drain_path start_points=start
-
 
 ```
 
@@ -139,10 +127,8 @@ we are using and create a shaded relief map:
 
 ```
 
-
 r.colors map=elev_lid792_1m color=elevation
 r.relief input=elev_lid792_1m output=relief
-
 
 ```
 
@@ -150,12 +136,10 @@ We visualize the input and output data:
 
 ```
 
-
 d.shade shade=relief color=elev_lid792_1m
 d.vect map=drain_path color=0:0:61 width=4 legend_label="drainage paths"
 d.vect map=start color=none fill_color=224:0:0 icon=basic/circle size=15 legend_label=origins
 d.legend.vect -b
-
 
 ```
 
@@ -170,9 +154,7 @@ We compute bitmask encoded movement directions using *r.walk:*
 
 ```
 
-
 g.region swwake_30m -p
-
 
 # create friction map based on land cover
 r.recode input=landclass96 output=friction rules=- << EOF
@@ -182,14 +164,12 @@ r.recode input=landclass96 output=friction rules=- << EOF
 7:7:0.3:0.3
 EOF
 
-
 # without Knight's move
 r.walk -b elevation=elev_ned_30m friction=friction output=walkcost \
     outdir=walkdir start_coordinates=635576,216485
 
 r.path input=walkdir start_coordinates=640206,222795 \
     raster_path=walkpath vector_path=walkpath
-
 
 # with Knight's move
 r.walk -b -k elevation=elev_ned_30m friction=friction output=walkcost_k \
@@ -198,14 +178,12 @@ r.walk -b -k elevation=elev_ned_30m friction=friction output=walkcost_k \
 r.path input=walkdir_k start_coordinates=640206,222795 \
     raster_path=walkpath_k vector_path=walkpath_k
 
-
 # without Knight's move and without bitmask encoding (single direction)
 r.walk elevation=elev_ned_30m friction=friction output=walkcost_s \
     outdir=walkdir_s start_coordinates=635576,216485
 
 r.path input=walkdir_s start_coordinates=640206,222795 \
     raster_path=walkpath_s vector_path=walkpath_s
-
 
 ```
 
@@ -214,8 +192,6 @@ the start point to the stop point (start point for r.walk). Note the
 gaps in the raster path when using the Knight's move.
 
 ```
-
-
 
 ```
 

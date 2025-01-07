@@ -18,12 +18,10 @@ and may look like this:
 
 ```
 
-
 GISDBASE=/opt/grassdata/
 LOCATION_NAME=nc_spm_08_grass7
 MAPSET=/user1
 GUI=gui
-
 
 ```
 
@@ -32,9 +30,7 @@ command line
 
 ```
 
-
 g.gisenv MAPSET
-
 
 ```
 
@@ -117,10 +113,8 @@ be printed using *g.gisenv* by providing multiple variables:
 
 ```
 
-
 g.gisenv get=GISDBASE,LOCATION_NAME,MAPSET sep='/'
 /opt/grassdata/nc_spm_08_grass7/user1
-
 
 ```
 
@@ -133,9 +127,7 @@ following command will cast each variable into the UNIX environment:
 
 ```
 
-
 eval `g.gisenv`
-
 
 ```
 
@@ -161,11 +153,8 @@ Set the maximum memory to be used (in MB), i.e. the cache size for raster rows:
 
 ```
 
-
-
 # set to 6 GB (default: 300 MB)
 g.gisenv set="MEMORYMB=6000"
-
 
 ```
 
@@ -175,11 +164,8 @@ Set the number of threads for parallel computing:
 
 ```
 
-
-
 # set to use 12 threads (default: 1)
 g.gisenv set="NPROCS=12"
-
 
 ```
 
@@ -190,9 +176,7 @@ equal or greater than 0:
 
 ```
 
-
 g.gisenv set="DEBUG=3"
-
 
 ```
 
@@ -207,9 +191,7 @@ To disable debugging messages:
 
 ```
 
-
 g.gisenv unset="DEBUG"
-
 
 ```
 

@@ -7,9 +7,7 @@
 
 ```
 
-
 v.out.pov input=vector3d output=vector3d.pov objmod="pigment { color red 0 green 1 blue 0 }"
-
 
 ```
 
@@ -17,10 +15,7 @@ The generated file can be included in an existing .pov file with the following s
 
 ```
 
-
-
 #include "vector3d.pov"
-
 
 ```
 

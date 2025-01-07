@@ -1,5 +1,4 @@
 
-
 ## KEYWORDS
 
 [general](general.html), [GUI](topic_GUI.html)
@@ -37,7 +36,6 @@ List of available *[wxGUI](wxGUI.html)* components:
 * [Raster Digitizer](wxGUI.rdigit.html)
   available also as a command line tool *[g.gui.rdigit](g.gui.rdigit.html)*
 * [Vector Network Analysis Tool](wxGUI.vnet.html)
-
 
 ## SEE ALSO
 

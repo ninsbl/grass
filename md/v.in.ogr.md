@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.in.ogr* imports vector data from files and database connections
@@ -99,7 +98,6 @@ vector dataset during import to the CRS of the current project.
 
 ## NOTES
 
-
 ### Table column names: supported characters
 
 The characters which are eligible for table column names are limited
@@ -107,12 +105,9 @@ by the SQL standard. Supported are:
 
 ```
 
-
 [A-Za-z][A-Za-z0-9_]*
 
-
 ```
-
 
 This means that SQL neither supports '.' (dots) nor '-' (minus) nor
 '#' in table column names. Also a table name must start with a
@@ -177,26 +172,19 @@ The command imports various vector formats:
 
 ### SHAPE files
 
-
 ```
-
 
 v.in.ogr input=/home/user/shape_data/test_shape.shp output=grass_map
 
-
 ```
-
 
 Alternate method:
 
 ```
 
-
 v.in.ogr input=/home/user/shape_data layer=test_shape output=grass_map
 
-
 ```
-
 
 Define encoding value for attribute data (in this example we expect
 attribute data
@@ -206,24 +194,17 @@ use Latin script, Microsoft Windows encoding).
 
 ```
 
-
 v.in.ogr input=/home/user/shape_data/test_shape.shp output=grass_map encoding=cp1250
 
-
 ```
-
 
 ### MapInfo files
 
-
 ```
-
 
 v.in.ogr input=./ layer=mapinfo_test output=grass_map
 
-
 ```
-
 
 ### Arc Coverage
 
@@ -232,12 +213,9 @@ areas.
 
 ```
 
-
 v.in.ogr input=gemeinden layer=LAB,ARC type=centroid,boundary output=mymap
 
-
 ```
-
 
 ### E00 file
 
@@ -251,13 +229,10 @@ fails):
 
 ```
 
-
 avcimport e00file coverage
 v.in.ogr input=coverage layer=LAB,ARC type=centroid,boundary output=mymap
 
-
 ```
-
 
 ### SDTS files
 
@@ -265,25 +240,18 @@ You have to select the CATD file.
 
 ```
 
-
 v.in.ogr input=CITXCATD.DDF output=cities
 
-
 ```
-
 
 ### TIGER files
 
-
 ```
-
 
 v.in.ogr input=input/2000/56015/ layer=CompleteChain,PIP output=t56015_all \
 type=boundary,centroid snap=-1
 
-
 ```
-
 
 ### PostGIS tables
 
@@ -291,26 +259,20 @@ Import polygons as areas:
 
 ```
 
-
 v.in.ogr input="PG:host=localhost dbname=postgis user=postgres" layer=polymap \
 output=polygons type=boundary,centroid
 
-
 ```
-
 
 If the table containing the polygons are in a specific schema, you can use:
 
 ```
 
-
 v.in.ogr input="PG:host=localhost dbname=postgis user=postgres" \
 layer=myschema.polymap \
 output=polygons type=boundary,centroid
 
-
 ```
-
 
 Generally, *v.in.ogr* just follows the
 [format-specific](https://gdal.org/en/stable/drivers/vector/)
@@ -338,12 +300,9 @@ with the **where** option, e.g. to import roads, use
 
 ```
 
-
 v.in.ogr where="highway >< ''"
 
-
 ```
-
 
 i.e. the OSM tag *highway* must be set.
 
@@ -353,12 +312,9 @@ be imported (valid range is 1 - 11), e.g. with
 
 ```
 
-
 v.in.ogr where="boundary = 'administrative' and admin_level = '1'"
 
-
 ```
-
 
 The OSM topological model differs from the GRASS topological model. OSM
 topologically correct connections of lines can be on all vertices of a
@@ -376,13 +332,10 @@ OSM\_CONFIG\_FILE has been created, OSM data can be imported with e.g.
 
 ```
 
-
 export OSM_CONFIG_FILE=/path/to/osmconf.ini
 v.in.ogr input=name.pbf layer=lines output=osm_data
 
-
 ```
-
 
 ### Oracle Spatial
 
@@ -391,12 +344,9 @@ ORACLE_SID, ORACLE_HOME` and `TNS_ADMIN` accordingly.
 
 ```
 
-
 v.in.ogr input=OCI:username/password@database_instance output=grasslayer layer=roads_oci
 
-
 ```
-
 
 ### Multiple geometry columns
 
@@ -407,7 +357,6 @@ together with **-t** flag.
 
 ```
 
-
 v.external -t input=20141130_ST_UKSH.xml.gz
 ...
 Okresy,point,1,DefinicniBod
@@ -415,9 +364,7 @@ Okresy,multipolygon,1,OriginalniHranice
 Okresy,multipolygon,1,GeneralizovaneHranice
 ...
 
-
 ```
-
 
 In our example layer "Okresy" has three geometry columns:
 "DefinicniBod", "OriginalniHranice" and
@@ -430,12 +377,9 @@ the output vector map will contain only geometry saved in
 
 ```
 
-
 v.in.ogr input=20141130_ST_UKSH.xml.gz layer=Okresy geometry=OriginalniHranice
 
-
 ```
-
 
 ## WARNINGS
 
@@ -443,12 +387,9 @@ If a message like
 
 ```
 
-
 WARNING: Area size 1.3e-06, area not imported
 
-
 ```
-
 
 appears, the **min\_area** may be adjusted to a
 smaller value so that all areas are imported. Otherwise tiny areas are
@@ -459,12 +400,9 @@ If a message like
 
 ```
 
-
 Try to import again, snapping with at least 1e-008: 'snap=1e-008'
 
-
 ```
-
 
 appears, then the map to be imported
 contains topological errors. The message suggests a value for the
@@ -473,34 +411,27 @@ contains topological errors. The message suggests a value for the
 
 ## ERROR MESSAGES
 
-
 ### SQL syntax errors
 
 Depending on the currently selected SQL driver, error messages such as follows may arise:
 
 ```
 
-
 DBMI-SQLite driver error:
 Error in sqlite3_prepare():
 near "ORDER": syntax error
 
-
 ```
-
 
 Or:
 
 ```
 
-
 DBMI-DBF driver error:
 SQL parser error:
 syntax error, unexpected DESC, expecting NAME processing 'DESC
 
-
 ```
-
 
 This indicates that a column name in the input dataset corresponds to a reserved
 SQL word (here: 'ORDER' and 'DESC' respectively). A different column name has to be
@@ -511,15 +442,11 @@ see [here](https://www.sqlite.org/lang_keywords.html).
 
 ### Projection errors
 
-
 ```
-
 
 Coordinate reference system of dataset does not appear to match the current project.
 
-
 ```
-
 
 Here you need to create or use a project whose CRS matches that
 of the vector data you wish to import. Try using **project** parameter to
@@ -531,7 +458,6 @@ with *[v.proj](v.proj.html)*.
 
 * [OGR vector library](https://gdal.org/)
 * [OGR vector library C API](https://gdal.org/en/stable/api/vector_c_api.html) documentation
-
 
 ## SEE ALSO
 

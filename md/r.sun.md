@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 **r.sun** computes beam (direct), diffuse and ground reflected solar
@@ -218,7 +217,6 @@ To overcome this problem, the user can use the option *civil\_time=<timezone\_of
 in r.sun to make it use real-world (wall clock) time. For example, for Central
 Europe the timezone offset is +1, +2 when daylight saving time is in effect.
 
-
 ### Extraction of shadow maps
 
 A map of shadows can be extracted from the solar incidence angle map
@@ -238,26 +236,17 @@ The amount of memory by **r.sun** is estimated as follows:
 
 ```
 
-
-
 # without input raster map partitioning:
-
 #  memory requirements: 4 bytes per raster cell
-
 #  rows,cols: rows and columns of current region (find out with g.region)
-
 #  IR: number of input raster maps without horizon maps
-
 #  OR: number of output raster maps
 memory_bytes = rows*cols*(IR*4 + horizon_steps + OR*4)
-
 
 # with input raster map partitioning:
 memory_bytes = rows*cols*((IR*4+horizon_steps)/npartitions  + OR*4)
 
-
 ```
-
 
 ## EXAMPLES
 
@@ -265,29 +254,22 @@ North Carolina example (considering also cast shadows):
 
 ```
 
-
 g.region raster=elevation -p
-
 
 # calculate horizon angles (to speed up the subsequent r.sun calculation)
 r.horizon elevation=elevation step=30 bufferzone=200 output=horangle \
     maxdistance=5000
 
-
 # slope + aspect
 r.slope.aspect elevation=elevation aspect=aspect.dem slope=slope.dem
-
 
 # calculate global radiation for day 180 at 2p.m., using r.horizon output
 r.sun elevation=elevation horizon_basename=horangle horizon_step=30 \
       aspect=aspect.dem slope=slope.dem glob_rad=global_rad day=180 time=14
-
 # result: output global (total) irradiance/irradiation [W.m-2] for given day/time
 r.univar global_rad
 
-
 ```
-
 
 Calculation of the integrated daily irradiation for a region in North-Carolina
 for a given day of the year at 30m resolution. Here day 172 (i.e., 21 June
@@ -295,9 +277,7 @@ in non-leap years):
 
 ```
 
-
 g.region raster=elev_ned_30m -p
-
 
 # considering cast shadows
 r.sun elevation=elev_ned_30m linke_value=2.5 albedo_value=0.2 day=172 \
@@ -305,29 +285,22 @@ r.sun elevation=elev_ned_30m linke_value=2.5 albedo_value=0.2 day=172 \
       refl_rad=r172 insol_time=it172
 
 d.mon wx0
-
 # show irradiation raster map [Wh.m-2.day-1]
 d.rast.leg b172
-
 # show insolation time raster map [h]
 d.rast.leg it172
 
-
 ```
-
 
 We can compute the day of year from a specific date in Python:
 
 ```
 
-
 >>> import datetime
 >>> datetime.datetime(2014, 6, 21).timetuple().tm_yday
 172
 
-
 ```
-
 
 ## SEE ALSO
 
@@ -378,7 +351,6 @@ We can compute the day of year from a specific date in Python:
   des Mines).
 * Joint Research Centre: [GIS solar radiation database for Europe](http://re.jrc.ec.europa.eu/pvgis/) and
   [Solar radiation and GIS](http://re.jrc.ec.europa.eu/pvgis/solres/solmod3.htm)
-
 
 ## AUTHORS
 

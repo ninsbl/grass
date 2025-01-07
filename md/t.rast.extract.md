@@ -28,16 +28,13 @@ side, eg.:
 
 ```
 
-
 t.rast.extract input=tempmean_monthly where="start_time > '2010-01-05'" output=selected_tempmean_monthly basename=new_tmean_month expression="if(tempmean_monthly < 0, null(), tempmean_monthly)"
-
 
 ```
 
 ## EXAMPLE
 
 ```
-
 
 t.rast.extract input=tempmean_monthly output=tempmean_monthly_later_2012 where="start_time >= '2012-01-01'"
 
@@ -55,7 +52,6 @@ name|mapset|start_time|end_time
 2012_10_tempmean|climate_2000_2012|2012-10-01 00:00:00|2012-11-01 00:00:00
 2012_11_tempmean|climate_2000_2012|2012-11-01 00:00:00|2012-12-01 00:00:00
 2012_12_tempmean|climate_2000_2012|2012-12-01 00:00:00|2013-01-01 00:00:00
-
 
 ```
 

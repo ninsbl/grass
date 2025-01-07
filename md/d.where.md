@@ -18,11 +18,9 @@ Mouse buttons:
 
 ```
 
-
      Left:   where am i
      Middle: draw to/from here
      Right:  quit this
-
 
 ```
 
@@ -47,10 +45,8 @@ Query position in map (North Carolina sample dataset):
 
 ```
 
-
 d.rast elevation
 d.where
-
 
 ```
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 The **vector digitizer** is a *[wxGUI](wxGUI.html)*
@@ -246,7 +245,6 @@ boundaries are automatically attached to the chosen points.
 
 * [GRASS Vedit Library](https://grass.osgeo.org/programming8/veditlib.html)
 * [Vector Database Management](https://grasswiki.osgeo.org/wiki/Vector_Database_Management) (Wiki page)
-
 
 ## SEE ALSO
 

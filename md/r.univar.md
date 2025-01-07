@@ -69,9 +69,7 @@ Carolina sample dataset is used to calculate univariate statistics:
 
 ```
 
-
 g.region raster=elevation -p
-
 
 # standard output, along with extended statistics
 r.univar -e elevation percentile=98
@@ -95,7 +93,6 @@ median (even number of cells): 108.88
 3rd quartile: 126.792
 98th percentile: 147.727
 
-
 # script style output, along with extended statistics
 r.univar -ge elevation percentile=98
 n=2025000
@@ -115,7 +112,6 @@ median=108.88
 third_quartile=126.792
 percentile_98=147.727
 
-
 ```
 
 ### Zonal statistics
@@ -126,16 +122,13 @@ for `elevation` raster map:
 
 ```
 
-
 g.region raster=basins -p
-
 
 ```
 
 This will set and print computational region in the format:
 
 ```
-
 
 projection: 99 (Lambert Conformal Conic)
 zone:       0
@@ -151,23 +144,19 @@ rows:       1350
 cols:       1500
 cells:      2025000
 
-
 ```
 
 Check basin's IDs using:
 
 ```
 
-
 r.category basins
-
 
 ```
 
 This will print them in the format:
 
 ```
-
 
 2
 4
@@ -185,13 +174,11 @@ This will print them in the format:
 28
 30
 
-
 ```
 
 Visualization of them underlying elevation map can be created as:
 
 ```
-
 
 d.mon wx0
 d.rast map=elevation
@@ -200,7 +187,6 @@ d.rast map=basins
 r.colors map=basins color=bgyr
 d.legend raster=basins use=2,4,6,8,10,12,14,16,18,20,22,24,26,28,30
 d.barscale
-
 
 ```
 
@@ -213,17 +199,14 @@ zone, i.e. basin found in the **zones** parameter:
 
 ```
 
-
 r.univar -t map=elevation zones=basins separator=comma \
          output=basin_elev_zonal.csv
-
 
 ```
 
 This will print information in the format:
 
 ```
-
 
 zone,label,non_null_cells,null_cells,min,max,range,mean,mean_of_abs,
 stddev,variance,coeff_var,sum,sum_abs2,,116975,0,55.5787925720215,
@@ -237,7 +220,6 @@ stddev,variance,coeff_var,sum,sum_abs2,,116975,0,55.5787925720215,
 5.68018623179036,83217.1225967407,83217.12259674078,,80506,
 0,67.4670791625977,147.161514282227, ...
 
-
 ```
 
 Comma Separated Values (CSV) file is best viewed through a spreadsheet
@@ -250,16 +232,13 @@ dataset) viewed through Libre/Open Office Calc.*
 
 ```
 
-
 r.univar -e elevation percentile=98 format=json
-
 
 ```
 
 will output the results in JSON format:
 
 ```
-
 
 [
     {
@@ -290,7 +269,6 @@ will output the results in JSON format:
         ]
     }
 ]
-
 
 ```
 

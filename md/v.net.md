@@ -141,12 +141,9 @@ The examples are [North Carolina dataset](https://grassbook.org/datasets/dataset
 
 ```
 
-
 v.net input=streets_wake output=streets_node operation=nodes
-
 # verify result
 v.category streets_node option=report
-
 
 ```
 
@@ -154,13 +151,10 @@ v.category streets_node option=report
 
 ```
 
-
 v.net input=streets_wake points=firestations out=streets_net \
       operation=connect threshold=500
-
 # verify result
 v.category streets_net option=report
-
 
 ```
 
@@ -173,9 +167,7 @@ following format is required:
 
 ```
 
-
 [category of edge] [category of start node] [category of end node]
-
 
 ```
 
@@ -183,20 +175,16 @@ Option 1: Save the file (e.g. "points.txt") and generate the map:
 
 ```
 
-
 v.net points=geodetic_swwake_pts output=geodetic_swwake_pts_net \
       operation=arcs file=points.txt
-
 # verify result
 v.category geodetic_swwake_pts_net option=report
-
 
 ```
 
 Option 2: Read in from command line:
 
 ```
-
 
 v.net points=geodetic_swwake_pts output=geodetic_swwake_pts_net \
       operation=arcs file=- << EOF
@@ -205,10 +193,8 @@ v.net points=geodetic_swwake_pts output=geodetic_swwake_pts_net \
 3 27886 27897
 EOF
 
-
 # verify result
 v.category geodetic_swwake_pts_net option=report
-
 
 ```
 
@@ -218,9 +204,7 @@ Following example generates a vector map with turntable:
 
 ```
 
-
 v.net operation=turntable in=railroads out=railroads_ttb
-
 
 ```
 

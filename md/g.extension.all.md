@@ -15,9 +15,7 @@ different GIS Library (see `g.version -r`)
 
 ```
 
-
 g.extension.rebuild.all
-
 
 ```
 
@@ -25,9 +23,7 @@ Force to rebuild all locally installed extensions
 
 ```
 
-
 g.extension.rebuild.all -f
-
 
 ```
 

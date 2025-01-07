@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *v.surf.rst* program performs spatial approximation based on
@@ -276,7 +275,6 @@ different number of cells (100k, 200k, 400k, and 800k).*
 
 ## EXAMPLE
 
-
 ### Setting for lidar point cloud
 
 Lidar point clouds as well as UAS SfM-based (phodar) point clouds tend
@@ -286,12 +284,9 @@ a typical temperature data interpolation.
 
 ```
 
-
 v.surf.rst input=points elevation=elevation npmin=100
 
-
 ```
-
 
 ### Usage of the where parameter
 
@@ -303,27 +298,21 @@ measures which we interpolate to a gap-free elevation surface):
 
 ```
 
-
 g.region raster=elevation -p
-
 # random elevation extraction of 500 samplings
 r.random -s elevation vector=elevrand n=500
 v.info -c elevrand
 v.db.select elevrand
 
-
 # interpolation based on all points
 v.surf.rst elevrand zcol=value elevation=elev_full
-
 # apply the color table of the original raster map
 r.colors elev_full raster=elevation
 d.rast elev_full
 d.vect elevrand
 
-
 # compute univariate statistics with 1st/3rd quartiles
 v.db.univar -e elevrand column=value
-
 
 # interpolation based on subset of points (only those over 1st quartile)
 v.surf.rst input=elevrand zcolumn=value elevation=elev_partial npmin=100 where="value > 94.9"
@@ -331,9 +320,7 @@ r.colors map=elev_partial raster=elevation
 d.rast elev_partial
 d.vect elevrand where="value > 94.9"
 
-
 ```
-
 
 ## REFERENCES
 
@@ -363,7 +350,6 @@ d.vect elevrand where="value > 94.9"
   Journal of Computational Physics, 23, p.93-123.
 * Wahba, G., 1990, : Spline Models for Observational Data, CNMS-NSF Regional
   Conference series in applied mathematics, 59, SIAM, Philadelphia, Pennsylvania.
-
 
 ## SEE ALSO
 

@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 A Linear Referencing System (LRS) is a system
@@ -28,30 +27,23 @@ has changed. Example:
 
 ```
 
-
 --- road (linear feature)
  +   MP (milepost, point, distance from the beginning in km)
 
-
 ```
-
 
 Old situation:
 
 ```
 
-
 +----+----+----+----+----+
 0    2    3    4    5    6
 
-
 ```
-
 
 New situation (for example a new bypass around the village)
 
 ```
-
 
           ?    ?
           +----+
@@ -60,9 +52,7 @@ New situation (for example a new bypass around the village)
 +----+----+    +----+----+
 0    2    3    4    5    6
 
-
 ```
-
 
 The segment between km 3 and 4 is now longer, it is now 3 km
 not 1 km as in old version. It would be expensive to change also
@@ -72,7 +62,6 @@ we reference the segment from the kilometer 3, using only offset.
 
 ```
 
-
       3+1000  3+2000
           +----+
           |    |
@@ -81,9 +70,7 @@ we reference the segment from the kilometer 3, using only offset.
 0    2    3  3+3000 5    6
                4
 
-
 ```
-
 
 This way, there is no ambiguity and minimal changes are needed.
 But the MP 4 is no more the end of segment 3 - 4 but
@@ -97,15 +84,12 @@ In this case original MP on km 4 will have these attributes:
 
 ```
 
-
 start_mp:  4
 start_off: 0
 end_mp:    3
 end_off:   3000
 
-
 ```
-
 
 Because each MP can keep 2 values (start, end) it is called 'double' referenced LRS.
 
@@ -139,7 +123,6 @@ lines. The command *v.build.polylines* creates this map structure.
 | end\_off | double precision | distance from end\_mp to end of the segment measured along the physical object |
 | end\_type | integer | 1: the same as specified for from\_ ; 2: calculated from map along the line from previous MP; 3: defined by user |
 
-
 ### Available commands
 
 * [v.lrs.create](v.lrs.create.html) to create a linear referencing system,
@@ -148,7 +131,6 @@ lines. The command *v.build.polylines* creates this map structure.
   and
 * [v.lrs.where](v.lrs.where.html) to find line id and real km+offset
   for given points in vector map using linear referencing system.
-
 
 ### Input lines for v.lrs.segment and v.lrs.label
 
@@ -163,13 +145,10 @@ It can happen that one offset appears on 2 different lines:
 
 ```
 
-
 ------1-------     --------2------
 +0.0            +1.0              +2.0
 
-
 ```
-
 
 In this case, the module gives error because the position
 results in 2 points.
@@ -179,7 +158,6 @@ with another one, but MP are used only for one:
 
 ```
 
-
  + road1/km15         + road1/km22
   \                  /
    \ road1/km17     / road1/km20
@@ -188,9 +166,7 @@ with another one, but MP are used only for one:
   /                  \
  + road2/km50         + road2/km54
 
-
 ```
-
 
 ## NOTES
 
@@ -203,7 +179,6 @@ Explanations of selected options:
 * rsdriver: Driver name for LRS table - DBMI SQL driver (dbf, pg, mysql, sqlite, etc)
 * rsdatabase: Database name for LRS table - DBMI SQL database name (e.g., "lrsdb")
 * rstable: Name of the LRS table - DBMI SQL table name (e.g., "streamslrs")
-
 
 ## SEE ALSO
 

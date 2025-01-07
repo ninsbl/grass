@@ -16,9 +16,7 @@ and do not need to be spcified each time.
 
 ```
 
-
 db.columns table=zipcodes_wake driver=pg database=grassdb
-
 
 ```
 
@@ -27,9 +25,7 @@ directly*
 
 ```
 
-
 db.columns table=zipcodes_wake
-
 
 ```
 
@@ -37,9 +33,7 @@ db.columns table=zipcodes_wake
 
 ```
 
-
 db.columns table=zipcodes_wake driver=dbf database=/grassdata/nc_spm_08/PERMANENT/dbf/
-
 
 ```
 
@@ -49,9 +43,7 @@ Note that the SQLite backend is the default setting.
 
 ```
 
-
 db.columns driver=sqlite table=archsites database='$GISDBASE/$LOCATION_NAME/$MAPSET/sqlite/sqlite.db'
-
 
 ```
 

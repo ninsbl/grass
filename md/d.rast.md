@@ -10,9 +10,7 @@ Display raster map "elevation":
 
 ```
 
-
 d.rast map=elevation
-
 
 ```
 
@@ -25,9 +23,7 @@ values between 75 and 80 meters:
 
 ```
 
-
 d.rast map=elevation values=75-80
-
 
 ```
 
@@ -39,9 +35,7 @@ Display raster map "landuse96\_28m" but only categories 1 and 2:
 
 ```
 
-
 d.rast landuse96_28m values=1,2
-
 
 ```
 

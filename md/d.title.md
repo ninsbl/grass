@@ -29,10 +29,8 @@ active display frame on the graphics monitor might type the following:
 
 ```
 
-
 d.title map=soils color=red size=5 > TITLE.file
 d.text < TITLE.file
-
 
 ```
 
@@ -41,9 +39,7 @@ into *[d.text](d.text.html):*
 
 ```
 
-
 d.title map=soils color=red size=5 | d.text
-
 
 ```
 

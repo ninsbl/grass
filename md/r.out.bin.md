@@ -15,10 +15,8 @@ With the -h flag, data can be directly used by
 
 ```
 
-
 r.out.bin -h input=grass.raster output=new.grd
 grdinfo new.grd=1 (if float)
-
 
 ```
 
@@ -26,9 +24,7 @@ Exported data can be piped directly into the GMT program xyz2grd.
 
 ```
 
-
 r.out.bin input=grass.raster output=- | xyz2grd -R....  -ZTLf -
-
 
 ```
 

@@ -16,7 +16,6 @@ are exported using **t.rast.out.vtk** into the directory
 
 ```
 
-
 mkdir /tmp/export
 t.rast.out.vtk input=precip_abs directory=/tmp/export/ elevation=elevation
 
@@ -33,7 +32,6 @@ ls -1 /tmp/export
 000009_tempmean_monthly.vtk
 000010_tempmean_monthly.vtk
 000011_tempmean_monthly.vtk
-
 
 ```
 

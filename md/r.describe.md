@@ -45,10 +45,8 @@ The following examples are from the Spearfish60 sample dataset:
 
 ```
 
-
 r.describe landcover.30m
 * 11 21-23 31 32 41-43 51 71 81-83 85 91 92
-
 
 ```
 
@@ -56,11 +54,9 @@ r.describe landcover.30m
 
 ```
 
-
 r.describe -r landcover.30m
 11 thru 92
 *
-
 
 ```
 
@@ -68,17 +64,14 @@ r.describe -r landcover.30m
 
 ```
 
-
 r.describe -n landcover.30m
 11 21-23 31 32 41-43 51 71 81-83 85 91 92
-
 
 ```
 
 ### Print raster map categories, one category per line
 
 ```
-
 
 r.describe -1 geology
 
@@ -92,7 +85,6 @@ r.describe -1 geology
 7
 8
 9
-
 
 ```
 

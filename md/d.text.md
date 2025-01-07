@@ -54,9 +54,7 @@ active frame's vertical space per line:
 
 ```
 
-
 d.text text="This is a test of d.text" color=yellow bgcolor=gray size=4
-
 
 ```
 

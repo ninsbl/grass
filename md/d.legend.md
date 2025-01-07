@@ -101,11 +101,9 @@ Displaying the legend along with a histogram (North Carolina Sample dataset):
 
 ```
 
-
 g.region raster=elevation -p
 d.rast elevation
 d.legend -d elevation
-
 
 ```
 
@@ -115,11 +113,9 @@ Displaying the legend with custom labels and background:
 
 ```
 
-
 g.region raster=elevation -p
 d.rast elevation
 d.legend raster=elevation -t label_step=20 label_values=108 title=Legend -b bgcolor=255:255:204 border_color=gray
-
 
 ```
 
@@ -129,12 +125,10 @@ Displaying the legend with logarithmic scale:
 
 ```
 
-
 g.region raster=elevation -p
 r.watershed -a elevation=elevation threshold=1000 accumulation=flowacc
 d.rast flowacc
 d.legend raster=flowacc -t -l label_step=1
-
 
 ```
 

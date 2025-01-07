@@ -35,9 +35,7 @@ map out of the reclassified map by copying it:
 
 ```
 
-
 r.mapcalc "newmap = reclass"
-
 
 ```
 
@@ -68,9 +66,7 @@ Set specific values of a classified map to NULL:
 
 ```
 
-
 r.null map=landcover.30m setnull=21,22
-
 
 ```
 
@@ -78,9 +74,7 @@ Set NULL-values of a map to a specific value:
 
 ```
 
-
 r.null map=fields null=99
-
 
 ```
 

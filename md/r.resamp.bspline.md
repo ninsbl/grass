@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 *r.resamp.bspline* performs a bilinear/bicubic spline interpolation with
@@ -58,18 +57,13 @@ when cross-validation is selected.
 
 ## EXAMPLES
 
-
 ### Basic interpolation
 
-
 ```
-
 
 r.resamp.bspline input=raster_surface output=interpolated_surface method=bicubic
 
-
 ```
-
 
 A bicubic spline interpolation will be done and a raster map with estimated
 (i.e., interpolated) values will be created.
@@ -80,23 +74,16 @@ General procedure:
 
 ```
 
-
-
 # set region to area with NULL cells, align region to input map
 g.region n=north s=south e=east w=west align=input -p
-
 # interpolate NULL cells
 r.resamp.bspline -n input=input_raster output=interpolated_nulls method=bicubic
-
 # set region to area with NULL cells, align region to input map
 g.region raster=input -p
-
 # patch original map and interpolated NULLs
 r.patch input=input_raster,interpolated_nulls output=input_raster_gapfilled
 
-
 ```
-
 
 ### Interpolation of NULL cells and patching (NC data)
 
@@ -107,19 +94,15 @@ a complete elevation map:
 
 ```
 
-
 g.region raster=elev_srtm_30m -p
 d.mon wx0
 d.histogram elev_srtm_30m
 
 r.univar -e elev_srtm_30m
 
-
 # remove too low elevations (esp. lakes)
-
 # Threshold: thresh = Q1 - 1.5 * (Q3 - Q1)
 r.mapcalc "elev_srtm_30m_filt = if(elev_srtm_30m < 50.0, null(), elev_srtm_30m)"
-
 
 # verify
 d.histogram elev_srtm_30m_filt
@@ -132,9 +115,7 @@ r.resamp.bspline -n input=elev_srtm_30m_filt output=elev_srtm_30m_complete \
 d.histogram elev_srtm_30m_complete
 d.rast elev_srtm_30m_complete
 
-
 ```
-
 
 ### Estimation of **lambda** parameter with a cross validation process
 
@@ -144,12 +125,9 @@ include more than 100 non-NULL random cells.
 
 ```
 
-
 r.resamp.bspline -c input=input_raster
 
-
 ```
-
 
 ## REFERENCES
 
@@ -165,7 +143,6 @@ r.resamp.bspline -c input=input_raster
   (ISSN 1593-2192)
 * Antolin R. and Brovelli M.A., 2007, LiDAR data Filtering with GRASS GIS for the Determination of Digital Terrain Models. Proceedings of Jornadas de SIG Libre,
   Girona, España. CD ISBN: 978-84-690-3886-9
-
 
 ## SEE ALSO
 

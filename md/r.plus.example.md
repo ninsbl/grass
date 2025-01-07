@@ -9,9 +9,7 @@
 
 ```
 
-
 r.plus.example
-
 
 ```
 

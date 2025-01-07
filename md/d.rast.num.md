@@ -29,11 +29,9 @@ Distance from the streams network (North Carolina sample dataset):
 
 ```
 
-
 g.region raster=streams_derived -p
 r.grow.distance input=streams_derived distance=dist_from_streams
 d.rast.num dist_from_streams -a
-
 
 ```
 

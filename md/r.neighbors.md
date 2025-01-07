@@ -1,5 +1,4 @@
 
-
 ## DESCRIPTION
 
 ***r.neighbors*** looks at each cell in a raster input
@@ -15,7 +14,6 @@ layer. Note that the centre cell is also included in the calculation.
 ![](r_neighbors.png)
 
 *Figure: Illustration for an 3x3 average neighborhood*
-
 
 ### OPTIONS
 
@@ -37,21 +35,17 @@ input map:
 
 ```
 
-
 1 1  1 1 1
 1 1  1 1 1
 1 1 10 1 1
 1 1  1 1 1
 1 1  1 1 1
 
-
 ```
-
 
 selection map, NULL values are marked as \*:
 
 ```
-
 
 * * * * *
 * * 1 * *
@@ -59,39 +53,31 @@ selection map, NULL values are marked as \*:
 * * 1 * *
 * * * * *
 
-
 ```
-
 
 The output map:
 
 ```
 
-
 1 1 1 1 1
 1 1 2 1 1
 1 2 2 2 1
 1 1 2 1 1
 1 1 1 1 1
 
-
 ```
-
 
 Without using the selection map, the output map would look like this:
 
 ```
 
-
 1 1 1 1 1
 1 2 2 2 1
 1 2 2 2 1
 1 2 2 2 1
 1 1 1 1 1
-
 
 ```
-
 
 It is also possible to weigh cells within the neighborhood. This can
 be either done with a custom weights matrix or by specifying a weighting
@@ -152,7 +138,6 @@ The result is rounded to the nearest integer (in this case 6).
 
 ```
 
-
    Raw Data     Operation     New Data
    +---+---+---+          +---+---+---+
    | 7 | 7 | 5 |          |   |   |   |
@@ -162,9 +147,7 @@ The result is rounded to the nearest integer (in this case 6).
    | 7 | 6 | 4 |          |   |   |   |
    +---+---+---+          +---+---+---+
 
-
 ```
-
 
 **median**
 The value found half-way through a list of the
@@ -215,15 +198,12 @@ For example, a size value of 3 will result in
 
 ```
 
-
                               _ _ _
                              |_|_|_|
     3 x 3 neighborhood --->  |_|_|_|
                              |_|_|_|
 
-
 ```
-
 
 *Matrix weights:*
 A custom matrix can be used if none of the neighborhood operation
@@ -236,31 +216,24 @@ text file. For example, to calculate the focal mean with a matrix
 
 ```
 
-
 r.neigbors in=input.map out=output.map size=3 weighting_function=file \
 weight=weights.txt
 
-
 ```
-
 
 The contents of the weight.txt file:
 
 ```
 
-
 3 3 3
 1 4 8
 9 5 3
 
-
 ```
-
 
 This corresponds to the following 3x3 matrix:
 
 ```
-
 
 +-+-+-+
 |3|3|3|
@@ -270,25 +243,20 @@ This corresponds to the following 3x3 matrix:
 |9|5|3|
 +-+-+-+
 
-
 ```
-
 
 To calculate an annulus shaped neighborhood the contents of weight.txt file
 may be e.g. for size=5:
 
 ```
 
-
  0 1 1 1 0
  1 0 0 0 1
  1 0 0 0 1
  1 0 0 0 1
  0 1 1 1 0
-
 
 ```
-
 
 The way that weights are used depends upon the specific aggregate
 (**method**) being used.
@@ -303,12 +271,9 @@ When weights are used, the calculation for **method=average** is:
 
 ```
 
-
   sum(w[i]*x[i]) / sum(w[i])
 
-
 ```
-
 
 In the case where all weights are zero, this will end up with both the
 numerator and denominator to zero, which produces a NULL result.
@@ -332,7 +297,6 @@ The exact masks for the first few neighborhood sizes are as follows:
 
 ```
 
-
 3x3     . X .        5x5    . . X . .    7x7    . . . X . . .
         X O X               . X X X .           . X X X X X .
         . X .               X X O X X           . X X X X X .
@@ -353,10 +317,7 @@ The exact masks for the first few neighborhood sizes are as follows:
                                         . . X X X X X X X . .
                                         . . . . . X . . . . .
 
-
 ```
-
-
 
 ## NOTES
 
@@ -442,7 +403,6 @@ With the current aggregates, there are 5 cases:
 5. Output is integer for integer input and unweighted aggregate,
    otherwise float: sum.
 
-
 ### Performance
 
 To enable parallel processing, the user can specify the number of threads to be
@@ -465,53 +425,40 @@ needs to be compiled with OpenMP enabled.
 
 ## EXAMPLES
 
-
 ### Measure occupancy of neighborhood
 
 Set up 10x10 computational region to aid visual inspection of results
 
 ```
 
-
 g.region rows=10 cols=10
 
-
 ```
-
 
 Fill 50% of computational region with randomly located cells.
 "distance=0" will allow filling adjacent cells.
 
 ```
 
-
 r.random.cells output=random_cells distance=0 ncells=50
 
-
 ```
-
 
 Count non-empty (not NULL) cells in 3x3 neighborhood
 
 ```
 
-
 r.neighbors input=random_cells output=counts method=count
 
-
 ```
-
 
 Optionally - exclude centre cell from the count (= only look around)
 
 ```
 
-
 r.mapcalc "count_around = if( isnull(random_cells), counts, counts - 1)"
 
-
 ```
-
 
 ## SEE ALSO
 

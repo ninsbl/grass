@@ -72,9 +72,7 @@ only, use the **-p** flag and set **dmax** so that:
 
 ```
 
-
  50 < dmax <= 100
-
 
 ```
 
@@ -93,21 +91,15 @@ sample dataset is used to create points along the input lines:
 
 ```
 
-
-
 # The North Carolina data are metric.
-
 # 200m distance for points (maximum limit but not an exact distance)
 v.to.points input=railroads output=railroads_points dmax=200
-
 
 # verify the two layers in the resulting map
 v.category input=railroads_points option=report
 
-
 # vector info
 v.info map=railroads_points
-
 
 ```
 
@@ -115,9 +107,7 @@ v.info map=railroads_points
 
 ```
 
-
 v.to.points input=railroads output=railroads_nodes use=node
-
 
 ```
 
@@ -125,11 +115,9 @@ v.to.points input=railroads output=railroads_nodes use=node
 
 ```
 
-
 v.to.points input=railroads output=railroads_start use=start
 
 v.to.points input=railroads output=railroads_end use=end
-
 
 ```
 

@@ -55,25 +55,19 @@ crosses, shortest paths are blue lines:
 
 ```
 
-
-
 # connect schools to streets as layer 2
 v.net input=streets_wake points=schools_wake output=streets_net1 \
       operation=connect thresh=400 arc_layer=1 node_layer=2
-
 
 # connect hospitals to streets as layer 3
 v.net input=streets_net1 points=hospitals output=streets_net2 \
       operation=connect thresh=400 arc_layer=1 node_layer=3
 
-
 # inspect the result
 v.category in=streets_net2 op=report
 
-
 # shortest paths from schools (points in layer 2) to nearest hospitals (points in layer 3)
 v.net.distance in=streets_net2 out=schools_to_hospitals flayer=2 to_layer=3
-
 
 # visualization
 g.region vector=streets_wake
@@ -83,7 +77,6 @@ d.vect schools_wake color=green size=10
 d.vect map=hospitals icon=basic/cross3 size=15 color=black fcolor=red
 d.vect schools_to_hospitals
 
-
 ```
 
 ### Distance between point source of pollution and sample points along streams
@@ -92,18 +85,14 @@ Example with streams of the NC sample data set.
 
 ```
 
-
-
 # add coordinates of pollution point source of pollution as vector
 pollution.txt:
 634731.563206905|216390.501834892
 
 v.in.ascii input=pollution.txt output=pollution
 
-
 # add table to vector
 v.db.addtable map=pollution
-
 
 # add coordinates of sample points as vector
 samples.txt:
@@ -113,10 +102,8 @@ samples.txt:
 
 v.in.ascii input=samples.txt output=samples
 
-
 # add table to vector
 v.db.addtable map=samples
-
 
 # connect samples and pollution to streams
 v.net -c input=streams points=samples output=streams_samples \
@@ -124,7 +111,6 @@ v.net -c input=streams points=samples output=streams_samples \
 v.net -c input=streams_samples points=pollution
          output=streams_samples_pollution operation=connect \
          node_layer=4 threshold=10
-
 
 # check vector layers
 v.category input=streams_samples_pollution option=report
@@ -159,11 +145,9 @@ face           0          0          0
 kernel         0          0          0
 all            1          1          1
 
-
 # calculate distance between sample points and pollution point source
 v.net.distance input=streams_samples_pollution \
       output=distance_samples_to_pollution from_layer=3 to_layer=4
-
 
 # check results
 v.report map=distance_samples_to_pollution@vnettest option=length
@@ -171,7 +155,6 @@ cat|tcat|dist|length
 1|1|100.0|100.0
 2|1|200.0|200.0
 3|1|231.446|231.446
-
 
 ```
 

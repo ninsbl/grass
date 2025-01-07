@@ -32,10 +32,8 @@ input map but a map with point on every node.
 
 ```
 
-
 v.net.centrality input=roads output=roads_cent closeness=closeness \
       betweenness=betweenness -a
-
 
 ```
 
