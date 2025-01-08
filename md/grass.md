@@ -1,79 +1,79 @@
+  GRASS startup program \- GRASS GIS Manual          [![GRASS logo](grass_logo.png)](index.html)
+## GRASS startup program
 
+#### Table of contents
 
+* [SYNOPSIS](#synopsis)
+  + [Flags:](#flags:)
+  + [Parameters:](#parameters:)
+* [DESCRIPTION](#description)
+  + [Running non-interactive jobs](#running-non-interactive-jobs)
+  + [Config flag](#config-flag)
+* [SAMPLE DATA](#sample-data)
+* [ENVIRONMENT VARIABLES](#environment-variables)
+  + [User Interface Environment Variable](#user-interface-environment-variable)
+  + [Python Environment Variables](#python-environment-variables)
+  + [Addon Path to Extra User Scripts](#addon-path-to-extra-user-scripts)
+  + [Addon Base for Extra Local GRASS Addon Modules](#addon-base-for-extra-local-grass-addon-modules)
+  + [HTML Browser Variable](#html-browser-variable)
+* [EXAMPLES](#examples)
+  + [Batch jobs with the exec interface](#batch-jobs-with-the-exec-interface)
+* [CAVEAT](#caveat)
+* [SEE ALSO](#see-also)
+* [AUTHORS (of this page)](#authors-(of-this-page))
+ 
 ## SYNOPSIS
 
 **grass** \[**-h** \| **-help** \| **--help**] \[**-v** \| **--version**] \| \[**-c** \| **-c geofile** \| **-c EPSG:code\[:datum\_trans]**] \| **-e** \| **-f** \| \[**--text** \| **--gtext** \| **--gui**] \| **--config** \| \[**--tmp-project** \| **--tmp-mapset**] \[\[\[**\<GISDBASE\>/**]**\<PROJECT\>/**] **\<MAPSET\>**] \[**--exec EXECUTABLE**]
-
 ### Flags:
 
  
-
 **-h** \| **-help** \| **--help**
 :   Prints a brief usage message and exits
-
 **-v** \| **--version**
 :   Prints the version of GRASS and exits
-
 **-c XY**
 :   Creates new GRASS project (location) without coordinate reference system in specified GISDBASE
-
 **-c geofile**
 :   Creates new GRASS project in specified GISDBASE with coordinate reference system based on georeferenced file
-
 **-c EPSG:code**
 :   Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code
-
 **-c EPSG:code:datum\_trans**
 :   Creates new GRASS project in specified GISDBASE with coordinate reference system defined by EPSG code and datum transform parameters
-
 **-e**
 :   Exit after creation of project or mapset. Only with **-c** flag
-
 **-f**
 :   Forces removal of .gislock if exists (use with care!). Only with --text flag
-
 **--text**
 :   Indicates that Text-based User Interface should be used (skip welcome screen)
-
 **--gtext**
 :   Indicates that Text-based User Interface should be used (show welcome screen)
-
 **--gui**
 :   Indicates that Graphical User Interface (*[wxGUI](wxGUI.html)*) should be used
-
 **--config**
 :   Prints GRASS configuration parameters (options: arch, build, compiler, date, path, python\_path, revision, svn\_revision, version)
-
 **--exec EXECUTABLE**
 :   Execute GRASS module or script. The provided executable will be executed in a GRASS GIS non-interactive session.
-
 **--tmp-project**
 :   Run using a temporary project which is created based on the given coordinate reference system and deleted at the end of the execution (use with the --exec flag). The active mapset will be the PERMANENT mapset.
-
 **--tmp-mapset**
 :   Run using a temporary mapset which is created in the specified project and deleted at the end of the execution (use with the --exec flag).
-
 ### Parameters:
 
  
-
 **GISDBASE**
 :   Initial database directory which should be a fully qualified path (e.g., `/usr/local/share/grassdata`)
-
 **PROJECT**
 :   Initial project directory which is a subdirectory of GISDBASE (project was previously called location)
-
 **MAPSET**
 :   Initial mapset directory which is a subdirectory of PROJECT
  *Note*: These parameters must be specified in one of the following ways: 
-
 ```shell
     MAPSET
     PROJECT/MAPSET
     GISDBASE/PROJECT/MAPSET
 
 ```
-
 ## DESCRIPTION
 
 This command is used to launch GRASS GIS. It will parse the command line
@@ -96,7 +96,6 @@ switch back to the text user interface mode.
 ### Running non-interactive jobs
 
 The **--exec** flag can run an executable on path, GRASS module, or a script. All are executed as a subprocess and any additional arguments are passed to it. A script needs to be specified by full or relative path and on unix-likes systems, the script file must have its executable bit set. Calling the interpreter (e.g., `python`) and providing the script as a parameter is possible, too. When it is finished GRASS will automatically exit using the return code given by the subprocess. Although the execution itself is non-interactive (no GUI or shell), the subprocess itself can be interactive if that is what the user requires.
-
 ### Config flag
 
 The flag **--config option** prints GRASS GIS configuration and version parameters, with the options:
@@ -114,7 +113,6 @@ The flag **--config option** prints GRASS GIS configuration and version paramete
 ## SAMPLE DATA
 
 The GRASS GIS project provides several free sample geospatial datasets as ready-to-use projects. They are available to download at <https://grass.osgeo.org/download/sample-data/>. The "North Carolina data set" is a modern package of geospatial data from North Carolina (USA), and it includes raster, vector, LiDAR and satellite data. This is the most extensively used data set in the documentation and the examples throughout the user manual pages are based upon it.
-
 ## ENVIRONMENT VARIABLES
 
 A number of environment variables are available at GRASS startup to assist with automation and customization. Most users will not need to bother with these.
@@ -161,11 +159,9 @@ above variables to have GRASS use the Python 3.8 binaries instead.
    GRASS_PYTHON=python3.8
 
 ```
-
 ### Addon Path to Extra User Scripts
 
 This environment variable allows the user to extend the GRASS program search paths to include locally developed/installed GRASS modules or user scripts. 
-
 ```shell
    GRASS_ADDON_PATH=/usr/mytools
    GRASS_ADDON_PATH=/usr/mytools:/usr/local/othertools
@@ -178,7 +174,6 @@ environment.
 ### Addon Base for Extra Local GRASS Addon Modules
 
 This environment variable allows the user to extend the GRASS program search paths to include locally installed (see *[g.extension](g.extension.html)* for details) [GRASS Addon](https://grasswiki.osgeo.org/wiki/GRASS_AddOns) modules which are not distributed with the standard GRASS release. 
-
 ```shell
    GRASS_ADDON_BASE=/usr/grass-addons
 
@@ -194,75 +189,57 @@ Windows.
 ### HTML Browser Variable
 
 The GRASS\_HTML\_BROWSER environment variable allows the user to set the HTML web browser to use for displaying help pages.
-
 ## EXAMPLES
 
 The following are some examples of how you could start GRASS
 
  
-
 **grass**
 :   Start GRASS using the default user interface. The user will be prompted to choose the appropriate project and mapset.
-
 **grass --gui**
 :   Start GRASS using the graphical user interface. The user will be prompted to choose the appropriate project and mapset.
-
 **grass --text**
 :   Start GRASS using the text-based user interface. Appropriate project and mapset must be set by environmental variables (see examples below) otherwise taken from the last GRASS session.
  
-
 **grass --gtext**
 :   Start GRASS using the text-based user interface. The user will be prompted to choose the appropriate project and mapset.
-
 **grass $HOME/grassdata/spearfish70/user1**
 :   Start GRASS using the default user interface and automatically launch into the given mapset, bypassing the mapset selection menu.
-
 **grass --gui \-**
 :   Start GRASS using the graphical user interface and try to obtain the project and mapset from environment variables.
-
 **grass -c EPSG:4326 $HOME/grassdata/myproject**
 :   Creates a new GRASS project with EPSG code 4326 (latitude-longitude, WGS84) in the specified GISDBASE
-
 **grass -c EPSG:5514:3 $HOME/grassdata/myproject**
 :   Creates a new GRASS project with EPSG code 5514 (S-JTSK / Krovak East North \- SJTSK) with datum transformation parameters used in Czech Republic in the specified GISDBASE
-
 **grass -c XY $HOME/grassdata/gnomonic --exec g.proj -c proj4\='\+proj\=gnom \+lat\_0\=90 \+lon\_0\=-50'**
 :   Creates a new GRASS project from PROJ definition string (here: [gnomonic](https://proj4.org/operations/projections/gnom.html)) in the specified GISDBASE
-
 **grass -c myvector.shp $HOME/grassdata/myproject**
 :   Creates a new GRASS project based on georeferenced Shapefile
-
 **grass -c myraster.tif $HOME/grassdata/myproject**
 :   Creates a new GRASS project based on georeferenced GeoTIFF file
-
 ### Batch jobs with the exec interface
 
  Creating a new project based on a geodata file's projection (**-c**) and exit (**-e**) immediately: 
-
 ```shell
 grass -c elevation.tiff -e /path/to/grassdata/test1/
 
 ```
  Linking external raster data to PERMANENT Mapset: 
-
 ```shell
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=basins.tiff output=basins
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.external input=elevation.tiff output=elevation
 
 ```
  Get statistics for one raster map: 
-
 ```shell
 grass /path/to/grassdata/test1/PERMANENT/ --exec r.univar map=elevation
 
 ```
  Compare the rasters visually: 
-
 ```shell
 grass /path/to/grassdata/test1/PERMANENT/ --exec g.gui.mapswipe first=elevation second=basins
 
 ```
-
 #### Execution of shell and Python scripts instead of single commands
 
 A sequence of commands can be bundled in a script and executed using the exec interface.
@@ -274,7 +251,6 @@ grass /path/to/grassdata/test1/PERMANENT/ --exec sh test.sh
 
 ```
  A very simple bash script ("test.sh") may look like this: 
-
 ```shell
 #!/bin/bash
 
@@ -291,7 +267,6 @@ grass /path/to/grassdata/test1/PERMANENT/ --exec python test.py
 
 ```
  A very simple Python script ("test.py") may look like this: 
-
 ```shell
 #!/usr/bin/env python3
 
@@ -310,23 +285,19 @@ for vector in gs.list_strings(type='vector'):
     print(vector)
 
 ```
-
 #### Using temporary project
 
 Creating a new temporary project based on a georeferenced file's coordinate reference system (CRS) and simultaneously starting computation in a shell script: 
-
 ```shell
 grass --tmp-project elevation.tiff --exec test.sh
 
 ```
  The same, but using an EPSG code and a Python script: 
-
 ```shell
 grass --tmp-project EPSG:3358 --exec test.py
 
 ```
  Finally, for special cases, we can create an XY project without any CRS: 
-
 ```shell
 grass --tmp-project XY --exec test.py
 
@@ -341,12 +312,10 @@ grass --tmp-project EPSG:3358 --exec g.proj -p
 
 ```
  A temporary XY project with single command is useful, e.g. to show help text of a module: 
-
 ```shell
 grass --tmp-project XY --exec r.neighbors --help
 
 ```
-
 #### Using temporary mapset
 
 A single command can be executed, e.g., to examine properties of a project
@@ -357,30 +326,25 @@ grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec g.proj -p
 
 ```
  Computation in a Python script can be executed in the same way: 
-
 ```shell
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py
 
 ```
  Additional parameters are just passed to the script, so we can run the script with different sets of parameters (here 5, 8 and 3, 9\) in different temporary mapsets which is good for parallel processing. 
-
 ```shell
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py 5 8
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.py 3 9
 
 ```
  The same applies to Bash scripts (and other scripts supported on you platform): 
-
 ```shell
 grass --tmp-mapset /path/to/grassdata/nc_spm_08/ --exec processing.sh 5 8
 
 ```
  The temporary mapset is automatically deleted after computation, so the script is expected to export, link or otherwise preserve the output data before ending.
-
 #### Troubleshooting
 
 Importantly, to avoid an `"[Errno 8] Exec format error"` there must be a [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29) line at the top of the script (like `#!/bin/sh`, `#!/bin/bash`, or `#!/usr/bin/env python3`) indicating which interpreter to be used for the script. The script file must have its executable bit set.
-
 ## CAVEAT
 
 If you start GRASS using the *[wxGUI](wxGUI.html)* interface you must have a `python` command in your $PATH variable. That is, the command must be named `python` and not something like `python3.6`. Rarely some Python installations do not create a `python` command. In these cases you can override `python` by GRASS\_PYTHON environmental variable.
@@ -403,4 +367,23 @@ List of [GRASS environment variables](variables.html)
 Justin Hickey\
  Markus Neteler\
  Hamish Bowman\
- Martin Landa, Czech Technical University in Prague, Czech Republic 
+ Martin Landa, Czech Technical University in Prague, Czech Republic
+## SOURCE CODE
+
+Available at: [GRASS startup program source
+code](https://github.com/OSGeo/grass/tree/main/lib/init)
+([history](https://github.com/OSGeo/grass/commits/main/lib/init))
+
+Latest change: Tuesday Jan 07 11:21:29 2025 in commit:
+f1f5dfa35dd86f1cc8cf5bfc7ee91d3d17b937c1
+
+---
+
+[Main index](index.html) \| [Topics index](topics.html) \| [Keywords
+index](keywords.html) \| [Graphical index](graphical_index.html) \| [Full
+index](full_index.html)
+
+© 2003-2025 [GRASS Development Team](https://grass.osgeo.org), GRASS GIS
+8.4.1dev Reference Manual
+
+ 
