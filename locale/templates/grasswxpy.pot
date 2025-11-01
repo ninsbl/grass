@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-18 16:02+0000\n"
+"POT-Creation-Date: 2025-11-01 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -924,7 +924,7 @@ msgstr ""
 #: ../gui/wxpython/core/gconsole.py:765
 #: ../gui/wxpython/gmodeler/model_items.py:282
 #: ../gui/wxpython/gmodeler/model_items.py:387
-#: ../gui/wxpython/gmodeler/panels.py:323 ../gui/wxpython/gui_core/ghelp.py:262
+#: ../gui/wxpython/gmodeler/panels.py:323 ../gui/wxpython/gui_core/ghelp.py:263
 #: ../gui/wxpython/startup/guiutils.py:586
 msgid "unknown"
 msgstr ""
@@ -3906,8 +3906,8 @@ msgstr ""
 
 #: ../gui/wxpython/gmodeler/panels.py:1351
 #: ../gui/wxpython/gmodeler/panels.py:1401
-#: ../gui/wxpython/gui_core/ghelp.py:438 ../gui/wxpython/gui_core/ghelp.py:441
-#: ../gui/wxpython/gui_core/ghelp.py:513
+#: ../gui/wxpython/gui_core/ghelp.py:439 ../gui/wxpython/gui_core/ghelp.py:442
+#: ../gui/wxpython/gui_core/ghelp.py:514
 #: ../gui/wxpython/location_wizard/wizard.py:227
 msgid "Name"
 msgstr ""
@@ -4771,144 +4771,144 @@ msgstr ""
 msgid "Try to set up GRASS_ADDON_PATH or GRASS_ADDON_BASE variable."
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:64
+#: ../gui/wxpython/gui_core/ghelp.py:65
 msgid "About GRASS"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:80
+#: ../gui/wxpython/gui_core/ghelp.py:81
 msgid "Info"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:81
+#: ../gui/wxpython/gui_core/ghelp.py:82
 msgid "Copyright"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:82
+#: ../gui/wxpython/gui_core/ghelp.py:83
 msgid "License"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:83
+#: ../gui/wxpython/gui_core/ghelp.py:84
 msgid "Citation"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:84
+#: ../gui/wxpython/gui_core/ghelp.py:85
 msgid "Authors"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:85
+#: ../gui/wxpython/gui_core/ghelp.py:86
 msgid "Contributors"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:86
+#: ../gui/wxpython/gui_core/ghelp.py:87
 msgid "Extra contributors"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:87
+#: ../gui/wxpython/gui_core/ghelp.py:88
 msgid "Translators"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:88
+#: ../gui/wxpython/gui_core/ghelp.py:89
 msgid "Translation status"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:120 ../gui/wxpython/gui_core/ghelp.py:948
+#: ../gui/wxpython/gui_core/ghelp.py:121 ../gui/wxpython/gui_core/ghelp.py:949
 #: ../gui/wxpython/lmgr/frame.py:1462 ../gui/wxpython/main_window/frame.py:1618
 msgid "Unable to get GRASS version\n"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:134 ../gui/wxpython/lmgr/frame.py:1489
+#: ../gui/wxpython/gui_core/ghelp.py:135 ../gui/wxpython/lmgr/frame.py:1489
 #: ../gui/wxpython/main_window/frame.py:1645
 msgid "unknown version"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:147
+#: ../gui/wxpython/gui_core/ghelp.py:148
 msgid "Official GRASS site:"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:162
+#: ../gui/wxpython/gui_core/ghelp.py:163
 msgid "Code Revision"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:180
+#: ../gui/wxpython/gui_core/ghelp.py:181
 msgid "Build Date"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:248 ../gui/wxpython/gui_core/ghelp.py:519
+#: ../gui/wxpython/gui_core/ghelp.py:249 ../gui/wxpython/gui_core/ghelp.py:520
 msgid "Language"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:282 ../gui/wxpython/gui_core/ghelp.py:310
-#: ../gui/wxpython/gui_core/ghelp.py:363 ../gui/wxpython/gui_core/ghelp.py:431
-#: ../gui/wxpython/gui_core/ghelp.py:505 ../gui/wxpython/gui_core/ghelp.py:663
+#: ../gui/wxpython/gui_core/ghelp.py:283 ../gui/wxpython/gui_core/ghelp.py:311
+#: ../gui/wxpython/gui_core/ghelp.py:364 ../gui/wxpython/gui_core/ghelp.py:432
+#: ../gui/wxpython/gui_core/ghelp.py:506 ../gui/wxpython/gui_core/ghelp.py:664
 #, python-format
 msgid "%s file missing"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:336
+#: ../gui/wxpython/gui_core/ghelp.py:337
 #, python-brace-format
 msgid "Unable to provide citation suggestion, see GRASS website instead. The error was: {0}"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:416 ../gui/wxpython/gui_core/ghelp.py:488
+#: ../gui/wxpython/gui_core/ghelp.py:417 ../gui/wxpython/gui_core/ghelp.py:489
 #, python-format
 msgid "Error when reading file '%s'."
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:418 ../gui/wxpython/gui_core/ghelp.py:490
+#: ../gui/wxpython/gui_core/ghelp.py:419 ../gui/wxpython/gui_core/ghelp.py:491
 msgid "Lines:"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:438 ../gui/wxpython/gui_core/ghelp.py:443
+#: ../gui/wxpython/gui_core/ghelp.py:439 ../gui/wxpython/gui_core/ghelp.py:444
 msgid "Country"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:438 ../gui/wxpython/gui_core/ghelp.py:442
-#: ../gui/wxpython/gui_core/ghelp.py:516
+#: ../gui/wxpython/gui_core/ghelp.py:439 ../gui/wxpython/gui_core/ghelp.py:443
+#: ../gui/wxpython/gui_core/ghelp.py:517
 msgid "E-mail"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:444
+#: ../gui/wxpython/gui_core/ghelp.py:445
 msgid "OSGeo_ID"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:445
+#: ../gui/wxpython/gui_core/ghelp.py:446
 msgid "ORCID"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:522
+#: ../gui/wxpython/gui_core/ghelp.py:523
 msgid "Nation"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:565
+#: ../gui/wxpython/gui_core/ghelp.py:566
 #, python-format
 msgid "   %d translated"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:569 ../gui/wxpython/gui_core/ghelp.py:594
+#: ../gui/wxpython/gui_core/ghelp.py:570 ../gui/wxpython/gui_core/ghelp.py:595
 #, python-format
 msgid "   %d fuzzy"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:573 ../gui/wxpython/gui_core/ghelp.py:603
+#: ../gui/wxpython/gui_core/ghelp.py:574 ../gui/wxpython/gui_core/ghelp.py:604
 #, python-format
 msgid "   %d untranslated"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:585
+#: ../gui/wxpython/gui_core/ghelp.py:586
 #, python-format
 msgid "%d translated"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:660
+#: ../gui/wxpython/gui_core/ghelp.py:661
 #, python-format
 msgid "File <%s> not found"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:832
+#: ../gui/wxpython/gui_core/ghelp.py:833
 msgid "&Next"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/ghelp.py:834
+#: ../gui/wxpython/gui_core/ghelp.py:835
 msgid "&Previous"
 msgstr ""
 
@@ -14079,91 +14079,91 @@ msgstr ""
 #, python-format
 msgid ""
 "Temporary map '%s' with result was changed outside vector network analysis tool.\n"
-"Showed result may not correspond original analysis result."
+"Showed result may not correspond to original analysis result."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:234
+#: ../gui/wxpython/vnet/vnet_core.py:233
 msgid "Result changed outside"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:272
+#: ../gui/wxpython/vnet/vnet_core.py:271
 msgid "Map can be created only in current mapset"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:282 ../gui/wxpython/vnet/vnet_core.py:358
+#: ../gui/wxpython/vnet/vnet_core.py:281 ../gui/wxpython/vnet/vnet_core.py:357
 #, python-format
 msgid "Vector map %s already exists. Do you want to overwrite it?"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:285 ../gui/wxpython/vnet/vnet_core.py:361
+#: ../gui/wxpython/vnet/vnet_core.py:284 ../gui/wxpython/vnet/vnet_core.py:360
 msgid "Overwrite vector map"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:309
+#: ../gui/wxpython/vnet/vnet_core.py:308
 msgid "Creation of turntable failed."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:328
+#: ../gui/wxpython/vnet/vnet_core.py:327
 msgid "Vector map with analysis result does not exist."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:348
+#: ../gui/wxpython/vnet/vnet_core.py:347
 msgid "Map can be saved only to currently set mapset"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:434
+#: ../gui/wxpython/vnet/vnet_core.py:433
 #, python-format
 msgid "Please choose '%s' and '%s' point."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:640
+#: ../gui/wxpython/vnet/vnet_core.py:639
 #, python-brace-format
 msgid "Please choose '{0}' and '{1}' point."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:649
+#: ../gui/wxpython/vnet/vnet_core.py:648
 msgid "Please choose at least two points."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:931
+#: ../gui/wxpython/vnet/vnet_core.py:930
 #, python-format
 msgid ""
 "Input map '%s' for analysis was changed outside vector network analysis tool.\n"
 "Topology column may not correspond to changed situation."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:937
+#: ../gui/wxpython/vnet/vnet_core.py:935
 msgid "Input changed outside"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:1006
+#: ../gui/wxpython/vnet/vnet_core.py:1004
 #, python-format
 msgid ""
-"Temporary map %s  already exists.\n"
+"Temporary map %s already exists.\n"
 "Do you want to continue in analysis and overwrite it?"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:1031
+#: ../gui/wxpython/vnet/vnet_core.py:1029
 msgid "Unable to use ctypes. \n"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:1032
-#: ../gui/wxpython/vnet/vnet_core.py:1055
+#: ../gui/wxpython/vnet/vnet_core.py:1030
+#: ../gui/wxpython/vnet/vnet_core.py:1053
 msgid "Snapping mode can not be activated."
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:1065
+#: ../gui/wxpython/vnet/vnet_core.py:1063
 msgid "Do you really want to activate snapping and overwrite it?"
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:1074
+#: ../gui/wxpython/vnet/vnet_core.py:1072
 #, python-format
 msgid ""
 "Temporary map '%s' was changed outside vector analysis tool.\n"
 "Do you really want to activate snapping and overwrite it? "
 msgstr ""
 
-#: ../gui/wxpython/vnet/vnet_core.py:1079
+#: ../gui/wxpython/vnet/vnet_core.py:1076
 msgid "Overwrite map"
 msgstr ""
 
