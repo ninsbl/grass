@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-18 16:02+0000\n"
+"POT-Creation-Date: 2025-11-01 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4842,6 +4842,7 @@ msgid "Topology level required for drawing centroids for OGR layers"
 msgstr ""
 
 #: ../display/d.vect/legend.c:18 ../display/d.vect/main.c:367
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:290
 #, c-format
 msgid "Map name <%s> is too long"
 msgstr ""
@@ -9222,7 +9223,7 @@ msgid "Removing raster maps from group <%s>..."
 msgstr ""
 
 #: ../imagery/i.group/main.c:225
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:178
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:182
 #: ../imagery/i.pca/main.c:141 ../imagery/i.rectify/main.c:189
 #, c-format
 msgid "Group <%s> not found"
@@ -10710,99 +10711,112 @@ msgstr ""
 msgid "<%s=%s> unknown %s"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:183
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:156
+#: ../imagery/i.rectify/main.c:158 ../imagery/i.target/main.c:83
+#: ../vector/v.rectify/main.c:130
+#, c-format
+msgid "Group name <%s> is too long"
+msgstr ""
+
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:159
+#: ../imagery/i.rectify/main.c:162
+#, c-format
+msgid "Extension <%s> is too long"
+msgstr ""
+
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:187
 #, c-format
 msgid "Project (location): %s"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:184
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:188
 #: ../imagery/i.rectify/main.c:195
 #, c-format
 msgid "Mapset: %s"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:185
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:189
 #: ../imagery/i.rectify/main.c:196
 #, c-format
 msgid "Could not read REF file for group <%s>"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:190
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:194
 #: ../imagery/i.rectify/main.c:201
 #, c-format
 msgid "Group <%s> contains no raster maps; run i.group"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:243
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:247
 #: ../imagery/i.ortho.photo/i.ortho.transform/main.c:531
 #, c-format
 msgid "No camera reference file selected for group <%s>"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:247
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:251
 #: ../imagery/i.ortho.photo/i.ortho.transform/main.c:535
 #, c-format
 msgid "Bad format in camera file for group <%s>"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:254
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:258
 #: ../imagery/i.ortho.photo/i.ortho.transform/main.c:542
 #, c-format
 msgid "Bad format in initial exposure station file for group <%s>"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:288
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:295
 #: ../imagery/i.rectify/main.c:275
 #, c-format
 msgid "Extension <%s> is illegal"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:291
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:300
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:298
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:307
 #: ../imagery/i.rectify/main.c:278
 msgid "The following raster map already exists in"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:292
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:301
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:299
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:308
 #, c-format
 msgid "target project (location) %s, mapset %s:"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:295
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:304
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:302
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:311
 #: ../imagery/i.rectify/main.c:282
 msgid "Orthorectification cancelled."
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:319
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:326
 #: ../imagery/i.rectify/main.c:297
 msgid "Target resolution must be > 0, ignored"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:326
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:333
 #: ../imagery/i.rectify/main.c:304
 #, c-format
 msgid "Using region: N=%f S=%f, E=%f W=%f"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:335
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:342
 #, c-format
 msgid "No target elevation model selected for group <%s>"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:395
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:402
 #: ../imagery/i.rectify/main.c:326
 #, c-format
 msgid "Input raster map <%s> does not exist in group <%s>."
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:397
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:404
 #: ../imagery/i.rectify/main.c:328
 msgid "Try:"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:402
+#: ../imagery/i.ortho.photo/i.ortho.rectify/main.c:409
 #: ../imagery/i.rectify/main.c:333
 msgid "Exit!"
 msgstr ""
@@ -10933,10 +10947,14 @@ msgstr ""
 msgid "permission denied"
 msgstr ""
 
-#: ../imagery/i.ortho.photo/i.ortho.rectify/target.c:39
+#: ../imagery/i.ortho.photo/i.ortho.rectify/target.c:40
 #: ../imagery/i.ortho.photo/i.ortho.transform/main.c:120
 #: ../imagery/i.rectify/target.c:38
 msgid "Please run i.target for group "
+msgstr ""
+
+#: ../imagery/i.ortho.photo/i.ortho.rectify/target.c:42
+msgid "Internal error: error message too long"
 msgstr ""
 
 #: ../imagery/i.ortho.photo/i.ortho.target/main.c:51
@@ -11265,17 +11283,6 @@ msgstr ""
 
 #: ../imagery/i.rectify/main.c:140
 msgid "Use thin plate spline"
-msgstr ""
-
-#: ../imagery/i.rectify/main.c:158 ../imagery/i.target/main.c:83
-#: ../vector/v.rectify/main.c:130
-#, c-format
-msgid "Group name <%s> is too long"
-msgstr ""
-
-#: ../imagery/i.rectify/main.c:162
-#, c-format
-msgid "Extension <%s> is too long"
 msgstr ""
 
 #: ../imagery/i.rectify/main.c:183 ../vector/v.rectify/main.c:147
