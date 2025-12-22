@@ -363,19 +363,19 @@ RUN make -j $NUMTHREADS distclean || echo "nothing to clean" \
     && ./configure $GRASS_CONFIG \
     && make -j $NUMTHREADS \
     && make install && ldconfig \
-    && rm -rf /usr/local/grass85/demolocation \
-    && cp /usr/local/grass85/gui/wxpython/xml/module_items.xml module_items.xml
+    && find /usr/local/ -maxdepth 2 -type d -iwholename "*grass*/demolocation" -exec rm -rf '{}' \; \
+    && find /usr/local/ -iwholename "*grass*/gui/wxpython/xml/module_items.xml" -exec cp '{}' module_items.xml
 
 FROM build_grass AS build_grass_with_gui_built
 RUN echo "GUI selected, skipping GUI related cleanup"
 
 FROM build_grass AS build_grass_without_gui_built
 RUN echo "No GUI selected, removing GUI related files" \
-    && rm -rf /usr/local/grass85/fonts \
-    && rm -rf /usr/local/grass85/gui \
-    && rm -rf /usr/local/grass85/docs/html \
-    && rm -rf /usr/local/grass85/docs/mkdocs \
-    && rm -rf /usr/local/grass85/share
+    && find /usr/local/ -maxdepth 2 -type d -iwholename "*grass*/fonts" -exec rm -rf '{}' \; \
+    && find /usr/local/ -maxdepth 2 -type d -iwholename "*grass8*/gui" -exec rm -rf '{}' \; \
+    && find /usr/local/ -maxdepth 3 -type d -iwholename "*grass8*/docs/html" -exec rm -rf '{}' \; \
+    && find /usr/local/ -maxdepth 3 -type d -iwholename "*grass8*/docs/mkdocs" -exec rm -rf '{}' \; \
+    && find /usr/local/ -maxdepth 2 -type d -iwholename "*grass8*/share" -exec rm -rf '{}' \; \
 
 # hadolint ignore=DL3006
 FROM build_grass_${GUI}_gui_built AS build_grass_plugin
@@ -431,7 +431,7 @@ ARG BRANCH=main
 # Set with "$(git log -n 1 --pretty=format:'%h')"
 ARG REVISION=latest
 # Set with "$(head include/VERSION -n 3 | sed ':a;N;$!ba;s/\n/ /g')"
-ARG VERSION=8.5.dev
+ARG VERSION
 # Set with "$(date +'%Y-%m-%dT%H:%M:%S%:z')"
 ARG BUILD_DATE
 ARG TITLE="GRASS ${VERSION}"
@@ -480,12 +480,12 @@ ENV GRASS_SKIP_MAPSET_OWNER_CHECK=1 \
 
 # Copy GRASS, GDAL-GRASS-plugin and compiled dependencies from build image
 COPY --link --from=build_grass_plugin /usr/local /usr/local
-COPY --link --from=build_grass_plugin /src/grass_build/module_items.xml /usr/local/grass85/gui/wxpython/xml/module_items.xml
-# COPY --link --from=datum_grids /tmp/cdn.proj.org/*.tif /usr/share/proj/
-
 # Create generic GRASS lib name regardless of version number
-RUN ln -sf /usr/local/grass85 /usr/local/grass \
+RUN find /usr/local/ -maxdepth 1 -type d -name "grass*" -exec ln -s '{}' /usr/local/grass \; -quit \
     && ldconfig
+
+COPY --link --from=build_grass_plugin /src/grass_build/module_items.xml /usr/local/grass/gui/wxpython/xml/module_items.xml
+# COPY --link --from=datum_grids /tmp/cdn.proj.org/*.tif /usr/share/proj/
 
 # show GRASS, PROJ, GDAL etc versions
 RUN grass --tmp-project EPSG:4326 --exec g.version -rge && \
