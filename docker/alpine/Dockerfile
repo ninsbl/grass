@@ -177,7 +177,7 @@ RUN cmake -B build -DAUTOLOAD_DIR=/usr/lib/gdalplugins -DBUILD_TESTING=OFF && \
     cmake --install build
 
 # Get rid of version number here, restore in next stage via symbolic link
-RUN mv /usr/local/grass85 /usr/local/grass
+RUN find /usr/local/ -maxdepth 1 -type d -name "grass*" -exec mv '{}' /usr/local/grass \; -quit
 
 # Reduce the image size - Remove unnecessary grass files
 RUN cp /usr/local/grass/gui/wxpython/xml/module_items.xml module_items.xml; \
@@ -214,8 +214,7 @@ COPY docker/testdata/test_grass_session.py docker/alpine/grass_tests.sh /scripts
 
 # run GRASS python session and scan the test LAZ file; some cleanup
 # also show installed version
-RUN ln -sf /usr/local/grass /usr/local/grass85; \
-    rm -rf /tmp/grasstest_epsg_25832; \
+RUN rm -rf /tmp/grasstest_epsg_25832; \
     $SHELL /scripts/grass_tests.sh; \
     python /scripts/test_grass_session.py && rm -rf /tmp/grasstest_epsg_25832; \
     grass --tmp-project EPSG:25832 --exec r.in.pdal input="/tmp/simple.laz" output="count_1" method="n" resolution=1 -g \
