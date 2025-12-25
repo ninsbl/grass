@@ -177,17 +177,16 @@ RUN cmake -B build -DAUTOLOAD_DIR=/usr/lib/gdalplugins -DBUILD_TESTING=OFF && \
     cmake --install build
 
 # Get rid of version number here, restore in next stage via symbolic link
-RUN find /usr/local/ -maxdepth 1 -type d -name "grass*" -exec mv '{}' /usr/local/grass \; -quit
+RUN find /usr/local/ -maxdepth 1 -type d -name "grass*" -exec ln -s '{}' /usr/local/grass \; -quit
 
 # Reduce the image size - Remove unnecessary grass files
-RUN cp /usr/local/grass/gui/wxpython/xml/module_items.xml module_items.xml; \
-    rm -rf /usr/local/grass/demolocation; \
-    rm -rf /usr/local/grass/fonts; \
-    rm -rf /usr/local/grass/gui; \
-    rm -rf /usr/local/grass/share; \
-    mkdir -p /usr/local/grass/gui/wxpython/xml/; \
-    mv module_items.xml /usr/local/grass/gui/wxpython/xml/module_items.xml;
-
+RUN cp /usr/local/grass/gui/wxpython/xml/module_items.xml module_items.xml \
+    && rm -rf /usr/local/grass/demolocation \
+    && rm -rf /usr/local/grass/fonts \
+    && rm -rf /usr/local/grass/gui \
+    && rm -rf /usr/local/grass/share \
+    && mkdir -p /usr/local/grass/gui/wxpython/xml/ \
+    && mv module_items.xml /usr/local/grass/gui/wxpython/xml/module_items.xml
 
 FROM common AS grass
 
