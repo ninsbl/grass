@@ -1,7 +1,6 @@
-"""
-Extract functions for space time raster, 3d raster and vector datasets
+"""Extract functions for space time raster, 3d raster and vector datasets.
 
-(C) 2012-2013 by the GRASS Development Team
+(C) 2012-2026 by the GRASS Development Team
 This program is free software under the GNU General Public
 License (>=v2). Read the file COPYING that comes with GRASS
 for details.
@@ -44,7 +43,7 @@ def compile_new_map_name(
     semantic_label: str | None,
     time_suffix: str | None,
     dbif: SQLDatabaseInterfaceConnection,
-):
+) -> str:
     """Compile new map name with suffix and semantic label.
 
     :param sp: An open SpaceTimeDataSet (STDS)
@@ -65,7 +64,8 @@ def compile_new_map_name(
     old_map.select(dbif)
     if time_suffix == "gran":
         suffix = create_suffix_from_datetime(
-            old_map.temporal_extent.get_start_time(), sp.get_granularity()
+            old_map.temporal_extent.get_start_time(),
+            sp.get_granularity(),
         )
     else:
         suffix = create_time_suffix(old_map)
@@ -113,28 +113,28 @@ def replace_stds_names(expression: str, simple_name: str, full_name: str) -> str
 
 
 def extract_dataset(
-    input,
-    output,
-    type,
-    where,
-    expression,
-    base,
-    time_suffix,
+    input_stds: str,
+    output: str,
+    stds_type: str,
+    where: str,
+    expression: str,
+    base: str,
+    time_suffix: str,
     nprocs: int = 1,
     register_null: bool = False,
     layer: int = 1,
-    vtype="point,line,boundary,centroid,area,face",
+    vtype: str = "point,line,boundary,centroid,area,face",
 ) -> None:
-    """Extract a subset of a space time raster, raster3d or vector dataset
+    """Extract a subset of a space time raster, raster3d or vector dataset.
 
     A mapcalc expression can be provided to process the temporal extracted
     maps.
     Mapcalc expressions are supported for raster and raster3d maps.
 
-    :param input: The name of the input space time raster/raster3d dataset
+    :param input_stds: The name of the input space time raster/raster3d dataset
     :param output: The name of the extracted new space time raster/raster3d
                   dataset
-    :param type: The type of the dataset: "raster", "raster3d" or vector
+    :param stds_type: The type of the dataset: "raster", "raster3d" or vector
     :param where: The temporal SQL WHERE statement for subset extraction
     :param expression: The r(3).mapcalc expression or the v.extract where
                       statement
@@ -151,7 +151,6 @@ def extract_dataset(
     :param vtype: The feature type to be extracted for vector maps, default
            is point,line,boundary,centroid,area and face
     """
-
     # Check the parameters
     msgr = get_tgis_message_interface()
 
@@ -165,14 +164,14 @@ def extract_dataset(
 
     tgis_version = get_tgis_db_version()
 
-    sp = open_old_stds(input, type, dbif)
+    sp = open_old_stds(input_stds, stds_type, dbif)
     has_semantic_labels = bool(
-        tgis_version > 2 and type == "raster" and sp.metadata.semantic_labels
+        tgis_version > 2 and stds_type == "raster" and sp.metadata.semantic_labels,
     )
 
     # Check the new stds
-    new_sp = check_new_stds(output, type, dbif, gs.overwrite())
-    if type == "vector":
+    new_sp = check_new_stds(output, stds_type, dbif, gs.overwrite())
+    if stds_type == "vector":
         rows = sp.get_registered_maps("id,name,mapset,layer", where, "start_time", dbif)
     else:
         rows = sp.get_registered_maps(
@@ -183,222 +182,233 @@ def extract_dataset(
         )
 
     new_maps = {}
-    if rows:
-        num_rows = len(rows)
-
-        msgr.percent(0, num_rows, 1)
-
-        # Run the mapcalc expression
-        if expression:
-            count = 0
-            proc_count = 0
-            proc_list = []
-
-            # Make sure STRDS is in the expression referenced with fully qualified name
-            expression = replace_stds_names(
-                expression, sp.base.get_name(), sp.base.get_map_id()
-            )
-            for row in rows:
-                count += 1
-
-                if count % 10 == 0:
-                    msgr.percent(count, num_rows, 1)
-
-                map_name = compile_new_map_name(
-                    sp,
-                    base,
-                    count,
-                    row["id"],
-                    row["semantic_label"] if has_semantic_labels else None,
-                    time_suffix,
-                    dbif,
-                )
-
-                # We need to modify the r(3).mapcalc expression
-                if type != "vector":
-                    expr = expression
-                    expr = expr.replace(sp.base.get_map_id(), row["id"])
-                    expr = "%s = %s" % (map_name, expr)
-
-                    # We need to build the id
-                    map_id = AbstractMapDataset.build_id(map_name, mapset)
-                else:
-                    map_id = AbstractMapDataset.build_id(map_name, mapset, row["layer"])
-
-                new_map = sp.get_new_map_instance(map_id)
-
-                # Check if new map is in the temporal database
-                if new_map.is_in_db(dbif):
-                    if gs.overwrite():
-                        # Remove the existing temporal database entry
-                        new_map.delete(dbif)
-                        new_map = sp.get_new_map_instance(map_id)
-                    else:
-                        msgr.error(
-                            _(
-                                "Map <%s> is already in temporal database"
-                                ", use overwrite flag to overwrite"
-                            )
-                            % (new_map.get_map_id())
-                        )
-                        continue
-
-                # Add process to the process list
-                if type == "raster":
-                    msgr.verbose(_('Applying r.mapcalc expression: "%s"') % expr)
-                    proc_list.append(Process(target=run_mapcalc2d, args=(expr,)))
-                elif type == "raster3d":
-                    msgr.verbose(_('Applying r3.mapcalc expression: "%s"') % expr)
-                    proc_list.append(Process(target=run_mapcalc3d, args=(expr,)))
-                elif type == "vector":
-                    msgr.verbose(
-                        _('Applying v.extract where statement: "%s"') % expression
+    if not rows:
+        gs.warning(
+            _(
+                "Nothing found in the database for space time dataset <{name}> "
+                "(type: {element_type}): {detail}",
+            ).format(
+                name=input_stds,
+                element_type=stds_type,
+                detail=(
+                    _(
+                        "Dataset is empty or where clause is too constrained or "
+                        "incorrect",
                     )
-                    if row["layer"]:
-                        proc_list.append(
-                            Process(
-                                target=run_vector_extraction,
-                                args=(
-                                    row["name"] + "@" + row["mapset"],
-                                    map_name,
-                                    row["layer"],
-                                    vtype,
-                                    expression,
-                                ),
-                            )
-                        )
-                    else:
-                        proc_list.append(
-                            Process(
-                                target=run_vector_extraction,
-                                args=(
-                                    row["name"] + "@" + row["mapset"],
-                                    map_name,
-                                    layer,
-                                    vtype,
-                                    expression,
-                                ),
-                            )
-                        )
-
-                proc_list[proc_count].start()
-                proc_count += 1
-
-                # Join processes if the maximum number of processes are
-                # reached or the end of the loop is reached
-                if proc_count == nprocs or count == num_rows:
-                    proc_count = 0
-                    exitcodes = 0
-                    for proc in proc_list:
-                        proc.join()
-                        exitcodes += proc.exitcode
-                    if exitcodes != 0:
-                        dbif.close()
-                        msgr.fatal(_("Error in computation process"))
-
-                    # Empty process list
-                    proc_list = []
-
-                # Store the new maps
-                new_maps[row["id"]] = new_map
-
-        msgr.percent(0, num_rows, 1)
-
-        temporal_type, semantic_type, title, description = sp.get_initial_values()
-        new_sp = open_new_stds(
-            output,
-            type,
-            sp.get_temporal_type(),
-            title,
-            description,
-            semantic_type,
-            dbif,
-            gs.overwrite(),
+                    if where
+                    else _("Dataset is empty")
+                ),
+            ),
         )
+        dbif.close()
+        return
 
-        # collect empty maps to remove them
-        empty_maps = []
+    num_rows = len(rows)
 
-        # Register the maps in the database
-        count = 0
-        for row in rows:
-            count += 1
+    msgr.percent(0, num_rows, 1)
 
+    # Run the mapcalc expression
+    if expression:
+        proc_count = 0
+        proc_list = []
+
+        # Make sure STRDS is in the expression referenced with fully qualified name
+        expression = replace_stds_names(
+            expression,
+            sp.base.get_name(),
+            sp.base.get_map_id(),
+        )
+        for count, row in enumerate(rows, 1):
             if count % 10 == 0:
                 msgr.percent(count, num_rows, 1)
 
-            old_map = sp.get_new_map_instance(row["id"])
-            old_map.select(dbif)
+            map_name = compile_new_map_name(
+                sp,
+                base,
+                count,
+                row["id"],
+                row["semantic_label"] if has_semantic_labels else None,
+                time_suffix,
+                dbif,
+            )
 
-            if expression:
-                # Register the new maps
-                if row["id"] in new_maps:
-                    new_map = new_maps[row["id"]]
+            # We need to modify the r(3).mapcalc expression
+            if stds_type != "vector":
+                expr = expression
+                expr = expr.replace(sp.base.get_map_id(), row["id"])
+                expr = f"{map_name} = {expr}"
 
-                    # Read the raster map data
-                    new_map.load()
-
-                    # In case of a empty map continue, do not register empty
-                    # maps
-                    if type in {"raster", "raster3d"}:
-                        if (
-                            new_map.metadata.get_min() is None
-                            and new_map.metadata.get_max() is None
-                        ):
-                            if not register_null:
-                                empty_maps.append(new_map)
-                                continue
-                    elif type == "vector":
-                        if (
-                            new_map.metadata.get_number_of_primitives() == 0
-                            or new_map.metadata.get_number_of_primitives() is None
-                        ):
-                            if not register_null:
-                                empty_maps.append(new_map)
-                                continue
-
-                    # Set the time stamp
-                    new_map.set_temporal_extent(old_map.get_temporal_extent())
-
-                    if type == "raster":
-                        # Set the semantic label
-                        if has_semantic_labels:
-                            new_map.set_semantic_label(row["semantic_label"])
-
-                    # Insert map in temporal database
-                    new_map.insert(dbif)
-
-                    new_sp.register_map(new_map, dbif)
+                # We need to build the id
+                map_id = AbstractMapDataset.build_id(map_name, mapset)
             else:
-                new_sp.register_map(old_map, dbif)
+                map_id = AbstractMapDataset.build_id(map_name, mapset, row["layer"])
 
-        # Update the spatio-temporal extent and the metadata table entries
-        new_sp.update_from_registered_maps(dbif)
+            new_map = sp.get_new_map_instance(map_id)
 
-        msgr.percent(num_rows, num_rows, 1)
-
-        # Remove empty maps
-        if len(empty_maps) > 0:
-            names = ""
-            count = 0
-            for map in empty_maps:
-                if count == 0:
-                    names += "%s" % (map.get_name())
+            # Check if new map is in the temporal database
+            if new_map.is_in_db(dbif):
+                if gs.overwrite():
+                    # Remove the existing temporal database entry
+                    new_map.delete(dbif)
+                    new_map = sp.get_new_map_instance(map_id)
                 else:
-                    names += ",%s" % (map.get_name())
-                count += 1
-            if type == "raster":
-                gs.run_command(
-                    "g.remove", flags="f", type="raster", name=names, quiet=True
+                    msgr.error(
+                        _(
+                            "Map <%s> is already in temporal database"
+                            ", use overwrite flag to overwrite",
+                        )
+                        % (new_map.get_map_id()),
+                    )
+                    continue
+
+            # Add process to the process list
+            if stds_type == "raster":
+                msgr.verbose(_('Applying r.mapcalc expression: "%s"') % expr)
+                proc_list.append(Process(target=run_mapcalc2d, args=(expr,)))
+            elif stds_type == "raster3d":
+                msgr.verbose(_('Applying r3.mapcalc expression: "%s"') % expr)
+                proc_list.append(Process(target=run_mapcalc3d, args=(expr,)))
+            elif stds_type == "vector":
+                msgr.verbose(_('Applying v.extract where statement: "%s"') % expression)
+                if row["layer"]:
+                    proc_list.append(
+                        Process(
+                            target=run_vector_extraction,
+                            args=(
+                                row["name"] + "@" + row["mapset"],
+                                map_name,
+                                row["layer"],
+                                vtype,
+                                expression,
+                            ),
+                        ),
+                    )
+                else:
+                    proc_list.append(
+                        Process(
+                            target=run_vector_extraction,
+                            args=(
+                                row["name"] + "@" + row["mapset"],
+                                map_name,
+                                layer,
+                                vtype,
+                                expression,
+                            ),
+                        ),
+                    )
+
+            proc_list[proc_count].start()
+            proc_count += 1
+
+            # Join processes if the maximum number of processes are
+            # reached or the end of the loop is reached
+            if proc_count == nprocs or count == num_rows:
+                proc_count = 0
+                exitcodes = 0
+                for proc in proc_list:
+                    proc.join()
+                    exitcodes += proc.exitcode
+                if exitcodes != 0:
+                    dbif.close()
+                    msgr.fatal(_("Error in computation process"))
+
+                # Empty process list
+                proc_list = []
+
+            # Store the new maps
+            new_maps[row["id"]] = new_map
+
+    msgr.percent(0, num_rows, 1)
+
+    _temporal_type, semantic_type, title, description = sp.get_initial_values()
+    new_sp = open_new_stds(
+        output,
+        stds_type,
+        sp.get_temporal_type(),
+        title,
+        description,
+        semantic_type,
+        dbif,
+        gs.overwrite(),
+    )
+
+    # collect empty maps to remove them
+    empty_maps = []
+
+    # Register the maps in the database
+    for count, row in enumerate(rows, 1):
+        if count % 10 == 0:
+            msgr.percent(count, num_rows, 1)
+
+        old_map = sp.get_new_map_instance(row["id"])
+        old_map.select(dbif)
+
+        if not expression:
+            # Just register the source map in the new STRDS if no
+            # the expression option is not used
+            if not old_map.is_in_db():
+                # Maps that are not part of the temporal database
+                # in the current mapset need to be inserted first
+                old_map.insert(dbif)
+            new_sp.register_map(old_map, dbif)
+            continue
+
+        # Register the new maps
+        if row["id"] in new_maps:
+            new_map = new_maps[row["id"]]
+
+            # Read the raster map data
+            new_map.load()
+
+            # In case of a empty map continue, do not register empty
+            # maps
+            if not register_null and (
+                (
+                    stds_type in {"raster", "raster3d"}
+                    and new_map.metadata.get_min() is None
+                    and new_map.metadata.get_max() is None
                 )
-            elif type == "raster3d":
-                gs.run_command(
-                    "g.remove", flags="f", type="raster_3d", name=names, quiet=True
+                or (
+                    stds_type == "vector"
+                    and not new_map.metadata.get_number_of_primitives()
                 )
-            elif type == "vector":
-                gs.run_command(
-                    "g.remove", flags="f", type="vector", name=names, quiet=True
-                )
+            ):
+                empty_maps.append(new_map)
+                continue
+
+            # Set the time stamp
+            new_map.set_temporal_extent(old_map.get_temporal_extent())
+
+            if stds_type == "raster" and has_semantic_labels:
+                # Set the semantic label
+                new_map.set_semantic_label(row["semantic_label"])
+
+            # Insert map in temporal database
+            new_map.insert(dbif)
+            new_sp.register_map(new_map, dbif)
+
+    # Update the spatio-temporal extent and the metadata table entries
+    new_sp.update_from_registered_maps(dbif)
+
+    msgr.percent(num_rows, num_rows, 1)
+
+    # Remove empty maps
+    if len(empty_maps) > 0:
+        names = ""
+        count = 0
+        for map in empty_maps:
+            if count == 0:
+                names += str(map.get_name())
+            else:
+                names += f",{map.get_name()}"
+            count += 1
+        gs.run_command(
+            "g.remove",
+            flags="f",
+            type=stds_type.replace("_", ""),
+            name=names,
+            superquiet=True,
+        )
 
     dbif.close()
 
@@ -406,35 +416,48 @@ def extract_dataset(
 ###############################################################################
 
 
-def run_mapcalc2d(expr) -> None:
-    """Helper function to run r.mapcalc in parallel"""
+def run_mapcalc2d(expr: str) -> None:
+    """Run r.mapcalc in parallel."""
     try:
         gs.run_command(
-            "r.mapcalc", expression=expr, nprocs=1, overwrite=gs.overwrite(), quiet=True
+            "r.mapcalc",
+            expression=expr,
+            nprocs=1,
+            overwrite=gs.overwrite(),
+            quiet=True,
         )
     except CalledModuleError:
         sys.exit(1)
 
 
-def run_mapcalc3d(expr) -> None:
-    """Helper function to run r3.mapcalc in parallel"""
+def run_mapcalc3d(expr: str) -> None:
+    """Run r3.mapcalc in parallel."""
     try:
         gs.run_command(
-            "r3.mapcalc", expression=expr, overwrite=gs.overwrite(), quiet=True
+            "r3.mapcalc",
+            expression=expr,
+            overwrite=gs.overwrite(),
+            quiet=True,
         )
     except CalledModuleError:
         sys.exit(1)
 
 
-def run_vector_extraction(input, output, layer, type, where) -> None:
-    """Helper function to run r.mapcalc in parallel"""
+def run_vector_extraction(
+    input_map: str,
+    output: str,
+    layer: str | int,
+    feature_type: str,
+    where: str,
+) -> None:
+    """Run v.extract in parallel."""
     try:
         gs.run_command(
             "v.extract",
-            input=input,
+            input=input_map,
             output=output,
             layer=layer,
-            type=type,
+            type=feature_type,
             where=where,
             overwrite=gs.overwrite(),
             quiet=True,
