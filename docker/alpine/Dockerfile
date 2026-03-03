@@ -1,4 +1,4 @@
-FROM alpine:3.23@sha256:865b95f46d98cf867a156fe4a135ad3fe50d2056aa3f25ed31662dff6da4eb62 as common
+FROM alpine:3.23@sha256:865b95f46d98cf867a156fe4a135ad3fe50d2056aa3f25ed31662dff6da4eb62 AS common
 
 # Based on:
 # https://github.com/mundialis/docker-grass-gis/blob/master/Dockerfile
@@ -177,17 +177,16 @@ RUN cmake -B build -DAUTOLOAD_DIR=/usr/lib/gdalplugins -DBUILD_TESTING=OFF && \
     cmake --install build
 
 # Get rid of version number here, restore in next stage via symbolic link
-RUN mv /usr/local/grass85 /usr/local/grass
+RUN find /usr/local/ -maxdepth 1 -type d -name "grass*" -exec ln -s '{}' /usr/local/grass \; -quit
 
 # Reduce the image size - Remove unnecessary grass files
-RUN cp /usr/local/grass/gui/wxpython/xml/module_items.xml module_items.xml; \
-    rm -rf /usr/local/grass/demolocation; \
-    rm -rf /usr/local/grass/fonts; \
-    rm -rf /usr/local/grass/gui; \
-    rm -rf /usr/local/grass/share; \
-    mkdir -p /usr/local/grass/gui/wxpython/xml/; \
-    mv module_items.xml /usr/local/grass/gui/wxpython/xml/module_items.xml;
-
+RUN cp /usr/local/grass/gui/wxpython/xml/module_items.xml module_items.xml \
+    && rm -rf /usr/local/grass/demolocation \
+    && rm -rf /usr/local/grass/fonts \
+    && rm -rf /usr/local/grass/gui \
+    && rm -rf /usr/local/grass/share \
+    && mkdir -p /usr/local/grass/gui/wxpython/xml/ \
+    && mv module_items.xml /usr/local/grass/gui/wxpython/xml/module_items.xml
 
 FROM common AS grass
 
@@ -214,8 +213,7 @@ COPY docker/testdata/test_grass_session.py docker/alpine/grass_tests.sh /scripts
 
 # run GRASS python session and scan the test LAZ file; some cleanup
 # also show installed version
-RUN ln -sf /usr/local/grass /usr/local/grass85; \
-    rm -rf /tmp/grasstest_epsg_25832; \
+RUN rm -rf /tmp/grasstest_epsg_25832; \
     $SHELL /scripts/grass_tests.sh; \
     python /scripts/test_grass_session.py && rm -rf /tmp/grasstest_epsg_25832; \
     grass --tmp-project EPSG:25832 --exec r.in.pdal input="/tmp/simple.laz" output="count_1" method="n" resolution=1 -g \
