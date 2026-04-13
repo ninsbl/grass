@@ -1,5 +1,4 @@
-"""
-Functions for mathematical datetime operations
+"""Functions for mathematical datetime operations
 
 (C) 2011-2025 by the GRASS Development Team
 This program is free software under the GNU General Public
@@ -15,7 +14,7 @@ import copy
 from datetime import datetime, timedelta
 from typing import TypedDict
 
-from .core import get_tgis_message_interface
+from .core import get_tgis_message_interface, SQLDatabaseInterfaceConnection
 
 try:
     from dateutil import parser
@@ -51,7 +50,6 @@ def relative_time_to_time_delta_seconds(value: float) -> timedelta:
 
 def time_delta_to_relative_time_seconds(delta: timedelta) -> float:
     """Convert the time delta into a double value, representing seconds."""
-
     return float(delta.days * DAY_IN_SECONDS) + float(delta.seconds)
 
 
@@ -59,7 +57,9 @@ def time_delta_to_relative_time_seconds(delta: timedelta) -> float:
 
 
 def decrement_datetime_by_string(
-    mydate: datetime, increment: str, mult=1
+    mydate: datetime,
+    increment: str,
+    mult=1,
 ) -> datetime | None:
     """Return a new datetime object decremented with the provided
     relative dates specified as string.
@@ -126,7 +126,9 @@ def decrement_datetime_by_string(
 
 
 def increment_datetime_by_string(
-    mydate: datetime, increment: str, mult=1
+    mydate: datetime,
+    increment: str,
+    mult=1,
 ) -> datetime | None:
     """Return a new datetime object incremented with the provided
     relative dates specified as string.
@@ -200,7 +202,10 @@ def increment_datetime_by_string(
 
 
 def modify_datetime_by_string(
-    mydate: datetime, increment: str, mult=1, sign: int = 1
+    mydate: datetime,
+    increment: str,
+    mult=1,
+    sign: int = 1,
 ) -> datetime | None:
     """Return a new datetime object incremented with the provided
     relative dates specified as string.
@@ -263,7 +268,14 @@ def modify_datetime_by_string(
                 return None
 
         return modify_datetime(
-            mydate, years, months, weeks, days, hours, minutes, seconds
+            mydate,
+            years,
+            months,
+            weeks,
+            days,
+            hours,
+            minutes,
+            seconds,
         )
 
     return mydate
@@ -273,11 +285,18 @@ def modify_datetime_by_string(
 
 
 def modify_datetime(
-    mydate: datetime, years=0, months=0, weeks=0, days=0, hours=0, minutes=0, seconds=0
+    mydate: datetime,
+    years=0,
+    months=0,
+    weeks=0,
+    days=0,
+    hours=0,
+    minutes=0,
+    seconds=0,
 ) -> datetime:
     """Return a new datetime object incremented with the provided
-    relative dates and times"""
-
+    relative dates and times
+    """
     tdelta_seconds = timedelta(seconds=seconds)
     tdelta_minutes = timedelta(minutes=minutes)
     tdelta_hours = timedelta(hours=hours)
@@ -402,7 +421,6 @@ def adjust_datetime_to_granularity(mydate: datetime, granularity):
         datetime.datetime(2001, 8, 8, 0, 0)
 
     """
-
     if granularity:
         has_seconds = False
         has_minutes = False
@@ -493,7 +511,8 @@ def adjust_datetime_to_granularity(mydate: datetime, granularity):
 
 class datetime_delta(TypedDict):
     """Typed dictionary to return the accumulated delta in year, month, day,
-    hour, minute and second as well as max_days. At runtime, it is a plain dict."""
+    hour, minute and second as well as max_days. At runtime, it is a plain dict.
+    """
 
     year: int
     month: int
@@ -769,7 +788,6 @@ def check_datetime_string(time_string: str, use_dateutil: bool = True):
         datetime.datetime(2000, 1, 1, 10, 0, 0, 1)
 
     """
-
     global has_dateutil
 
     if has_dateutil and use_dateutil is True:
@@ -837,7 +855,6 @@ def string_to_datetime(time_string: str) -> datetime | None:
     :return: datetime object or None in case the string
              could not be converted
     """
-
     if not isinstance(time_string, str):
         return None
 
@@ -978,7 +995,7 @@ def create_time_suffix(mapp, end: bool = False) -> str:
     if end:
         end = mapp.temporal_extent.get_end_time()
         estring = end.isoformat().replace(":", "_").replace("-", "_")
-        return "{st}_{en}".format(st=sstring, en=estring)
+        return f"{sstring}_{estring}"
     return sstring
 
 
@@ -989,18 +1006,59 @@ def create_numeric_suffix(base, count: int, zeros: str) -> str:
     :param count: a number
     :param zeros: a string containing the expected number, coming from suffix option
                   like "%05"
+    :return: A string
+
+    .. code-block:: pycon
+
+        >>> import grass.temporal as tgis
+        >>> tgis.create_numeric_suffix("map", 1, "num%3")
+        'map_001'
     """
+    zero = "05"
     spli = zeros.split("%")
     if len(spli) == 2:
         suff = spli[1]
         if suff.isdigit():
-            zero = suff if int(suff[0]) == 0 else "0{nu}".format(nu=suff)
-        else:
-            zero = "05"
-    else:
-        zero = "05"
+            zero = suff if int(suff[0]) == 0 else f"0{suff}"
     s = "{ba}_{i:" + zero + "d}"
     return s.format(ba=base, i=count)
+
+
+def compile_new_map_name(
+    sp,
+    base: str,
+    count: int,
+    map_id: str,
+    semantic_label: str | None,
+    time_suffix: str | None,
+    dbif: SQLDatabaseInterfaceConnection,
+):
+    """Compile new map name with suffix and semantic label.
+
+    :param sp: An open SpaceTimeDataSet (STDS)
+    :param count: Running number of the map to be used as numeric suffix (if not time suffix)
+    :param map_id: Map ID to compile new map name for
+    :param time_suffix: Type of time suffix to use (or None)
+    :param dbif: initialized TGIS database interface
+    """
+    if semantic_label:
+        base = f"{base}_{semantic_label}"
+    if (
+        sp.get_temporal_type() != "absolute"
+        or not time_suffix
+        or time_suffix.startswith("num")
+    ):
+        return create_numeric_suffix(base, count, time_suffix)
+    old_map = sp.get_new_map_instance(map_id)
+    old_map.select(dbif)
+    if time_suffix == "gran":
+        suffix = create_suffix_from_datetime(
+            old_map.temporal_extent.get_start_time(),
+            sp.get_granularity(),
+        )
+    else:
+        suffix = create_time_suffix(old_map)
+    return f"{base}_{suffix}"
 
 
 if __name__ == "__main__":
