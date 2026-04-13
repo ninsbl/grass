@@ -1,5 +1,4 @@
-"""
-Extract functions for space time raster, 3d raster and vector datasets
+"""Extract functions for space time raster, 3d raster and vector datasets.
 
 (C) 2012-2013 by the GRASS Development Team
 This program is free software under the GNU General Public
@@ -26,50 +25,8 @@ from .core import (
     get_tgis_message_interface,
     get_tgis_db_version,
 )
-from .datetime_math import (
-    create_numeric_suffix,
-    create_suffix_from_datetime,
-    create_time_suffix,
-)
+from .datetime_math import compile_new_map_name
 from .open_stds import check_new_stds, open_new_stds, open_old_stds
-
-############################################################################
-
-
-def compile_new_map_name(
-    sp,
-    base: str,
-    count: int,
-    map_id: str,
-    semantic_label: str | None,
-    time_suffix: str | None,
-    dbif: SQLDatabaseInterfaceConnection,
-):
-    """Compile new map name with suffix and semantic label.
-
-    :param sp: An open SpaceTimeDataSet (STDS)
-    :param count: Running number of the map to be used as numeric suffix (if not time suffix)
-    :param map_id: Map ID to compile new map name for
-    :param time_suffix: Type of time suffix to use (or None)
-    :param dbif: initialized TGIS database interface
-    """
-    if semantic_label:
-        base = f"{base}_{semantic_label}"
-    if (
-        sp.get_temporal_type() != "absolute"
-        or not time_suffix
-        or time_suffix.startswith("num")
-    ):
-        return create_numeric_suffix(base, count, time_suffix)
-    old_map = sp.get_new_map_instance(map_id)
-    old_map.select(dbif)
-    if time_suffix == "gran":
-        suffix = create_suffix_from_datetime(
-            old_map.temporal_extent.get_start_time(), sp.get_granularity()
-        )
-    else:
-        suffix = create_time_suffix(old_map)
-    return f"{base}_{suffix}"
 
 
 def replace_stds_names(expression: str, simple_name: str, full_name: str) -> str:
@@ -125,7 +82,7 @@ def extract_dataset(
     layer: int = 1,
     vtype="point,line,boundary,centroid,area,face",
 ) -> None:
-    """Extract a subset of a space time raster, raster3d or vector dataset
+    """Extract a subset of a space time raster, raster3d or vector dataset.
 
     A mapcalc expression can be provided to process the temporal extracted
     maps.
@@ -151,7 +108,6 @@ def extract_dataset(
     :param vtype: The feature type to be extracted for vector maps, default
            is point,line,boundary,centroid,area and face
     """
-
     # Check the parameters
     msgr = get_tgis_message_interface()
 
@@ -167,7 +123,7 @@ def extract_dataset(
 
     sp = open_old_stds(input, type, dbif)
     has_semantic_labels = bool(
-        tgis_version > 2 and type == "raster" and sp.metadata.semantic_labels
+        tgis_version > 2 and type == "raster" and sp.metadata.semantic_labels,
     )
 
     # Check the new stds
@@ -196,7 +152,9 @@ def extract_dataset(
 
             # Make sure STRDS is in the expression referenced with fully qualified name
             expression = replace_stds_names(
-                expression, sp.base.get_name(), sp.base.get_map_id()
+                expression,
+                sp.base.get_name(),
+                sp.base.get_map_id(),
             )
             for row in rows:
                 count += 1
@@ -237,9 +195,9 @@ def extract_dataset(
                         msgr.error(
                             _(
                                 "Map <%s> is already in temporal database"
-                                ", use overwrite flag to overwrite"
+                                ", use overwrite flag to overwrite",
                             )
-                            % (new_map.get_map_id())
+                            % (new_map.get_map_id()),
                         )
                         continue
 
@@ -252,7 +210,7 @@ def extract_dataset(
                     proc_list.append(Process(target=run_mapcalc3d, args=(expr,)))
                 elif type == "vector":
                     msgr.verbose(
-                        _('Applying v.extract where statement: "%s"') % expression
+                        _('Applying v.extract where statement: "%s"') % expression,
                     )
                     if row["layer"]:
                         proc_list.append(
@@ -265,7 +223,7 @@ def extract_dataset(
                                     vtype,
                                     expression,
                                 ),
-                            )
+                            ),
                         )
                     else:
                         proc_list.append(
@@ -278,7 +236,7 @@ def extract_dataset(
                                     vtype,
                                     expression,
                                 ),
-                            )
+                            ),
                         )
 
                 proc_list[proc_count].start()
@@ -389,15 +347,27 @@ def extract_dataset(
                 count += 1
             if type == "raster":
                 gs.run_command(
-                    "g.remove", flags="f", type="raster", name=names, quiet=True
+                    "g.remove",
+                    flags="f",
+                    type="raster",
+                    name=names,
+                    quiet=True,
                 )
             elif type == "raster3d":
                 gs.run_command(
-                    "g.remove", flags="f", type="raster_3d", name=names, quiet=True
+                    "g.remove",
+                    flags="f",
+                    type="raster_3d",
+                    name=names,
+                    quiet=True,
                 )
             elif type == "vector":
                 gs.run_command(
-                    "g.remove", flags="f", type="vector", name=names, quiet=True
+                    "g.remove",
+                    flags="f",
+                    type="vector",
+                    name=names,
+                    quiet=True,
                 )
 
     dbif.close()
@@ -407,27 +377,34 @@ def extract_dataset(
 
 
 def run_mapcalc2d(expr) -> None:
-    """Helper function to run r.mapcalc in parallel"""
+    """Helper function to run r.mapcalc in parallel."""
     try:
         gs.run_command(
-            "r.mapcalc", expression=expr, nprocs=1, overwrite=gs.overwrite(), quiet=True
+            "r.mapcalc",
+            expression=expr,
+            nprocs=1,
+            overwrite=gs.overwrite(),
+            quiet=True,
         )
     except CalledModuleError:
         sys.exit(1)
 
 
 def run_mapcalc3d(expr) -> None:
-    """Helper function to run r3.mapcalc in parallel"""
+    """Helper function to run r3.mapcalc in parallel."""
     try:
         gs.run_command(
-            "r3.mapcalc", expression=expr, overwrite=gs.overwrite(), quiet=True
+            "r3.mapcalc",
+            expression=expr,
+            overwrite=gs.overwrite(),
+            quiet=True,
         )
     except CalledModuleError:
         sys.exit(1)
 
 
 def run_vector_extraction(input, output, layer, type, where) -> None:
-    """Helper function to run r.mapcalc in parallel"""
+    """Helper function to run r.mapcalc in parallel."""
     try:
         gs.run_command(
             "v.extract",

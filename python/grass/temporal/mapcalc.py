@@ -22,7 +22,8 @@ from .core import (
     get_current_mapset,
     get_tgis_message_interface,
 )
-from .datetime_math import time_delta_to_relative_time
+from .datetime_math import time_delta_to_relative_time, compile_new_map_name
+
 from .open_stds import check_new_stds, open_new_stds, open_old_stds
 
 _TEMPORAL_OPERATOR_SUPPORTS_ONLY_ABSOLUTE_TIME = (
@@ -38,6 +39,9 @@ def dataset_mapcalculator(
     expression,
     base,
     method,
+    semantic_label: str | None = None,
+    suffix: str = "num%03",
+    offset: int = 0,
     nprocs: int = 1,
     register_null: bool = False,
     spatial: bool = False,
@@ -92,6 +96,12 @@ def dataset_mapcalculator(
     :param base: The base name of the new created maps in case a
            mapcalc expression is provided
     :param method: The method to be used for temporal sampling
+    :param suffix: The method to be used for adding a suffix to the basename
+        Can be one of "gran", "time" or e.g. "num%05"
+    :param offset: Offset to be added to a numeric suffix
+    :param semantic_label: semantic_label to be assigned to the output maps
+         if None given, semantic_label of the first input map will be used
+         (None if the first input map has no semantic_label)
     :param nprocs: The number of parallel processes to be used for
            mapcalc processing
     :param register_null: Set this number True to register empty maps
@@ -108,6 +118,17 @@ def dataset_mapcalculator(
     input_name_list = inputs.split(",")
 
     first_input = open_old_stds(input_name_list[0], type, dbif)
+
+    # Check if requested suffix type is supported by input
+    if suffix == "gran" and not first_input.get_granularity():
+        msgr.fatal(
+            _("Suffix of type <gran> requested but first input has no granularity.")
+        )
+    if suffix in {"gran", "time"} and not first_input.is_time_absolute():
+        msgr.fatal(
+            _("Suffix of type <%s> requested, but first input has no absolute time.")
+            % suffix
+        )
 
     # skip sampling when only one dataset specified (with different
     # band filters)
@@ -147,12 +168,12 @@ def dataset_mapcalculator(
 
         has_samples = False
         for dataset in input_list:
-            list = dataset.sample_by_dataset(
+            stds_list = dataset.sample_by_dataset(
                 stds=first_input, method=method, spatial=spatial, dbif=dbif
             )
 
             # In case samples are not found
-            if not list or len(list) == 0:
+            if not stds_list or len(stds_list) == 0:
                 dbif.close()
                 msgr.message(_("No samples found for map calculation"))
                 return 0
@@ -160,7 +181,7 @@ def dataset_mapcalculator(
             # The fist entries are the samples
             map_name_list = []
             if not has_samples:
-                for entry in list:
+                for entry in stds_list:
                     granule = entry["granule"]
                     # Do not consider gaps
                     if granule.get_id() is None:
@@ -172,7 +193,7 @@ def dataset_mapcalculator(
                 has_samples = True
 
             map_name_list = []
-            for entry in list:
+            for entry in stds_list:
                 maplist = entry["samples"]
                 granule = entry["granule"]
 
@@ -202,9 +223,9 @@ def dataset_mapcalculator(
     else:
         input_list.insert(0, first_input)
         for dataset in input_list:
-            list = dataset.get_registered_maps_as_objects(dbif=dbif)
+            map_list = dataset.get_registered_maps_as_objects(dbif=dbif)
 
-            if list is None or len(list) < 1:
+            if map_list is None or len(map_list) < 1:
                 dbif.close()
                 msgr.message(
                     _("No maps registered in input dataset <{}>").format(
@@ -214,9 +235,9 @@ def dataset_mapcalculator(
                 return 0
 
             map_name_list = []
-            for map in list:
-                map_name_list.append(map.get_name())
-                sample_map_list.append(map)
+            for raster_map in map_list:
+                map_name_list.append(raster_map.get_name())
+                sample_map_list.append(raster_map)
 
             # Attach the map names
             map_matrix.append(copy.copy(map_name_list))
@@ -240,11 +261,23 @@ def dataset_mapcalculator(
         # For all samples
         for i in range(num):
             count += 1
+            offset += 1
             msgr.percent(count, num, 10)
 
+            # Get semantic_label
+            semantic_label = (
+                semantic_label or sample_map_list[i].metadata.get_semantic_label()
+            )
+
             # Create the r.mapcalc statement for the current time step
-            map_name = "{base}_{suffix}".format(
-                base=base, suffix=gs.get_num_suffix(count, num)
+            map_name = compile_new_map_name(
+                first_input,
+                base,
+                offset,
+                sample_map_list[i].get_id(),
+                semantic_label,
+                suffix,
+                dbif,
             )
             # Remove spaces and new lines
             expr = expression.replace(" ", "")
@@ -266,7 +299,7 @@ def dataset_mapcalculator(
 
             # Create the new map id and check if the map is already
             # in the database
-            map_id = map_name + "@" + mapset
+            map_id = f"{map_name}@{mapset}"
 
             new_map = first_input.get_new_map_instance(map_id)
 
@@ -294,7 +327,6 @@ def dataset_mapcalculator(
                 new_map.set_relative_time(start, end, unit)
 
             # Set the semantic label
-            semantic_label = sample_map_list[i].metadata.get_semantic_label()
             if semantic_label is not None:
                 new_map.set_semantic_label(semantic_label)
 

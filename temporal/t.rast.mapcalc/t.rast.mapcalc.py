@@ -50,8 +50,25 @@
 # %option G_OPT_R_BASENAME_OUTPUT
 # % key: basename
 # % label: Basename for output raster maps
-# % description: A numerical suffix separated by an underscore will be attached to create a unique identifier
+# % description: A suffix separated by an underscore will be attached to create a unique identifier
 # % required: yes
+# %end
+
+# %option G_OPT_T_SUFFIX
+# % key: suffix
+# % description: Type of suffix to be attached the base name to create a unique identifier
+# % required: yes
+# % multiple: no
+# % answer: num%03
+# %end
+
+# %option
+# % key: offset
+# % type: integer
+# % description: Offset added to numeric suffix of produced maps
+# % required: no
+# % multiple: no
+# % answer: 0
 # %end
 
 # %option
@@ -75,43 +92,29 @@
 
 import grass.script as gs
 
-############################################################################
 
-
-def main():
+def main() -> None:
+    """Run dataset_mapcalculator with options and flags."""
     # lazy imports
-    import grass.temporal as tgis
-
-    # Get the options
-    inputs = options["inputs"]
-    output = options["output"]
-    expression = options["expression"]
-    base = options["basename"]
-    method = options["method"]
-    nprocs = int(options["nprocs"])
-    register_null = flags["n"]
-    spatial = flags["s"]
-
-    # Create the method list
-    method = method.split(",")
+    import grass.temporal as tgis  # noqa: PLC0415
 
     # Make sure the temporal database exists
     tgis.init()
 
     tgis.dataset_mapcalculator(
-        inputs,
-        output,
+        options["inputs"],
+        options["output"],
         "raster",
-        expression,
-        base,
-        method,
-        nprocs,
-        register_null,
-        spatial,
+        options["expression"],
+        options["basename"],
+        method=options["method"].split(","),
+        suffix=options["suffix"],
+        offset=int(options["offset"]),
+        nprocs=int(options["nprocs"]),
+        register_null=flags["n"],
+        spatial=flags["s"],
     )
 
-
-###############################################################################
 
 if __name__ == "__main__":
     options, flags = gs.parser()
