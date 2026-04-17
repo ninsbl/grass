@@ -435,14 +435,13 @@ def run_mapcalc2d(expr: str) -> None:
 def run_mapcalc3d(expr: str) -> None:
     """Run r3.mapcalc on a single core in quiet mode.
 
-    Wrapper function setting nprocs to 1 and verbosity to quiet. It is
-    intended to be run in parallel in `extract_dataset`.
+    Wrapper function setting verbosity to quiet. It is intended to be
+    run in parallel in `extract_dataset`.
     """
     try:
         gs.run_command(
             "r3.mapcalc",
             expression=expr,
-            nprocs=1,
             overwrite=gs.overwrite(),
             quiet=True,
         )
