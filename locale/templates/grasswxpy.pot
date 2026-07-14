@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-27 15:58+0000\n"
+"POT-Creation-Date: 2026-07-11 16:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4065,7 +4065,7 @@ msgstr ""
 
 #: ../gui/wxpython/gmodeler/panels.py:1743
 #: ../gui/wxpython/gui_core/pyedit.py:401
-#: ../gui/wxpython/gui_core/pyedit.py:472
+#: ../gui/wxpython/gui_core/pyedit.py:470
 msgid "Python script (*.py)|*.py"
 msgstr ""
 
@@ -5802,60 +5802,60 @@ msgstr ""
 msgid " Unable to launch Python script."
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:470
+#: ../gui/wxpython/gui_core/pyedit.py:468
 msgid "Open file"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:512
+#: ../gui/wxpython/gui_core/pyedit.py:508
 #, python-brace-format
 msgid "File <{path}> doesn't exist. It was probably moved or deleted."
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:580
+#: ../gui/wxpython/gui_core/pyedit.py:576
 msgid "Replace the content by the template?"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:582
+#: ../gui/wxpython/gui_core/pyedit.py:578
 msgid "Replace the content by the example?"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:584
+#: ../gui/wxpython/gui_core/pyedit.py:580
 msgid "Replace the current content by the file content?"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:591
+#: ../gui/wxpython/gui_core/pyedit.py:587
 msgid "Replace content"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:604
+#: ../gui/wxpython/gui_core/pyedit.py:600
 msgid "Set parameters for the script"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:606
+#: ../gui/wxpython/gui_core/pyedit.py:602
 msgid "Specify command line parameters for the script separated by spaces:"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:659
+#: ../gui/wxpython/gui_core/pyedit.py:655
 msgid "Open (Ctrl+O)"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:660
+#: ../gui/wxpython/gui_core/pyedit.py:656
 msgid "Save (Ctrl+S)"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:661
+#: ../gui/wxpython/gui_core/pyedit.py:657
 msgid "Run (Ctrl+R)"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:663
+#: ../gui/wxpython/gui_core/pyedit.py:659
 msgid "Activate overwrite"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:664
+#: ../gui/wxpython/gui_core/pyedit.py:660
 msgid "Deactivate overwrite"
 msgstr ""
 
-#: ../gui/wxpython/gui_core/pyedit.py:883
+#: ../gui/wxpython/gui_core/pyedit.py:879
 msgid "Simple Python Editor"
 msgstr ""
 
