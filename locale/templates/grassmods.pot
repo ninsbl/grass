@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-27 15:58+0000\n"
+"POT-Creation-Date: 2026-08-22 15:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4103,6 +4103,7 @@ msgstr ""
 msgid "Get text color from cell color value"
 msgstr ""
 
+#. GTC Count of window rows
 #. GTC Count of raster rows
 #. GTC Count of window rows
 #: ../display/d.rast.num/main.c:211 ../raster/r.thin/io.c:110
@@ -4154,6 +4155,7 @@ msgstr ""
 #: ../locale/scriptstrings/t.list_to_translate.c:8
 #: ../locale/scriptstrings/t.list_to_translate.c:14
 #: ../locale/scriptstrings/t.list_to_translate.c:15
+#: ../locale/scriptstrings/t.list_to_translate.c:19
 #: ../locale/scriptstrings/t.rast.list_to_translate.c:10
 #: ../locale/scriptstrings/t.rast.list_to_translate.c:11
 #: ../locale/scriptstrings/t.rast.neighbors_to_translate.c:7
@@ -5362,8 +5364,7 @@ msgstr ""
 #: ../scripts/r.buffer.lowmem/r.buffer.lowmem.py:85
 #: ../scripts/r.fillnulls/r.fillnulls.py:152 ../scripts/r.grow/r.grow.py:124
 #: ../scripts/r.mask/r.mask.py:151 ../scripts/r.pack/r.pack.py:74
-#: ../scripts/r.reclass.area/r.reclass.area.py:101
-#: ../scripts/r.reclass.area/r.reclass.area.py:222 ../scripts/r.rgb/r.rgb.py:55
+#: ../scripts/r.reclass.area/r.reclass.area.py:345 ../scripts/r.rgb/r.rgb.py:55
 #: ../scripts/v.rast.stats/v.rast.stats.py:154 ../vector/v.colors/main.c:317
 #: ../vector/v.vol.rst/main.c:604
 #, c-format, python-format
@@ -14533,30 +14534,52 @@ msgid "aggregation"
 msgstr ""
 
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:5
-msgid "Value option that sets the area size limit (in hectares)"
+msgid "Value option that sets the area size limit (in hectares) (deprecated)"
 msgstr ""
 
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:6
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:8
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:10
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:12
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:14
 #: ../locale/scriptstrings/v.to.lines_to_translate.c:8
 msgid "Area"
 msgstr ""
 
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:7
-msgid "Lesser or greater than specified value"
+msgid "Keep only areas lesser or greater than specified value (deprecated)"
 msgstr ""
 
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:9
-msgid "Method used for reclassification"
+msgid "Value for the lower area size limit (in hectares). Pixel clumps with areas below this value are removed."
 msgstr ""
 
 #: ../locale/scriptstrings/r.reclass.area_to_translate.c:11
+msgid "Value for the upper area size limit (in hectares). Pixel clumps with areas above this value are removed."
+msgstr ""
+
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:13
+msgid "Method used for area size filtering"
+msgstr ""
+
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:15
 msgid "Input map is clumped"
 msgstr ""
 
-#: ../locale/scriptstrings/r.reclass.area_to_translate.c:12
-msgid "Clumps including diagonal neighbors"
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:16
+msgid "Generate clumps including diagonal neighbors"
+msgstr ""
+
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:17
+msgid "Invert filter (remove clumps larger than lower and smaller than upper)"
+msgstr ""
+
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:18
+msgid "Apply lower area threshold as \"minsize\" during clumping"
+msgstr ""
+
+#: ../locale/scriptstrings/r.reclass.area_to_translate.c:19
+msgid "Output vector map, do not convert back to raster (only for method 'rmarea')"
 msgstr ""
 
 #: ../locale/scriptstrings/r.rgb_to_translate.c:1
@@ -15090,8 +15113,8 @@ msgstr ""
 
 #: ../locale/scriptstrings/t.list_to_translate.c:11
 #: ../locale/scriptstrings/t.list_to_translate.c:17
-#: ../locale/scriptstrings/t.list_to_translate.c:19
 #: ../locale/scriptstrings/t.list_to_translate.c:21
+#: ../locale/scriptstrings/t.list_to_translate.c:23
 #: ../locale/scriptstrings/t.rast.list_to_translate.c:8
 #: ../locale/scriptstrings/t.rast.list_to_translate.c:15
 #: ../locale/scriptstrings/t.rast.list_to_translate.c:17
@@ -15142,6 +15165,10 @@ msgid "plain;Plain text output;line;Comma separated list of dataset names;json;J
 msgstr ""
 
 #: ../locale/scriptstrings/t.list_to_translate.c:18
+msgid "Name of mapsets to list ('.' for current, '*' for all mapsets)"
+msgstr ""
+
+#: ../locale/scriptstrings/t.list_to_translate.c:20
 #: ../locale/scriptstrings/t.rast.list_to_translate.c:16
 #: ../locale/scriptstrings/t.rast.univar_to_translate.c:12
 #: ../locale/scriptstrings/t.rast3d.list_to_translate.c:15
@@ -15152,7 +15179,7 @@ msgstr ""
 msgid "Field separator character between the output columns"
 msgstr ""
 
-#: ../locale/scriptstrings/t.list_to_translate.c:20
+#: ../locale/scriptstrings/t.list_to_translate.c:22
 #: ../locale/scriptstrings/t.sample_to_translate.c:11
 msgid "Print the column names as first row"
 msgstr ""
@@ -29917,6 +29944,7 @@ msgstr ""
 msgid "Input raster must be of type CELL."
 msgstr ""
 
+#. GTC Count of window columns
 #. GTC Count of raster columns
 #. GTC Count of window columns
 #: ../raster/r.thin/io.c:112 ../raster/r.thin/io.c:188
@@ -34877,63 +34905,58 @@ msgstr ""
 msgid "azimuth must be between 0 and 360"
 msgstr ""
 
-#: ../scripts/r.reclass.area/r.reclass.area.py:97
-#: ../scripts/r.reclass.area/r.reclass.area.py:214
-msgid "xy-locations are not supported"
+#: ../scripts/r.reclass.area/r.reclass.area.py:151
+msgid ""
+"xy-locations are not supported\n"
+"Need projected data with grids in meters"
 msgstr ""
 
-#: ../scripts/r.reclass.area/r.reclass.area.py:98
-msgid "Need projected data with grids in meters"
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:104
-msgid "flags c and d are mutually exclusive"
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:114
-#, python-format
-msgid "Temporary raster map <%s> exists"
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:117
-msgid "Generating a clumped raster file including diagonal neighbors..."
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:121
-msgid "Generating a clumped raster file ..."
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:127
-#, python-format
-msgid "Generating a reclass map with area size less than or equal to %f hectares..."
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:135
-#, python-format
-msgid "Generating a reclass map with area size greater than or equal to %f hectares..."
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:166
-#, python-format
-msgid "No areas of size less than or equal to %f hectares found."
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:170
-#, python-format
-msgid "No areas of size greater than or equal to %f hectares found."
-msgstr ""
-
-#: ../scripts/r.reclass.area/r.reclass.area.py:212
+#: ../scripts/r.reclass.area/r.reclass.area.py:157
 msgid "Latitude-longitude locations are not supported"
 msgstr ""
 
-#: ../scripts/r.reclass.area/r.reclass.area.py:219
-msgid "You have to specify mode='lesser' with method='rmarea'"
+#: ../scripts/r.reclass.area/r.reclass.area.py:159
+msgid "xy-locations are not supported"
 msgstr ""
 
-#: ../scripts/r.reclass.area/r.reclass.area.py:229
+#: ../scripts/r.reclass.area/r.reclass.area.py:177
+msgid "Generating a clumped raster file"
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:179
+msgid " including diagonal neighbors"
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:181
 #, python-format
-msgid "Generating output raster map <%s>..."
+msgid " with minimum %s pixels"
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:204
+msgid "Generating a reclass map with area size"
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:209
+#, python-format
+msgid " larger than or equal to %f hectares..."
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:217
+#, python-format
+msgid " smaller than or equal to %f hectares..."
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:257
+msgid "No areas of size "
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:275
+#, python-format
+msgid "Raster map <%s> is not of type 'CELL'. Results may not be as expected."
+msgstr ""
+
+#: ../scripts/r.reclass.area/r.reclass.area.py:354
+msgid "Options <mode> and <value> are deprecated. Use 'lower' and/or 'upper'."
 msgstr ""
 
 #: ../scripts/r.semantic.label/r.semantic.label.py:67
