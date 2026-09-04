@@ -3,10 +3,8 @@
 
    \brief Raster library - Get raster row
 
-   (C) 2003-2009 by the GRASS Development Team
-
-   This program is free software under the GNU General Public License
-   (>=v2).  Read the file COPYING that comes with GRASS for details.
+   SPDX-FileCopyrightText: 2003-2009 GRASS Development Team
+   SPDX-License-Identifier: GPL-2.0-or-later
 
    \author Original author CERL
  */
@@ -207,26 +205,33 @@ static void read_data_gdal(int fd, int row, unsigned char *data_buf,
     struct fileinfo *fcb = &R__.fileinfo[fd];
     unsigned char *buf;
     CPLErr err;
+    /* Restrict the read to the native columns actually needed by the
+     * region (except for hflip'ed maps). */
+    int col_off = 0;
+    int ncols = fcb->cellhd.cols;
+
+    if (!fcb->gdal->hflip && fcb->gdal_min_col >= 0) {
+        col_off = fcb->gdal_min_col;
+        ncols = fcb->gdal_max_col - fcb->gdal_min_col + 1;
+    }
 
     *nbytes = fcb->nbytes;
 
     if (fcb->gdal->vflip)
         row = fcb->cellhd.rows - 1 - row;
 
-    buf = fcb->gdal->hflip ? G_malloc(fcb->cellhd.cols * fcb->cur_nbytes)
-                           : data_buf;
+    buf = fcb->gdal->hflip ? G_malloc((size_t)ncols * fcb->cur_nbytes)
+                           : data_buf + (size_t)col_off * fcb->cur_nbytes;
 
-    err =
-        Rast_gdal_raster_IO(fcb->gdal->band, GF_Read, 0, row, fcb->cellhd.cols,
-                            1, buf, fcb->cellhd.cols, 1, fcb->gdal->type, 0, 0);
+    err = Rast_gdal_raster_IO(fcb->gdal->band, GF_Read, col_off, row, ncols, 1,
+                              buf, ncols, 1, fcb->gdal->type, 0, 0);
 
     if (fcb->gdal->hflip) {
         int i;
 
-        for (i = 0; i < fcb->cellhd.cols; i++)
+        for (i = 0; i < ncols; i++)
             memcpy(data_buf + i * fcb->cur_nbytes,
-                   buf + (fcb->cellhd.cols - 1 - i) * fcb->cur_nbytes,
-                   fcb->cur_nbytes);
+                   buf + (ncols - 1 - i) * fcb->cur_nbytes, fcb->cur_nbytes);
         G_free(buf);
     }
 
