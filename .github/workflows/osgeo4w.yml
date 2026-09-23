@@ -64,7 +64,6 @@ jobs:
             libsystre
             libtre
             libwinpthread-git
-            openblas
             pcre
             pkgconf
             toolchain

@@ -27,6 +27,7 @@ import platform
 import uuid
 import random
 import string
+import sys
 
 from pathlib import Path
 from typing import TYPE_CHECKING, AnyStr, TypeVar, cast, overload
@@ -123,6 +124,24 @@ def resolve_nprocs(nprocs: int | str) -> int:
     if n == 0:
         return available
     return max(1, available + n)
+
+
+def get_fork_context():
+    """Return a suitable :mod:`multiprocessing` fork context.
+
+    The GRASS Python APIs does not yet support `spawn` and `forkserver`
+    start-methods for multiprocessing, which became new default in
+    Python 3.14. This function provides a temporary workaround that
+    switches back to `fork` on Linux until the new default methods are
+    supported.
+    The function should be removed as soon as the GRASS Python APIs support
+    the new default start-methods.
+    """
+    import multiprocessing
+
+    if sys.platform != "darwin" and "fork" in multiprocessing.get_all_start_methods():
+        return multiprocessing.get_context("fork")
+    return multiprocessing.get_context()
 
 
 def diff_files(
