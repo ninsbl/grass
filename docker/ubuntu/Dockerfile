@@ -4,14 +4,14 @@
 #       Changes to this file must be copied over to the other file.
 ARG GUI=without
 
-FROM ubuntu:26.04@sha256:61ebaa5cc23ca45450db85eac015435199ec569e28ec222ea13f2aed2110b8a6 AS common_start
+FROM ubuntu:26.04@sha256:88a381d5b5eeb2b35d3ad70925a362c37ce569daf43ede89ff818ec20e4d3794 AS common_start
 
 ARG BASE_NAME="ubuntu:26.04"
 ARG PYTHON_VERSION=3.14
 # renovate: datasource=github-tags depName=libgeos/geos
 ARG GEOS_VERSION=3.15.0
 # renovate: datasource=github-tags depName=OSGeo/PROJ
-ARG PROJ_VERSION=9.8.1
+ARG PROJ_VERSION=9.9.0
 # renovate: datasource=github-tags depName=OSGeo/gdal
 ARG GDAL_VERSION=3.13.3
 # renovate: datasource=github-tags depName=PDAL/PDAL
