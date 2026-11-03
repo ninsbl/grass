@@ -38,22 +38,24 @@
 
 
 import grass.script as gs
+from grass.tools import Tools
 
 ############################################################################
 
 
-def copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps):
-    """Copy the maps if requested and register them in the new dataset"""
+def copy_maps_and_register(output_stds, old_maps, maptype, element, copy_maps):
+    """Copy the maps if requested and register them in the new dataset."""
     import grass.temporal as tgis
 
-    dbif = new_sp.dbif
-    mapset = new_sp.get_mapset()
+    tools = Tools()
+
+    dbif = output_stds.dbif
+    mapset = output_stds.get_mapset()
     overwrite = gs.overwrite()
-    msgr = tgis.get_tgis_message_interface()
 
     new_maps = None
     if copy_maps:
-        gs.message(_("Copying %s maps to the current mapset...") % maptype)
+        gs.verbose(_("Copying %s maps to the current mapset...") % maptype)
         new_maps = []
         num_maps = len(old_maps)
         count = 0
@@ -74,8 +76,8 @@ def copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps):
                         % (maptype, map_name, mapset)
                     )
 
-                kwargs = {maptype: "%s,%s" % (map_id, map_name)}
-                gs.run_command("g.copy", **kwargs)
+                kwargs = {maptype: f"{map_id},{map_name}"}
+                tools.g_copy(**kwargs)
             else:
                 # the map is already in the current mapset
                 gs.message(
@@ -84,12 +86,12 @@ def copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps):
                 )
 
             if count % 10 == 0:
-                msgr.percent(count, num_maps, 1)
+                gs.percent(count, num_maps, 1)
 
             new_map = tgis.open_new_map_dataset(
                 map_name,
                 None,
-                type="raster",
+                type=maptype,
                 temporal_extent=map.get_temporal_extent(),
                 overwrite=overwrite,
                 dbif=dbif,
@@ -114,10 +116,10 @@ def copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps):
             if semantic_label is not None and semantic_label != "None":
                 map.metadata.set_semantic_label(semantic_label)
             map.insert(dbif)
-        new_sp.register_map(map, dbif)
+        output_stds.register_map(map, dbif)
 
     # Update the spatio-temporal extent and the metadata table entries
-    new_sp.update_from_registered_maps(dbif)
+    output_stds.update_from_registered_maps(dbif)
 
 
 def main():
@@ -128,24 +130,22 @@ def main():
     input = options["input"]
     output = options["output"]
     stdstype = options["type"]
-    copy_maps = flags["c"]
 
-    maptype = "raster"
-    element = "cell"
-    if stdstype == "str3ds":
-        maptype = "raster_3d"
-        element = "g3dcell"
-    elif stdstype == "stvds":
-        maptype = "vector"
-        element = "vector"
+    type_mapping = {
+        "strds": {"maptype": "raster", "element": "cell"},
+        "str3ds": {"maptype": "raster_3d", "element": "g3dcell"},
+        "stvds": {"maptype": "vector", "element": "vector"},
+    }
+    maptype = type_mapping[stdstype]["maptype"]
+    element = type_mapping[stdstype]["element"]
 
     try:
-        old_sp = tgis.open(input, "r", stds_type=stdstype)
+        input_stds = tgis.open(options["input"], "r", stds_type=stdstype)
     except (ValueError, OSError) as error:
         gs.fatal(str(error))
 
-    with old_sp:
-        old_maps = old_sp.get_registered_maps_as_objects(dbif=old_sp.dbif)
+    with input_stds:
+        old_maps = input_stds.get_registered_maps_as_objects(dbif=input_stds.dbif)
 
         if not old_maps:
             gs.warning(
@@ -154,11 +154,13 @@ def main():
             )
             return
 
-        temporal_type, semantic_type, title, description = old_sp.get_initial_values()
+        temporal_type, semantic_type, title, description = (
+            input_stds.get_initial_values()
+        )
         # The new dataset is created first, so that an existing dataset or
         # another mapset than the current one is detected before maps are copied
         try:
-            new_sp = tgis.open(
+            output_stds = tgis.open(
                 output,
                 "w",
                 stds_type=stdstype,
@@ -166,17 +168,19 @@ def main():
                 semantic_type=semantic_type,
                 title=title,
                 description=description,
-                dbif=old_sp.dbif,
+                dbif=input_stds.dbif,
             )
         except (ValueError, OSError) as error:
             gs.fatal(str(error))
 
-        with new_sp:
+        with output_stds:
             try:
-                copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps)
+                copy_maps_and_register(
+                    output_stds, old_maps, maptype, element, flags["c"]
+                )
             except BaseException:
                 # Do not leave an empty dataset behind
-                new_sp.delete(new_sp.dbif)
+                output_stds.delete(output_stds.dbif)
                 raise
 
 

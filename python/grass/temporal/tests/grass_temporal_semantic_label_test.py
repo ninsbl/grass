@@ -56,19 +56,19 @@ def tgis_session(tmp_path_factory):
         ("ndvi.S2_8", "stvds", ("ndvi.S2_8", None, None)),
     ],
 )
-def test_parse_id(tgis_session, ident, stds_type, expected):
-    """_parse_id splits the band reference for raster STDS types only."""
-    from grass.temporal.open_stds import _parse_id
+def test_parse_stds_name(tgis_session, ident, stds_type, expected):
+    """parse_stds_name splits the band reference for raster STDS types only."""
+    from grass.temporal.utils import parse_stds_name
 
-    assert _parse_id(ident, stds_type=stds_type) == expected
+    assert parse_stds_name(ident, stds_type) == expected
 
 
-def test_parse_id_rejects_double_dot(tgis_session):
+def test_parse_stds_name_rejects_double_dot(tgis_session):
     """A semantic label cannot itself contain a dot."""
-    from grass.temporal.open_stds import _parse_id
+    from grass.temporal.utils import parse_stds_name
 
-    with pytest.raises((SystemExit, FatalError)):
-        _parse_id("ndvi.S2_8.extra", stds_type="raster")
+    with pytest.raises(ValueError, match="semantic label"):
+        parse_stds_name("ndvi.S2_8.extra", "raster")
 
 
 def test_check_new_stds_rejects_dotted_name(tgis_session):
