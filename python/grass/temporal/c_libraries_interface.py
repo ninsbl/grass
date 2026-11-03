@@ -31,8 +31,10 @@ from grass.pygrass.vector import VectorTopo
 from grass.script.utils import _get_multiprocessing_context, encode
 import grass.script as gs
 
+from .utils import applied_environment
+
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Mapping
     from multiprocessing.connection import Connection
     from multiprocessing.synchronize import _LockLike
 
@@ -1462,7 +1464,12 @@ class CLibrariesInterface(RPCServerBase):
 
     """  # noqa: E501
 
-    def __init__(self) -> None:
+    def __init__(self, env: Mapping[str, str] | None = None) -> None:
+        """
+        :param env: The GRASS session environment of the server process,
+                    the environment of the current process by default
+        """
+        self.env = None if env is None else dict(env)
         RPCServerBase.__init__(self)
 
     def start_server(self) -> None:
@@ -1473,7 +1480,9 @@ class CLibrariesInterface(RPCServerBase):
             target=c_library_server, args=(self.lock, self.server_conn)
         )
         self.server.daemon = True
-        self.server.start()
+        # The server inherits the environment of the process when it is started
+        with applied_environment(self.env):
+            self.server.start()
 
     def raster_map_exists(self, name, mapset):
         """Check if a raster map exists in the spatial database

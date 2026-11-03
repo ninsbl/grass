@@ -31,6 +31,7 @@ from .datetime_math import (
     increment_datetime_by_string,
     string_to_datetime,
 )
+from .debug_logging import log_debug
 from .factory import dataset_factory
 from .open_stds import open_old_stds
 
@@ -93,7 +94,7 @@ def register_maps_in_space_time_dataset(
 
     msgr = get_tgis_message_interface()
 
-    msgr.debug(1, "register_maps_in_space_time_dataset()")
+    log_debug(1, "register_maps_in_space_time_dataset()")
 
     # Make sure the arguments are of type string
     if start != "" and start is not None:
@@ -247,7 +248,7 @@ def register_maps_in_space_time_dataset(
     # Store the ids of datasets that must be updated
     datatsets_to_modify = {}
 
-    msgr.debug(2, "Gathering map information...")
+    log_debug(2, "Gathering map information...")
 
     for count, row in enumerate(maplist):
         if count % 50 == 0:
@@ -530,29 +531,21 @@ def assign_valid_time_to_map(
                     msgr.fatal(_("Error occurred in increment computation"))
 
         if map_object.get_layer():
-            msgr.debug(
+            log_debug(
                 1,
-                _(
-                    "Set absolute valid time for map <{id}> with "
-                    "layer {layer} to {start} - {end}"
-                ).format(
-                    id=map_object.get_map_id(),
-                    layer=map_object.get_layer(),
-                    start=str(start_time),
-                    end=str(end_time),
-                ),
+                "Set absolute valid time for map <%s> with layer %s to %s - %s",
+                map_object.get_map_id(),
+                map_object.get_layer(),
+                start_time,
+                end_time,
             )
         else:
-            msgr.debug(
+            log_debug(
                 1,
-                _(
-                    "Set absolute valid time for map <{mid}> to "
-                    "{start_time} - {end_time}"
-                ).format(
-                    mid=map_object.get_map_id(),
-                    start_time=str(start_time),
-                    end_time=str(end_time),
-                ),
+                "Set absolute valid time for map <%s> to %s - %s",
+                map_object.get_map_id(),
+                start_time,
+                end_time,
             )
 
         map_object.set_absolute_time(start_time, end_time)
@@ -569,31 +562,24 @@ def assign_valid_time_to_map(
                 end_time = start_time + int(increment)
 
         if map_object.get_layer():
-            msgr.debug(
+            log_debug(
                 1,
-                _(
-                    "Set relative valid time for map <{mid}> with layer"
-                    " {layer} to {start} - {end} with unit {unit}"
-                ).format(
-                    mid=map_object.get_map_id(),
-                    layer=map_object.get_layer(),
-                    start=start_time,
-                    end=str(end_time),
-                    unit=unit,
-                ),
+                "Set relative valid time for map <%s> with layer %s "
+                "to %s - %s with unit %s",
+                map_object.get_map_id(),
+                map_object.get_layer(),
+                start_time,
+                end_time,
+                unit,
             )
         else:
-            msgr.debug(
+            log_debug(
                 1,
-                _(
-                    "Set relative valid time for map <{mid}> to "
-                    "{start} - {end} with unit {unit}"
-                ).format(
-                    mid=map_object.get_map_id(),
-                    start=start_time,
-                    end=str(end_time),
-                    unit=unit,
-                ),
+                "Set relative valid time for map <%s> to %s - %s with unit %s",
+                map_object.get_map_id(),
+                start_time,
+                end_time,
+                unit,
             )
 
         map_object.set_relative_time(start_time, end_time, unit)

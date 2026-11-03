@@ -17,6 +17,8 @@ import uuid
 from abc import ABCMeta, abstractmethod
 from datetime import datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
+
 from grass.exceptions import FatalError
 
 from .abstract_dataset import (
@@ -25,11 +27,13 @@ from .abstract_dataset import (
 )
 from .core import (
     get_current_mapset,
+    get_current_session,
     get_sql_template_path,
     get_tgis_db_version_from_metadata,
     init_dbif,
 )
 from .datetime_math import increment_datetime_by_string, string_to_datetime
+from .debug_logging import log_debug
 from .spatio_temporal_relationships import (
     SpatioTemporalTopologyBuilder,
     count_temporal_topology_relationships,
@@ -42,6 +46,9 @@ from .temporal_granularity import (
     compute_relative_time_granularity,
     get_time_tuple_function,
 )
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 ###############################################################################
 
@@ -70,6 +77,71 @@ class AbstractSpaceTimeDataset(AbstractDataset):
 
         # SpaceTimeRasterDataset related only
         self.semantic_label = None
+
+        # Set by set_dbif()
+        self.dbif = None
+        self._close_dbif = False
+
+        # Set by pin_session()
+        self.env = None
+        self._session = None
+
+    def set_dbif(self, dbif, close_on_exit: bool = False) -> None:
+        """Associate a database interface connection with this dataset
+
+        The connection is not used implicitly, pass ``self.dbif`` to the
+        methods of this dataset to use it. It is closed by :meth:`close` if
+        requested.
+
+        :param dbif: The database interface connection
+        :param close_on_exit: True if :meth:`close` (and leaving the context
+                              of a with statement) shall close the connection,
+                              False if the caller is responsible for that
+        """
+        self.dbif = dbif
+        self._close_dbif = close_on_exit
+
+    def pin_session(self, env: Mapping[str, str]) -> None:
+        """Bind this dataset to the session the temporal framework is set up for
+
+        The dataset can only be modified as long as the framework is set up for
+        this session. This keeps a dataset from writing into the wrong session
+        after :func:`grass.temporal.init` was called for another session.
+
+        :param env: The environment of the session, available as ``env``
+                    attribute of the dataset, e.g., to run tools for it
+        """
+        self.env = dict(env)
+        self._session = get_current_session()
+
+    def _check_writable(self) -> None:
+        """Raise an error if this dataset must not be modified
+
+        :raises PermissionError: if the dataset is read-only
+        :raises RuntimeError: if the dataset is bound to another session
+        """
+        super()._check_writable()
+        if self._session is not None and self._session != get_current_session():
+            msg = _(
+                "Space time dataset <{ds}> was opened in another GRASS session "
+                "than the current session of the temporal framework"
+            ).format(ds=self.get_id())
+            raise RuntimeError(msg)
+
+    def close(self) -> None:
+        """Close the associated database connection if this dataset owns it
+
+        The dataset can still be used afterwards, its methods connect to
+        the database on demand.
+        """
+        if self._close_dbif and self.dbif is not None and self.dbif.is_connected():
+            self.dbif.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback) -> None:
+        self.close()
 
     def get_name(self, semantic_label: bool = True):
         """Get dataset name including semantic label filter if enabled.
@@ -255,6 +327,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
         :param dbif: The database interface to be used
         """
 
+        self._check_writable()
         self.metadata.select(dbif=dbif)
         command = self.metadata.get_command()
         if command is None:
@@ -391,6 +464,28 @@ class AbstractSpaceTimeDataset(AbstractDataset):
                 self.msgr.fatal(_("Unsupported temporal unit: %s") % (unit))
             self.relative_time.set_unit(unit)
 
+    def update(self, dbif=None, execute: bool = True, ident=None):
+        """Update the space time dataset entry in the database from the
+        internal structure excluding None variables
+
+        See :meth:`AbstractDataset.update`.
+
+        :raises PermissionError: if the dataset is read-only
+        """
+        self._check_writable()
+        return super().update(dbif=dbif, execute=execute, ident=ident)
+
+    def update_all(self, dbif=None, execute: bool = True, ident=None):
+        """Update the space time dataset entry in the database from the
+        internal structure including None variables
+
+        See :meth:`AbstractDataset.update_all`.
+
+        :raises PermissionError: if the dataset is read-only
+        """
+        self._check_writable()
+        return super().update_all(dbif=dbif, execute=execute, ident=ident)
+
     def insert(self, dbif=None, execute: bool = True):
         """Insert the space time dataset content into the database from the internal
         structure
@@ -406,6 +501,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
                  empty string otherwise
         """
 
+        self._check_writable()
         dbif, connection_state_changed = init_dbif(dbif)
 
         # We need to create the register table if it does not exist
@@ -439,14 +535,12 @@ class AbstractSpaceTimeDataset(AbstractDataset):
             # Set the map register table name
             self.set_map_register(stds_register_table)
 
-            self.msgr.debug(
+            log_debug(
                 1,
-                _("Created register table <%s> for space time %s  dataset <%s>")
-                % (
-                    stds_register_table,
-                    self.get_new_map_instance(None).get_type(),
-                    self.get_id(),
-                ),
+                "Created register table <%s> for space time %s dataset <%s>",
+                stds_register_table,
+                self.get_new_map_instance(None).get_type(),
+                self.get_id(),
             )
 
         statement += AbstractDataset.insert(self, dbif=dbif, execute=False)
@@ -2065,16 +2159,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
                 granularity
 
         """
-        if self.get_mapset() != get_current_mapset():
-            self.msgr.fatal(
-                _(
-                    "Unable to shift dataset <%(ds)s> of type "
-                    "%(type)s in the temporal database. The mapset "
-                    "of the database does not match the current "
-                    "mapset"
-                )
-                % {"ds": self.get_id(), "type": self.get_type()}
-            )
+        self._check_writable()
 
         if not check_granularity_string(gran, self.get_temporal_type()):
             self.msgr.error(_("Wrong granularity format: %s") % (gran))
@@ -2241,16 +2326,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
 
         """
 
-        if self.get_mapset() != get_current_mapset():
-            self.msgr.fatal(
-                _(
-                    "Unable to snap dataset <%(ds)s> of type "
-                    "%(type)s in the temporal database. The mapset "
-                    "of the database does not match the current "
-                    "mapset"
-                )
-                % {"ds": self.get_id(), "type": self.get_type()}
-            )
+        self._check_writable()
 
         dbif, connection_state_changed = init_dbif(dbif)
 
@@ -2348,16 +2424,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
         :param dbif: The database interface to be used
         """
 
-        if self.get_mapset() != get_current_mapset():
-            self.msgr.fatal(
-                _(
-                    "Unable to rename dataset <%(ds)s> of type "
-                    "%(type)s in the temporal database. The mapset "
-                    "of the database does not match the current "
-                    "mapset"
-                )
-                % {"ds": self.get_id(), "type": self.get_type()}
-            )
+        self._check_writable()
 
         dbif, connection_state_changed = init_dbif(dbif)
 
@@ -2437,16 +2504,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
             % (self.get_new_map_instance(ident=None).get_type(), self.get_id())
         )
 
-        if self.get_mapset() != get_current_mapset():
-            self.msgr.fatal(
-                _(
-                    "Unable to delete dataset <%(ds)s> of type "
-                    "%(type)s from the temporal database. The mapset"
-                    " of the database does not match the current "
-                    "mapset"
-                )
-                % {"ds": self.get_id(), "type": self.get_type()}
-            )
+        self._check_writable()
 
         statement = ""
         dbif, connection_state_changed = init_dbif(dbif)
@@ -2455,9 +2513,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
         self.metadata.select(dbif)
 
         if self.get_map_register() is not None:
-            self.msgr.debug(
-                1, _("Drop map register table: %s") % (self.get_map_register())
-            )
+            log_debug(1, "Drop map register table: %s", self.get_map_register())
             rows = self.get_registered_maps(
                 columns="id", where=None, order=None, dbif=dbif
             )
@@ -2541,20 +2597,12 @@ class AbstractSpaceTimeDataset(AbstractDataset):
         :raises ~grass.exceptions.FatalError:
             This method raises a :exc:`~grass.exceptions.FatalError` exception
             in case of a fatal error
+        :raises PermissionError: if the dataset is read-only
         """
 
         # only modify database in current mapset
         mapset = get_current_mapset()
-
-        if self.get_mapset() != get_current_mapset():
-            self.msgr.fatal(
-                _(
-                    "Unable to register map in dataset <%(ds)s> of "
-                    "type %(type)s. The mapset of the database does "
-                    "not match the current mapset"
-                )
-                % {"ds": self.get_id(), "type": self.get_type()}
-            )
+        self._check_writable()
 
         dbif, connection_state_changed = init_dbif(dbif)
 
@@ -2569,24 +2617,23 @@ class AbstractSpaceTimeDataset(AbstractDataset):
             )
 
         if map.get_layer():
-            self.msgr.debug(
+            log_debug(
                 1,
-                "Register %s map <%s> with layer %s in space "
-                "time %s dataset <%s>"
-                % (
-                    map.get_type(),
-                    map.get_map_id(),
-                    map.get_layer(),
-                    map.get_type(),
-                    self.get_id(),
-                ),
+                "Register %s map <%s> with layer %s in space time %s dataset <%s>",
+                map.get_type(),
+                map.get_map_id(),
+                map.get_layer(),
+                map.get_type(),
+                self.get_id(),
             )
         else:
-            self.msgr.debug(
+            log_debug(
                 1,
-                "Register %s map <%s> in space time %s "
-                "dataset <%s>"
-                % (map.get_type(), map.get_map_id(), map.get_type(), self.get_id()),
+                "Register %s map <%s> in space time %s dataset <%s>",
+                map.get_type(),
+                map.get_map_id(),
+                map.get_type(),
+                self.get_id(),
             )
 
         # First select all data from the database in the current mapset
@@ -2650,10 +2697,12 @@ class AbstractSpaceTimeDataset(AbstractDataset):
             self.set_relative_time_unit(map_rel_time_unit)
             statement += self.relative_time.get_update_all_statement_mogrified(dbif)
 
-            self.msgr.debug(
+            log_debug(
                 1,
-                _("Set temporal unit for space time %s dataset <%s> to %s")
-                % (map.get_type(), self.get_id(), map_rel_time_unit),
+                "Set temporal unit for space time %s dataset <%s> to %s",
+                map.get_type(),
+                self.get_id(),
+                map_rel_time_unit,
             )
 
         stds_rel_time_unit = self.get_relative_time_unit()
@@ -2745,13 +2794,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
 
         # only modify database in current mapset
         mapset = get_current_mapset()
-
-        if self.get_mapset() != mapset:
-            self.msgr.debug(1, "STDS name <%s>" % self.get_name())
-            dbif.close()
-            self.msgr.fatal(
-                _("Maps can only unregistered in a database in the current mapset")
-            )
+        self._check_writable()
 
         statement = ""
 
@@ -2827,16 +2870,7 @@ class AbstractSpaceTimeDataset(AbstractDataset):
         :param dbif: The database interface to be used
         """
 
-        if self.get_mapset() != get_current_mapset():
-            self.msgr.fatal(
-                _(
-                    "Unable to update dataset <%(ds)s> of type "
-                    "%(type)s in the temporal database. The mapset"
-                    " of the database does not match the current "
-                    "mapset"
-                )
-                % {"ds": self.get_id(), "type": self.get_type()}
-            )
+        self._check_writable()
 
         self.msgr.verbose(
             _(

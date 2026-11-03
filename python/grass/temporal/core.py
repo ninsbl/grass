@@ -37,6 +37,7 @@ import sqlite3
 from datetime import datetime
 from importlib.util import find_spec
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import grass.script as gs
 from grass.tools import Tools
@@ -44,6 +45,11 @@ from grass.pygrass import messages
 from grass.script.utils import decode
 
 from .c_libraries_interface import CLibrariesInterface
+from .debug_logging import configure_debug_logging, log_debug
+from .utils import applied_environment
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 tools = Tools()
@@ -165,6 +171,10 @@ def get_tgis_dbmi_paramstyle() -> str | None:
 current_mapset = None
 current_location = None
 current_gisdbase = None
+# The GISRC file and the environment of the session which init() was called for.
+# The environment is None if it is the environment of the process.
+current_gisrc = None
+tgis_env = None
 
 ###############################################################################
 
@@ -195,6 +205,24 @@ def get_current_location() -> str | None:
 
 
 ###############################################################################
+
+
+def get_tgis_env() -> dict[str, str] | None:
+    """Return the session environment :func:`init` was called with
+
+    :return: A copy of the environment, None if it is the environment of the
+             process
+    """
+    return None if tgis_env is None else dict(tgis_env)
+
+
+def get_current_session() -> tuple[str | None, str | None, str | None, str | None]:
+    """Return the identity of the session the temporal framework is set up for
+
+    :return: Tuple of the gisdbase, the location (project), the mapset and the
+             GISRC file of the session
+    """
+    return current_gisdbase, current_location, current_mapset, current_gisrc
 
 
 def get_current_gisdbase() -> str | None:
@@ -276,15 +304,24 @@ def get_enable_timestamp_write():
 message_interface = None
 
 
-def _init_tgis_message_interface(raise_on_error: bool = False) -> None:
+def _init_tgis_message_interface(
+    raise_on_error: bool = False, env: Mapping[str, str] | None = None
+) -> None:
     """Initiate the global message interface
 
     :param raise_on_error: If True raise a FatalError exception in case of
                            a fatal error, call sys.exit(1) otherwise
+    :param env: The GRASS session environment of the message server process,
+                the environment of the current process by default
     """
     global message_interface
     if message_interface is None:
-        message_interface = messages.get_msgr(raise_on_error=raise_on_error)
+        # The server inherits the environment of the process when it is started
+        with applied_environment(env):
+            message_interface = messages.get_msgr(raise_on_error=raise_on_error)
+            # The messenger is a singleton, so it may have been stopped
+            if not message_interface.server.is_alive():
+                message_interface.start_server()
 
 
 def get_tgis_message_interface():
@@ -306,14 +343,17 @@ def get_tgis_message_interface():
 c_library_interface = None
 
 
-def _init_tgis_c_library_interface() -> None:
+def _init_tgis_c_library_interface(env: Mapping[str, str] | None = None) -> None:
     """Set the global C-library interface variable that
     provides a fast and exit safe interface to the C-library libgis,
     libraster, libraster3d and libvector functions
+
+    :param env: The GRASS session environment of the server process,
+                the environment of the current process by default
     """
     global c_library_interface
     if c_library_interface is None:
-        c_library_interface = CLibrariesInterface()
+        c_library_interface = CLibrariesInterface(env)
 
 
 def get_tgis_c_library_interface():
@@ -520,10 +560,12 @@ def get_available_temporal_mapsets(mapsets: str | None = None) -> dict:
         driver = mapset_data["driver"]
         database = c_library_interface.get_database_name(mapset)
 
-        message_interface.debug(
+        log_debug(
             1,
-            "get_available_temporal_mapsets: "
-            "\n  mapset %s\n  driver %s\n  database %s" % (mapset, driver, database),
+            "get_available_temporal_mapsets: \n  mapset %s\n  driver %s\n  database %s",
+            mapset,
+            driver,
+            database,
         )
         if driver and database:
             # Check if the temporal sqlite database exists
@@ -549,6 +591,7 @@ def init(
     raise_fatal_error: bool = False,
     skip_db_version_check: bool = False,
     skip_db_init: bool = False,
+    env: Mapping[str, str] | None = None,
 ):
     """Initialize the temporal GIS system.
 
@@ -574,6 +617,9 @@ def init(
 
     - GRASS_TGIS_PROFILE (True, False, 1, 0)
     - GRASS_TGIS_RAISE_ON_ERROR (True, False, 1, 0)
+
+    The GRASS debug level (``g.gisenv set="DEBUG=3"``) controls the debug
+    messages of the temporal framework, see :mod:`grass.temporal.debug_logging`.
 
     If not otherwise requested (skip_db_init), this function will check for
     the existence of a temporal database and its version in the current mapset.
@@ -606,6 +652,14 @@ def init(
                          but does not require a temporal database in the
                          current mapset for operations (like listing
                          datasets, getting metainformation, ...).
+    :param env: The environment of the GRASS session to set up the temporal
+                framework for. It is used to read the session, to run tools
+                and to start the subprocesses. By default, the environment
+                of the process is used. The framework is set up for one
+                session at a time, calling this function with the environment
+                of another session switches the session. Datasets opened with
+                :func:`grass.temporal.open` in the previous session cannot be
+                modified afterwards.
     """
     # We need to set the correct database backend and several global variables
     # from the GRASS mapset specific environment variables of g.gisenv and t.connect
@@ -615,14 +669,22 @@ def init(
     global enable_mapset_check, enable_timestamp_write  # noqa: FURB154
     global current_mapset, current_location, current_gisdbase  # noqa: FURB154
     global message_interface, c_library_interface  # noqa: FURB154
+    global current_gisrc, tgis_env, tools  # noqa: FURB154
 
     raise_on_error = raise_fatal_error
+    session_env = os.environ if env is None else env
 
-    grassenv = gs.gisenv()
+    grassenv = gs.gisenv(env=env)
 
     new_mapset = grassenv["MAPSET"]
     new_location = grassenv["LOCATION_NAME"]
     new_gisdbase = grassenv["GISDBASE"]
+    new_gisrc = session_env.get("GISRC")
+
+    try:
+        configure_debug_logging(int(grassenv.get("DEBUG") or 0))
+    except ValueError:
+        configure_debug_logging(0)
 
     # The message and C-library subprocesses inherit GISRC at spawn time,
     # so a session change leaves them bound to the old (possibly deleted)
@@ -632,6 +694,7 @@ def init(
         current_mapset != new_mapset
         or current_location != new_location
         or current_gisdbase != new_gisdbase
+        or current_gisrc != new_gisrc
     ):
         if message_interface is not None:
             message_interface.stop()
@@ -639,6 +702,10 @@ def init(
         if c_library_interface is not None:
             c_library_interface.stop()
             c_library_interface = None
+
+    # Set defaults of the session, a previous session may have changed them
+    enable_mapset_check = True
+    enable_timestamp_write = True
 
     # Set defaults for the TGIS DB (overwritten later if initialized)
     tgis_backend = "sqlite"
@@ -649,12 +716,12 @@ def init(
     current_mapset = new_mapset
     current_location = new_location
     current_gisdbase = new_gisdbase
+    current_gisrc = new_gisrc
+    tgis_env = None if env is None else dict(env)
+    tools = Tools() if env is None else Tools(env=tgis_env)
 
     # Check environment variable GRASS_TGIS_RAISE_ON_ERROR
-    if (
-        os.getenv("GRASS_TGIS_RAISE_ON_ERROR") == "True"
-        or os.getenv("GRASS_TGIS_RAISE_ON_ERROR") == "1"
-    ):
+    if session_env.get("GRASS_TGIS_RAISE_ON_ERROR") in {"True", "1"}:
         raise_on_error = True
 
     # Check if the script library raises on error,
@@ -663,15 +730,15 @@ def init(
         raise_on_error = True
 
     # Start the GRASS message interface server
-    _init_tgis_message_interface(raise_on_error)
+    _init_tgis_message_interface(raise_on_error, tgis_env)
     # Start the C-library interface server
-    _init_tgis_c_library_interface()
+    _init_tgis_c_library_interface(tgis_env)
     msgr = get_tgis_message_interface()
 
-    msgr.debug(1, ("Raise on error id: %s" % str(raise_on_error)))
+    log_debug(1, "Raise on error id: %s", raise_on_error)
 
     ciface = get_tgis_c_library_interface()
-    current_mapset = decode(gs.gisenv().get("MAPSET"))
+    current_mapset = decode(grassenv.get("MAPSET"))
 
     # Set the mapset check and the timestamp write
     if "TGIS_DISABLE_MAPSET_CHECK" in grassenv:
@@ -691,12 +758,27 @@ def init(
             msgr.warning("TGIS_DISABLE_TIMESTAMP_WRITE is True")
 
     if skip_db_init:
+        # The database of the current mapset is not initialized, but the
+        # global defaults are for SQLite and need to be adapted if the
+        # temporal database of the current mapset uses PostgreSQL
+        driver_string = ciface.get_driver_name(current_mapset)
+        if driver_string and decode(driver_string) == "pg":
+            try:
+                import psycopg2
+            except ImportError:
+                msgr.error(
+                    "Unable to locate the Postgresql SQL Python "
+                    "interface module psycopg2."
+                )
+                raise
+            tgis_backend = "pg"
+            tgis_dbmi_paramstyle = psycopg2.paramstyle
         return
 
-    msgr.debug(1, "Initiate the temporal database")
+    log_debug(1, "Initiate the temporal database")
     # We must run t.connect at first to create the temporal database and to
     # get the environmental variables
-    gs.run_command("t.connect", flags="c", superquiet=True)
+    gs.run_command("t.connect", flags="c", superquiet=True, env=env)
 
     driver_string = ciface.get_driver_name(current_mapset)
     database_string = ciface.get_database_name(current_mapset)
@@ -734,8 +816,8 @@ def init(
             )
     else:
         # Set the default sqlite3 connection in case nothing was defined
-        gs.run_command("t.connect", flags="d", superquiet=True)
-        current_mapset = decode(gs.gisenv().get("MAPSET"))
+        gs.run_command("t.connect", flags="d", superquiet=True, env=env)
+        current_mapset = decode(gs.gisenv(env=env).get("MAPSET"))
         driver_string = ciface.get_driver_name(current_mapset)
         database_string = ciface.get_database_name(current_mapset)
         tgis_backend = driver_string
@@ -876,6 +958,54 @@ def init(
     create_temporal_database(
         DBConnection(backend=tgis_backend, dbstring=tgis_database_string)
     )
+
+
+###############################################################################
+
+
+def _read_session(
+    env: Mapping[str, str] | None,
+) -> tuple[str, str, str, str | None]:
+    """Return the gisdbase, location, mapset and GISRC file of a session
+
+    The session is read from the GISRC file, which is much faster than running
+    g.gisenv. The tool is only used if there is no such file.
+    """
+    session_env = os.environ if env is None else env
+    gisrc = session_env.get("GISRC")
+    values = {}
+    if gisrc and Path(gisrc).is_file():
+        for line in Path(gisrc).read_text(encoding="utf-8").splitlines():
+            key, _separator, value = line.partition(":")
+            values[key.strip()] = value.strip()
+    if not all(key in values for key in ("GISDBASE", "LOCATION_NAME", "MAPSET")):
+        values = gs.gisenv(env=env)
+    return values["GISDBASE"], values["LOCATION_NAME"], values["MAPSET"], gisrc
+
+
+def init_if_needed(
+    raise_fatal_error: bool = False,
+    skip_db_init: bool = False,
+    env: Mapping[str, str] | None = None,
+) -> None:
+    """Initialize the temporal GIS system unless it is ready for the session.
+
+    :func:`init` is only called if the GRASS session (project, mapset or
+    GISRC file) differs from the one the framework is set up for or if the
+    temporal database is needed (``skip_db_init=False``) but was skipped by the
+    last initialization. Changes of the temporal database connection
+    (t.connect) within a session are not detected, call :func:`init` in that
+    case.
+
+    :param raise_fatal_error: See :func:`init`
+    :param skip_db_init: See :func:`init`
+    :param env: See :func:`init`
+    """
+    if _read_session(env) == get_current_session() and (
+        skip_db_init or tgis_database_string is not None
+    ):
+        return
+    init(raise_fatal_error=raise_fatal_error, skip_db_init=skip_db_init, env=env)
 
 
 ###############################################################################
@@ -1364,11 +1494,11 @@ class DBConnection:
         self.dbstring = dbstring
 
         self.msgr = get_tgis_message_interface()
-        self.msgr.debug(
+        log_debug(
             1,
-            "DBConnection constructor:"
-            "\n  backend: %s"
-            "\n  dbstring: %s" % (backend, self.dbstring),
+            "DBConnection constructor:\n  backend: %s\n  dbstring: %s",
+            backend,
+            self.dbstring,
         )
 
     def __del__(self) -> None:

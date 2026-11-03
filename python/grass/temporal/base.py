@@ -27,6 +27,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
+from .debug_logging import log_debug
 from .core import (
     SQLDatabaseInterfaceConnection,
     get_current_mapset,
@@ -387,7 +388,7 @@ class SQLDatabaseInterface(DictSQLSerializer):
         if mapset is None:
             mapset = self.mapset
 
-        self.msgr.debug(2, "SQLDatabaseInterface.select() from mapset %s" % mapset)
+        log_debug(2, "SQLDatabaseInterface.select() from mapset %s", mapset)
 
         if dbif:
             if len(args) == 0:
@@ -629,6 +630,9 @@ class DatasetBase(SQLDatabaseInterface):
 
     """
 
+    # Read by set_readonly(), which is called while the object is initialized
+    _forced_readonly = False
+
     def __init__(
         self,
         table=None,
@@ -814,9 +818,20 @@ class DatasetBase(SQLDatabaseInterface):
         """
         return self.D.get("temporal_type")
 
-    def set_readonly(self) -> None:
-        """Set the readonly flag for this object"""
-        self._readonly = bool(
+    def set_readonly(self, readonly: bool | None = None) -> None:
+        """Set the readonly flag for this object
+
+        A dataset of a mapset other than the current mapset is always
+        read-only. Datasets of the current mapset can be made read-only
+        explicitly.
+
+        :param readonly: True to make the dataset read-only, False to remove
+                         this restriction, None to keep it and only update the
+                         flag, e.g., after the mapset changed
+        """
+        if readonly is not None:
+            self._forced_readonly = readonly
+        self._readonly = self._forced_readonly or bool(
             self.get_mapset() and self.get_mapset() != get_current_mapset()
         )
 

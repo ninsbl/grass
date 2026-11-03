@@ -28,38 +28,9 @@ from grass.exceptions import FatalError
 from .abstract_map_dataset import AbstractMapDataset
 from .core import get_current_mapset, get_tgis_message_interface, init_dbif
 from .factory import dataset_factory
+from .utils import parse_stds_name
 
 ###############################################################################
-
-
-def _parse_id(
-    ident: str, stds_type: str = "strds"
-) -> tuple[str, str | None, str | None]:
-    """Parse parts of a user given dataset name.
-
-    :param ident: The id of a space time dataset
-
-    :return: Tuple with ID components: name, mapset, semantic_label
-    """
-    msgr = get_tgis_message_interface()
-    name = ident
-
-    mapset = None
-    if "@" in ident:
-        name, mapset = ident.split("@", 1)
-
-    semantic_label = None
-    # Semantic labels apply to raster STRDS. Accept the raster map element types
-    # ("raster"/"rast") as well as "strds": callers such as t.rast.mapcalc reach
-    # open_old_stds() with the map element type rather than "strds", and without
-    # this the ".label" band reference stays attached to the name and the dataset
-    # lookup fails. 3D-raster and vector STDS have no semantic labels.
-    if "." in name and stds_type in {"strds", "raster", "rast"}:
-        name, semantic_label = name.split(".", 1)
-        if "." in semantic_label:
-            msgr.fatal(_("Invalid semantic_label <%s>") % semantic_label)
-
-    return name, mapset, semantic_label
 
 
 def open_old_stds(name, type, dbif=None):
@@ -120,7 +91,7 @@ def open_old_stds(name, type, dbif=None):
         return None
 
     # Check if the dataset name contains the mapset and the semantic label as well
-    name, mapset, semantic_label = _parse_id(name, stds_type=stds_type)
+    name, mapset, semantic_label = parse_stds_name(name, stds_type)
 
     dbif, connection_state_changed = init_dbif(dbif)
 
@@ -187,7 +158,7 @@ def check_new_stds(name, type, dbif=None, overwrite: bool = False):
     msgr = get_tgis_message_interface()
 
     original_name = name
-    name, mapset, semantic_label = _parse_id(name, stds_type=stds_type)
+    name, mapset, semantic_label = parse_stds_name(name, stds_type)
     if semantic_label:
         msgr.fatal(
             _("Illegal dataset name <{}>. Character '.' not allowed.").format(

@@ -42,65 +42,14 @@ import grass.script as gs
 ############################################################################
 
 
-def main():
-    # lazy imports
+def copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps):
+    """Copy the maps if requested and register them in the new dataset"""
     import grass.temporal as tgis
 
-    # Get the options
-    input = options["input"]
-    output = options["output"]
-    stdstype = options["type"]
-    copy_maps = flags["c"]
-
-    maptype = "raster"
-    element = "cell"
-    if stdstype == "str3ds":
-        maptype = "raster_3d"
-        element = "g3dcell"
-    elif stdstype == "stvds":
-        maptype = "vector"
-        element = "vector"
-
-    # Make sure the temporal database exists
-    tgis.init()
-
-    # Get the current mapset to create the id of the space time dataset
-    mapset = gs.gisenv()["MAPSET"]
-
-    inname = input
-    inmapset = mapset
-    if "@" in input:
-        inname, inmapset = input.split("@")
-
-    outname = output
-    outmapset = mapset
-    if "@" in output:
-        outname, outmapset = output.split("@")
-        if outmapset != mapset:
-            gs.fatal(
-                _("The output dataset <%s> must be in the current mapset<%s>.")
-                % (input, mapset)
-            )
-
-    msgr = tgis.get_tgis_message_interface()
-
-    dbif = tgis.SQLDatabaseInterfaceConnection()
-    dbif.connect()
-
-    old_sp = tgis.open_old_stds(input, stdstype, dbif)
-    old_maps = old_sp.get_registered_maps_as_objects(dbif=dbif)
-
-    if not old_maps:
-        dbif.close()
-        gs.warning(
-            _("Empty space-time %s dataset <%s>, nothing to copy") % (maptype, input)
-        )
-        return
-
+    dbif = new_sp.dbif
+    mapset = new_sp.get_mapset()
     overwrite = gs.overwrite()
-
-    # Check the new stds
-    new_sp = tgis.check_new_stds(output, stdstype, dbif, overwrite)
+    msgr = tgis.get_tgis_message_interface()
 
     new_maps = None
     if copy_maps:
@@ -137,14 +86,6 @@ def main():
             if count % 10 == 0:
                 msgr.percent(count, num_maps, 1)
 
-            # We need to build the id
-            if maptype != "vector":
-                map_id = tgis.AbstractMapDataset.build_id(map_name, mapset)
-            else:
-                map_id = tgis.AbstractMapDataset.build_id(
-                    map_name, mapset, map.get_layer()
-                )
-
             new_map = tgis.open_new_map_dataset(
                 map_name,
                 None,
@@ -163,24 +104,8 @@ def main():
         # don't copy maps, use old maps
         new_maps = old_maps
 
-    temporal_type, semantic_type, title, description = old_sp.get_initial_values()
-    new_sp = tgis.open_new_stds(
-        output,
-        stdstype,
-        old_sp.get_temporal_type(),
-        title,
-        description,
-        semantic_type,
-        dbif,
-        gs.overwrite(),
-    )
-
     # Register the maps in the database
-    num_maps = len(new_maps)
-    count = 0
     for map in new_maps:
-        count += 1
-
         # Insert map in temporal database
         if not map.is_in_db(dbif, mapset):
             semantic_label = map.metadata.get_semantic_label()
@@ -194,7 +119,65 @@ def main():
     # Update the spatio-temporal extent and the metadata table entries
     new_sp.update_from_registered_maps(dbif)
 
-    dbif.close()
+
+def main():
+    # lazy imports
+    import grass.temporal as tgis
+
+    # Get the options
+    input = options["input"]
+    output = options["output"]
+    stdstype = options["type"]
+    copy_maps = flags["c"]
+
+    maptype = "raster"
+    element = "cell"
+    if stdstype == "str3ds":
+        maptype = "raster_3d"
+        element = "g3dcell"
+    elif stdstype == "stvds":
+        maptype = "vector"
+        element = "vector"
+
+    try:
+        old_sp = tgis.open(input, "r", stds_type=stdstype)
+    except (ValueError, OSError) as error:
+        gs.fatal(str(error))
+
+    with old_sp:
+        old_maps = old_sp.get_registered_maps_as_objects(dbif=old_sp.dbif)
+
+        if not old_maps:
+            gs.warning(
+                _("Empty space-time %s dataset <%s>, nothing to copy")
+                % (maptype, input)
+            )
+            return
+
+        temporal_type, semantic_type, title, description = old_sp.get_initial_values()
+        # The new dataset is created first, so that an existing dataset or
+        # another mapset than the current one is detected before maps are copied
+        try:
+            new_sp = tgis.open(
+                output,
+                "w",
+                stds_type=stdstype,
+                temporal_type=temporal_type,
+                semantic_type=semantic_type,
+                title=title,
+                description=description,
+                dbif=old_sp.dbif,
+            )
+        except (ValueError, OSError) as error:
+            gs.fatal(str(error))
+
+        with new_sp:
+            try:
+                copy_maps_and_register(new_sp, old_maps, maptype, element, copy_maps)
+            except BaseException:
+                # Do not leave an empty dataset behind
+                new_sp.delete(new_sp.dbif)
+                raise
 
 
 ###############################################################################

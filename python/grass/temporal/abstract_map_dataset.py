@@ -22,6 +22,7 @@ from .core import (
     get_tgis_c_library_interface,
     init_dbif,
 )
+from .debug_logging import log_debug
 from .datetime_math import (
     datetime_to_grass_datetime_string,
     decrement_datetime_by_string,
@@ -164,10 +165,6 @@ class AbstractMapDataset(AbstractDataset):
         :return: The map id "name@mapset"
         """
         return self.base.get_map_id()
-
-    def get_readonly(self) -> bool:
-        """Return True if this map is read-only (belongs to a foreign mapset)"""
-        return self.base.get_readonly()
 
     @staticmethod
     def split_name(name: str, layer=None, mapset=None):
@@ -1058,22 +1055,19 @@ class AbstractMapDataset(AbstractDataset):
         """
 
         if self.get_layer() is not None:
-            self.msgr.debug(
+            log_debug(
                 1,
-                "Unregister %(type)s map <%(map)s> with "
-                "layer %(layer)s from space time datasets"
-                % {
-                    "type": self.get_type(),
-                    "map": self.get_map_id(),
-                    "layer": self.get_layer(),
-                },
+                "Unregister %s map <%s> with layer %s from space time datasets",
+                self.get_type(),
+                self.get_map_id(),
+                self.get_layer(),
             )
         else:
-            self.msgr.debug(
+            log_debug(
                 1,
-                "Unregister %(type)s map <%(map)s> "
-                "from space time datasets"
-                % {"type": self.get_type(), "map": self.get_map_id()},
+                "Unregister %s map <%s> from space time datasets",
+                self.get_type(),
+                self.get_map_id(),
             )
 
         mapset = get_current_mapset()
@@ -1144,7 +1138,7 @@ class AbstractMapDataset(AbstractDataset):
 
         :return: The SQL statements if execute=False, else an empty string
         """
-        self.msgr.debug(2, "AbstractMapDataset.add_stds_to_register")
+        log_debug(2, "AbstractMapDataset.add_stds_to_register")
 
         dbif, connection_state_changed = init_dbif(dbif=dbif)
 
@@ -1194,7 +1188,7 @@ class AbstractMapDataset(AbstractDataset):
 
         :return: The SQL statements if execute=False, else an empty string
         """
-        self.msgr.debug(2, "AbstractMapDataset.remove_stds_from_register")
+        log_debug(2, "AbstractMapDataset.remove_stds_from_register")
         dbif, connection_state_changed = init_dbif(dbif)
 
         # only modify database in current mapset

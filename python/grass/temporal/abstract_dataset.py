@@ -13,6 +13,7 @@ from __future__ import annotations
 from abc import ABCMeta, abstractmethod
 
 from .core import get_current_mapset, get_tgis_message_interface, init_dbif
+from .debug_logging import log_debug
 from .spatial_topology_dataset_connector import SpatialTopologyDatasetConnector
 from .temporal_topology_dataset_connector import TemporalTopologyDatasetConnector
 
@@ -32,6 +33,33 @@ class AbstractDataset(
         SpatialTopologyDatasetConnector.__init__(self)
         TemporalTopologyDatasetConnector.__init__(self)
         self.msgr = get_tgis_message_interface()
+
+    def get_readonly(self) -> bool:
+        """Return True if this dataset must not be modified
+
+        See :meth:`DatasetBase.set_readonly`.
+        """
+        return self.base.get_readonly()
+
+    def set_readonly(self, readonly: bool | None = None) -> None:
+        """Make this dataset read-only or remove this restriction
+
+        See :meth:`DatasetBase.set_readonly`.
+        """
+        self.base.set_readonly(readonly)
+
+    def _check_writable(self) -> None:
+        """Raise an error if this dataset must not be modified
+
+        :raises PermissionError: if the dataset is read-only
+        """
+        if self.get_readonly():
+            msg = _(
+                "Dataset <{ds}> of type {type} is read-only. Datasets can only "
+                "be modified in the current mapset and if they are not opened "
+                "for reading only."
+            ).format(ds=self.get_id(), type=self.get_type())
+            raise PermissionError(msg)
 
     def reset_topology(self) -> None:
         """Reset any information about temporal topology"""
@@ -446,7 +474,7 @@ class AbstractDataset(
 
         dbif, connection_state_changed = init_dbif(dbif)
 
-        self.msgr.debug(2, "AbstractDataset.insert...")
+        log_debug(2, "AbstractDataset.insert...")
 
         # only modify database in current mapset
         mapset = get_current_mapset()
@@ -459,7 +487,7 @@ class AbstractDataset(
         if self.is_stds() is False:
             statement += self.stds_register.get_insert_statement_mogrified(dbif)
 
-        self.msgr.debug(2, "insert with %s" % statement)
+        log_debug(2, "insert with %s", statement)
         if execute:
             # database to be modified must be in the current mapset
             dbif.execute_transaction(statement, mapset=mapset)

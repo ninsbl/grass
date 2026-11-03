@@ -31,6 +31,7 @@ from .core import (
     get_current_gisdbase,
     get_current_location,
     get_current_mapset,
+    get_current_session,
     get_database_info_string,
     get_enable_mapset_check,
     get_enable_timestamp_write,
@@ -43,16 +44,19 @@ from .core import (
     get_tgis_db_version,
     get_tgis_db_version_from_metadata,
     get_tgis_dbmi_paramstyle,
+    get_tgis_env,
     get_tgis_message_interface,
     get_tgis_metadata,
     get_tgis_version,
     init,
     init_dbif,
+    init_if_needed,
     profile_function,
     set_raise_on_error,
     stop_subprocesses,
     upgrade_temporal_database,
 )
+from .debug_logging import configure_debug_logging
 from .datetime_math import (
     adjust_datetime_to_granularity,
     check_datetime_string,
@@ -134,6 +138,7 @@ from .spatio_temporal_relationships import (
 )
 from .stds_export import export_stds
 from .stds_import import import_stds
+from .stds_open import open  # noqa: A004
 from .temporal_algebra import (
     FatalError,
     GlobalTemporalVar,
@@ -190,7 +195,12 @@ from .univar_statistics import (
     print_gridded_dataset_univar_statistics,
     print_vector_dataset_univar_statistics,
 )
-from .utils import TemporalJSONEncoder
+from .utils import (
+    TemporalJSONEncoder,
+    normalize_stds_type,
+    parse_stds_name,
+    split_name_mapset,
+)
 
 __all__ = [
     "AbsoluteTemporalExtent",
@@ -288,6 +298,7 @@ __all__ = [
     "compute_datetime_delta",
     "compute_relative_time_granularity",
     "compute_univar_stats",
+    "configure_debug_logging",
     "count_temporal_topology_relationships",
     "create_numeric_suffix",
     "create_suffix_from_datetime",
@@ -306,6 +317,7 @@ __all__ = [
     "get_current_gisdbase",
     "get_current_location",
     "get_current_mapset",
+    "get_current_session",
     "get_database_info_string",
     "get_dataset_list",
     "get_enable_mapset_check",
@@ -319,6 +331,7 @@ __all__ = [
     "get_tgis_db_version",
     "get_tgis_db_version_from_metadata",
     "get_tgis_dbmi_paramstyle",
+    "get_tgis_env",
     "get_tgis_message_interface",
     "get_tgis_metadata",
     "get_tgis_version",
@@ -330,12 +343,16 @@ __all__ = [
     "increment_datetime_by_string",
     "init",
     "init_dbif",
+    "init_if_needed",
     "list_maps_of_stds",
     "modify_datetime",
     "modify_datetime_by_string",
+    "normalize_stds_type",
+    "open",
     "open_new_map_dataset",
     "open_new_stds",
     "open_old_stds",
+    "parse_stds_name",
     "print_gridded_dataset_univar_statistics",
     "print_spatio_temporal_topology_relationships",
     "print_temporal_topology_relationships",
@@ -353,6 +370,7 @@ __all__ = [
     "set_raise_on_error",
     "set_spatial_relationship",
     "set_temporal_relationship",
+    "split_name_mapset",
     "stop_subprocesses",
     "string_to_datetime",
     "time_delta_to_relative_time",
