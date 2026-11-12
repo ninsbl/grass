@@ -161,3 +161,38 @@ def test_unqualified_group_in_other_mapset_is_resolved(group_session):
         "other_group", dict_keys="indices", env=group_session.env
     )
     assert group_dict == {"1": "other_band@other_mapset"}
+
+
+def test_map_names_as_keys_and_indices_as_values(group_session, mapset):
+    """Map names as keys, indices as values (directly supported by i.group)."""
+    group_dict = gs.group_to_dict(
+        "test_group",
+        dict_keys="map_names",
+        dict_values="indices",
+        env=group_session.env,
+    )
+    assert group_dict == {
+        f"band_1@{mapset}": "1",
+        f"band_2@{mapset}": "2",
+        f"band_3@{mapset}": "3",
+        f"band_unlabeled@{mapset}": "4",
+    }
+
+
+def test_combinations_not_supported_by_i_group(group_session):
+    """Other key and value combinations are built from the maps and labels."""
+    group_dict = gs.group_to_dict(
+        "test_group",
+        dict_keys="indices",
+        dict_values="semantic_labels",
+        env=group_session.env,
+    )
+    assert group_dict == {"1": "L8_1", "2": "L8_2", "3": "L8_3", "4": '"none"'}
+
+    group_dict = gs.group_to_dict(
+        "test_group",
+        dict_keys="semantic_labels",
+        dict_values="indices",
+        env=group_session.env,
+    )
+    assert group_dict == {"L8_1": "1", "L8_2": "2", "L8_3": "3", "4": "4"}
