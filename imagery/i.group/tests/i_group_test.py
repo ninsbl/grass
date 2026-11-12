@@ -195,3 +195,95 @@ def test_group_not_found_anywhere_still_fails(i_group_session):
     tools = Tools(session=i_group_session)
     with pytest.raises(CalledModuleError):
         tools.i_group(group="no_such_group", format="json")
+
+
+@pytest.fixture(scope="module")
+def labeled_group(i_group_session):
+    """Group with two maps with semantic labels and one without"""
+    tools = Tools(session=i_group_session)
+    group = "labeled_group"
+    tools.r_mapcalc(expression="label_a = 1")
+    tools.r_mapcalc(expression="label_b = 2")
+    tools.r_mapcalc(expression="label_c = 3")
+    tools.r_support(map="label_a", semantic_label="L8_1")
+    tools.r_support(map="label_c", semantic_label="L8_3")
+    tools.i_group(group=group, input="label_a,label_b,label_c")
+    return tools, group
+
+
+def test_json_structure_list(labeled_group):
+    """The default structure is a flat list of map names"""
+    tools, group = labeled_group
+    expected = ["label_a@PERMANENT", "label_b@PERMANENT", "label_c@PERMANENT"]
+    assert tools.i_group(group=group, format="json").json == expected
+    assert tools.i_group(group=group, format="json", structure="list").json == expected
+
+
+def test_json_structure_semantic_label_mapname(labeled_group):
+    """Semantic labels are keys; a map without label is keyed by its index"""
+    tools, group = labeled_group
+    result = tools.i_group(
+        group=group, format="json", structure="semantic_label-mapname"
+    ).json
+    assert result == {
+        "L8_1": "label_a@PERMANENT",
+        "2": "label_b@PERMANENT",
+        "L8_3": "label_c@PERMANENT",
+    }
+
+
+def test_json_structure_index_mapname(labeled_group):
+    """Indices are keys"""
+    tools, group = labeled_group
+    result = tools.i_group(group=group, format="json", structure="index-mapname").json
+    assert result == {
+        "1": "label_a@PERMANENT",
+        "2": "label_b@PERMANENT",
+        "3": "label_c@PERMANENT",
+    }
+
+
+def test_json_structure_mapname_semantic_label(labeled_group):
+    """Map names are keys; a missing semantic label is null"""
+    tools, group = labeled_group
+    result = tools.i_group(
+        group=group, format="json", structure="mapname-semantic_label"
+    ).json
+    assert result == {
+        "label_a@PERMANENT": "L8_1",
+        "label_b@PERMANENT": None,
+        "label_c@PERMANENT": "L8_3",
+    }
+
+
+def test_json_structure_mapname_index(labeled_group):
+    """Map names are keys and their indices are the values"""
+    tools, group = labeled_group
+    result = tools.i_group(group=group, format="json", structure="mapname-index").json
+    assert result == {
+        "label_a@PERMANENT": "1",
+        "label_b@PERMANENT": "2",
+        "label_c@PERMANENT": "3",
+    }
+
+
+def test_json_structure_subgroup(labeled_group):
+    """Indices refer to the position in the subgroup"""
+    tools, group = labeled_group
+    tools.i_group(group=group, subgroup="sub", input="label_b,label_c")
+    result = tools.i_group(
+        group=group,
+        subgroup="sub",
+        format="json",
+        structure="semantic_label-mapname",
+    ).json
+    assert result == {"1": "label_b@PERMANENT", "L8_3": "label_c@PERMANENT"}
+
+
+def test_json_structure_invalid_combinations(labeled_group):
+    """Structures other than list require format=json and no -s flag"""
+    tools, group = labeled_group
+    with pytest.raises(CalledModuleError):
+        tools.i_group(group=group, format="shell", structure="index-mapname")
+    with pytest.raises(CalledModuleError):
+        tools.i_group(group=group, format="json", structure="index-mapname", flags="s")

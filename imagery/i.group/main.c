@@ -21,8 +21,16 @@
 #include <grass/imagery.h>
 #include <grass/glocale.h>
 #include <grass/gjson.h>
+#include <grass/raster.h>
 
 enum OutputFormat { PLAIN, JSON, SHELL };
+enum Structure {
+    LIST,
+    INDEX_MAPNAME,
+    LABEL_MAPNAME,
+    MAPNAME_LABEL,
+    MAPNAME_INDEX
+};
 
 /* function prototypes */
 static int add_or_update_group(char group[INAME_LEN], char **rasters, int k);
@@ -36,6 +44,9 @@ static int remove_subgroup_files(char group[INAME_LEN],
 static void print_subgroups(const char *group, const char *mapset,
                             enum OutputFormat format, G_JSON_Array *root_array);
 static void list_files_json(const struct Ref *ref, G_JSON_Array *root_array);
+static void list_files_json_dict(const struct Ref *ref,
+                                 G_JSON_Object *root_object,
+                                 enum Structure structure);
 
 int main(int argc, char *argv[])
 {
@@ -45,14 +56,16 @@ int main(int argc, char *argv[])
     int m, k = 0;
     int can_edit, qualified;
 
-    struct Option *grp, *rast, *rastf, *sgrp, *frmt;
+    struct Option *grp, *rast, *rastf, *sgrp, *frmt, *strct;
     struct Flag *r, *l, *s, *simple_flag;
     struct GModule *module;
 
     enum OutputFormat format;
+    enum Structure structure;
 
     G_JSON_Value *root_value = NULL;
     G_JSON_Array *root_array = NULL;
+    G_JSON_Object *root_object = NULL;
 
     G_gisinit(argv[0]);
 
@@ -87,6 +100,21 @@ int main(int argc, char *argv[])
                            "json;JSON (JavaScript Object Notation);");
     frmt->guisection = _("Print");
 
+    strct = G_define_option();
+    strct->key = "structure";
+    strct->type = TYPE_STRING;
+    strct->required = NO;
+    strct->options = "list,index-mapname,semantic_label-mapname,"
+                     "mapname-semantic_label,mapname-index";
+    strct->answer = "list";
+    strct->label = _("Structure of the JSON output listing the maps");
+    strct->description =
+        _("Everything except list gives a JSON object (key-value) and "
+          "requires format=json. The index is the 1-based position of the "
+          "map in the (sub)group. Maps without semantic label are keyed by "
+          "their index.");
+    strct->guisection = _("Print");
+
     r = G_define_flag();
     r->key = 'r';
     r->description =
@@ -114,13 +142,27 @@ int main(int argc, char *argv[])
     if (G_parser(argc, argv))
         exit(EXIT_FAILURE);
 
+    if (strcmp(strct->answer, "index-mapname") == 0)
+        structure = INDEX_MAPNAME;
+    else if (strcmp(strct->answer, "semantic_label-mapname") == 0)
+        structure = LABEL_MAPNAME;
+    else if (strcmp(strct->answer, "mapname-semantic_label") == 0)
+        structure = MAPNAME_LABEL;
+    else if (strcmp(strct->answer, "mapname-index") == 0)
+        structure = MAPNAME_INDEX;
+    else
+        structure = LIST;
+
     if (strcmp(frmt->answer, "json") == 0) {
         format = JSON;
-        root_value = G_json_value_init_array();
-        if (root_value == NULL) {
-            G_fatal_error(_("Failed to initialize JSON array. Out of memory?"));
-        }
-        root_array = G_json_array(root_value);
+        root_value = structure == LIST ? G_json_value_init_array()
+                                       : G_json_value_init_object();
+        if (root_value == NULL)
+            G_fatal_error(_("Failed to initialize JSON output"));
+        if (structure == LIST)
+            root_array = G_json_array(root_value);
+        else
+            root_object = G_json_object(root_value);
     }
     else if (strcmp(frmt->answer, "shell") == 0) {
         format = SHELL;
@@ -140,6 +182,13 @@ int main(int argc, char *argv[])
         }
         format = SHELL;
     }
+
+    if (structure != LIST && format != JSON)
+        G_fatal_error(_("Option <%s=%s> requires format=json"), strct->key,
+                      strct->answer);
+    if (structure != LIST && s->answer)
+        G_fatal_error(_("Option <%s=%s> cannot be combined with the -%c flag"),
+                      strct->key, strct->answer, s->key);
 
     /* backward compatibility -> simple list implied l flag list, if there was
        only l flag (with s flag added it is not clear, shell/json format is
@@ -245,7 +294,10 @@ int main(int argc, char *argv[])
                     I_list_subgroup(group, sgrp->answer, &ref, stdout);
                     break;
                 case JSON:
-                    list_files_json(&ref, root_array);
+                    if (root_object)
+                        list_files_json_dict(&ref, root_object, structure);
+                    else
+                        list_files_json(&ref, root_array);
                     break;
                 }
             }
@@ -266,7 +318,10 @@ int main(int argc, char *argv[])
                     I_list_group(group, &ref, stdout);
                     break;
                 case JSON:
-                    list_files_json(&ref, root_array);
+                    if (root_object)
+                        list_files_json_dict(&ref, root_object, structure);
+                    else
+                        list_files_json(&ref, root_array);
                     break;
                 }
             }
@@ -566,5 +621,66 @@ static void list_files_json(const struct Ref *ref, G_JSON_Array *root_array)
         snprintf(map_str, sizeof(map_str), "%s@%s", ref->file[i].name,
                  ref->file[i].mapset);
         G_json_array_append_string(root_array, map_str);
+    }
+}
+
+/*!
+ * \brief List files in a (sub)group as a JSON object
+ *
+ * With LABEL_MAPNAME, a map without semantic label is keyed by its index.
+ * Later maps overwrite earlier ones with the same key.
+ *
+ * \param ref group reference (set with I_get_group_ref())
+ * \param root_object JSON object to which data will be added.
+ * \param structure key-value combination of the object (not LIST)
+ */
+static void list_files_json_dict(const struct Ref *ref,
+                                 G_JSON_Object *root_object,
+                                 enum Structure structure)
+{
+    int i;
+    char map_str[1024];
+    char index_str[16];
+
+    for (i = 0; i < ref->nfiles; i++) {
+        char *label = NULL;
+        const char *key, *value;
+
+        snprintf(map_str, sizeof(map_str), "%s@%s", ref->file[i].name,
+                 ref->file[i].mapset);
+        snprintf(index_str, sizeof(index_str), "%d", i + 1);
+        if (structure == LABEL_MAPNAME || structure == MAPNAME_LABEL)
+            label = Rast_read_semantic_label(ref->file[i].name,
+                                             ref->file[i].mapset);
+
+        switch (structure) {
+        case INDEX_MAPNAME:
+            key = index_str;
+            value = map_str;
+            break;
+        case LABEL_MAPNAME:
+            key = label ? label : index_str;
+            value = map_str;
+            break;
+        case MAPNAME_INDEX:
+            key = map_str;
+            value = index_str;
+            break;
+        default:
+            key = map_str;
+            value = label;
+        }
+
+        if (G_json_object_get_value(root_object, key))
+            G_warning(_("Key <%s> from raster map <%s> already present. "
+                        "Overwriting existing entry..."),
+                      key, map_str);
+
+        if (value)
+            G_json_object_set_string(root_object, key, value);
+        else
+            G_json_object_set_null(root_object, key);
+
+        G_free(label);
     }
 }

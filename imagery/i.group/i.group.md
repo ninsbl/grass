@@ -99,6 +99,44 @@ To list maps in the `vis_bands` group:
     ['lsat7_2000_10@PERMANENT', 'lsat7_2000_20@PERMANENT', 'lsat7_2000_30@PERMANENT']
     ```
 
+### List maps in a group as a dictionary
+
+With `format=json`, the **structure** option selects the layout of the
+output. The default `list` is a flat list of map names. The other values give
+a JSON object with the first part as key and the second part as value:
+`index-mapname`, `semantic_label-mapname`, `mapname-semantic_label`, and
+`mapname-index`. The
+index is the 1-based position of the map in the (sub)group. With
+`semantic_label-mapname`, maps without semantic label are keyed by their
+index; with `mapname-semantic_label`, their value is `null`. If several maps
+get the same key, the last one is kept.
+
+=== "Command line"
+
+    ```sh
+    i.group group=vis_bands format=json structure=semantic_label-mapname
+    ```
+
+=== "Python (grass.script)"
+
+    ```python
+    import grass.script as gs
+
+    data = gs.parse_command(
+        "i.group",
+        group="vis_bands",
+        format="json",
+        structure="semantic_label-mapname",
+    )
+    print(data)
+    ```
+
+    Possible output:
+
+    ```text
+    {'L7_1': 'lsat7_2000_10@PERMANENT', 'L7_2': 'lsat7_2000_20@PERMANENT', 'L7_3': 'lsat7_2000_30@PERMANENT'}
+    ```
+
 ### List subgroups in a group
 
 To list subgroups in the `vis_bands` group:

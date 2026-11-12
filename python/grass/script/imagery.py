@@ -21,6 +21,14 @@ import json
 from .core import read_command, warning, fatal
 from .raster import raster_info
 
+# Combinations of (dict_keys, dict_values) that i.group can return directly
+_I_GROUP_STRUCTURES = {
+    ("indices", "map_names"): "index-mapname",
+    ("semantic_labels", "map_names"): "semantic_label-mapname",
+    ("map_names", "semantic_labels"): "mapname-semantic_label",
+    ("map_names", "indices"): "mapname-index",
+}
+
 
 def group_to_dict(
     imagery_group_name,
@@ -40,6 +48,13 @@ def group_to_dict(
     in addition to the group file. The same metadata is read when the
     "metadata" is requested as dict_values. Other supported dict_values
     are "map_names" (default), "semantic_labels", or "indices".
+
+    The function wraps the structure option of i.group. Combinations
+    of dict_keys and dict_values supported by i.group are returned from
+    a single call. Other combinations, fill_semantic_label=False, and
+    "metadata" are built from the map names and semantic labels
+    reported by i.group; only "metadata" requires additional calls
+    (raster_info() for each map).
 
     The function can also operate on the level of subgroups. In case a
     non-existing (or empty sub-group) is requested a warning is printed
@@ -79,18 +94,6 @@ def group_to_dict(
              semantic labels, row indices in the group, or metadata
     :rtype: dict
     """
-    group_dict = {}
-    maps_in_group = json.loads(
-        read_command(
-            "i.group",
-            group=imagery_group_name,
-            subgroup=subgroup,
-            format="json",
-            quiet=True,
-            env=env,
-        )
-    )
-
     if dict_keys not in {"indices", "map_names", "semantic_labels"}:
         msg = f"Invalid dictionary keys <{dict_keys}> requested"
         raise ValueError(msg)
@@ -98,6 +101,23 @@ def group_to_dict(
     if dict_values not in {"indices", "map_names", "semantic_labels", "metadata"}:
         msg = f"Invalid dictionary values <{dict_values}> requested"
         raise ValueError(msg)
+
+    structure = _I_GROUP_STRUCTURES.get((dict_keys, dict_values))
+    if dict_keys == "semantic_labels" and not fill_semantic_label:
+        structure = None
+    # Maps with their semantic labels (None if missing) are enough for any
+    # combination except metadata
+    maps_in_group = json.loads(
+        read_command(
+            "i.group",
+            group=imagery_group_name,
+            subgroup=subgroup,
+            format="json",
+            structure=structure or "mapname-semantic_label",
+            quiet=True,
+            env=env,
+        )
+    )
 
     if subgroup and not maps_in_group:
         warning(
@@ -107,41 +127,39 @@ def group_to_dict(
             env=env,
         )
 
-    for idx, raster_map in enumerate(maps_in_group):
-        raster_map_info = None
-        # Get raster metadata if needed
-        if (
-            dict_values in {"semantic_labels", "metadata"}
-            or dict_keys == "semantic_labels"
-        ):
-            raster_map_info = raster_info(raster_map, env=env)
+    if structure:
+        if structure == "mapname-semantic_label":
+            # Keep the literal reported by r.info for a missing semantic label
+            return {
+                raster_map: '"none"' if label is None else label
+                for raster_map, label in maps_in_group.items()
+            }
+        return maps_in_group
 
-        # Get key for dictionary
-        if dict_keys == "indices":
-            key = str(idx + 1)
-        elif dict_keys == "map_names":
-            key = raster_map
-        elif dict_keys == "semantic_labels":
-            key = raster_map_info["semantic_label"]
-            if not key or key == '"none"':
-                if fill_semantic_label:
-                    key = str(idx + 1)
-                else:
-                    fatal(
-                        _(
-                            "Semantic label missing for raster map {m} in group <{g}>."
-                        ).format(m=raster_map, g=imagery_group_name),
-                        env=env,
-                    )
+    group_dict = {}
+    for idx, (raster_map, label) in enumerate(maps_in_group.items(), start=1):
+        fields = {
+            "map_names": raster_map,
+            "indices": str(idx),
+            "semantic_labels": '"none"' if label is None else label,
+        }
 
-        if dict_values == "indices":
-            val = str(idx + 1)
-        elif dict_values == "map_names":
-            val = raster_map
-        elif dict_values == "semantic_labels":
-            val = raster_map_info["semantic_label"]
-        elif dict_values == "metadata":
-            val = raster_map_info
+        if dict_keys == "semantic_labels" and label is None:
+            if not fill_semantic_label:
+                fatal(
+                    _(
+                        "Semantic label missing for raster map {m} in group <{g}>."
+                    ).format(m=raster_map, g=imagery_group_name),
+                    env=env,
+                )
+            key = str(idx)
+        else:
+            key = fields[dict_keys]
+
+        if dict_values == "metadata":
+            val = raster_info(raster_map, env=env)
+        else:
+            val = fields[dict_values]
         if key in group_dict:
             warning(
                 _(
